@@ -63,9 +63,15 @@ class HomeScreen extends StatelessWidget {
                   children: [
                     // ChooseCategoryComponents(),
                     SliderComponent(),
-                    const HomeBanner(),
-
-                    UpcomingAppointmentComponents(),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 10),
+                      child: Column(
+                        children: [
+                          const HomeBanner(),
+                          UpcomingAppointmentComponents(),
+                        ],
+                      ),
+                    ),
                     FeaturedServiceComponent(),
                   ],
                 ),
@@ -87,6 +93,7 @@ class HomeBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
+        const SizedBox(height: 30),
         Row(
           children: [
             HomeCard(
@@ -104,7 +111,8 @@ class HomeBanner extends StatelessWidget {
         Row(
           children: [
             HomeCard(
-              imagePath: "assets/images/ambulance.png", //assets/icons/ambulance.png
+              imagePath:
+                  "assets/images/ambulance.png", //assets/icons/ambulance.png
               title: "Appointment",
               onTap: () {
                 Future.delayed(const Duration(seconds: 3), () {
