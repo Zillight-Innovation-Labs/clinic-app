@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kivicare_patient/screens/dashboard/dashboard_screen.dart';
-import 'package:kivicare_patient/screens/home/home_controller.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:get/get.dart';
 import 'package:kivicare_patient/utils/app_common.dart';

@@ -28,6 +28,8 @@ class Assets {
   static const String iconsIcEditReview = 'assets/icons/ic_edit_review.png';
   static const String iconsIcEditprofileOutlined = 'assets/icons/ic_editprofile_outlined.png';
   static const String iconsIcEncounter = 'assets/icons/ic_encounter.png';
+  static const String iconsIcMedicine = 'assets/icons/pharmacy.png';
+  static const String iconsIcMeter = 'assets/icons/meter.png';
   static const String iconsIcEvening = 'assets/icons/ic_evening.png';
   static const String iconsIcExperience = 'assets/icons/ic_experience.png';
   static const String iconsIcExpertise = 'assets/icons/ic_expertise.png';

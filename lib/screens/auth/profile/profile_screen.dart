@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kivicare_patient/screens/auth/profile/mt_excersize_reminder.dart';
+import 'package:kivicare_patient/screens/auth/profile/mt_medicine_reminders.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '../../../components/app_scaffold.dart';
 import '../../../generated/assets.dart';
@@ -64,14 +66,27 @@ class ProfileScreen extends StatelessWidget {
                 ).paddingTop(16),
                 SettingItemWidget(
                   decoration: boxDecorationDefault(),
-                  title: "Encounters",
-                  subTitle: "See Your Encounter Data",
+                  title: "Medicine Reminder",
+                  subTitle: "See Your Medicine Reminder Data",
                   splashColor: transparentColor,
                   onTap: () {
-                    Get.to(() => AllEncountersScreen());
+                    Get.to(() => const MedicineRemindersScreen());
                   },
                   titleTextStyle: boldTextStyle(size: 14),
-                  leading: commonLeadingWid(imgPath: Assets.iconsIcEncounter, color: appColorPrimary).circularLightPrimaryBg(),
+                  leading: commonLeadingWid(imgPath: Assets.iconsIcMedicine, color: appColorPrimary).circularLightPrimaryBg(),
+                  trailing: trailing,
+                  padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
+                ).paddingTop(16),
+                SettingItemWidget(
+                  decoration: boxDecorationDefault(),
+                  title: "Exercise Reminder",
+                  subTitle: "See Your Exercise Reminder Data",
+                  splashColor: transparentColor,
+                  onTap: () {
+                    Get.to(() => const ExcersizeReminderScreen());
+                  },
+                  titleTextStyle: boldTextStyle(size: 14),
+                  leading: commonLeadingWid(imgPath: Assets.iconsIcMeter , color: appColorPrimary).circularLightPrimaryBg(),
                   trailing: trailing,
                   padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
                 ).paddingTop(16),

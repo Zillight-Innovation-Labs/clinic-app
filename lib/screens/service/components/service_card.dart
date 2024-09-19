@@ -18,24 +18,24 @@ import '../service_detail_controller.dart';
 import '../service_detail_screen.dart';
 
 class ServiceCard extends StatelessWidget {
-  final ServiceElement serviceElement;
+  // final ServiceElement serviceElement;
   final bool isFromClinicDetail;
 
   const ServiceCard(
       {super.key,
-      required this.serviceElement,
+      // required this.serviceElement,
       this.isFromClinicDetail = false});
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
-        if (isFromClinicDetail) {
-          Get.delete<ServiceDetailController>();
-        }
-        Get.to(
-            () => ServiceDetailScreen(isFromClinicDetail: isFromClinicDetail),
-            arguments: serviceElement);
+        // if (isFromClinicDetail) {
+        //   Get.delete<ServiceDetailController>();
+        // }
+        // Get.to(
+        //     () => ServiceDetailScreen(isFromClinicDetail: isFromClinicDetail),
+        //     arguments: serviceElement);
       },
       child: Container(
         decoration: boxDecorationDefault(
@@ -44,9 +44,8 @@ class ServiceCard extends StatelessWidget {
         child: Column(
           children: [
             Hero(
-              tag: serviceElement.serviceImage.trim().isNotEmpty
-                  ? "${serviceElement.id}${serviceElement.serviceImage}"
-                  : UniqueKey(),
+              tag: 
+                 UniqueKey(),
               child: Stack(
                 children: [
                   CachedImageWidget(
@@ -58,34 +57,9 @@ class ServiceCard extends StatelessWidget {
                     topLeftRadius: 8,
                     topRightRadius: 8,
                     bottomRightRadius:
-                        serviceElement.isVideoConsultancy ? 6 : 0,
+                        6
                   ),
-                  if (serviceElement.isVideoConsultancy)
-                    Positioned(
-                      bottom: 0,
-                      right: 0,
-                      child: Container(
-                        padding: const EdgeInsets.symmetric(
-                            horizontal: 12, vertical: 6),
-                        decoration: boxDecorationDefault(
-                          color: completedStatusColor,
-                          borderRadius: BorderRadius.only(
-                              topLeft: radiusCircular(),
-                              bottomRight: radiusCircular(6)),
-                          border: Border(
-                              left: BorderSide(
-                                  color: context.cardColor, width: 6),
-                              top: BorderSide(
-                                  color: context.cardColor, width: 6)),
-                        ),
-                        child: CachedImageWidget(
-                          url: Assets.imagesVideoCamera,
-                          fit: BoxFit.fitHeight,
-                          height: 10,
-                          color: context.cardColor,
-                        ),
-                      ),
-                    ),
+               
                 ],
               ),
             ),
@@ -96,7 +70,7 @@ class ServiceCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text(
-                      serviceElement.name,
+                      "Service 1",
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
                       style: boldTextStyle(size: 16),
@@ -104,26 +78,7 @@ class ServiceCard extends StatelessWidget {
                   ],
                 ),
                 8.height,
-                Marquee(
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      if (serviceElement.discount)
-                        PriceWidget(
-                                price: serviceElement.payableAmount, size: 18)
-                            .paddingRight(6),
-                      PriceWidget(
-                        price: serviceElement.charges,
-                        isLineThroughEnabled:
-                            serviceElement.discount ? true : false,
-                        size: serviceElement.discount ? 14 : 18,
-                        color: serviceElement.discount
-                            ? textSecondaryColorGlobal
-                            : appColorPrimary,
-                      ),
-                    ],
-                  ),
-                ),
+              
                 6.height,
                 AppButton(
                   padding:
@@ -132,42 +87,8 @@ class ServiceCard extends StatelessWidget {
                   width: Get.width,
                   elevation: 0,
                   color: appColorSecondary,
-                  onTap: () {
-                    if (isFromClinicDetail) {
-                      showInDialog(
-                        context,
-                        contentPadding: EdgeInsets.zero,
-                        builder: (context) {
-                          return AppCustomDialog(
-                            title:
-                                'Do you want to replace the previous service with the current one?',
-                            negativeText: 'No',
-                            positiveText: locale.value.yes,
-                            onTap: () {
-                              log('PREVIOUS SERVICE ID==> ${currentSelectedService.value.id}');
-                              log('PREVIOUS SERVICE NAME==> ${currentSelectedService.value.name}');
-                              log('PREVIOUS CLINIC ID==> ${currentSelectedClinic.value.id}');
-                              log('PREVIOUS CLINIC NAME==> ${currentSelectedClinic.value.name}');
-                              currentSelectedService(serviceElement);
-                              log('NEW SERVICE ID==> ${currentSelectedService.value.id}');
-                              log('NEW SERVICE NAME==> ${currentSelectedService.value.name}');
-                              Get.back();
-                              Get.to(() => DoctorsListScreen(),
-                                  arguments: currentSelectedClinic.value.id);
-                            },
-                          );
-                        },
-                      );
-                    } else {
-                      /// Store select service in global variable
-                      currentSelectedService(serviceElement);
-                      log('CURRENT SELECTED SERVICE ID==> ${currentSelectedService.value.id}');
-                      log('CURRENT SELECTED SERVICE NAME==> ${currentSelectedService.value.name}');
-                      Get.to(() => ClinicListScreen(),
-                          arguments: serviceElement);
-                    }
-                  },
-                  child: Text('Book Now',
+                  onTap: () {},
+                  child: Text('View ',
                       style: boldTextStyle(
                           size: 12,
                           color: whiteTextColor,

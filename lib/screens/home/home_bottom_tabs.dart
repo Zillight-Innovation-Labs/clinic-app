@@ -1,14 +1,13 @@
-import 'dart:developer';
 
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:get/get.dart';
 import 'package:kivicare_patient/api/const/const.dart';
 import 'package:kivicare_patient/screens/auth/profile/profile_screen.dart';
-import 'package:kivicare_patient/screens/booking/appointments_screen.dart';
+import 'package:kivicare_patient/screens/booking/apointments/appointment_tab.dart';
+import 'package:kivicare_patient/screens/booking/appointments_controller.dart';
 import 'package:kivicare_patient/screens/home/home_screen.dart';
-import 'package:kivicare_patient/screens/home/mt_home.dart';
 // import 'package:maan_doctor_appoinment/const/const.dart';
 // import 'package:maan_doctor_appoinment/ui/Home/Doctor%20Appoinment/mt_book_appoinment.dart';
 // import 'package:maan_doctor_appoinment/ui/Home/mt_home.dart';
@@ -24,13 +23,17 @@ class HomeBottomNavBarScreen extends StatefulWidget {
 }
 
 class _HomeBottomNavBarScreenState extends State<HomeBottomNavBarScreen> {
+    final AppointmentsController appointmentsCont = Get.put(AppointmentsController());
+    //"Get.put(AppointmentsController())" or "Get.lazyPut(()=>AppointmentsController())"
+
   var currentIndex = 0;
   var selectedIndex = 0;
   bool showPopup = false;
 
   List<Widget> pages = [
      HomeScreen(),
-     AppointmentsScreen(),
+     AppointmentTabs(),
+   
     Container(),
     const Center(
       child: Text("Payment UI needed"),
@@ -90,7 +93,7 @@ class _HomeBottomNavBarScreenState extends State<HomeBottomNavBarScreen> {
                                   children: [
                                     ListTile(
                                         leading: Icon(Icons.safety_check),
-                                        title: Text("Services")),
+                                        title: Text("Services")),//BookingFormScreen
                                     ListTile(
                                         leading: Icon(Icons.safety_check),
                                         title: Text("Tests")),

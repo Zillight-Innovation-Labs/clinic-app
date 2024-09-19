@@ -19,12 +19,16 @@ class AppointmentsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffoldNew(
-      appBartitleText: "Appointments",
-      hasLeadingWidget: false,
-      appBarVerticalSize: Get.height * 0.12,
-      isLoading: appointmentsCont.isLoading,
-      body: Obx(
+    return 
+    // AppScaffoldNew(
+    //   appBartitleText: "Appointments",
+    //   hasLeadingWidget: false,
+    //   appBarVerticalSize: Get.height * 0.12,
+    //   isLoading: appointmentsCont.isLoading,
+    Container(
+      child: 
+      
+      Obx(
         () => SnapHelperWidget(
           future: appointmentsCont.getAppointments.value,
           initialData: appointmentsCont.appointments.isNotEmpty ? appointmentsCont.appointments : null,

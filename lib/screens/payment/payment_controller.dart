@@ -1,6 +1,7 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:kivicare_patient/screens/home/home_bottom_tabs.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:kivicare_patient/api/core_apis.dart';
 
@@ -14,7 +15,6 @@ import '../booking/appointments_controller.dart';
 import '../booking/model/booking_req.dart';
 import '../booking/model/save_payment_req.dart';
 import '../dashboard/dashboard_controller.dart';
-import '../dashboard/dashboard_screen.dart';
 import 'booking_confirmation_dialog.dart';
 import 'booking_success_screen.dart';
 
@@ -185,7 +185,7 @@ class PaymentController extends GetxController {
             binding: BindingsBuilder(() {
               setStatusBarColor(transparentColor, statusBarIconBrightness: Brightness.dark, statusBarBrightness: Brightness.dark);
             })),
-        (route) => route.isFirst || route.settings.name == '/$DashboardScreen');
+        (route) => route.isFirst || route.settings.name == '/$HomeBottomNavBarScreen');
   }
 }
 

@@ -819,7 +819,7 @@ Widget detailWidgetPrice({Widget? leadingWidget, Widget? trailingWidget, String?
 
 String getServiceType({required String serviceType}) {
   if (serviceType.toLowerCase().contains(ServiceTypeConst.inClinic)) {
-    return 'In Clinic';
+    return 'Offline';
   } else if (serviceType.toLowerCase().contains(ServiceTypeConst.online)) {
     return 'Online';
   } else {

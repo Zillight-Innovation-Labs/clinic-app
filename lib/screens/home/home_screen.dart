@@ -1,13 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kivicare_patient/screens/auth/profile/mt_medicine_reminders.dart';
 import 'package:kivicare_patient/screens/home/home_card.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:kivicare_patient/components/loader_widget.dart';
-
 import '../../components/app_scaffold.dart';
 import '../../main.dart';
 import '../../utils/empty_error_state_widget.dart';
-import 'components/choose_category_components.dart';
 import 'components/featured_service_component.dart';
 import 'components/greetings_component.dart';
 import 'components/slider_component.dart';
@@ -60,13 +59,13 @@ class HomeScreen extends StatelessWidget {
                 scrollDirection: Axis.vertical,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    // ChooseCategoryComponents(),
+                  children: [               
                     SliderComponent(),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Column(
                         children: [
+                         
                           const HomeBanner(),
                           UpcomingAppointmentComponents(),
                         ],
@@ -93,7 +92,7 @@ class HomeBanner extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 30),
+        const SizedBox(height: 40),
         Row(
           children: [
             HomeCard(
@@ -115,16 +114,17 @@ class HomeBanner extends StatelessWidget {
                   "assets/images/ambulance.png", //assets/icons/ambulance.png
               title: "Appointment",
               onTap: () {
-                Future.delayed(const Duration(seconds: 3), () {
-                  // const BookAppoinment().launch(context);
-                });
+                // Get.to(BookingFormScreen());
+               //BookingFormScreen
               },
             ),
             const SizedBox(width: 12),
             HomeCard(
                 imagePath: "assets/images/pharmacyImage.png",
                 title: "Medication",
-                onTap: () {}),
+                onTap: () {
+                  Get.to(const MedicineRemindersScreen());
+                }),
           ],
         ),
         const SizedBox(

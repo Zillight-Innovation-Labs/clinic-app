@@ -50,7 +50,7 @@ class ClinicServicesComponent extends StatelessWidget {
                 ).paddingSymmetric(horizontal: 32).paddingBottom(Get.height * 0.1),
                 itemBuilder: (context, index) {
                   ServiceElement serviceElement = clinicDetailCont.serviceList[index];
-                  return ServiceCard(serviceElement: serviceElement).paddingTop(index == 0 ? 0 : 16);
+                  return ServiceCard().paddingTop(index == 0 ? 0 : 16);
                 },
                 onNextPage: () async {
                   if (!clinicDetailCont.isServicesLastPage.value) {

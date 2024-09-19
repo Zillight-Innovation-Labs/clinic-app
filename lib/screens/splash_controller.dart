@@ -12,7 +12,6 @@ import '../api/auth_apis.dart';
 import '../utils/common_base.dart';
 import '../utils/constants.dart';
 import 'auth/model/login_response.dart';
-import 'dashboard/dashboard_screen.dart';
 
 class SplashScreenController extends GetxController {
   @override

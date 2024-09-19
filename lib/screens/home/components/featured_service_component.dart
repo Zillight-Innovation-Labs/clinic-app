@@ -31,16 +31,16 @@ class FeaturedServiceComponent extends StatelessWidget {
             },
             trailingText: "See All",
           ).paddingOnly(left: 16, right: 8),
-          Obx(
-            () => HorizontalList(
+
+          HorizontalList(
               spacing: 16,
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              itemCount: homeController.dashboardData.value.featuredServices.length,
+              itemCount: 3,
               itemBuilder: (context, index) {
-                return ServiceCard(serviceElement: homeController.dashboardData.value.featuredServices[index]);
+                return const ServiceCard();
               },
-            ),
-          ),
+            )
+        
         ],
       ),
     );

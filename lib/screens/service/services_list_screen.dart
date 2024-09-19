@@ -126,7 +126,7 @@ class ServiceListScreen extends StatelessWidget {
                       listAnimationType: ListAnimationType.FadeIn,
                       itemBuilder: (ctx, index) {
                         ServiceElement serviceElement = serviceListCont.serviceList[index];
-                        return ServiceCard(serviceElement: serviceElement, isFromClinicDetail: isFromClinicDetail);
+                        return ServiceCard();
                       },
                     ),
                   ],

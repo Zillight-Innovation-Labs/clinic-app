@@ -65,7 +65,7 @@ class AppointmentCard extends StatelessWidget {
                         ),
                         6.width,
                         Text(
-                          '${appointment.appointmentTime.format24HourtoAMPM} - ${appointment.endTime.format24HourtoAMPM}',
+                          '3:30 PM - 4:00 PM',
                           style: boldTextStyle(size: 12, color: appColorSecondary),
                         ),
                       ],
@@ -79,19 +79,19 @@ class AppointmentCard extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        appointment.serviceName,
+                        "Cardiac Consultation",
                         style: boldTextStyle(size: 20),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ),
                       Text(
-                        appointment.clinicName,
+                        "HeartCare & OrthoCare Center",
                         style: primaryTextStyle(size: 14, color: secondaryTextColor),
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
                       ).paddingTop(8),
                       Text(
-                        appointment.appointmentExtraInfo,
+                        "appointment.appointmentExtraInfo",
                         style: secondaryTextStyle(size: 12),
                       ).paddingTop(6).visible(appointment.appointmentExtraInfo.isNotEmpty),
                     ],
@@ -107,7 +107,7 @@ class AppointmentCard extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            getServiceType(serviceType: appointment.serviceType),
+                            getServiceType(serviceType: "Online"),
                             style: secondaryTextStyle(size: 12, color: secondaryTextColor),
                           ),
                           6.height,
@@ -119,7 +119,7 @@ class AppointmentCard extends StatelessWidget {
                               ),
                               6.width,
                               Text(
-                                appointment.doctorName,
+                                "Doctor woo",
                                 overflow: TextOverflow.ellipsis,
                                 style: boldTextStyle(size: 12),
                               ).expand(),
@@ -127,50 +127,54 @@ class AppointmentCard extends StatelessWidget {
                           ),
                         ],
                       ).expand(),
-                      PriceWidget(
-                        price: appointment.totalAmount,
-                        color: appColorPrimary,
-                        size: 18,
-                        isBoldText: true,
-                      ),
+                      // PriceWidget(
+                      //   price: appointment.totalAmount,
+                      //   color: appColorPrimary,
+                      //   size: 18,
+                      //   isBoldText: true,
+                      // ),
                     ],
                   ),
                 ),
                 34.height,
                 commonDivider,
                 22.height,
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const Icon(Icons.calendar_today_outlined, color: secondaryTextColor, size: 12),
-                        4.width,
-                        Text("Appointment:", style: secondaryTextStyle()),
-                        4.width,
-                        Text(
-                          getBookingStatus(status: appointment.status),
-                          style: primaryTextStyle(size: 12, color: getBookingStatusColor(status: appointment.status)),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        const CachedImageWidget(url: Assets.iconsIcTotalPayout, height: 15),
-                        4.width,
-                        Text("Payment:", style: secondaryTextStyle()),
-                        4.width,
-                        Text(
-                          getBookingPaymentStatus(status: appointment.paymentStatus),
-                          style: primaryTextStyle(size: 12, color: getPriceStatusColor(paymentStatus: appointment.paymentStatus)),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-                if (appointment.status.contains(StatusConst.pending) && !appointment.paymentStatus.toLowerCase().contains(PaymentStatus.PAID)) ...[
+              //   Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [
+              //       Row(
+              //         mainAxisAlignment: MainAxisAlignment.center,
+              //         children: [
+              //           const Icon(Icons.calendar_today_outlined, color: secondaryTextColor, size: 12),
+              //           4.width,
+              //           Text("Appointment:", style: secondaryTextStyle()),
+              //           4.width,
+              //           Text(
+              //             getBookingStatus(status: appointment.status),
+              //             style: primaryTextStyle(size: 12, color: getBookingStatusColor(status: appointment.status)),
+              //           ),
+              //         ],
+              //       ),
+              //       Row(
+              //         mainAxisAlignment: MainAxisAlignment.center,
+              //         children: [
+              //           const CachedImageWidget(url: Assets.iconsIcTotalPayout, height: 15),
+              //           4.width,
+              //           Text("Payment:", style: secondaryTextStyle()),
+              //           4.width,
+              //           Text(
+              //             getBookingPaymentStatus(status: appointment.paymentStatus),
+              //             style: primaryTextStyle(size: 12, color: getPriceStatusColor(paymentStatus: appointment.paymentStatus)),
+              //           ),
+              //         ],
+              //       ),
+              //     ],
+              //   ),
+              // //
+                if (""==""
+                  // appointment.status.contains(StatusConst.pending) 
+                  ) ...[
+
                   28.height,
                   AppButton(
                     color: extraLightPrimaryColor,

@@ -4,11 +4,11 @@ import 'dart:developer' as dev;
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kivicare_patient/screens/home/home_bottom_tabs.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '../../../main.dart';
 import '../../../utils/push_notification_service.dart';
 import '../../dashboard/dashboard_controller.dart';
-import '../../dashboard/dashboard_screen.dart';
 import '../../home/home_controller.dart';
 import '../model/login_response.dart';
 import '../../../api/auth_apis.dart';
@@ -167,7 +167,7 @@ class SignInController extends GetxController {
       dev.log("isNavigateToDashboard.value:${isNavigateToDashboard.value}");
       if (!isNavigateToDashboard.value) {
         dev.log("login--======================================--running 3");
-        Get.offAll(() => DashboardScreen(), binding: BindingsBuilder(() {
+        Get.offAll(() => const HomeBottomNavBarScreen(), binding: BindingsBuilder(() {
           Get.put(HomeController());
         }));
       } else {

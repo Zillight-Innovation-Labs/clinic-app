@@ -13,7 +13,7 @@ class SliderComponent extends StatelessWidget {
 
   SliderComponent({super.key});
 
-  List images = [
+ final List images = [
     "https://t4.ftcdn.net/jpg/01/33/33/41/240_F_133334155_X23HzbJKawbIgXVaub4bPM8CjpkS5uMS.jpg",
     "https://t4.ftcdn.net/jpg/01/33/33/41/240_F_133334155_X23HzbJKawbIgXVaub4bPM8CjpkS5uMS.jpg",
     "https://t4.ftcdn.net/jpg/01/33/33/41/240_F_133334155_X23HzbJKawbIgXVaub4bPM8CjpkS5uMS.jpg",
@@ -29,7 +29,7 @@ class SliderComponent extends StatelessWidget {
     }
 
     return SizedBox(
-      height: 200,
+      height: 150,
       child: Stack(
         clipBehavior: Clip.none,
         children: [
@@ -42,34 +42,21 @@ class SliderComponent extends StatelessWidget {
               },
               itemCount: homeScreenController.dashboardData.value.slider.length,
               itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    if (homeScreenController
-                        .dashboardData.value.slider[index].link.isURL) {
-                      commonLaunchUrl(
-                        homeScreenController
-                            .dashboardData.value.slider[index].link,
-                        launchMode: LaunchMode.externalApplication,
-                      );
-                    }
-                  },
-                  behavior: HitTestBehavior.translucent,
-                  child: Container(
-                    color: Colors.transparent,
+                return Container(
+                  color: Colors.transparent,
+                  width: Get.width,
+                  child: CachedImageWidget(
+                    url: images[index],
+                    fit: BoxFit.fitWidth,
+                    usePlaceholderIfUrlEmpty: false,
                     width: Get.width,
-                    child: CachedImageWidget(
-                      url: images[index],
-                      fit: BoxFit.fitWidth,
-                      usePlaceholderIfUrlEmpty: false,
-                      width: Get.width,
-                    ),
                   ),
                 );
               },
             ),
           ),
           Positioned(
-            bottom: -16,
+            bottom: -25,
             left: 0,
             right: 0,
             child: Obx(
@@ -114,6 +101,6 @@ class SliderComponent extends StatelessWidget {
           ),
         ],
       ),
-    ).paddingTop(30);
+    );
   }
 }

@@ -65,3 +65,9 @@ String pac2="Lorem ipsum dolor sit amet, consectetur adipisc ing elit. Felis vol
 String pac3="pellentesque enim, libero augue sed. Sagittis ult rices quisque purus id euismod diam orci cura bitur sodales Et sollicitudin";
 String pac4="Lorem ipsum dolor sit amet, consectetur adipisc ing elit. Felis volutpat dictumst";
 String aboutUsdetails="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec tincidunt lectus turpis feugiat amet, nibh. Mauris mattis aliquam et, amet, consequat vulputate. Est condimentum a ut condime Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nec tincidunt lectus turpis feugiat amet, nibh. Mauris mattis aliquam et, amet, consequat vulputate. Est condimentum a ut condime";
+
+
+
+//
+TextStyle ksubTitleTextStyle=TextStyle(color: kSubTitleColor);
+TextStyle ktitleTextStyle=TextStyle(fontWeight: FontWeight.bold,color: kTitleColor);

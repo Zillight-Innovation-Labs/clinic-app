@@ -1,9 +1,9 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'package:get/get.dart';
+import 'package:kivicare_patient/screens/home/home_bottom_tabs.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '../../../utils/app_common.dart';
-import '../../dashboard/dashboard_screen.dart';
 import '../../home/home_controller.dart';
 import '../../../api/auth_apis.dart';
 
@@ -29,7 +29,7 @@ class ProfileController extends GetxController {
       toast(e.toString());
     }).whenComplete(() {
       AuthServiceApis.clearData();
-      Get.offAll(() => DashboardScreen(), binding: BindingsBuilder(() {
+      Get.offAll(() => const HomeBottomNavBarScreen(), binding: BindingsBuilder(() {
         Get.put(HomeController());
       }));
     });
