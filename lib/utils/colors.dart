@@ -72,3 +72,62 @@ const ratingSecondColor = checkoutStatusColor;
 const ratingThirdColor = pendingStatusColor;
 const ratingFourthColor = cancelStatusColor;
 const ratingFifthColor = checkInStatusColor;
+
+
+
+ const Color scaffoldBackground = Color(0xffFCFBFB);
+   const Color buttonColor = Color(0xff4D0A80);
+  //  const Color white = Colors.white;
+   const Color arrowColor = Color(0xffFAFAFA);
+   const Color textField = Color(0xffBEBEBE);
+   const Color backgroundColor = Color(0xffFFFFFF);
+   const Color navColor = Color(0xff929090);
+   const Color primaryColor = Color(0xFF1F867D); //0xFF91D9DE
+   const Color secondaryColor = Color(0xFFB8F5F9);
+   const Color appGrey = Color(0xFF5F5F5F);
+   const Color darkColor = Color(0xFF000000);
+   const Color miniColor = Color(0xff91D9DE);
+   const Color periodColor = Color(0xffEF9760);
+   const Color possiblePeriodColor = Color(0xffFFECE3);
+   const Color optionColor = Colors.white;
+   const Color redColor = Color(0xFFF44336);
+   const Color forumPrimary = Color(0xFF202433);
+   const Color forumPrimaryTwo = Color(0xFF8D96B7);
+   const Color forumPrimaryThree = Color(0xFFD1CAFF);
+   const Color forumSecondary = Color(0xFF9D8DB7);
+   const Color forumIconColors = Color(0xFFFC728B);
+
+   Color cardColor1 = const Color.fromARGB(240, 222, 245, 245);
+   Color cardColor2 = const Color.fromARGB(255, 242, 226, 1);
+   Color btnGreen3 = const Color.fromARGB(255, 42, 152, 81);
+  // ignore: use_full_hex_values_for_flutter_colors
+   const Color cycleScrollerBorder = Color(0xff7070701D);
+   const Color cycleScrollerArrow = Color(0xff1F867D);
+
+  ///////////////// Old Color Configuration ///////////////////
+  //  Color primaryColor = Color.fromARGB(255, 37, 94, 159);
+   Color customTextColor = const Color(0xff22004E);
+   Color logoColor = const Color.fromRGBO(34, 0, 78, 1);
+   Color textColor = const Color(0xff454545);
+   Color fadedWhite = const Color.fromARGB(255, 250, 250, 250);
+   Color appbarTextColor = const Color.fromARGB(174, 0, 0, 0);
+   Color fadedText = const Color.fromARGB(255, 102, 100, 100);
+   Color bgColor = Colors.white;
+   Color fadedBgColor = const Color.fromARGB(255, 246, 252, 255);
+
+   Color btnRed = const Color.fromARGB(255, 240, 123, 60);
+   Color btnRed2 = const Color.fromARGB(255, 210, 80, 55);
+   Color btnGreen = const Color.fromARGB(255, 69, 212, 119);
+   Color btnGreen2 = const Color.fromARGB(255, 51, 173, 94);
+
+   Color fadedGreen = const Color.fromARGB(145, 165, 222, 167);
+
+   Color infoBackGroundColor = const Color.fromARGB(255, 197, 230, 245);
+   Color iconBgColor = const Color.fromARGB(255, 234, 239, 242);
+
+   Color transHistoryColorBuy = const Color.fromARGB(145, 165, 222, 167);
+
+   Color transHistoryColorSell = const Color.fromARGB(145, 222, 177, 165);
+
+   Color selectedAccountColor = const Color.fromARGB(255, 242, 236, 236);
+  //

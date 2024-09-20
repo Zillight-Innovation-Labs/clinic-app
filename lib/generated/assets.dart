@@ -56,6 +56,7 @@ class Assets {
   static const String iconsIcSearch = 'assets/icons/ic_search.png';
   static const String iconsIcServices = 'assets/icons/ic_services.png';
   static const String iconsIcSetting = 'assets/icons/ic_setting.png';
+  static const String iconsIcHistory = 'assets/images/prescription-history.png';
   static const String iconsIcSettingOutlined = 'assets/icons/ic_setting_outlined.png';
   static const String iconsIcShare = 'assets/icons/ic_share.png';
   static const String iconsIcSpecialization = 'assets/icons/ic_specialization.png';

@@ -6,6 +6,7 @@ import 'package:country_picker/country_picker.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:html/parser.dart';
@@ -946,3 +947,133 @@ String getAppointmentNotification({required String notification}) {
     return "";
   }
 }
+
+AppBar customAppBar({
+  BuildContext? context,
+  String? headerText,
+  Function()? onTapped,
+  Color? backgroundColor
+}) {
+  return AppBar(
+    automaticallyImplyLeading: false,
+    backgroundColor: backgroundColor ?? Colors.white,
+    elevation: 0,
+    leading: GestureDetector(
+      onTap: () {
+        if (onTapped != null) {
+          onTapped.call();
+        } else {
+          Navigator.pop(context!);
+        }
+      },
+      child: const Padding(
+        padding: EdgeInsets.only(left: 20.0),
+        child:  Icon(Icons.arrow_back_ios_new_outlined, color: Colors.white, size: 20),
+      ),
+    ),
+    title: Text(
+      headerText!,
+      style: const TextStyle(
+          color: Color(0xFF00192C), fontSize: 18, fontWeight: FontWeight.bold),
+    ),
+  );
+}
+
+   Widget optionCard({
+    Color iconBgColor = const Color.fromARGB(226, 154, 244, 247),
+    Color iconColor = const Color.fromARGB(225, 78, 79, 131),
+    String imagePath = "",
+    Color? borderColor,
+    String text = "",
+    double elevation = 0.5,
+    double borderWidth = 1,
+    Function()? onTap,
+  }) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Material(
+        elevation: elevation,
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(8),
+          side: BorderSide(
+              color: borderColor ?? Colors.white, width: borderWidth),
+        ),
+        color: fadedBgColor,
+        child: Container(
+          padding: const EdgeInsets.all(10),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.asset(
+                imagePath,
+                width: 86,
+                height: 86,
+              ),
+                 const  SizedBox(height: 5),
+                 Text(
+                text,
+                style: const TextStyle( fontSize: 15, fontWeight: FontWeight.w500),
+              ),
+         
+            const  SizedBox(width: 10),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget showCommets(List commentList) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: commentList.map<Widget>((x) {
+        return Text(
+          '▪️ $x',
+          style: const TextStyle(
+            fontSize: 14,
+            color: Colors.black,
+            height: 1.5,
+          ),
+        );
+      }).toList(),
+    );
+  }
+
+    Widget typeOfTestCard({
+    String testType = "",
+    String image = "",
+    Function()? onTap,
+    double imageSize = 100,
+  }) {
+    return Container(
+      margin: const EdgeInsets.only(bottom: 20),
+      child: Material(
+        elevation: 1,
+        shadowColor: Colors.grey.withOpacity(0.3),
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
+        child: InkWell(
+          onTap: onTap,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Image.asset(
+                image,
+                fit: BoxFit.cover,
+                height: 60,
+              ),
+              const SizedBox(height: 8),
+              Padding(
+                padding: const EdgeInsets.only(left: 12.0),
+                child:Text(testType,
+              style: const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                ),
+               ),
+              const SizedBox(height: 20),
+            ],
+          ),
+        ),
+      ),
+    );
+  }

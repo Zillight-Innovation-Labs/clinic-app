@@ -1,9 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kivicare_patient/providers/bottom_nav_provider.dart';
 import 'package:kivicare_patient/screens/auth/profile/mt_medicine_reminders.dart';
 import 'package:kivicare_patient/screens/home/home_card.dart';
+import 'package:kivicare_patient/screens/tests/take_test_page.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:kivicare_patient/components/loader_widget.dart';
+import 'package:provider/provider.dart';
 import '../../components/app_scaffold.dart';
 import '../../main.dart';
 import '../../utils/empty_error_state_widget.dart';
@@ -98,7 +101,7 @@ class HomeBanner extends StatelessWidget {
             HomeCard(
                 imagePath: "assets/images/diagnostics.png",
                 title: "Tests",
-                onTap: () {}),
+                onTap: () {Get.to(const TakeTestPage());}),
             const SizedBox(width: 12),
             HomeCard(
                 imagePath: "assets/images/nursing.png",
@@ -114,6 +117,7 @@ class HomeBanner extends StatelessWidget {
                   "assets/images/ambulance.png", //assets/icons/ambulance.png
               title: "Appointment",
               onTap: () {
+                context.read<BottomNavProvider>().setNavbarIndex(1);
                 // Get.to(BookingFormScreen());
                //BookingFormScreen
               },

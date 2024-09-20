@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kivicare_patient/screens/auth/profile/history/mt_history.dart';
 import 'package:kivicare_patient/screens/auth/profile/mt_excersize_reminder.dart';
 import 'package:kivicare_patient/screens/auth/profile/mt_medicine_reminders.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '../../../components/app_scaffold.dart';
 import '../../../generated/assets.dart';
 import '../../../main.dart';
-import '../../Encounter/all_encounters_screen.dart';
 import 'common_horizontal_profile_widget.dart';
 import 'edit_user_profile_controller.dart';
 import 'profile_controller.dart';
@@ -90,6 +90,19 @@ class ProfileScreen extends StatelessWidget {
                   trailing: trailing,
                   padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
                 ).paddingTop(16),
+                   SettingItemWidget(
+                  title: "History",
+                  decoration: boxDecorationDefault(),
+                  subTitle: "See Your Medical History",
+                  splashColor: transparentColor,
+                  onTap: () {
+                    Get.to(() => const MyHistoryScreen());
+                  },
+                  titleTextStyle: boldTextStyle(size: 14),
+                  leading: commonLeadingWid(imgPath: Assets.iconsIcHistory).circularLightPrimaryBg(),
+                  trailing: trailing,
+                  padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
+                ).paddingTop(16),
                 SettingItemWidget(
                   title: locale.value.settings,
                   decoration: boxDecorationDefault(),
@@ -103,6 +116,7 @@ class ProfileScreen extends StatelessWidget {
                   trailing: trailing,
                   padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
                 ).paddingTop(16),
+             
                 SettingItemWidget(
                   title: locale.value.rateApp,
                   decoration: boxDecorationDefault(),

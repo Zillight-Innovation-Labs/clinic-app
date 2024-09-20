@@ -1,13 +1,15 @@
-
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:get/get.dart';
 import 'package:kivicare_patient/api/const/const.dart';
+import 'package:kivicare_patient/providers/bottom_nav_provider.dart';
 import 'package:kivicare_patient/screens/auth/profile/profile_screen.dart';
 import 'package:kivicare_patient/screens/booking/apointments/appointment_tab.dart';
 import 'package:kivicare_patient/screens/booking/appointments_controller.dart';
 import 'package:kivicare_patient/screens/home/home_screen.dart';
+import 'package:kivicare_patient/screens/tests/take_test_page.dart';
+import 'package:provider/provider.dart';
 // import 'package:maan_doctor_appoinment/const/const.dart';
 // import 'package:maan_doctor_appoinment/ui/Home/Doctor%20Appoinment/mt_book_appoinment.dart';
 // import 'package:maan_doctor_appoinment/ui/Home/mt_home.dart';
@@ -23,39 +25,36 @@ class HomeBottomNavBarScreen extends StatefulWidget {
 }
 
 class _HomeBottomNavBarScreenState extends State<HomeBottomNavBarScreen> {
-    final AppointmentsController appointmentsCont = Get.put(AppointmentsController());
-    //"Get.put(AppointmentsController())" or "Get.lazyPut(()=>AppointmentsController())"
+  final AppointmentsController appointmentsCont =
+      Get.put(AppointmentsController());
+  //"Get.put(AppointmentsController())" or "Get.lazyPut(()=>AppointmentsController())"
 
   var currentIndex = 0;
   var selectedIndex = 0;
-  bool showPopup = false;
+  // bool showPopup = false;
 
   List<Widget> pages = [
-     HomeScreen(),
-     AppointmentTabs(),
-   
+    HomeScreen(),
+    AppointmentTabs(),
     Container(),
     const Center(
       child: Text("Payment UI needed"),
     ),
-     ProfileScreen()
+    ProfileScreen()
   ];
 
   @override
   Widget build(BuildContext context) {
+    final homeTabVM = context.watch<BottomNavProvider>();
+
     return Scaffold(
       body: GestureDetector(
         onTap: () {
-          if (showPopup) {
-            setState(() {
-              showPopup = false;
-              selectedIndex = currentIndex;
-            });
-          }
+          homeTabVM.updatePopUp(false);
         },
         child: Stack(
           children: [
-            pages.elementAt(currentIndex),
+            pages.elementAt(homeTabVM.currentIndex),
             // AnimatedContainer for the popup when the third tab is clicked
             Positioned(
               bottom: 100,
@@ -63,9 +62,9 @@ class _HomeBottomNavBarScreenState extends State<HomeBottomNavBarScreen> {
               right: MediaQuery.of(context).size.width * 0.1,
               child: AnimatedContainer(
                 duration: const Duration(milliseconds: 300),
-                height: showPopup ? 200 : 0, // Animate height
+                height: homeTabVM.showPopup ? 200 : 0, // Animate height
                 curve: Curves.easeInOut,
-                decoration: showPopup
+                decoration: homeTabVM.showPopup
                     ? BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(20),
@@ -84,22 +83,31 @@ class _HomeBottomNavBarScreenState extends State<HomeBottomNavBarScreen> {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(20),
                   child: SingleChildScrollView(
-                    child: showPopup
+                    child: homeTabVM.showPopup
                         ? Center(
                             child: Stack(
                               children: [
-                                const Column(
+                                Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    ListTile(
+                                    const ListTile(
                                         leading: Icon(Icons.safety_check),
-                                        title: Text("Services")),//BookingFormScreen
+                                        title: Text(
+                                            "Services")), //BookingFormScreen
                                     ListTile(
-                                        leading: Icon(Icons.safety_check),
-                                        title: Text("Tests")),
+                                        onTap: () =>
+                                            Get.to(const TakeTestPage()),
+                                        leading: const Icon(
+                                            Icons.medical_information),
+                                        title: const Text("Tests")),
                                     ListTile(
-                                        leading: Icon(Icons.safety_check),
-                                        title: Text("Appointment")),
+                                        onTap: () {
+                                          context
+                                              .read<BottomNavProvider>()
+                                              .setNavbarIndex(1);
+                                        },
+                                        leading: const Icon(Icons.safety_check),
+                                        title: const Text("Appointment")),
                                   ],
                                 ),
                                 Positioned(
@@ -107,11 +115,7 @@ class _HomeBottomNavBarScreenState extends State<HomeBottomNavBarScreen> {
                                   top: 5,
                                   child: IconButton(
                                     onPressed: () {
-                                      if (showPopup) {
-                                        setState(() {
-                                          showPopup = false;
-                                        });
-                                      }
+                                      homeTabVM.updatePopUp(false);
                                     },
                                     icon: const Icon(
                                       Icons.cancel,
@@ -139,14 +143,7 @@ class _HomeBottomNavBarScreenState extends State<HomeBottomNavBarScreen> {
           backgroundColor: kLikeWhiteColor,
           activeColor: kMainColor,
           onTap: (value) {
-            setState(() {
-              if (value == 2) {
-                showPopup = true;
-              } else {
-                showPopup = false;
-                currentIndex = value;
-              }
-            });
+            homeTabVM.setNavbarIndex(value);
           },
           items: [
             TabItem(

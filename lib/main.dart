@@ -7,7 +7,7 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:kivicare_patient/screens/walkthrough/walkthrough_screen.dart';
+import 'package:kivicare_patient/providers/app_provider.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:kivicare_patient/locale/language_en.dart';
 import 'app_theme.dart';
@@ -22,6 +22,7 @@ import 'utils/common_base.dart';
 import 'utils/constants.dart';
 import 'utils/local_storage.dart';
 import 'utils/push_notification_service.dart';
+import 'package:provider/provider.dart';
 
 Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
@@ -79,7 +80,9 @@ void main() async {
     log('getThemeFromLocal from cache E: $e');
   }
 
-  runApp(const MyApp());
+  runApp(MultiProvider(
+     providers: AppProvider.providers,
+    child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
