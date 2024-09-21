@@ -165,7 +165,7 @@ class SignInController extends GetxController {
       PushNotificationService().registerFCMAndTopics();
       dev.log("login--======================================--running 2");
       dev.log("isNavigateToDashboard.value:${isNavigateToDashboard.value}");
-      if (!isNavigateToDashboard.value) {
+      if ("" =="") {//!isNavigateToDashboard.value
         dev.log("login--======================================--running 3");
         Get.offAll(() => const HomeBottomNavBarScreen(), binding: BindingsBuilder(() {
           Get.put(HomeController());
