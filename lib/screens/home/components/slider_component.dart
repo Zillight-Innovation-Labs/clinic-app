@@ -89,7 +89,7 @@ class SliderComponent extends StatelessWidget {
                                 homeScreenController.sliderCurrentPage.value ==
                                         index
                                     ? appColorSecondary
-                                    : appColorPrimary,
+                                    : appColorPrimary,  
                           ),
                         ),
                       ),

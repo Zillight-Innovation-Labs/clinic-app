@@ -24,7 +24,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffoldNew(
+    return AppScaffoldNew( 
       hasLeadingWidget: false,
       isBlurBackgroundinLoader: true,
       isLoading: homeScreenController.isLoading,

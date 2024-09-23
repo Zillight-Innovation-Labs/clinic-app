@@ -22,7 +22,7 @@ class ProfileScreen extends StatelessWidget {
   final ProfileController profileController = Get.put(ProfileController());
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { 
     return Obx(
       () => AppScaffoldNew(
         appBartitleText: "Profile",

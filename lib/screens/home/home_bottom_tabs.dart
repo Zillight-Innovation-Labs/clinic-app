@@ -8,14 +8,9 @@ import 'package:kivicare_patient/screens/auth/profile/profile_screen.dart';
 import 'package:kivicare_patient/screens/booking/apointments/appointment_tab.dart';
 import 'package:kivicare_patient/screens/booking/appointments_controller.dart';
 import 'package:kivicare_patient/screens/home/home_screen.dart';
+import 'package:kivicare_patient/screens/service/service_screen.dart';
 import 'package:kivicare_patient/screens/tests/take_test_page.dart';
 import 'package:provider/provider.dart';
-// import 'package:maan_doctor_appoinment/const/const.dart';
-// import 'package:maan_doctor_appoinment/ui/Home/Doctor%20Appoinment/mt_book_appoinment.dart';
-// import 'package:maan_doctor_appoinment/ui/Home/mt_home.dart';
-// import 'package:maan_doctor_appoinment/ui/Profile/mt_profile.dart';
-
-// import '../History/mt_history.dart';
 
 class HomeBottomNavBarScreen extends StatefulWidget {
   const HomeBottomNavBarScreen({super.key});
@@ -90,10 +85,14 @@ class _HomeBottomNavBarScreenState extends State<HomeBottomNavBarScreen> {
                                 Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    const ListTile(
-                                        leading: Icon(Icons.safety_check),
-                                        title: Text(
-                                            "Services")), //BookingFormScreen
+                                    ListTile(
+                                      onTap: () =>
+                                          Get.to(const ServiceScreen()),
+                                      leading: const Icon(Icons.safety_check),
+                                      title: const Text(
+                                        "Services",
+                                      ),
+                                    ), //BookingFormScreen
                                     ListTile(
                                         onTap: () =>
                                             Get.to(const TakeTestPage()),
