@@ -9,6 +9,7 @@ class ServiceCard extends StatelessWidget {
     required this.onTap,
     required this.color,
     required this.img,
+    this.hasButton = true,
   });
 
   final String title;
@@ -16,6 +17,7 @@ class ServiceCard extends StatelessWidget {
   final void Function()? onTap;
   final Color color;
   final String img;
+  final bool hasButton;
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +28,7 @@ class ServiceCard extends StatelessWidget {
       height: size.height * 0.22,
       width: size.width,
       decoration: BoxDecoration(
+        image: const DecorationImage(image: AssetImage("assets/images/polygon.png")),
         color: color,
         borderRadius: BorderRadius.circular(18),
       ),
@@ -47,23 +50,25 @@ class ServiceCard extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 12),
-              GestureDetector(
-                onTap: onTap,
-                child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
-                  decoration: BoxDecoration(
-                      color: white, borderRadius: BorderRadius.circular(20)),
-                  child: Text(
-                    "Book Now",
-                    style: TextStyle(color: color, fontSize: 12),
+              if (hasButton) ...{
+                GestureDetector(
+                  onTap: onTap,
+                  child: Container(
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 7),
+                    decoration: BoxDecoration(
+                        color: white, borderRadius: BorderRadius.circular(20)),
+                    child: Text(
+                      "Book Now",
+                      style: TextStyle(color: color, fontSize: 12),
+                    ),
                   ),
-                ),
-              )
+                )
+              }
             ],
           ),
           Positioned(
-            right: 0,
+            right: hasButton ? 0 : -30,
             bottom: 0,
             child: ClipRRect(
               borderRadius:

@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:kivicare_patient/components/app_scaffold.dart';
 import 'package:kivicare_patient/screens/auth/profile/profile_controller.dart';
+import 'package:kivicare_patient/screens/payment/payment_list.dart';
+import 'package:kivicare_patient/screens/payment/payment_pending_list.dart';
 import 'package:kivicare_patient/screens/service/service_plan_card.dart';
 import 'package:kivicare_patient/utils/colors.dart';
+import 'package:kivicare_patient/utils/common_base.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class PaymentScreen extends StatefulWidget {
@@ -23,7 +27,7 @@ class _PaymentScreenState extends State<PaymentScreen>
   @override
   void initState() {
     super.initState();
-    _tabController = TabController(length: 3, vsync: this);
+    _tabController = TabController(length: 2, vsync: this);
 
     // Add listener to handle tab changes
     _tabController.addListener(() {
@@ -62,6 +66,7 @@ class _PaymentScreenState extends State<PaymentScreen>
 
     return AppScaffoldNew(
       appBartitleText: "Payment ",
+      hasLeadingWidget: false,
       appBarVerticalSize: size.height * 0.12,
       body: DefaultTabController(
         length: 2,
@@ -69,28 +74,26 @@ class _PaymentScreenState extends State<PaymentScreen>
           children: [
             Column(
               children: [
-                Image.asset(
-                  'assets/images/personalizedServiceImg.png',
-                ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20)
                       .copyWith(top: 10),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
+                    // crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
+                      SizedBox(height: size.height * 0.1),
                       Text(
-                        "Personal Healthcare Management",
+                        "Available Balance",
                         style: primaryTextStyle(),
                       ),
                       const SizedBox(height: 10),
                       Text(
-                        "Our app empowers users to take control of their health with personalized plans, appointment scheduling, and remote consultations, ensuring comprehensive care at their fingertips.",
-                        style: secondaryTextStyle(color: Colors.black),
+                        "${getCurrency()} 1000",
+                        style: primaryTextStyle(size: 22, color: Colors.black),
                       ),
                       const SizedBox(height: 10),
                       Text(
-                        "Features",
-                        style: primaryTextStyle(),
+                        "+Add money",
+                        style: primaryTextStyle(color: appColorPrimary),
                       ),
                       const SizedBox(height: 10),
                       Card(
@@ -118,7 +121,7 @@ class _PaymentScreenState extends State<PaymentScreen>
                             dividerColor: Colors.transparent,
                             splashBorderRadius: BorderRadius.circular(10),
                             indicator: BoxDecoration(
-                              color: tabColor,
+                              color: appColorPrimary,
                               borderRadius: BorderRadius.circular(10),
                             ),
                             tabs: [
@@ -128,12 +131,12 @@ class _PaymentScreenState extends State<PaymentScreen>
                                       horizontal: 10),
                                   decoration: BoxDecoration(
                                     border: Border.all(
-                                      color: tabColor.withOpacity(0.5),
+                                      color: appColorPrimary.withOpacity(0.5),
                                     ),
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                   child:
-                                      const Center(child: Text("Payment List")),
+                                      const Center(child: Text("Payment History")),
                                 ),
                               ),
                               Tab(
@@ -142,7 +145,7 @@ class _PaymentScreenState extends State<PaymentScreen>
                                       horizontal: 10),
                                   decoration: BoxDecoration(
                                     border: Border.all(
-                                      color: tabColor.withOpacity(0.5),
+                                      color: appColorPrimary.withOpacity(0.5),
                                     ),
                                     borderRadius: BorderRadius.circular(10),
                                   ),
@@ -164,25 +167,10 @@ class _PaymentScreenState extends State<PaymentScreen>
                     controller: _tabController,
                     children: const [
                       // Tab 1 Content
-                      ServicePlanCard(
-                        name: 'Basic',
-                        price: '1000',
-                        textOne: "Access to the app with",
-                        textTwo:
-                            "Personalized health plans, Monthly\nhealth reminders and tips",
-                        textThree: "Basic appointment scheduling\nfeatures",
-                      ),
+                      PaymentList(),
 
                       // Tab 2 Content
-                      ServicePlanCard(
-                        name: 'Standard',
-                        price: '3000',
-                        textOne: "All Basic Plan benefits",
-                        textTwo:
-                            "Bi-weekly remote consultations with\nhealthcare professionals",
-                        textThree:
-                            "Bi-weekly remote consultations with\nhealthcare professionals",
-                      ),
+                      PaymentPayementList()
                     ],
                   ),
                 ),

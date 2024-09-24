@@ -20,8 +20,6 @@ class HomeServiceSlider extends StatefulWidget {
 class _HomeServiceSliderState extends State<HomeServiceSlider> {
   final HomeController homeScreenController = Get.find();
 
-
-
   int sliderCurrentPage = 0;
 
   final PageController sliderPageController = PageController();
@@ -87,8 +85,8 @@ class _HomeServiceSliderState extends State<HomeServiceSlider> {
                           borderRadius: BorderRadius.circular(20),
                           border: Border.all(color: white),
                           color: sliderCurrentPage == index
-                              ? appColorSecondary
-                              : appColorPrimary,
+                              ? appColorPrimary
+                              : appColorPrimary.withOpacity(0.5),
                         ),
                       ),
                     );
@@ -103,30 +101,29 @@ class _HomeServiceSliderState extends State<HomeServiceSlider> {
   }
 }
 
-
-  final List<Map<String, dynamic>> servicePages = [
-    {
-      "title": "Personal Healthcare Management",
-      "desc":
-          "Get a comprehensive health plan for\nyourself and your family. Your health,\nyour future, secured.",
-      'image': "assets/images/personalizeImg.png",
-      "color": serviceCardOne,
-      "page": const PersonalizedHomeCareService()
-    },
-    {
-      "title": "Personalized Home Care for Seniors",
-      "desc":
-          "Your parents cared for you, now it's\ntime to return the favor. Secure\ntheir health with the best coverage.",
-      'image': "assets/images/seniorImg.png",
-      "color": serviceCardTwo,
-      "page": const PersonalizedHomeCareForSeniorService()
-    },
-    {
-      "title": "Event and Outreach Health Services",
-      "desc":
-          "Check your health condition regularly\nto minimize the incidence of disease\nin the future.",
-      'image': "assets/images/eventImg.png",
-      "color": serviceCardThree,
-      "page": const EventOutreachService()
-    },
-  ];
+final List<Map<String, dynamic>> servicePages = [
+  {
+    "title": "Personal Healthcare Management",
+    "desc":
+        "Get a comprehensive health plan for\nyourself and your family. Your health,\nyour future, secured.",
+    'image': "assets/images/personalizeImg.png",
+    "color": serviceCardOne,
+    "page": const PersonalizedHomeCareService()
+  },
+  {
+    "title": "Personalized Home Care for Seniors",
+    "desc":
+        "Your parents cared for you, now it's\ntime to return the favor. Secure\ntheir health with the best coverage.",
+    'image': "assets/images/seniorImg.png",
+    "color": serviceCardTwo,
+    "page": const PersonalizedHomeCareForSeniorService()
+  },
+  {
+    "title": "Event and Outreach Health Services",
+    "desc":
+        "Check your health condition regularly\nto minimize the incidence of disease\nin the future.",
+    'image': "assets/images/eventImg.png",
+    "color": serviceCardThree,
+    "page": const EventOutreachService()
+  },
+];

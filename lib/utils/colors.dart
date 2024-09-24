@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+const homeCardOne = Color(0xFF0B8FAC);
 const serviceCardOne = Color(0xFF28B2A7);
 const serviceCardTwo = Color(0xFF4F73DF);
 const serviceCardThree = Color(0xFF475467);

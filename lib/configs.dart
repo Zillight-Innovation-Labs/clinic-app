@@ -3,7 +3,7 @@
 const APP_NAME = 'KiviCare - Patient App';
 const APP_LOGO_URL = '$DOMAIN_URL/img/logo/mini_logo.png';
 const DEFAULT_LANGUAGE = 'en';
-const DASHBOARD_AUTO_SLIDER_SECOND = 5;
+const DASHBOARD_AUTO_SLIDER_SECOND = 5; 
 
 ///Live Url
 const DOMAIN_URL = 'http://pos.zealightlabs.com/api'; // Don't add slash at the end of the url

@@ -65,7 +65,7 @@ class AppScaffold extends StatelessWidget {
                 elevation: appBarelevation,
                 automaticallyImplyLeading: automaticallyImplyLeading,
                 backgroundColor:
-                    appBarbackgroundColor ?? context.scaffoldBackgroundColor,
+                    appBarbackgroundColor ?? Color(0xffEDEDED),
                 centerTitle: isCenterTitle,
                 titleSpacing: 2,
                 title: appBarTitle ??
@@ -79,7 +79,7 @@ class AppScaffold extends StatelessWidget {
               ).paddingTop(10),
             ),
       backgroundColor:
-          scaffoldBackgroundColor ?? context.scaffoldBackgroundColor,
+          scaffoldBackgroundColor ?? Color(0xffEDEDED),
       body: Body(
         isLoading: isLoading ?? false.obs,
         child: body,
@@ -191,7 +191,8 @@ class AppScaffoldNew extends StatelessWidget {
     return Scaffold(
       resizeToAvoidBottomInset: resizeToAvoidBottomPadding,
       backgroundColor:
-          scaffoldBackgroundColor ?? context.scaffoldBackgroundColor,
+          scaffoldBackgroundColor ?? Color(0xffEDEDED),
+          // scaffoldBackgroundColor ?? Color(0xffEDEDED),
       body: Stack(
         children: [
           Container(
@@ -212,7 +213,7 @@ class AppScaffoldNew extends StatelessWidget {
                   margin: EdgeInsets.only(top: topBarHeight),
                   decoration: boxDecorationDefault(
                     color: scaffoldBackgroundColor ??
-                        context.scaffoldBackgroundColor,
+                        Color(0xffEDEDED),
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(defaultRadius * 2),
                       topRight: Radius.circular(defaultRadius * 2),

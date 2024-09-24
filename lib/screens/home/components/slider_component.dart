@@ -1,24 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kivicare_patient/screens/service/components/service_card.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:kivicare_patient/utils/colors.dart';
 
 import '../../../components/cached_image_widget.dart';
 import '../home_controller.dart';
 
-class SliderComponent extends StatelessWidget {
-  final HomeController homeScreenController = Get.find();
-
+class SliderComponent extends StatefulWidget {
   SliderComponent({super.key});
 
- final List images = [
-    "https://t4.ftcdn.net/jpg/01/33/33/41/240_F_133334155_X23HzbJKawbIgXVaub4bPM8CjpkS5uMS.jpg",
-    "https://t4.ftcdn.net/jpg/01/33/33/41/240_F_133334155_X23HzbJKawbIgXVaub4bPM8CjpkS5uMS.jpg",
-    "https://t4.ftcdn.net/jpg/01/33/33/41/240_F_133334155_X23HzbJKawbIgXVaub4bPM8CjpkS5uMS.jpg",
-    "https://t4.ftcdn.net/jpg/01/33/33/41/240_F_133334155_X23HzbJKawbIgXVaub4bPM8CjpkS5uMS.jpg",
-    "https://t4.ftcdn.net/jpg/01/33/33/41/240_F_133334155_X23HzbJKawbIgXVaub4bPM8CjpkS5uMS.jpg",
-    "https://t4.ftcdn.net/jpg/01/33/33/41/240_F_133334155_X23HzbJKawbIgXVaub4bPM8CjpkS5uMS.jpg",
-  ];
+  @override
+  State<SliderComponent> createState() => _SliderComponentState();
+}
+
+class _SliderComponentState extends State<SliderComponent> {
+  final HomeController homeScreenController = Get.find();
+
+  int sliderCurrentPage = 0;
+
+  final PageController sliderPageController = PageController();
+  @override
+  void dispose() {
+    sliderPageController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,73 +33,61 @@ class SliderComponent extends StatelessWidget {
     }
 
     return SizedBox(
-      height: 150,
+      height: 190,
       child: Stack(
         clipBehavior: Clip.none,
         children: [
-          Obx(
-            () => PageView.builder(
-              controller: homeScreenController.sliderPageController,
-              onPageChanged: (int page) {
-                hideKeyboard(context);
-                homeScreenController.sliderCurrentPage(page);
-              },
-              itemCount: homeScreenController.dashboardData.value.slider.length,
-              itemBuilder: (context, index) {
-                return Container(
-                  color: Colors.transparent,
-                  width: Get.width,
-                  child: CachedImageWidget(
-                    url: images[index],
-                    fit: BoxFit.fitWidth,
-                    usePlaceholderIfUrlEmpty: false,
-                    width: Get.width,
-                  ),
-                );
-              },
-            ),
+          PageView.builder(
+            controller: sliderPageController,
+            onPageChanged: (int page) {
+              setState(() {
+                sliderCurrentPage = page;
+              });
+            },
+            itemCount: homeSliderPages.length,
+            itemBuilder: (context, index) {
+              return ServiceCard(
+                hasButton: false,
+                title: homeSliderPages[index]['title'],
+                desc: homeSliderPages[index]['desc'],
+                img: homeSliderPages[index]['image'],
+                onTap: () {},
+                color: homeSliderPages[index]['color'],
+              );
+            },
           ),
           Positioned(
-            bottom: -25,
+            bottom: 0,
             left: 0,
             right: 0,
-            child: Obx(
-              () => Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: List<Widget>.generate(
-                  homeScreenController.dashboardData.value.slider.length,
-                  (index) {
-                    return InkWell(
-                      onTap: () {
-                        homeScreenController.sliderPageController.animateToPage(
-                          index,
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeIn,
-                        );
-                      },
-                      child: Obx(
-                        () => Container(
-                          height: 10,
-                          width: homeScreenController.sliderCurrentPage.value ==
-                                  index
-                              ? 20
-                              : 10,
-                          margin: const EdgeInsets.all(3),
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(20),
-                            border: Border.all(color: white),
-                            color:
-                                homeScreenController.sliderCurrentPage.value ==
-                                        index
-                                    ? appColorSecondary
-                                    : appColorPrimary,  
-                          ),
-                        ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: List<Widget>.generate(
+                homeSliderPages.length,
+                (index) {
+                  return InkWell(
+                    onTap: () {
+                      sliderPageController.animateToPage(
+                        index,
+                        duration: const Duration(milliseconds: 300),
+                        curve: Curves.easeIn,
+                      );
+                    },
+                    child: Container(
+                      height: 6,
+                      width: sliderCurrentPage == index ? 20 : 10,
+                      margin: const EdgeInsets.all(3),
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        border: Border.all(color: white),
+                        color: sliderCurrentPage == index
+                            ? homeCardOne
+                            : homeCardOne.withOpacity(0.5),
                       ),
-                    );
-                  },
-                ),
+                    ),
+                  );
+                },
               ),
             ),
           ),
@@ -102,3 +96,27 @@ class SliderComponent extends StatelessWidget {
     );
   }
 }
+
+final List<Map<String, dynamic>> homeSliderPages = [
+  {
+    "title": "Online Hospital",
+    "desc":
+        "Yorem ipsum dolor sit amet, consectetur\nadipiscing elit. Nunc vulputate libero et\nvelit interdum, ac aliquet odio mattis.",
+    'image': "assets/images/nurseImg.png",
+    "color": homeCardOne,
+  },
+  {
+    "title": "Online Hospital",
+    "desc":
+        "YYorem ipsum dolor sit amet, consectetur\nadipiscing elit. Nunc vulputate libero et\nvelit interdum, ac aliquet odio mattis.",
+    'image': "assets/images/dr_joshia.png",
+    "color": homeCardOne,
+  },
+  {
+    "title": "Online Hospital",
+    "desc":
+        "YYorem ipsum dolor sit amet, consectetur\nadipiscing elit. Nunc vulputate libero et\nvelit interdum, ac aliquet odio mattis.",
+    'image': "assets/images/dr_allenda.png",
+    "color": homeCardOne,
+  },
+];
