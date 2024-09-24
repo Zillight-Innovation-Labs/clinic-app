@@ -29,10 +29,6 @@ class DashboardController extends GetxController {
 
   Rx<BottomBarItem> selectedBottomNav = BottomBarItem(title: "Home", icon: Assets.navigationIcHomeOutlined, activeIcon: Assets.navigationIcHomeFilled, type: BottomItem.home.name).obs;
 
-  RxList<StatelessWidget> screen = [
-    HomeScreen(),
-    AppointmentsScreen(),
-  ].obs;
 
   @override
   void onInit() {
@@ -51,7 +47,6 @@ class DashboardController extends GetxController {
 
   @override
   void onReady() {
-    reloadBottomTabs();
     if (Get.context != null) {
       View.of(Get.context!).platformDispatcher.onPlatformBrightnessChanged = () {
         WidgetsBinding.instance.handlePlatformBrightnessChanged();
@@ -68,33 +63,7 @@ class DashboardController extends GetxController {
     super.onReady();
   }
 
-  void reloadBottomTabs() {
-    debugPrint('reloadBottomTabs ISLOGGEDIN.VALUE: ${isLoggedIn.value}');
-    if (isLoggedIn.value) {
-      screen.removeWhere((element) => element is SettingScreen);
-      if (bottomNavItems.indexWhere((element) => element is ProfileScreen).isNegative) {
-        screen.add(ProfileScreen());
-      }
-      screen.toSet();
 
-      bottomNavItems.removeWhere((element) => element.type == BottomItem.settings.name);
-      if (bottomNavItems.indexWhere((element) => element.type == BottomItem.profile.name).isNegative) {
-        bottomNavItems.add(BottomBarItem(title: "Profile", icon: Assets.navigationIcUserOutlined, activeIcon: Assets.navigationIcUserFilled, type: BottomItem.profile.name));
-      }
-      bottomNavItems.toSet();
-    } else {
-      screen.removeWhere((element) => element is ProfileScreen);
-      screen.add(SettingScreen());
-      screen.toSet();
-
-      bottomNavItems.removeWhere((element) => element.type == BottomItem.profile.name);
-      if (bottomNavItems.indexWhere((element) => element.type == BottomItem.settings.name).isNegative) {
-        bottomNavItems.add(BottomBarItem(title: "Settings", icon: Assets.iconsIcSettingOutlined, activeIcon: Assets.iconsIcSetting, type: BottomItem.settings.name));
-      }
-      bottomNavItems.toSet();
-    }
-    selectedBottomNav(bottomNavItems[currentIndex.value]);
-  }
 }
 
 ///Get App Configuration Api

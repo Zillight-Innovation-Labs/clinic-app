@@ -6,15 +6,16 @@ import 'package:kivicare_patient/screens/service/service_plan_card.dart';
 import 'package:kivicare_patient/utils/colors.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-class PaymentScreen extends StatefulWidget {
-  const PaymentScreen({super.key});
+class PersonalizedHomeCareService extends StatefulWidget {
+  const PersonalizedHomeCareService({super.key});
 
   @override
-  State<PaymentScreen> createState() => _PaymentScreenState();
+  State<PersonalizedHomeCareService> createState() =>
+      _PersonalizedHomeCareServiceState();
 }
 
-class _PaymentScreenState extends State<PaymentScreen>
-    with TickerProviderStateMixin {
+class _PersonalizedHomeCareServiceState
+    extends State<PersonalizedHomeCareService> with TickerProviderStateMixin {
   final ProfileController profileController = Get.put(ProfileController());
 
   String selectedPlan = 'Basic';
@@ -61,10 +62,10 @@ class _PaymentScreenState extends State<PaymentScreen>
     final Size size = MediaQuery.of(context).size;
 
     return AppScaffoldNew(
-      appBartitleText: "Payment ",
+      appBartitleText: "Personal Healthcare Management ",
       appBarVerticalSize: size.height * 0.12,
       body: DefaultTabController(
-        length: 2,
+        length: 3,
         child: Stack(
           children: [
             Column(
@@ -132,8 +133,7 @@ class _PaymentScreenState extends State<PaymentScreen>
                                     ),
                                     borderRadius: BorderRadius.circular(10),
                                   ),
-                                  child:
-                                      const Center(child: Text("Payment List")),
+                                  child: const Center(child: Text("Basic")),
                                 ),
                               ),
                               Tab(
@@ -146,8 +146,20 @@ class _PaymentScreenState extends State<PaymentScreen>
                                     ),
                                     borderRadius: BorderRadius.circular(10),
                                   ),
-                                  child: const Center(
-                                      child: Text("Payment Pending")),
+                                  child: const Center(child: Text("Standard")),
+                                ),
+                              ),
+                              Tab(
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: tabColor.withOpacity(0.5),
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: const Center(child: Text("Premium")),
                                 ),
                               ),
                             ],
@@ -183,11 +195,54 @@ class _PaymentScreenState extends State<PaymentScreen>
                         textThree:
                             "Bi-weekly remote consultations with\nhealthcare professionals",
                       ),
+
+                      // Tab 3 Content
+                      ServicePlanCard(
+                        name: 'Premium',
+                        price: '5000',
+                        textOne: "All Standard Plan benefits",
+                        textTwo: "Weekly remote consultations",
+                        textThree: "Weekly remote consultations",
+                      ),
                     ],
                   ),
                 ),
               ],
             ),
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 10,
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: GestureDetector(
+                  onTap: () {
+                    log("selectedpage:$selectedPlan");
+                  },
+                  child: Container(
+                    width: 150,
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                    decoration: BoxDecoration(
+                        color: tabColor,
+                        borderRadius: BorderRadius.circular(20)),
+                    child: Row(
+                      children: [
+                        Text(
+                          "Choose this plan",
+                          style: secondaryTextStyle(color: Colors.white),
+                        ),
+                        const SizedBox(width: 5),
+                        const Icon(
+                          Icons.arrow_forward,
+                          color: Colors.white,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),

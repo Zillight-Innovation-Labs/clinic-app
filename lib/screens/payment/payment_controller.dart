@@ -199,7 +199,6 @@ void reLoadBookingsOnDashboard() {
   try {
     DashboardController dashboardController = Get.find();
     dashboardController.currentIndex(1);
-    dashboardController.reloadBottomTabs();
   } catch (e) {
     log('E: $e');
   }

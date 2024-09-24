@@ -83,7 +83,7 @@ class UpcomingAppointmentComponents extends StatelessWidget {
       children: [
         16.height,
         const ViewAllLabel(label: "Upcoming Appointments", isShowAll: false),
-        AppointmentCard(appointment: upcomingAppointment.first),
+        // AppointmentCard(appointment: upcomingAppointment.first),
       ],
     ).paddingSymmetric(horizontal: 16);
   }

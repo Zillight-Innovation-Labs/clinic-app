@@ -1190,3 +1190,28 @@ String currency(context) {
 
   return format.currencySymbol;
 }
+
+tileText({String text = ""}) {
+  if (text != "") {
+    return Padding(
+      padding: const EdgeInsets.only(bottom: 20),
+      child: Row(
+        children: [
+          const SizedBox(width: 30),
+          const Icon(
+            Icons.check_circle,
+            size: 16,
+          ),
+          const SizedBox(width: 20),
+          Text(
+            text,
+            style: secondaryTextStyle(
+              weight: FontWeight.w300,
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+  return const SizedBox.shrink();
+}

@@ -8,7 +8,7 @@ import 'package:kivicare_patient/utils/colors.dart';
 import '../../../utils/common_base.dart';
 import '../../booking/model/booking_req.dart';
 import '../../payment/payment_controller.dart';
-import '../../payment/payment_screen.dart';
+import '../../payment/payment_screen_del.dart';
 
 class AppointmentSummaryWidget extends StatelessWidget {
   final BookingReq bookingData;
@@ -149,7 +149,7 @@ class AppointmentSummaryWidget extends StatelessWidget {
                   Get.back();
                   paymentController = PaymentController();
                   paymentController.bookingData = bookingData;
-                  Get.to(() => const PaymentScreen());
+                  // Get.to(() => const PaymentScreen());
                 },
               )
             ],

@@ -1,5 +1,12 @@
 import 'package:flutter/material.dart';
 
+const serviceCardOne = Color(0xFF28B2A7);
+const serviceCardTwo = Color(0xFF4F73DF);
+const serviceCardThree = Color(0xFF475467);
+
+const serviceStandard = Color(0xFFEF6820);
+const servicePremium = Color(0xFF16B364);
+
 const appColorPrimary = Color(0xFF5670CC);
 const appColorSecondary = Color(0xFFF67E7D);
 const lightPrimaryColor = Color(0xFFEBEDFF);

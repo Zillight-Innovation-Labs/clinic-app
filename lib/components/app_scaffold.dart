@@ -64,7 +64,8 @@ class AppScaffold extends StatelessWidget {
               child: AppBar(
                 elevation: appBarelevation,
                 automaticallyImplyLeading: automaticallyImplyLeading,
-                backgroundColor: appBarbackgroundColor ?? context.scaffoldBackgroundColor,
+                backgroundColor:
+                    appBarbackgroundColor ?? context.scaffoldBackgroundColor,
                 centerTitle: isCenterTitle,
                 titleSpacing: 2,
                 title: appBarTitle ??
@@ -73,10 +74,12 @@ class AppScaffold extends StatelessWidget {
                       style: primaryTextStyle(size: 16),
                     ).paddingLeft(hasLeadingWidget ? 0 : 16),
                 actions: actions,
-                leading: leadingWidget ?? (hasLeadingWidget ? backButton() : null),
+                leading:
+                    leadingWidget ?? (hasLeadingWidget ? backButton() : null),
               ).paddingTop(10),
             ),
-      backgroundColor: scaffoldBackgroundColor ?? context.scaffoldBackgroundColor,
+      backgroundColor:
+          scaffoldBackgroundColor ?? context.scaffoldBackgroundColor,
       body: Body(
         isLoading: isLoading ?? false.obs,
         child: body,
@@ -126,7 +129,8 @@ class AppScaffoldNew extends StatelessWidget {
     this.fabWidget,
   }) : super(key: key);
 
-  double get topBarHeight => hideAppBar ? 0 : appBarVerticalSize ?? Get.height * 0.15;
+  double get topBarHeight =>
+      hideAppBar ? 0 : appBarVerticalSize ?? Get.height * 0.15;
 
   Widget get topBarComponent =>
       appBarChild ??
@@ -146,7 +150,12 @@ class AppScaffoldNew extends StatelessWidget {
                       appBartitleText ?? "",
                       overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.center,
-                      style: primaryTextStyle(size: 18, fontFamily: GoogleFonts.interTight(fontWeight: FontWeight.w600).fontFamily, color: white),
+                      style: primaryTextStyle(
+                          size: 18,
+                          fontFamily: GoogleFonts.interTight(
+                                  fontWeight: FontWeight.w600)
+                              .fontFamily,
+                          color: white),
                     ).expand(),
                   ],
                 ).paddingSymmetric(horizontal: Get.width * 0.12),
@@ -158,7 +167,10 @@ class AppScaffoldNew extends StatelessWidget {
                               onPressed: () {
                                 Get.back();
                               },
-                              icon: const Icon(Icons.arrow_back_ios_new_outlined, color: white, size: 20),
+                              icon: const Icon(
+                                  Icons.arrow_back_ios_new_outlined,
+                                  color: white,
+                                  size: 20),
                             )
                           : const Offstage()),
                 ),
@@ -178,7 +190,8 @@ class AppScaffoldNew extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: resizeToAvoidBottomPadding,
-      backgroundColor: scaffoldBackgroundColor ?? context.scaffoldBackgroundColor,
+      backgroundColor:
+          scaffoldBackgroundColor ?? context.scaffoldBackgroundColor,
       body: Stack(
         children: [
           Container(
@@ -198,7 +211,8 @@ class AppScaffoldNew extends StatelessWidget {
                   clipBehavior: clipBehaviorSplitRegion,
                   margin: EdgeInsets.only(top: topBarHeight),
                   decoration: boxDecorationDefault(
-                    color: scaffoldBackgroundColor ?? context.scaffoldBackgroundColor,
+                    color: scaffoldBackgroundColor ??
+                        context.scaffoldBackgroundColor,
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(defaultRadius * 2),
                       topRight: Radius.circular(defaultRadius * 2),
@@ -210,7 +224,9 @@ class AppScaffoldNew extends StatelessWidget {
               ],
             ),
           ),
-          Obx(() => LoaderWidget(isBlurBackground: isBlurBackgroundinLoader).center().visible((isLoading ?? false.obs).value))
+          Obx(() => LoaderWidget(isBlurBackground: isBlurBackgroundinLoader)
+              .center()
+              .visible((isLoading ?? false.obs).value))
         ],
       ),
       floatingActionButton: fabWidget,

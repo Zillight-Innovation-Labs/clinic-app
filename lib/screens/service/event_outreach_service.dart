@@ -6,14 +6,14 @@ import 'package:kivicare_patient/screens/service/service_plan_card.dart';
 import 'package:kivicare_patient/utils/colors.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-class PaymentScreen extends StatefulWidget {
-  const PaymentScreen({super.key});
+class EventOutreachService extends StatefulWidget {
+  const EventOutreachService({super.key});
 
   @override
-  State<PaymentScreen> createState() => _PaymentScreenState();
+  State<EventOutreachService> createState() => _EventOutreachServiceState();
 }
 
-class _PaymentScreenState extends State<PaymentScreen>
+class _EventOutreachServiceState extends State<EventOutreachService>
     with TickerProviderStateMixin {
   final ProfileController profileController = Get.put(ProfileController());
 
@@ -61,16 +61,16 @@ class _PaymentScreenState extends State<PaymentScreen>
     final Size size = MediaQuery.of(context).size;
 
     return AppScaffoldNew(
-      appBartitleText: "Payment ",
+      appBartitleText: "Event and Outreach Health Services ",
       appBarVerticalSize: size.height * 0.12,
       body: DefaultTabController(
-        length: 2,
+        length: 3,
         child: Stack(
           children: [
             Column(
               children: [
                 Image.asset(
-                  'assets/images/personalizedServiceImg.png',
+                  'assets/images/eventService.png',
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20)
@@ -79,12 +79,12 @@ class _PaymentScreenState extends State<PaymentScreen>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Personal Healthcare Management",
+                        "Event and Outreach Health Services",
                         style: primaryTextStyle(),
                       ),
                       const SizedBox(height: 10),
                       Text(
-                        "Our app empowers users to take control of their health with personalized plans, appointment scheduling, and remote consultations, ensuring comprehensive care at their fingertips.",
+                        "Our platform provides on-site health services for events and community outreach programs, ensuring participants have access to medical consultations, screenings, and wellness resources in a convenient and engaging setting.",
                         style: secondaryTextStyle(color: Colors.black),
                       ),
                       const SizedBox(height: 10),
@@ -132,8 +132,7 @@ class _PaymentScreenState extends State<PaymentScreen>
                                     ),
                                     borderRadius: BorderRadius.circular(10),
                                   ),
-                                  child:
-                                      const Center(child: Text("Payment List")),
+                                  child: const Center(child: Text("Basic")),
                                 ),
                               ),
                               Tab(
@@ -146,8 +145,20 @@ class _PaymentScreenState extends State<PaymentScreen>
                                     ),
                                     borderRadius: BorderRadius.circular(10),
                                   ),
-                                  child: const Center(
-                                      child: Text("Payment Pending")),
+                                  child: const Center(child: Text("Standard")),
+                                ),
+                              ),
+                              Tab(
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: tabColor.withOpacity(0.5),
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: const Center(child: Text("Premium")),
                                 ),
                               ),
                             ],
@@ -167,10 +178,9 @@ class _PaymentScreenState extends State<PaymentScreen>
                       ServicePlanCard(
                         name: 'Basic',
                         price: '1000',
-                        textOne: "Access to the app with",
-                        textTwo:
-                            "Personalized health plans, Monthly\nhealth reminders and tips",
-                        textThree: "Basic appointment scheduling\nfeatures",
+                        textOne: "Access to community health events",
+                        textTwo: "Health education materials",
+                        textThree: "Monthly newsletter with health\ntips",
                       ),
 
                       // Tab 2 Content
@@ -179,15 +189,59 @@ class _PaymentScreenState extends State<PaymentScreen>
                         price: '3000',
                         textOne: "All Basic Plan benefits",
                         textTwo:
-                            "Bi-weekly remote consultations with\nhealthcare professionals",
+                            "Participation in two on-site health\nscreenings per month",
                         textThree:
-                            "Bi-weekly remote consultations with\nhealthcare professionals",
+                            "Discounted rates for additional event\nservices",
+                      ),
+
+                      // Tab 3 Content
+                      ServicePlanCard(
+                        name: 'Premium',
+                        price: '5000',
+                        textOne: "All Standard Plan benefits",
+                        textTwo: "Access to exclusive workshops and\nwebinars",
+                        textThree: "Free wellness kits for event participants",
+                        textFour: "Priority scheduling for events",
                       ),
                     ],
                   ),
                 ),
               ],
             ),
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 10,
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: GestureDetector(
+                  onTap: () {
+                    log("selectedpage:$selectedPlan");
+                  },
+                  child: Container(
+                    width: 150,
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                    decoration: BoxDecoration(
+                        color: tabColor,
+                        borderRadius: BorderRadius.circular(20)),
+                    child: Row(
+                      children: [
+                        Text(
+                          "Choose this plan",
+                          style: secondaryTextStyle(color: Colors.white),
+                        ),
+                        const SizedBox(width: 5),
+                        const Icon(
+                          Icons.arrow_forward,
+                          color: Colors.white,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),

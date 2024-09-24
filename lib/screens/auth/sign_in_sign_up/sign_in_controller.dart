@@ -174,7 +174,7 @@ class SignInController extends GetxController {
         dev.log("login--======================================--running 4");
         try {
           DashboardController dashboardController = Get.find();
-          dashboardController.reloadBottomTabs();
+          // dashboardController.reloadBottomTabs();
         } catch (e) {
           log('dashboardController Get.find E: $e');
         }

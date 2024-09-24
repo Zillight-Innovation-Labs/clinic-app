@@ -6,14 +6,16 @@ import 'package:kivicare_patient/screens/service/service_plan_card.dart';
 import 'package:kivicare_patient/utils/colors.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-class PaymentScreen extends StatefulWidget {
-  const PaymentScreen({super.key});
+class PersonalizedHomeCareForSeniorService extends StatefulWidget {
+  const PersonalizedHomeCareForSeniorService({super.key});
 
   @override
-  State<PaymentScreen> createState() => _PaymentScreenState();
+  State<PersonalizedHomeCareForSeniorService> createState() =>
+      _PersonalizedHomeCareForSeniorServiceState();
 }
 
-class _PaymentScreenState extends State<PaymentScreen>
+class _PersonalizedHomeCareForSeniorServiceState
+    extends State<PersonalizedHomeCareForSeniorService>
     with TickerProviderStateMixin {
   final ProfileController profileController = Get.put(ProfileController());
 
@@ -61,16 +63,16 @@ class _PaymentScreenState extends State<PaymentScreen>
     final Size size = MediaQuery.of(context).size;
 
     return AppScaffoldNew(
-      appBartitleText: "Payment ",
+      appBartitleText: "Personalized Home Care for Seniors ",
       appBarVerticalSize: size.height * 0.12,
       body: DefaultTabController(
-        length: 2,
+        length: 3,
         child: Stack(
           children: [
             Column(
               children: [
                 Image.asset(
-                  'assets/images/personalizedServiceImg.png',
+                  'assets/images/seniorServiceImg.png',
                 ),
                 Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 20)
@@ -79,12 +81,12 @@ class _PaymentScreenState extends State<PaymentScreen>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Personal Healthcare Management",
+                        "Personalized Home Care for Seniors",
                         style: primaryTextStyle(),
                       ),
                       const SizedBox(height: 10),
                       Text(
-                        "Our app empowers users to take control of their health with personalized plans, appointment scheduling, and remote consultations, ensuring comprehensive care at their fingertips.",
+                        "We offer tailored home care services for the elderly, connecting them with compassionate caregivers who provide medical support, companionship, and assistance with daily activities in the comfort of their own homes.",
                         style: secondaryTextStyle(color: Colors.black),
                       ),
                       const SizedBox(height: 10),
@@ -132,8 +134,7 @@ class _PaymentScreenState extends State<PaymentScreen>
                                     ),
                                     borderRadius: BorderRadius.circular(10),
                                   ),
-                                  child:
-                                      const Center(child: Text("Payment List")),
+                                  child: const Center(child: Text("Basic")),
                                 ),
                               ),
                               Tab(
@@ -146,8 +147,20 @@ class _PaymentScreenState extends State<PaymentScreen>
                                     ),
                                     borderRadius: BorderRadius.circular(10),
                                   ),
-                                  child: const Center(
-                                      child: Text("Payment Pending")),
+                                  child: const Center(child: Text("Standard")),
+                                ),
+                              ),
+                              Tab(
+                                child: Container(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10),
+                                  decoration: BoxDecoration(
+                                    border: Border.all(
+                                      color: tabColor.withOpacity(0.5),
+                                    ),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: const Center(child: Text("Premium")),
                                 ),
                               ),
                             ],
@@ -167,10 +180,9 @@ class _PaymentScreenState extends State<PaymentScreen>
                       ServicePlanCard(
                         name: 'Basic',
                         price: '1000',
-                        textOne: "Access to the app with",
-                        textTwo:
-                            "Personalized health plans, Monthly\nhealth reminders and tips",
-                        textThree: "Basic appointment scheduling\nfeatures",
+                        textOne: "Initial home care assessment",
+                        textTwo: "Access to caregiver profiles",
+                        textThree: "Weekly check-in calls from\ncaregivers",
                       ),
 
                       // Tab 2 Content
@@ -178,16 +190,58 @@ class _PaymentScreenState extends State<PaymentScreen>
                         name: 'Standard',
                         price: '3000',
                         textOne: "All Basic Plan benefits",
-                        textTwo:
-                            "Bi-weekly remote consultations with\nhealthcare professionals",
+                        textTwo: "10 hours of in-home care services\nper month",
+                        textThree: "Access to emergency medical\nsupport",
+                      ),
+
+                      // Tab 3 Content
+                      ServicePlanCard(
+                        name: 'Premium',
+                        price: '5000',
+                        textOne: "All Standard Plan benefits",
+                        textTwo: "20 hours of in-home care services\nper month",
                         textThree:
-                            "Bi-weekly remote consultations with\nhealthcare professionals",
+                            "Customized activity plans for\ncompanionship",
                       ),
                     ],
                   ),
                 ),
               ],
             ),
+            Positioned(
+              left: 0,
+              right: 0,
+              bottom: 10,
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: GestureDetector(
+                  onTap: () {
+                    log("selectedpage:$selectedPlan");
+                  },
+                  child: Container(
+                    width: 150,
+                    padding:
+                        const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                    decoration: BoxDecoration(
+                        color: tabColor,
+                        borderRadius: BorderRadius.circular(20)),
+                    child: Row(
+                      children: [
+                        Text(
+                          "Choose this plan",
+                          style: secondaryTextStyle(color: Colors.white),
+                        ),
+                        const SizedBox(width: 5),
+                        const Icon(
+                          Icons.arrow_forward,
+                          color: Colors.white,
+                        )
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            )
           ],
         ),
       ),

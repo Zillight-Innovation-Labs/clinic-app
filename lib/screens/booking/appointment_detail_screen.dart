@@ -19,7 +19,7 @@ import '../../utils/empty_error_state_widget.dart';
 import '../../utils/price_widget.dart';
 import '../../utils/view_all_label_component.dart';
 import '../payment/payment_controller.dart';
-import '../payment/payment_screen.dart';
+import '../payment/payment_screen_del.dart';
 import 'appointment_detail_controller.dart';
 import 'appointments_controller.dart';
 import 'encounter_detail_screen.dart';
@@ -335,20 +335,20 @@ class AppointmentDetail extends StatelessWidget {
               tax: appointmentDetailCont.appointmentDetail.value.tax.map((e) => e.value).sumByDouble((p0) => p0),
             );
             paymentController.paymentOption(PaymentMethods.PAYMENT_METHOD_STRIPE);
-            Get.to(() => const PaymentScreen())?.then((value) {
-              if (value == true) {
-                appointmentDetailCont.init(showLoader: true);
+            // Get.to(() => const PaymentScreen())?.then((value) {
+            //   if (value == true) {
+            //     appointmentDetailCont.init(showLoader: true);
 
-                ///Refresh Appointment List
-                try {
-                  AppointmentsController appointmentsCont = Get.find();
-                  appointmentsCont.page(1);
-                  appointmentsCont.getAppointmentList();
-                } catch (e) {
-                  log('onItemSelected Err: $e');
-                }
-              }
-            });
+            //     ///Refresh Appointment List
+            //     try {
+            //       AppointmentsController appointmentsCont = Get.find();
+            //       appointmentsCont.page(1);
+            //       appointmentsCont.getAppointmentList();
+            //     } catch (e) {
+            //       log('onItemSelected Err: $e');
+            //     }
+            //   }
+            // });
           },
         ).paddingSymmetric(horizontal: 16),
       ],

@@ -1,6 +1,7 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:kivicare_patient/api/const/const.dart';
 import 'package:kivicare_patient/providers/bottom_nav_provider.dart';
@@ -8,6 +9,7 @@ import 'package:kivicare_patient/screens/auth/profile/profile_screen.dart';
 import 'package:kivicare_patient/screens/booking/apointments/appointment_tab.dart';
 import 'package:kivicare_patient/screens/booking/appointments_controller.dart';
 import 'package:kivicare_patient/screens/home/home_screen.dart';
+import 'package:kivicare_patient/screens/payment/payment_screen.dart';
 import 'package:kivicare_patient/screens/service/service_screen.dart';
 import 'package:kivicare_patient/screens/tests/take_test_page.dart';
 import 'package:provider/provider.dart';
@@ -32,9 +34,7 @@ class _HomeBottomNavBarScreenState extends State<HomeBottomNavBarScreen> {
     HomeScreen(),
     AppointmentTabs(),
     Container(),
-    const Center(
-      child: Text("Payment UI needed"),
-    ),
+    const PaymentScreen(),
     ProfileScreen()
   ];
 
@@ -88,7 +88,9 @@ class _HomeBottomNavBarScreenState extends State<HomeBottomNavBarScreen> {
                                     ListTile(
                                       onTap: () =>
                                           Get.to(const ServiceScreen()),
-                                      leading: const Icon(Icons.safety_check),
+                                      leading: SvgPicture.asset(
+                                        "assets/icons/servicesIcon.svg",
+                                      ),
                                       title: const Text(
                                         "Services",
                                       ),

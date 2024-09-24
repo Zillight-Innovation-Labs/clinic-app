@@ -27,7 +27,7 @@ class AppointmentCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         hideKeyboard(context);
-        Get.to(() => AppointmentDetail(), arguments: appointment);
+        // Get.to(() => AppointmentDetail(), arguments: appointment);
       },
       child: Stack(
         children: [

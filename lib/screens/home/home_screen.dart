@@ -2,20 +2,24 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kivicare_patient/providers/bottom_nav_provider.dart';
 import 'package:kivicare_patient/screens/auth/profile/mt_medicine_reminders.dart';
+import 'package:kivicare_patient/screens/home/components/home_service_slider.dart';
 import 'package:kivicare_patient/screens/home/home_card.dart';
+import 'package:kivicare_patient/screens/service/service_screen.dart';
 import 'package:kivicare_patient/screens/tests/take_test_page.dart';
+import 'package:kivicare_patient/utils/view_all_label_component.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:kivicare_patient/components/loader_widget.dart';
 import 'package:provider/provider.dart';
 import '../../components/app_scaffold.dart';
 import '../../main.dart';
 import '../../utils/empty_error_state_widget.dart';
-import 'components/featured_service_component.dart';
 import 'components/greetings_component.dart';
 import 'components/slider_component.dart';
 import 'components/upcoming_appointment_components.dart';
 import 'home_controller.dart';
 import 'model/dashboard_res_model.dart';
+
+
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -24,7 +28,7 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return AppScaffoldNew( 
+    return AppScaffoldNew(
       hasLeadingWidget: false,
       isBlurBackgroundinLoader: true,
       isLoading: homeScreenController.isLoading,
@@ -62,19 +66,25 @@ class HomeScreen extends StatelessWidget {
                 scrollDirection: Axis.vertical,
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [               
+                  children: [
                     SliderComponent(),
                     Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 10),
                       child: Column(
                         children: [
-                         
                           const HomeBanner(),
                           UpcomingAppointmentComponents(),
                         ],
                       ),
                     ),
-                    FeaturedServiceComponent(),
+                    ViewAllLabel(
+                      label: "Services",
+                      onTap: () {
+                        Get.to(() => const ServiceScreen());
+                      },
+                      trailingText: "See All",
+                    ).paddingOnly(left: 16, right: 8),
+                    HomeServiceSlider()
                   ],
                 ),
               );
@@ -101,7 +111,9 @@ class HomeBanner extends StatelessWidget {
             HomeCard(
                 imagePath: "assets/images/diagnostics.png",
                 title: "Tests",
-                onTap: () {Get.to(const TakeTestPage());}),
+                onTap: () {
+                  Get.to(const TakeTestPage());
+                }),
             const SizedBox(width: 12),
             HomeCard(
                 imagePath: "assets/images/nursing.png",
@@ -119,7 +131,7 @@ class HomeBanner extends StatelessWidget {
               onTap: () {
                 context.read<BottomNavProvider>().setNavbarIndex(1);
                 // Get.to(BookingFormScreen());
-               //BookingFormScreen
+                //BookingFormScreen
               },
             ),
             const SizedBox(width: 12),

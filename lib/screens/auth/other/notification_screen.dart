@@ -65,10 +65,10 @@ class NotificationScreen extends StatelessWidget {
                   return GestureDetector(
                     onTap: () async {
                       if (notification.data.notificationDetail.id > 0) {
-                        await Get.to(
-                          () => AppointmentDetail(),
-                          arguments: AppointmentData(id: notification.data.notificationDetail.id),
-                        );
+                        // await Get.to(
+                        //   () => AppointmentDetail(),
+                        //   arguments: AppointmentData(id: notification.data.notificationDetail.id),
+                        // );
                         notificationScreenController.page(1);
                         notificationScreenController.init();
                       }
