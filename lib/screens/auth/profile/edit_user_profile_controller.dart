@@ -70,7 +70,7 @@ class EditUserProfileController extends GetxController {
     }
     isLoading(true);
 
-    AuthServiceApis.updateProfile(
+    AuthServiceApis.updateProfile( 
       firstName: isProfilePhoto ? loginUserData.value.firstName : fNameCont.text.trim(),
       lastName: isProfilePhoto ? loginUserData.value.lastName : lNameCont.text.trim(),
       mobile: isProfilePhoto ? loginUserData.value.mobile : "+${mobileCont.text.trim().formatPhoneNumber(pickedPhoneCode.value.phoneCode)}",

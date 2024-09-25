@@ -88,7 +88,7 @@ class SignUpScreen extends StatelessWidget {
                     ),
                     16.height,
                     AppTextField(
-                      title: locale.value.email,
+                      title: locale.value.email, 
                       textStyle: primaryTextStyle(size: 12),
                       controller: signUpController.emailCont,
                       focus: signUpController.emailFocus,

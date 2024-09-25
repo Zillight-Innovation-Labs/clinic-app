@@ -35,6 +35,7 @@ class APIEndPoints {
   static const String savePayment = 'save-payment';
   static const String updateStatus = 'update-status';
   static const String rescheduleBooking = 'reschedule-booking';
+  static const String appointment = 'appointments2';
 
   //booking detail-api
   static const String getAppointmentDetail = 'appointment-detail';

@@ -29,17 +29,25 @@ class AuthServiceApis {
 
   static Future<UserResponse> loginUser(
       {required Map request, bool isSocialLogin = false}) async {
-    return UserResponse.fromJson(await handleResponse(await buildHttpResponse(
+    return UserResponse.fromJson(await handleResponse(
+      await buildHttpResponse(
         isSocialLogin ? APIEndPoints.socialLogin : APIEndPoints.login,
         request: request,
-        method: HttpMethodType.POST)));
+        method: HttpMethodType.POST,
+      ),
+    ));
   }
 
   static Future<ChangePassRes> changePasswordAPI({required Map request}) async {
-    return ChangePassRes.fromJson(await handleResponse(await buildHttpResponse(
-        APIEndPoints.changePassword,
-        request: request,
-        method: HttpMethodType.POST)));
+    return ChangePassRes.fromJson(
+      await handleResponse(
+        await buildHttpResponse(
+          APIEndPoints.changePassword,
+          request: request,
+          method: HttpMethodType.POST,
+        ),
+      ),
+    );
   }
 
   static Future<BaseResponseModel> forgotPasswordAPI(

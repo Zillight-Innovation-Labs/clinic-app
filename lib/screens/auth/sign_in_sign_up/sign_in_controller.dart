@@ -160,18 +160,13 @@ class SignInController extends GetxController {
       setValueToLocal(SharedPreferenceConst.IS_REMEMBER_ME, isRememberMe.value);
 
       isLoading(false);
-      dev.log("login--======================================--running 1");
 
       PushNotificationService().registerFCMAndTopics();
-      dev.log("login--======================================--running 2");
-      dev.log("isNavigateToDashboard.value:${isNavigateToDashboard.value}");
       if ("" =="") {//!isNavigateToDashboard.value
-        dev.log("login--======================================--running 3");
         Get.offAll(() => const HomeBottomNavBarScreen(), binding: BindingsBuilder(() {
           Get.put(HomeController());
         }));
       } else {
-        dev.log("login--======================================--running 4");
         try {
           DashboardController dashboardController = Get.find();
           // dashboardController.reloadBottomTabs();
