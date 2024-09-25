@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kivicare_patient/components/app_scaffold.dart';
+import 'package:kivicare_patient/models/payment_model.dart';
+import 'package:kivicare_patient/providers/bottom_nav_provider.dart';
+import 'package:kivicare_patient/providers/payment_provider.dart';
 import 'package:kivicare_patient/screens/auth/profile/profile_controller.dart';
+import 'package:kivicare_patient/screens/home/home_bottom_tabs.dart';
 import 'package:kivicare_patient/screens/service/service_plan_card.dart';
 import 'package:kivicare_patient/utils/colors.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:provider/provider.dart';
 
 class PersonalizedHomeCareForSeniorService extends StatefulWidget {
   const PersonalizedHomeCareForSeniorService({super.key});
@@ -20,6 +25,7 @@ class _PersonalizedHomeCareForSeniorServiceState
   final ProfileController profileController = Get.put(ProfileController());
 
   String selectedPlan = 'Basic';
+  String selectedPrice = '1000';
   late TabController _tabController;
 
   @override
@@ -48,12 +54,15 @@ class _PersonalizedHomeCareForSeniorServiceState
     if (index == 0) {
       tabColor = appColorPrimary;
       selectedPlan = 'Basic';
+      selectedPrice = '1000';
     } else if (index == 1) {
       tabColor = serviceStandard;
       selectedPlan = 'Standard';
+      selectedPrice = '3000';
     } else if (index == 2) {
       tabColor = servicePremium;
       selectedPlan = 'Premium';
+      selectedPrice = '5000';
     }
     setState(() {});
   }
@@ -215,8 +224,21 @@ class _PersonalizedHomeCareForSeniorServiceState
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: GestureDetector(
-                  onTap: () {
-                    log("selectedpage:$selectedPlan");
+                  onTap: () async {
+                    final homeTabVM = context.read<BottomNavProvider>();
+                    final paymentVM = context.read<PaymentProvider>();
+                    final selectedService = PaymentModel(
+                      title: "Personalized Home Care for Seniors",
+                      desc: 'Home care services for the elderly',
+                      price: selectedPrice,
+                      serviceType: selectedPlan,
+                      createdAt: DateTime.now(),
+                    );
+
+                    await paymentVM.addSelectedService(selectedService);
+
+                    homeTabVM.setNavbarIndex(3);
+                    Get.to(() => const HomeBottomNavBarScreen());
                   },
                   child: Container(
                     width: 150,

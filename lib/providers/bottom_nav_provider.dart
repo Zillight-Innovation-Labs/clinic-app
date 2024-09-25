@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 
-class BottomNavProvider extends ChangeNotifier { 
+class BottomNavProvider extends ChangeNotifier {
+  int currentIndex = 0;
 
-    int currentIndex = 0;
-
-      bool showPopup = false;
-
+  bool showPopup = false;
 
   dynamic socketIo;
 
@@ -14,15 +12,18 @@ class BottomNavProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-
   setNavbarIndex(index) {
-    if (index==2) {
-      showPopup =true;   
-    }else{
-        currentIndex = index;
-      showPopup =false;
+   
+    if (index == 2) {
+      if (showPopup) {
+        showPopup = false;
+      } else {
+        showPopup = true;
+      }
+    } else {
+      currentIndex = index;
+      showPopup = false;
     }
     notifyListeners();
   }
-
 }

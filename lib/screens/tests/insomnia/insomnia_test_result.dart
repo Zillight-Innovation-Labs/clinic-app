@@ -22,7 +22,7 @@ class InsomniaTestResult extends StatelessWidget {
     return WillPopScope(
       onWillPop: () async {
         context.read<BottomNavProvider>().setNavbarIndex(1);
-        Get.to(const HomeBottomNavBarScreen());
+        Get.to(()=> const HomeBottomNavBarScreen());
 
         return false;
       },
@@ -32,7 +32,7 @@ class InsomniaTestResult extends StatelessWidget {
           context: context,
           onTapped: () {
             context.read<BottomNavProvider>().setNavbarIndex(1);
-          Get.to(const HomeBottomNavBarScreen());
+          Get.to(()=>const HomeBottomNavBarScreen());
           },
         ),
         body: SingleChildScrollView(

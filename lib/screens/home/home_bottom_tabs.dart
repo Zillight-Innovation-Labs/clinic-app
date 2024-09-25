@@ -42,171 +42,190 @@ class _HomeBottomNavBarScreenState extends State<HomeBottomNavBarScreen> {
   Widget build(BuildContext context) {
     final homeTabVM = context.watch<BottomNavProvider>();
 
-    return Scaffold(
-      body: GestureDetector(
-        onTap: () {
-          homeTabVM.updatePopUp(false);
-        },
-        child: Stack(
-          children: [
-            pages.elementAt(homeTabVM.currentIndex),
-            // AnimatedContainer for the popup when the third tab is clicked
-            Positioned(
-              bottom: 100,
-              left: MediaQuery.of(context).size.width * 0.1,
-              right: MediaQuery.of(context).size.width * 0.1,
-              child: AnimatedContainer(
-                duration: const Duration(milliseconds: 300),
-                height: homeTabVM.showPopup ? 200 : 0, // Animate height
-                curve: Curves.easeInOut,
-                decoration: homeTabVM.showPopup
-                    ? BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
-                            blurRadius: 10,
-                            spreadRadius: 5,
-                          ),
-                        ],
-                      )
-                    : BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(20),
-                  child: SingleChildScrollView(
-                    child: homeTabVM.showPopup
-                        ? Center(
-                            child: Stack(
-                              children: [
-                                Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  children: [
-                                    ListTile(
-                                      onTap: () =>
-                                          Get.to(const ServiceScreen()),
-                                      leading: SvgPicture.asset(
-                                        "assets/icons/servicesIcon.svg",
-                                      ),
-                                      title: const Text(
-                                        "Services",
-                                      ),
-                                    ), //BookingFormScreen
-                                    ListTile(
-                                        onTap: () =>
-                                            Get.to(const TakeTestPage()),
-                                        leading: const Icon(
-                                            Icons.medical_information),
-                                        title: const Text("Tests")),
-                                    ListTile(
-                                        onTap: () {
-                                          context
-                                              .read<BottomNavProvider>()
-                                              .setNavbarIndex(1);
-                                        },
-                                        leading: const Icon(Icons.safety_check),
-                                        title: const Text("Appointment")),
-                                  ],
-                                ),
-                                Positioned(
-                                  right: 5,
-                                  top: 5,
-                                  child: IconButton(
-                                    onPressed: () {
-                                      homeTabVM.updatePopUp(false);
-                                    },
-                                    icon: const Icon(
-                                      Icons.cancel,
-                                    ),
-                                  ),
-                                )
-                              ],
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) {
+        homeTabVM.setNavbarIndex(0);
+      },
+      child: Scaffold(
+        body: GestureDetector(
+          onTap: () {
+            homeTabVM.updatePopUp(false);
+          },
+          child: Stack(
+            children: [
+              pages.elementAt(homeTabVM.currentIndex),
+              // AnimatedContainer for the popup when the third tab is clicked
+              Positioned(
+                bottom: 100,
+                left: MediaQuery.of(context).size.width * 0.1,
+                right: MediaQuery.of(context).size.width * 0.1,
+                child: AnimatedContainer(
+                  duration: const Duration(milliseconds: 300),
+                  height: homeTabVM.showPopup ? 200 : 0, // Animate height
+                  curve: Curves.easeInOut,
+                  decoration: homeTabVM.showPopup
+                      ? BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.1),
+                              blurRadius: 10,
+                              spreadRadius: 5,
                             ),
-                          )
-                        : null,
+                          ],
+                        )
+                      : BoxDecoration(
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                  child: ClipRRect(
+                    borderRadius: BorderRadius.circular(20),
+                    child: SingleChildScrollView(
+                      child: homeTabVM.showPopup
+                          ? Center(
+                              child: Stack(
+                                children: [
+                                  Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      ListTile(
+                                        onTap: () {
+                                          homeTabVM.updatePopUp(false);
+                                          Get.to(() => const ServiceScreen());
+                                        },
+                                        leading: SvgPicture.asset(
+                                          "assets/icons/servicesIcon.svg",
+                                        ),
+                                        title: const Text(
+                                          "Services",
+                                        ),
+                                      ), //BookingFormScreen
+                                      ListTile(
+                                          onTap: () {
+                                            homeTabVM.updatePopUp(false);
+                                            Get.to(() => const TakeTestPage());
+                                          },
+                                          leading: const Icon(
+                                              Icons.medical_information),
+                                          title: const Text("Tests")),
+                                      ListTile(
+                                          onTap: () {
+                                            homeTabVM.updatePopUp(false);
+                                            context
+                                                .read<BottomNavProvider>()
+                                                .setNavbarIndex(1);
+                                          },
+                                          leading:
+                                              const Icon(Icons.safety_check),
+                                          title: const Text("Appointment")),
+                                    ],
+                                  ),
+                                  Positioned(
+                                    right: 5,
+                                    top: 5,
+                                    child: IconButton(
+                                      onPressed: () {
+                                        homeTabVM.updatePopUp(false);
+                                      },
+                                      icon: const Icon(
+                                        Icons.cancel,
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ),
+                            )
+                          : null,
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
-      ),
-      bottomNavigationBar: StyleProvider(
-        style: Style(),
-        child: ConvexAppBar(
-          height: 72,
-          shadowColor: kSubTitleColor.withOpacity(0.1),
-          style: TabStyle.fixedCircle,
-          color: kSubTitleColor,
-          backgroundColor: kLikeWhiteColor,
-          activeColor: kMainColor,
-          onTap: (value) {
-            homeTabVM.setNavbarIndex(value);
-          },
-          items: [
-            TabItem(
-              icon: Icon(
-                IconlyBold.home,
-                color: kSubTitleColor,
+        bottomNavigationBar: StyleProvider(
+          style: Style(),
+          child: ConvexAppBar(
+            height: 72,
+            shadowColor: kSubTitleColor.withOpacity(0.1),
+            style: TabStyle.fixedCircle,
+            color: kSubTitleColor,
+            backgroundColor: kLikeWhiteColor,
+            activeColor: kMainColor,
+            onTap: (value) {
+              homeTabVM.setNavbarIndex(value);
+            },
+            items: [
+              TabItem(
+                icon: homeTabVM.currentIndex == 0
+                    ? Icon(
+                        //active
+                        IconlyBold.home,
+                        color: kMainColor,
+                      )
+                    : Icon(
+                        IconlyBold.home,
+                        color: kSubTitleColor,
+                      ),
+                title: "Home",
               ),
-              title: "Home",
-              activeIcon: Icon(
-                IconlyBold.home,
-                color: kMainColor,
+              TabItem(
+                //  color: kMainColor,
+                icon: homeTabVM.currentIndex == 1
+                    ? SvgPicture.asset(
+                        "assets/icons/appointIcon.svg",
+                        color: kMainColor,
+                      )
+                    : SvgPicture.asset(
+                        "assets/icons/appointIcon.svg",
+                        color: kSubTitleColor,
+                      ),
+
+                title: "Appointment",
               ),
-            ),
-            TabItem(
-              icon: ImageIcon(
-                const AssetImage(
-                  "assets/icons/pharmacy.png",
+              TabItem(
+                icon: Icon(
+                  IconlyBold.plus,
+                  color: kLikeWhiteColor,
                 ),
-                color: kSubTitleColor,
+                title: "",
               ),
-              title: "Appointment",
-              activeIcon: ImageIcon(
-                const AssetImage(
-                  "assets/icons/pharmacy.png",
-                ),
-                color: kMainColor,
+              TabItem(
+                icon: homeTabVM.currentIndex == 3
+                    ? Icon(
+                        IconlyBold.document,
+                        color: kMainColor,
+                      )
+                    : Icon(
+                        IconlyBold.document,
+                        color: kSubTitleColor,
+                      ),
+                title: "Payment",
+                // activeIcon: Icon(
+                //   IconlyBold.document,
+                //   color: kMainColor,
+                // ),
               ),
-            ),
-            TabItem(
-              icon: Icon(
-                IconlyBold.plus,
-                color: kLikeWhiteColor,
+              TabItem(
+                icon: homeTabVM.currentIndex == 4
+                    ? Icon(
+                        IconlyBold.profile,
+                        color: kMainColor,
+                      )
+                    : Icon(
+                        IconlyBold.profile,
+                        color: kSubTitleColor,
+                      ),
+                title: "Profile",
+                // activeIcon: Icon(
+                //   IconlyBold.profile,
+                //   color: kMainColor,
+                // ),
               ),
-              title: "",
-              activeIcon: Icon(
-                IconlyBold.plus,
-                color: kLikeWhiteColor,
-              ),
-            ),
-            TabItem(
-              icon: Icon(
-                IconlyBold.document,
-                color: kSubTitleColor,
-              ),
-              title: "Payment",
-              activeIcon: Icon(
-                IconlyBold.document,
-                color: kMainColor,
-              ),
-            ),
-            TabItem(
-              icon: Icon(
-                IconlyBold.profile,
-                color: kSubTitleColor,
-              ),
-              title: "Profile",
-              activeIcon: Icon(
-                IconlyBold.profile,
-                color: kMainColor,
-              ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );

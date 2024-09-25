@@ -135,8 +135,8 @@ class _PaymentScreenState extends State<PaymentScreen>
                                     ),
                                     borderRadius: BorderRadius.circular(10),
                                   ),
-                                  child:
-                                      const Center(child: Text("Payment History")),
+                                  child: const Center(
+                                      child: Text("Pending Payment ")),
                                 ),
                               ),
                               Tab(
@@ -150,7 +150,7 @@ class _PaymentScreenState extends State<PaymentScreen>
                                     borderRadius: BorderRadius.circular(10),
                                   ),
                                   child: const Center(
-                                      child: Text("Payment Pending")),
+                                      child: Text("Payment History")),
                                 ),
                               ),
                             ],
@@ -167,10 +167,10 @@ class _PaymentScreenState extends State<PaymentScreen>
                     controller: _tabController,
                     children: const [
                       // Tab 1 Content
-                      PaymentList(),
+                      PaymentPending(),
 
                       // Tab 2 Content
-                      PaymentPayementList()
+                      PaymentHistory(),
                     ],
                   ),
                 ),

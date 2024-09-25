@@ -1,10 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:kivicare_patient/components/app_scaffold.dart';
+import 'package:kivicare_patient/models/payment_model.dart';
+import 'package:kivicare_patient/providers/bottom_nav_provider.dart';
+import 'package:kivicare_patient/providers/payment_provider.dart';
 import 'package:kivicare_patient/screens/auth/profile/profile_controller.dart';
+import 'package:kivicare_patient/screens/home/home_bottom_tabs.dart';
 import 'package:kivicare_patient/screens/service/service_plan_card.dart';
 import 'package:kivicare_patient/utils/colors.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:provider/provider.dart';
+import 'dart:developer' as dev;
 
 class PersonalizedHomeCareService extends StatefulWidget {
   const PersonalizedHomeCareService({super.key});
@@ -19,7 +26,10 @@ class _PersonalizedHomeCareServiceState
   final ProfileController profileController = Get.put(ProfileController());
 
   String selectedPlan = 'Basic';
+  String selectedPrice = '1000';
   late TabController _tabController;
+
+  String name = 'no name';
 
   @override
   void initState() {
@@ -47,12 +57,15 @@ class _PersonalizedHomeCareServiceState
     if (index == 0) {
       tabColor = appColorPrimary;
       selectedPlan = 'Basic';
+      selectedPrice = '1000';
     } else if (index == 1) {
       tabColor = serviceStandard;
       selectedPlan = 'Standard';
+      selectedPrice = '3000';
     } else if (index == 2) {
       tabColor = servicePremium;
       selectedPlan = 'Premium';
+      selectedPrice = '5000';
     }
     setState(() {});
   }
@@ -79,14 +92,28 @@ class _PersonalizedHomeCareServiceState
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        "Personal Healthcare Management",
-                        style: primaryTextStyle(),
+                      GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            name = 'Yusuf';
+                          });
+                          dev.log("helllo world");
+                          print("helllo world");
+                        },
+                        child: Text(
+                          "Personal Healthcare Management:$name",
+                          style: primaryTextStyle(),
+                        ),
                       ),
                       const SizedBox(height: 10),
-                      Text(
-                        "Our app empowers users to take control of their health with personalized plans, appointment scheduling, and remote consultations, ensuring comprehensive care at their fingertips.",
-                        style: secondaryTextStyle(color: Colors.black),
+                      InkWell(
+                        onTap: () {
+                          dev.log("log here");
+                        },
+                        child: Text(
+                          "Our app empowers users to take control of their health with personalized plans, appointment scheduling, and remote consultations, ensuring comprehensive care at their fingertips.",
+                          style: secondaryTextStyle(color: Colors.black),
+                        ),
                       ),
                       const SizedBox(height: 10),
                       Text(
@@ -166,6 +193,7 @@ class _PersonalizedHomeCareServiceState
                           ),
                         ),
                       ),
+                      //
                     ],
                   ),
                 ),
@@ -207,6 +235,7 @@ class _PersonalizedHomeCareServiceState
                     ],
                   ),
                 ),
+                //
               ],
             ),
             Positioned(
@@ -216,8 +245,23 @@ class _PersonalizedHomeCareServiceState
               child: Align(
                 alignment: Alignment.bottomCenter,
                 child: GestureDetector(
-                  onTap: () {
-                    log("selectedpage:$selectedPlan");
+                  behavior: HitTestBehavior.translucent,
+                  onTap: () async {
+                    final homeTabVM = context.read<BottomNavProvider>();
+                    final paymentVM = context.read<PaymentProvider>();
+
+                    final selectedService = PaymentModel(
+                      title: "Personal Healthcare Management",
+                      desc:
+                          'Empowers users to take control of their health with personalized plans',
+                      price: selectedPrice,
+                      serviceType: selectedPlan,
+                      createdAt: DateTime.now() ,
+                    );
+
+                    await paymentVM.addSelectedService(selectedService);
+                    homeTabVM.setNavbarIndex(3);
+                    Get.to(() => const HomeBottomNavBarScreen());
                   },
                   child: Container(
                     width: 150,

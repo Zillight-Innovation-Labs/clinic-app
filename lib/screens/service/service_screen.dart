@@ -1,6 +1,4 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:kivicare_patient/components/app_scaffold.dart';
 import 'package:kivicare_patient/screens/auth/profile/profile_controller.dart';
@@ -9,8 +7,6 @@ import 'package:kivicare_patient/screens/service/components/service_card.dart';
 import 'package:kivicare_patient/screens/service/event_outreach_service.dart';
 import 'package:kivicare_patient/screens/service/personalized_self_service.dart';
 import 'package:kivicare_patient/screens/service/personalized_senior_service.dart';
-import 'package:kivicare_patient/utils/colors.dart';
-import 'package:nb_utils/nb_utils.dart';
 
 class ServiceScreen extends StatefulWidget {
   const ServiceScreen({super.key});
@@ -43,7 +39,18 @@ class _ServiceScreenState extends State<ServiceScreen> {
                     desc: servicePages[index]['desc'],
                     img: servicePages[index]['image'],
                     onTap: () {
-                      Get.to(servicePages[index]['page']);
+                      if (index == 0) {
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => const PersonalizedHomeCareService()));
+                        // Get.to(() => const PersonalizedHomeCareService());
+                      } else if (index == 1) {
+                        Get.to(
+                            () => const PersonalizedHomeCareForSeniorService());
+                      } else {
+                        Get.to(() => const EventOutreachService());
+                      }
                     },
                     color: servicePages[index]['color'],
                   );
@@ -56,4 +63,3 @@ class _ServiceScreenState extends State<ServiceScreen> {
     );
   }
 }
-

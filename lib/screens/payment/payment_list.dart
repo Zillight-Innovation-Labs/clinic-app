@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:kivicare_patient/utils/common_base.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-class PaymentList extends StatelessWidget {
-  const PaymentList({
+class PaymentHistory extends StatelessWidget {
+  const PaymentHistory({
     super.key,
   });
 
