@@ -12,6 +12,9 @@ class AppointmentProvider extends ChangeNotifier {
   final List<AppointModel> _selectedUserAppointments = [];
   List<AppointModel> get selectedUserAppointments => _selectedUserAppointments;
 
+  final List<AppointModel> _selectedUserBooking = [];
+  List<AppointModel> get selectedUserBooking => _selectedUserBooking;
+
   AppointmentState _state = AppointmentState.initial;
   AppointmentState get state => _state;
 
@@ -24,9 +27,12 @@ class AppointmentProvider extends ChangeNotifier {
   }
 
   Future<void> addSelectedAppointment(AppointModel apoint) async {
-    dev.log("apoint:$apoint");
     _selectedUserAppointments.add(apoint);
+    notifyListeners();
+  }
 
+  Future<void> addBooking(AppointModel book) async {
+    _selectedUserBooking.add(book);
     notifyListeners();
   }
 

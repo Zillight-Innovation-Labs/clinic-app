@@ -1,17 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kivicare_patient/providers/bottom_nav_provider.dart';
-import 'package:kivicare_patient/screens/auth/profile/mt_medicine_reminders.dart';
 import 'package:kivicare_patient/screens/home/components/home_service_slider.dart';
 import 'package:kivicare_patient/screens/home/home_banner.dart';
-import 'package:kivicare_patient/screens/home/home_card.dart';
-import 'package:kivicare_patient/screens/service/service_screen.dart';
-import 'package:kivicare_patient/screens/tests/take_test_page.dart';
-import 'package:kivicare_patient/utils/colors.dart';
-import 'package:kivicare_patient/utils/view_all_label_component.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:kivicare_patient/components/loader_widget.dart';
-import 'package:provider/provider.dart';
 import '../../components/app_scaffold.dart';
 import '../../main.dart';
 import '../../utils/empty_error_state_widget.dart';
@@ -70,7 +62,6 @@ class HomeScreen extends StatelessWidget {
                     SliderComponent(),
                     const HomeBanner(),
                     UpcomingAppointmentComponents(),
-                 
                     HomeServiceSlider()
                   ],
                 ),

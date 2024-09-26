@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kivicare_patient/providers/bottom_nav_provider.dart';
 import 'package:kivicare_patient/screens/auth/profile/mt_medicine_reminders.dart';
+import 'package:kivicare_patient/screens/booking/talk_to_doc/talk_to_doctor.dart';
 import 'package:kivicare_patient/screens/home/home_card.dart';
 import 'package:kivicare_patient/screens/tests/take_test_page.dart';
 import 'package:kivicare_patient/utils/colors.dart';
@@ -23,7 +24,7 @@ class HomeBanner extends StatelessWidget {
             children: [
               HomeCard(
                 imagePath:
-                    "assets/icons/bookAppointmentIcon.svg", //assets/icons/ambulance.png
+                    "assets/icons/bookAppointmentIcon.svg",
                 title: "Book an\nAppointment",
                 color: bookAppointCard,
                 onTap: () {
@@ -35,7 +36,7 @@ class HomeBanner extends StatelessWidget {
                   imagePath: "assets/icons/talkToDocIcon.svg",
                   title: "Talk to a Doctor",
                   color: talkToDocCard,
-                  onTap: () {}),
+                  onTap: () {Get.to(()=> const TalkToDoctor());}),
             ],
           ),
           const SizedBox(height: 12),
@@ -46,7 +47,7 @@ class HomeBanner extends StatelessWidget {
                   title: "Medication",
                   color: medicationCard,
                   onTap: () {
-                    Get.to(const MedicineRemindersScreen());
+                    Get.to(()=> const MedicineRemindersScreen());
                   }),
               const SizedBox(width: 12),
               HomeCard(
@@ -54,7 +55,7 @@ class HomeBanner extends StatelessWidget {
                   title: "Tests/ Diagnosis",
                   color: testCard,
                   onTap: () {
-                    Get.to(const TakeTestPage());
+                    Get.to(()=> const TakeTestPage());
                   }),
             ],
           ),
