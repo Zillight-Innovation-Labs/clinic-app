@@ -128,103 +128,108 @@ class SignInScreen extends StatelessWidget {
                         ),
                       ],
                     ),
+                    SizedBox(
+                      height: Get.height * 0.1,
+                    ),
+                    Column(
+                      children: [
+                        Row(
+                          children: [
+                            AppButton(
+                              height: 54,
+                              text: locale.value.signIn,
+                              color: appColorSecondary,
+                              textStyle: appButtonTextStyleWhite,
+                              onTap: () {
+                             
+                                if (signInController.signInformKey.currentState!
+                                    .validate()) {
+                                  signInController.signInformKey.currentState!
+                                      .save();
+                                  signInController.saveForm();
+                                }
+                              },
+                            ).expand(),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                GestureDetector(
+                                  onTap: () {
+                                    signInController.googleSignIn();
+                                  },
+                                  child: Container(
+                                    height: 54,
+                                    width: 54,
+                                    padding: const EdgeInsets.all(18),
+                                    decoration: boxDecorationWithRoundedCorners(
+                                      backgroundColor:
+                                          bodyWhite.withOpacity(0.1),
+                                      boxShape: BoxShape.circle,
+                                    ),
+                                    child: GoogleLogoWidget(size: 24),
+                                  ),
+                                ),
+                                GestureDetector(
+                                  onTap: () {
+                                    signInController.appleSignIn();
+                                  },
+                                  child: Container(
+                                    height: 54,
+                                    width: 54,
+                                    padding: const EdgeInsets.all(16),
+                                    decoration: boxDecorationWithRoundedCorners(
+                                      backgroundColor:
+                                          bodyWhite.withOpacity(0.1),
+                                      boxShape: BoxShape.circle,
+                                    ),
+                                    child: Image.asset(
+                                      Assets.imagesAppleLogo,
+                                      color: isDarkMode.value ? null : black,
+                                    ).center(),
+                                  ).paddingLeft(16).visible(isApple),
+                                ),
+                              ],
+                            ).paddingLeft(16)
+                          ],
+                        ),
+                        8.height,
+                        Row(
+                          mainAxisSize: MainAxisSize.min,
+                          children: [
+                            Text("Not A Member?", style: secondaryTextStyle()),
+                            4.width,
+                            TextButton(
+                              style: TextButton.styleFrom(
+                                padding: EdgeInsets.zero,
+                              ),
+                              onPressed: () {
+                                Get.to(() => SignUpScreen());
+                              },
+                              child: Text(
+                                locale.value.registerNow,
+                                style: primaryTextStyle(
+                                  size: 12,
+                                  color: appColorSecondary,
+                                  decoration: TextDecoration.underline,
+                                  decorationColor: appColorSecondary,
+                                ),
+                              ).paddingSymmetric(horizontal: 8),
+                            ),
+                          ],
+                        ),
+                        16.height,
+                      ],
+                    ).paddingSymmetric(horizontal: 16),
                   ],
                 ),
               ).paddingSymmetric(horizontal: 16),
             ],
           ),
-          Positioned(
-            bottom: 0,
-            width: Get.width,
-            child: Column(
-              children: [
-                Row(
-                  children: [
-                    AppButton(
-                      height: 54,
-                      text: locale.value.signIn,
-                      color: appColorSecondary,
-                      textStyle: appButtonTextStyleWhite,
-                      onTap: () {
-                        // Get.offAll(() => DashboardScreen(),
-                        //     binding: BindingsBuilder(() {
-                        //   Get.put(HomeController());
-                        // }));
-                        if (signInController.signInformKey.currentState!.validate()) {
-                          signInController.signInformKey.currentState!.save();
-                          signInController.saveForm();
-                        }
-                      },
-                    ).expand(),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        GestureDetector(
-                          onTap: () {
-                            signInController.googleSignIn();
-                          },
-                          child: Container(
-                            height: 54,
-                            width: 54,
-                            padding: const EdgeInsets.all(18),
-                            decoration: boxDecorationWithRoundedCorners(
-                              backgroundColor: bodyWhite.withOpacity(0.1),
-                              boxShape: BoxShape.circle,
-                            ),
-                            child: GoogleLogoWidget(size: 24),
-                          ),
-                        ),
-                        GestureDetector(
-                          onTap: () {
-                            signInController.appleSignIn();
-                          },
-                          child: Container(
-                            height: 54,
-                            width: 54,
-                            padding: const EdgeInsets.all(16),
-                            decoration: boxDecorationWithRoundedCorners(
-                              backgroundColor: bodyWhite.withOpacity(0.1),
-                              boxShape: BoxShape.circle,
-                            ),
-                            child: Image.asset(
-                              Assets.imagesAppleLogo,
-                              color: isDarkMode.value ? null : black,
-                            ).center(),
-                          ).paddingLeft(16).visible(isApple),
-                        ),
-                      ],
-                    ).paddingLeft(16)
-                  ],
-                ),
-                8.height,
-                Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Text("Not A Member?", style: secondaryTextStyle()),
-                    4.width,
-                    TextButton(
-                      style: TextButton.styleFrom(
-                        padding: EdgeInsets.zero,
-                      ),
-                      onPressed: () {
-                        Get.to(() => SignUpScreen());
-                      },
-                      child: Text(
-                        locale.value.registerNow,
-                        style: primaryTextStyle(
-                          size: 12,
-                          color: appColorSecondary,
-                          decoration: TextDecoration.underline,
-                          decorationColor: appColorSecondary,
-                        ),
-                      ).paddingSymmetric(horizontal: 8),
-                    ),
-                  ],
-                ),
-                16.height,
-              ],
-            ).paddingSymmetric(horizontal: 16),
-          ),
+          // Positioned(
+          //   bottom: 0,
+          //   width: Get.width,
+          //   child:
+          // ),
           Positioned(
             width: Get.width,
             top: -Constants.appLogoSize / 2,

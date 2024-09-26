@@ -12,13 +12,14 @@ class GreetingsComponent extends StatelessWidget {
   const GreetingsComponent({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context) { 
     return SizedBox(
       width: Get.width,
       child: Row(
         children: [
-          CachedImageWidget(
-            url: loginUserData.value.profileImage,
+          const CachedImageWidget(
+            url: "https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2264922221.jpg",
+            // url: loginUserData.value.profileImage,
             fit: BoxFit.cover,
             width: 48,
             height: 48,

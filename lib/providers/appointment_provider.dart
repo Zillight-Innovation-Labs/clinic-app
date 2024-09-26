@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:kivicare_patient/api/appointment_apis.dart';
 import 'package:kivicare_patient/models/appointment_model.dart';
+import 'package:kivicare_patient/utils/app_common.dart';
+import 'package:nb_utils/nb_utils.dart';
 
-// import 'dart:developer' as dev;
+import 'dart:developer' as dev;
+
 enum AppointmentState { loading, initial, error, success }
 
 class AppointmentProvider extends ChangeNotifier {
@@ -21,6 +24,7 @@ class AppointmentProvider extends ChangeNotifier {
   }
 
   Future<void> addSelectedAppointment(AppointModel apoint) async {
+    dev.log("apoint:$apoint");
     _selectedUserAppointments.add(apoint);
 
     notifyListeners();
@@ -34,13 +38,13 @@ class AppointmentProvider extends ChangeNotifier {
   }
 
   Future<void> bookAppointment({
-    required String userId,
     required String appointmentTime,
     required String appointmenDate,
   }) async {
+    setState(AppointmentState.loading);
     try {
       final response = await _appointmentServiceApis.bookAppoinment(
-        userId: userId,
+        userId: loginUserData.value.id.toString(),
         appointmentTime: appointmentTime,
         appointmenDate: appointmenDate,
       );

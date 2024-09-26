@@ -1,12 +1,17 @@
+import 'dart:ui';
+
 import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:get/get.dart';
+import 'package:get/get_core/src/get_main.dart';
 import 'package:kivicare_patient/api/const/const.dart';
+import 'package:kivicare_patient/components/date_time_appoint_card.dart';
+import 'package:kivicare_patient/components/loader.dart';
 import 'package:kivicare_patient/models/appointment_model.dart';
 import 'package:kivicare_patient/providers/appointment_provider.dart';
-import 'package:kivicare_patient/utils/app_common.dart';
 import 'package:kivicare_patient/utils/colors.dart';
 import 'package:kivicare_patient/utils/common_base.dart';
 
@@ -24,22 +29,6 @@ class BookAppoinment extends StatefulWidget {
 
 class _BookAppoinmentState extends State<BookAppoinment> {
   var index = 0;
-
-  List time = [
-    {"time": "9 00 am", "times": "9.00 am"},
-    "9 00 am",
-    "9 30 am",
-    "10 00 am",
-    "10 30 am",
-    "11 00 am",
-    "11 30 am",
-    "12 00 am",
-    "12 30 pm",
-    "1 00 pm",
-    "1 30 pm",
-    "2 00 pm",
-    "2 30 pm",
-  ];
   List times = [
     {"time": "9 00 am", "times": "9.00 am"},
     {"time": "9 30 am", "times": "9.30 am"},
@@ -63,7 +52,7 @@ class _BookAppoinmentState extends State<BookAppoinment> {
     // {"time": "6 30 pm", "times": "6.30 pm"},
   ];
 
-  String isTime = '9.00 am';
+  String formatTime = '9.00 am';
   String selectedTime = '';
   String selectedDate = '';
 
@@ -108,33 +97,34 @@ class _BookAppoinmentState extends State<BookAppoinment> {
                           ),
                           ElevatedButton(
                             style: ElevatedButton.styleFrom(
-                                backgroundColor: selectedTime == ""
-                                    ? appColorPrimary.withOpacity(0.5)
-                                    : appColorPrimary),
+                                backgroundColor:
+                                    selectedTime == "" || selectedDate == ""
+                                        ? appColorPrimary.withOpacity(0.5)
+                                        : appColorPrimary),
                             onPressed: () {
                               if (selectedTime != "" && selectedDate != '') {
                                 final AppointModel model = AppointModel(
-                                  time: selectedTime,
+                                  time: formatTime,
                                   date: selectedDate,
+                                  formatedTime: formatSlectedTime(selectedTime),
                                 );
                                 context
                                     .read<AppointmentProvider>()
                                     .addSelectedAppointment(model);
                                 setState(() {
                                   selectedTime = '';
+                                  selectedDate = '';
                                 });
-
-                                dev.log("UserId:${loginUserData.value.id}");
                               }
                             },
                             child: Text(
                               "Add Date ",
                               style: TextStyle(
-                                  fontWeight: FontWeight.w700,
-                                  color:
-                                      selectedTime == "" && selectedDate == ""
-                                          ? white.withOpacity(0.5)
-                                          : white),
+                                fontWeight: FontWeight.w700,
+                                color: selectedTime == "" || selectedDate == ""
+                                    ? white.withOpacity(0.5)
+                                    : white,
+                              ),
                             ),
                           ),
                         ],
@@ -155,8 +145,7 @@ class _BookAppoinmentState extends State<BookAppoinment> {
                             // New date selected
                             setState(() {
                               selectedDate = formatDate(date, true);
-                              selectedDate = formatDate(date, true);
-                              dev.log(":$selectedDate");
+                              // dev.log(":$selectedDate");
                             });
                           },
                         ),
@@ -176,9 +165,12 @@ class _BookAppoinmentState extends State<BookAppoinment> {
                           return GestureDetector(
                             onTap: () {
                               setState(() {
-                                isTime = times[index]['times'];
+                                formatTime = times[index]['times'];
                                 selectedTime = times[index]['time'];
                               });
+                              dev.log("formatTime:$formatTime");
+                              dev.log(
+                                  "selectedTime:${formatSlectedTime(selectedTime)}");
                             },
                             child: Container(
                               decoration: BoxDecoration(
@@ -186,7 +178,7 @@ class _BookAppoinmentState extends State<BookAppoinment> {
                                   color: kSubTitleColor.withOpacity(0.10),
                                 ),
                                 borderRadius: BorderRadius.circular(6.0),
-                                color: isTime == times[index]['times']
+                                color: formatTime == times[index]['times']
                                     ? appColorPrimary
                                     : kLikeWhiteColor,
                               ),
@@ -194,7 +186,7 @@ class _BookAppoinmentState extends State<BookAppoinment> {
                                 child: Text(
                                   times[index]['times'],
                                   style: TextStyle(
-                                      color: isTime == times[index]['times']
+                                      color: formatTime == times[index]['times']
                                           ? kLikeWhiteColor
                                           : kSubTitleColor,
                                       fontWeight: FontWeight.w600),
@@ -268,7 +260,20 @@ class _BookAppoinmentState extends State<BookAppoinment> {
                   textColor: kLikeWhiteColor,
                   enableScaleAnimation: false,
                   color: appColorPrimary,
-                  onTap: () {},
+                  onTap: () {
+                    if (viewModel.selectedUserAppointments.isNotEmpty) {
+                      final model = AppointModel(
+                        date: viewModel.selectedUserAppointments[0].date,
+                        time:
+                            viewModel.selectedUserAppointments[0].formatedTime,
+                      );
+                      //selectedUserAppointments
+                      viewModel.bookAppointment(
+                        appointmentTime: model.time,
+                        appointmenDate: model.date,
+                      );
+                    }
+                  },
                   elevation: 0,
                 );
               }
@@ -276,91 +281,13 @@ class _BookAppoinmentState extends State<BookAppoinment> {
             }),
           ),
         ),
-      ],
-    );
-  }
-}
-
-class DateTimeAppointmentCard extends StatelessWidget {
-  const DateTimeAppointmentCard({
-    super.key,
-    required this.selectedDate,
-  });
-
-  final AppointModel selectedDate;
-
-  @override
-  Widget build(BuildContext context) {
-    final Size size = MediaQuery.of(context).size;
-    return Stack(
-      children: [
-        Container(
-          margin: const EdgeInsets.only(
-            right: 10,
-          ),
-          padding: const EdgeInsets.symmetric(
-            horizontal: 10,
-            vertical: 6,
-          ).copyWith(right: 20),
-          decoration: BoxDecoration(
-            color: appColorPrimary,
-            borderRadius: BorderRadius.circular(
-              15,
-            ),
-          ),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(
-                children: [
-                  SvgPicture.asset(
-                    'assets/icons/dateIcon.svg',
-                    height: size.height * 0.02,
-                  ),
-                  const SizedBox(width: 5),
-                  Text(
-                    selectedDate.date,
-                    style: const TextStyle(
-                      color: white,
-                      fontSize: 10,
-                    ),
-                  )
-                ],
-              ),
-              const SizedBox(height: 10),
-              Row(
-                children: [
-                  SvgPicture.asset(
-                    'assets/icons/timeIcon.svg',
-                    height: size.height * 0.02,
-                  ),
-                  const SizedBox(width: 5),
-                  Text(
-                    selectedDate.time,
-                    style: const TextStyle(
-                      color: white,
-                      fontSize: 10,
-                    ),
-                  )
-                ],
-              ),
-            ],
-          ),
-        ),
-        Positioned(
-          right: -8,
-          top: -13,
-          child: IconButton(
-              onPressed: () {
-                context.read<AppointmentProvider>().removedDate(
-                      selectedDate,
-                    );
-              },
-              icon: const Icon(
-                Icons.cancel,
-                color: white,
-              )),
-        )
+        Builder(builder: (context) {
+          final viewModel = context.watch<AppointmentProvider>();
+          if (viewModel.state == AppointmentState.loading) {
+            return const LoaderWidget();
+          }
+          return const SizedBox.shrink();
+        })
       ],
     );
   }

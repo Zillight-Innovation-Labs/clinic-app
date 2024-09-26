@@ -1,5 +1,5 @@
 import 'dart:convert';
-
+import 'dart:developer' as dev;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:kivicare_patient/api/const/api.dart';
 import 'package:kivicare_patient/screens/booking/apointments/mt_book_appoinment.dart';
@@ -8,11 +8,10 @@ import 'package:kivicare_patient/utils/api_end_points.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:http/http.dart' as http;
 
-
 class AppointmentServiceApis {
-    final _secureStorage = const FlutterSecureStorage();
+  final _secureStorage = const FlutterSecureStorage();
 
-   Future<ApiResponse> bookAppoinment({
+  Future<ApiResponse> bookAppoinment({
     required String userId,
     required String appointmenDate,
     required String appointmentTime,
@@ -24,14 +23,18 @@ class AppointmentServiceApis {
       "Authorization": "Bearer $token"
     };
 
-    if (token == null || token.isEmpty) {
-      log("Token not found");
-      return ApiResponse(
-        statusCode: 401,
-        isError: true,
-        data: {"message": "No authentication token found"},
-      );
-    }
+    // if (token == null || token.isEmpty) {
+    //   log("Token not found");
+    //   return ApiResponse(
+    //     statusCode: 401,
+    //     isError: true,
+    //     data: {"message": "No authentication token found"},
+    //   );
+    // }
+
+    dev.log("userId:$userId");
+    dev.log("appointmenDate:$appointmenDate");
+    dev.log("appointmentTime:$appointmentTime");
     /*
       "doctor_id": 3,
   "user_id": 12,
@@ -52,7 +55,8 @@ class AppointmentServiceApis {
       });
 
       final response = await http.post(url, body: body, headers: header);
-      log(response.statusCode.toString());
+      dev.log(response.statusCode.toString());
+      dev.log("appointment res:${response.body}");
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         return ApiResponse(
@@ -70,6 +74,5 @@ class AppointmentServiceApis {
     } catch (e) {
       return handleError(e);
     }
-  } 
-
+  }
 }

@@ -1216,36 +1216,35 @@ tileText({String text = ""}) {
   return const SizedBox.shrink();
 }
 
+String formatDate(DateTime date, bool hasDash) {
+  String formattedDate = '';
 
-  String formatDate(DateTime date, bool hasDash) {
-    String formattedDate = '';
-
-    if (hasDash) {
-      formattedDate = DateFormat('yyyy-MM-dd').format(date);
-    } else {
-      formattedDate = DateFormat('d MMMM, yyyy').format(date);
-    }
-
-    return formattedDate;
+  if (hasDash) {
+    formattedDate = DateFormat('yyyy-MM-dd').format(date);
+  } else {
+    formattedDate = DateFormat('d MMMM, yyyy').format(date);
   }
 
-    String formatSlectedTime(String inputTime) {
-    // Split the input time into hours and minutes
-    try {
-      final parts = inputTime.split(' ');
-      final hours = (double.parse(parts[0]))
-          .toInt(); // Convert to double and then cast to int
-      final minutes = int.parse(parts[1].substring(0, 2));
+  return formattedDate;
+}
 
-      // Convert to 24-hour format if necessary
-      int finalHours = hours;
-      if (parts.contains('pm')) {
-        finalHours += 12;
-      }
+String formatSlectedTime(String inputTime) {
+  // Split the input time into hours and minutes
+  try {
+    final parts = inputTime.split(' ');
+    final hours = (double.parse(parts[0]))
+        .toInt(); // Convert to double and then cast to int
+    final minutes = int.parse(parts[1].substring(0, 2));
 
-      // Format the time as "HH:MM"
-      return '${finalHours.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}';
-    } catch (e) {
-      return '';
+    // Convert to 24-hour format if necessary
+    int finalHours = hours;
+    if (parts.contains('pm') && !parts.contains('12')) {
+      finalHours += 12;
     }
+
+    // Format the time as "HH:MM"
+    return '${finalHours.toString().padLeft(2, '0')}:${minutes.toString().padLeft(2, '0')}';
+  } catch (e) {
+    return '';
   }
+}

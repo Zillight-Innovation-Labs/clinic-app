@@ -13,7 +13,7 @@ import '../../utils/local_storage.dart';
 import '../auth/other/settings_screen.dart';
 import '../auth/profile/profile_controller.dart';
 import '../auth/profile/profile_screen.dart';
-import '../booking/appointments_screen.dart';
+import '../booking/apointments/appointments_history.dart';
 import '../home/home_screen.dart';
 import 'components/menu.dart';
 

@@ -16,8 +16,12 @@ import '../../../utils/app_common.dart';
 
 class EditUserProfileScreen extends StatelessWidget {
   EditUserProfileScreen({super.key});
-  final EditUserProfileController editUserProfileController = Get.put(EditUserProfileController());
+  final EditUserProfileController editUserProfileController =
+      Get.put(EditUserProfileController());
   final GlobalKey<FormState> formKey = GlobalKey<FormState>();
+
+  final String image =
+      'https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2264922221.jpg';
 
   @override
   Widget build(BuildContext context) {
@@ -34,16 +38,22 @@ class EditUserProfileScreen extends StatelessWidget {
                 children: [
                   16.height,
                   Obx(() => ProfilePicWidget(
-                        heroTag: editUserProfileController.imageFile.value.path.isNotEmpty
+                        heroTag: editUserProfileController
+                                .imageFile.value.path.isNotEmpty
                             ? editUserProfileController.imageFile.value.path
                             : loginUserData.value.profileImage.isNotEmpty
-                                ? loginUserData.value.profileImage
-                                : loginUserData.value.profileImage,
-                        profileImage: editUserProfileController.imageFile.value.path.isNotEmpty
+                                ? image
+                                // loginUserData.value.profileImage
+                                : image,
+                                // loginUserData.value.profileImage,
+                        profileImage: editUserProfileController
+                                .imageFile.value.path.isNotEmpty
                             ? editUserProfileController.imageFile.value.path
                             : loginUserData.value.profileImage.isNotEmpty
-                                ? loginUserData.value.profileImage
-                                : loginUserData.value.profileImage,
+                                ? image
+                                // loginUserData.value.profileImage
+                                : image,
+                                // loginUserData.value.profileImage,
                         firstName: loginUserData.value.firstName,
                         lastName: loginUserData.value.lastName,
                         userName: loginUserData.value.userName,
@@ -69,7 +79,11 @@ class EditUserProfileScreen extends StatelessWidget {
                       fillColor: context.cardColor,
                       filled: true,
                     ),
-                    suffix: commonLeadingWid(imgPath: Assets.navigationIcUserOutlined, color: secondaryTextColor, size: 12).paddingAll(16),
+                    suffix: commonLeadingWid(
+                            imgPath: Assets.navigationIcUserOutlined,
+                            color: secondaryTextColor,
+                            size: 12)
+                        .paddingAll(16),
                   ),
                   16.height,
                   AppTextField(
@@ -85,7 +99,11 @@ class EditUserProfileScreen extends StatelessWidget {
                       fillColor: context.cardColor,
                       filled: true,
                     ),
-                    suffix: commonLeadingWid(imgPath: Assets.navigationIcUserOutlined, color: secondaryTextColor, size: 12).paddingAll(16),
+                    suffix: commonLeadingWid(
+                            imgPath: Assets.navigationIcUserOutlined,
+                            color: secondaryTextColor,
+                            size: 12)
+                        .paddingAll(16),
                   ),
                   16.height,
                   AppTextField(
@@ -102,7 +120,11 @@ class EditUserProfileScreen extends StatelessWidget {
                       fillColor: context.cardColor,
                       filled: true,
                     ),
-                    suffix: commonLeadingWid(imgPath: Assets.iconsIcMail, color: secondaryTextColor, size: 12).paddingAll(16),
+                    suffix: commonLeadingWid(
+                            imgPath: Assets.iconsIcMail,
+                            color: secondaryTextColor,
+                            size: 12)
+                        .paddingAll(16),
                   ),
                   16.height,
                   Row(
@@ -112,15 +134,21 @@ class EditUserProfileScreen extends StatelessWidget {
                         () => AppTextField(
                           textStyle: primaryTextStyle(size: 12),
                           textFieldType: TextFieldType.OTHER,
-                          controller: TextEditingController(text: "  +${editUserProfileController.pickedPhoneCode.value.phoneCode}"),
+                          controller: TextEditingController(
+                              text:
+                                  "  +${editUserProfileController.pickedPhoneCode.value.phoneCode}"),
                           focus: editUserProfileController.phoneCodeFocus,
                           nextFocus: editUserProfileController.mobileFocus,
-                          errorThisFieldRequired: locale.value.thisFieldIsRequired,
+                          errorThisFieldRequired:
+                              locale.value.thisFieldIsRequired,
                           readOnly: true,
                           onTap: () {
                             pickCountry(context, onSelect: (Country country) {
-                              editUserProfileController.pickedPhoneCode(country);
-                              editUserProfileController.phoneCodeCont.text = editUserProfileController.pickedPhoneCode.value.phoneCode;
+                              editUserProfileController
+                                  .pickedPhoneCode(country);
+                              editUserProfileController.phoneCodeCont.text =
+                                  editUserProfileController
+                                      .pickedPhoneCode.value.phoneCode;
                             });
                           },
                           textAlign: TextAlign.center,
@@ -128,15 +156,18 @@ class EditUserProfileScreen extends StatelessWidget {
                             context,
                             hintText: "+91",
                             prefixIcon: Text(
-                              editUserProfileController.pickedPhoneCode.value.flagEmoji,
+                              editUserProfileController
+                                  .pickedPhoneCode.value.flagEmoji,
                             ).paddingOnly(top: 4, left: 8),
-                            prefixIconConstraints: BoxConstraints.tight(const Size(24, 24)),
+                            prefixIconConstraints:
+                                BoxConstraints.tight(const Size(24, 24)),
                             suffixIcon: const Icon(
                               Icons.keyboard_arrow_down_rounded,
                               color: dividerColor,
                               size: 22,
                             ).paddingOnly(bottom: 2, right: 32),
-                            suffixIconConstraints: BoxConstraints.tight(const Size(32, 24)),
+                            suffixIconConstraints:
+                                BoxConstraints.tight(const Size(32, 24)),
                             fillColor: context.cardColor,
                             filled: true,
                           ),
@@ -148,7 +179,8 @@ class EditUserProfileScreen extends StatelessWidget {
                         textFieldType: TextFieldType.PHONE,
                         controller: editUserProfileController.mobileCont,
                         focus: editUserProfileController.mobileFocus,
-                        errorThisFieldRequired: locale.value.thisFieldIsRequired,
+                        errorThisFieldRequired:
+                            locale.value.thisFieldIsRequired,
                         keyboardType: TextInputType.phone,
                         inputFormatters: [
                           FilteringTextInputFormatter.allow(RegExp('[0-9]')),
@@ -159,7 +191,11 @@ class EditUserProfileScreen extends StatelessWidget {
                           fillColor: context.cardColor,
                           filled: true,
                         ),
-                        suffix: commonLeadingWid(imgPath: Assets.iconsIcCall, color: secondaryTextColor, size: 12).paddingAll(16),
+                        suffix: commonLeadingWid(
+                                imgPath: Assets.iconsIcCall,
+                                color: secondaryTextColor,
+                                size: 12)
+                            .paddingAll(16),
                       ).expand(flex: 8),
                     ],
                   ),
@@ -174,7 +210,8 @@ class EditUserProfileScreen extends StatelessWidget {
                     decoration: inputDecoration(
                       context,
                       labelText: 'Address',
-                      hintText: "${locale.value.eG} 123, ${locale.value.mainStreet}",
+                      hintText:
+                          "${locale.value.eG} 123, ${locale.value.mainStreet}",
                       fillColor: context.cardColor,
                       filled: true,
                     ),
@@ -195,19 +232,31 @@ class EditUserProfileScreen extends StatelessWidget {
                             return Obx(
                               () => InkWell(
                                 onTap: () {
-                                  editUserProfileController.selectedGender(genders[index]);
-                                  loginUserData.value.gender = editUserProfileController.selectedGender.value.slug;
+                                  editUserProfileController
+                                      .selectedGender(genders[index]);
+                                  loginUserData.value.gender =
+                                      editUserProfileController
+                                          .selectedGender.value.slug;
                                 },
                                 borderRadius: radius(),
                                 child: Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 12),
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 20, vertical: 12),
                                   decoration: boxDecorationDefault(
-                                    color: editUserProfileController.selectedGender.value.id == genders[index].id ? appColorPrimary : context.cardColor,
+                                    color: editUserProfileController
+                                                .selectedGender.value.id ==
+                                            genders[index].id
+                                        ? appColorPrimary
+                                        : context.cardColor,
                                   ),
                                   child: Text(
                                     genders[index].name,
                                     style: secondaryTextStyle(
-                                      color: editUserProfileController.selectedGender.value.id == genders[index].id ? white : null,
+                                      color: editUserProfileController
+                                                  .selectedGender.value.id ==
+                                              genders[index].id
+                                          ? white
+                                          : null,
                                     ),
                                   ),
                                 ),
@@ -239,7 +288,8 @@ class EditUserProfileScreen extends StatelessWidget {
               ),
             ).paddingSymmetric(horizontal: 24),
           ),
-          Obx(() => const LoaderWidget().visible(editUserProfileController.isLoading.value)),
+          Obx(() => const LoaderWidget()
+              .visible(editUserProfileController.isLoading.value)),
         ],
       ),
     );

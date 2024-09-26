@@ -21,8 +21,10 @@ class ProfileScreen extends StatelessWidget {
   ProfileScreen({Key? key}) : super(key: key);
   final ProfileController profileController = Get.put(ProfileController());
 
+  final String image =
+      'https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2264922221.jpg';
   @override
-  Widget build(BuildContext context) { 
+  Widget build(BuildContext context) {
     return Obx(
       () => AppScaffoldNew(
         appBartitleText: "Profile",
@@ -39,13 +41,15 @@ class ProfileScreen extends StatelessWidget {
                 Obx(
                   () => ProfilePicHorizotalWidget(
                     heroTag: loginUserData.value.profileImage,
-                    profileImage: loginUserData.value.profileImage,
+                    profileImage: image,
+                    // profileImage: loginUserData.value.profileImage,
                     firstName: loginUserData.value.firstName,
                     lastName: loginUserData.value.lastName,
                     userName: loginUserData.value.userName,
                     subInfo: loginUserData.value.email,
                     onCameraTap: () {
-                      EditUserProfileController editUserProfileController = EditUserProfileController(isProfilePhoto: true);
+                      EditUserProfileController editUserProfileController =
+                          EditUserProfileController(isProfilePhoto: true);
                       editUserProfileController.showBottomSheet(context);
                     },
                   ),
@@ -57,12 +61,16 @@ class ProfileScreen extends StatelessWidget {
                   subTitle: locale.value.personalizeYourProfile,
                   splashColor: transparentColor,
                   onTap: () {
-                    Get.to(() => EditUserProfileScreen(), duration: const Duration(milliseconds: 800));
+                    Get.to(() => EditUserProfileScreen(),
+                        duration: const Duration(milliseconds: 800));
                   },
                   titleTextStyle: boldTextStyle(size: 14),
-                  leading: commonLeadingWid(imgPath: Assets.iconsIcEditprofileOutlined).circularLightPrimaryBg(),
+                  leading: commonLeadingWid(
+                          imgPath: Assets.iconsIcEditprofileOutlined)
+                      .circularLightPrimaryBg(),
                   trailing: trailing,
-                  padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
                 ).paddingTop(16),
                 SettingItemWidget(
                   decoration: boxDecorationDefault(),
@@ -73,9 +81,13 @@ class ProfileScreen extends StatelessWidget {
                     Get.to(() => const MedicineRemindersScreen());
                   },
                   titleTextStyle: boldTextStyle(size: 14),
-                  leading: commonLeadingWid(imgPath: Assets.iconsIcMedicine, color: appColorPrimary).circularLightPrimaryBg(),
+                  leading: commonLeadingWid(
+                          imgPath: Assets.iconsIcMedicine,
+                          color: appColorPrimary)
+                      .circularLightPrimaryBg(),
                   trailing: trailing,
-                  padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
                 ).paddingTop(16),
                 SettingItemWidget(
                   decoration: boxDecorationDefault(),
@@ -86,11 +98,14 @@ class ProfileScreen extends StatelessWidget {
                     Get.to(() => const ExcersizeReminderScreen());
                   },
                   titleTextStyle: boldTextStyle(size: 14),
-                  leading: commonLeadingWid(imgPath: Assets.iconsIcMeter , color: appColorPrimary).circularLightPrimaryBg(),
+                  leading: commonLeadingWid(
+                          imgPath: Assets.iconsIcMeter, color: appColorPrimary)
+                      .circularLightPrimaryBg(),
                   trailing: trailing,
-                  padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
                 ).paddingTop(16),
-                   SettingItemWidget(
+                SettingItemWidget(
                   title: "History",
                   decoration: boxDecorationDefault(),
                   subTitle: "See Your Medical History",
@@ -99,24 +114,28 @@ class ProfileScreen extends StatelessWidget {
                     Get.to(() => const MyHistoryScreen());
                   },
                   titleTextStyle: boldTextStyle(size: 14),
-                  leading: commonLeadingWid(imgPath: Assets.iconsIcHistory).circularLightPrimaryBg(),
+                  leading: commonLeadingWid(imgPath: Assets.iconsIcHistory)
+                      .circularLightPrimaryBg(),
                   trailing: trailing,
-                  padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
                 ).paddingTop(16),
                 SettingItemWidget(
                   title: locale.value.settings,
                   decoration: boxDecorationDefault(),
-                  subTitle: "${locale.value.changePassword},${locale.value.themeAndMore}",
+                  subTitle:
+                      "${locale.value.changePassword},${locale.value.themeAndMore}",
                   splashColor: transparentColor,
                   onTap: () {
                     Get.to(() => SettingScreen());
                   },
                   titleTextStyle: boldTextStyle(size: 14),
-                  leading: commonLeadingWid(imgPath: Assets.iconsIcSetting).circularLightPrimaryBg(),
+                  leading: commonLeadingWid(imgPath: Assets.iconsIcSetting)
+                      .circularLightPrimaryBg(),
                   trailing: trailing,
-                  padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
                 ).paddingTop(16),
-             
                 SettingItemWidget(
                   title: locale.value.rateApp,
                   decoration: boxDecorationDefault(),
@@ -132,9 +151,11 @@ class ProfileScreen extends StatelessWidget {
                     handleRate();
                   },
                   titleTextStyle: boldTextStyle(size: 14),
-                  leading: commonLeadingWid(imgPath: Assets.iconsIcStar).circularLightPrimaryBg(),
+                  leading: commonLeadingWid(imgPath: Assets.iconsIcStar)
+                      .circularLightPrimaryBg(),
                   trailing: trailing,
-                  padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
                 ).paddingTop(16),
                 SettingItemWidget(
                   title: locale.value.aboutApp,
@@ -145,9 +166,11 @@ class ProfileScreen extends StatelessWidget {
                     Get.to(() => const AboutScreen());
                   },
                   titleTextStyle: boldTextStyle(size: 14),
-                  leading: commonLeadingWid(imgPath: Assets.iconsIcInfo).circularLightPrimaryBg(),
+                  leading: commonLeadingWid(imgPath: Assets.iconsIcInfo)
+                      .circularLightPrimaryBg(),
                   trailing: trailing,
-                  padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
                 ).paddingTop(16),
                 SettingItemWidget(
                   title: locale.value.logout,
@@ -169,12 +192,17 @@ class ProfileScreen extends StatelessWidget {
                     );
                   },
                   titleTextStyle: boldTextStyle(size: 14),
-                  leading: commonLeadingWid(imgPath: Assets.iconsIcLogout).circularLightPrimaryBg(),
+                  leading: commonLeadingWid(imgPath: Assets.iconsIcLogout)
+                      .circularLightPrimaryBg(),
                   trailing: trailing,
-                  padding: const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
                 ).paddingTop(16),
                 30.height,
-                VersionInfoWidget(prefixText: 'Version  ', textStyle: primaryTextStyle(color: secondaryTextColor)).center(),
+                VersionInfoWidget(
+                        prefixText: 'Version  ',
+                        textStyle: primaryTextStyle(color: secondaryTextColor))
+                    .center(),
                 32.height,
               ],
             ).paddingSymmetric(horizontal: 16),
@@ -184,5 +212,6 @@ class ProfileScreen extends StatelessWidget {
     );
   }
 
-  Widget get trailing => const Icon(Icons.arrow_forward_ios_rounded, size: 12, color: darkGray);
+  Widget get trailing =>
+      const Icon(Icons.arrow_forward_ios_rounded, size: 12, color: darkGray);
 }

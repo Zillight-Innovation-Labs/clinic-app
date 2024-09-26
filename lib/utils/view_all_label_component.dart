@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:kivicare_patient/providers/bottom_nav_provider.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:kivicare_patient/utils/colors.dart';
 import 'package:kivicare_patient/utils/constants.dart';
+import 'package:provider/provider.dart';
 
 import '../main.dart';
 
@@ -37,18 +39,23 @@ class ViewAllLabel extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         if (expandedText)
-          Text(label, style: boldTextStyle(size: labelSize ?? Constants.labelTextSize), maxLines: maxLines ?? 1, overflow: textOverflow).expand()
+          Text(label,
+                  style:
+                      boldTextStyle(size: labelSize ?? Constants.labelTextSize),
+                  maxLines: maxLines ?? 1,
+                  overflow: textOverflow)
+              .expand()
         else
-          Text(label, style: boldTextStyle(size: labelSize ?? Constants.labelTextSize)),
+          Text(label,
+              style: boldTextStyle(size: labelSize ?? Constants.labelTextSize)),
         if (isShowAll)
           TextButton(
-            onPressed: (list == null ? true : isViewAllVisible(list!))
-                ? () {
-                    onTap?.call();
-                  }
-                : null,
-            child: (list == null ? true : isViewAllVisible(list!)) ? Text(trailingText ?? locale.value.viewAll, style: boldTextStyle(color: trailingTextColor ?? appColorSecondary, size: 14)) : const SizedBox(),
-          )
+              onPressed: () {
+                context.read<BottomNavProvider>().setNavbarIndex(1);
+              },
+              child: Text('See All',
+                  style: boldTextStyle(
+                      color: trailingTextColor ?? appColorSecondary, size: 14)))
         else
           46.height,
       ],

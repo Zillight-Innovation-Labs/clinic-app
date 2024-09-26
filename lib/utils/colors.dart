@@ -5,6 +5,11 @@ const serviceCardOne = Color(0xFF28B2A7);
 const serviceCardTwo = Color(0xFF4F73DF);
 const serviceCardThree = Color(0xFF475467);
 
+const bookAppointCard = Color(0xFFF9F5FF);
+const testCard = Color(0xFFEDFCF2);
+const talkToDocCard = Color(0xFFFEF6EE);
+const medicationCard = Color(0xFFFEF3F2);
+
 const serviceStandard = Color(0xFFEF6820);
 const servicePremium = Color(0xFF16B364);
 

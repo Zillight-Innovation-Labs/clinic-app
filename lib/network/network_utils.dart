@@ -302,31 +302,31 @@ void apiPrint({
   bool fullLog = false,
 }) {
   if (fullLog) {
-    dev.log(
-        "┌───────────────────────────────────────────────────────────────────────────────────────────────────────");
-    dev.log("\u001b[93m Url: \u001B[39m $url");
-    dev.log("\u001b[93m endPoint:: \u001B[39m \u001B[1m$endPoint\u001B[22m");
-    dev.log("\u001b[93m header: \u001B[39m \u001b[96m$headers\u001B[39m");
-    if (hasRequest) {
-      dev.log('\u001b[93m Request: \u001B[39m \u001b[95m$request\u001B[39m');
-    }
-    dev.log(statusCode.isSuccessful() ? "\u001b[32m" : "\u001b[31m");
-    dev.log('Response ($methodtype) $statusCode: $responseBody');
-    dev.log("\u001B[0m");
-    dev.log(
-        "└───────────────────────────────────────────────────────────────────────────────────────────────────────");
+    // dev.log(
+    //     "┌───────────────────────────────────────────────────────────────────────────────────────────────────────");
+    // dev.log("\u001b[93m Url: \u001B[39m $url");
+    // dev.log("\u001b[93m endPoint:: \u001B[39m \u001B[1m$endPoint\u001B[22m");
+    // dev.log("\u001b[93m header: \u001B[39m \u001b[96m$headers\u001B[39m");
+    // if (hasRequest) {
+    //   dev.log('\u001b[93m Request: \u001B[39m \u001b[95m$request\u001B[39m');
+    // }
+    // dev.log(statusCode.isSuccessful() ? "\u001b[32m" : "\u001b[31m");
+    // dev.log('Response ($methodtype) $statusCode: $responseBody');
+    // dev.log("\u001B[0m");
+    // dev.log(
+    //     "└───────────────────────────────────────────────────────────────────────────────────────────────────────");
   } else {
-    log("┌───────────────────────────────────────────────────────────────────────────────────────────────────────");
-    log("\u001b[93m Url: \u001B[39m $url");
-    log("\u001b[93m endPoint:: \u001B[39m \u001B[1m$endPoint\u001B[22m");
-    log("\u001b[93m header: \u001B[39m \u001b[96m$headers\u001B[39m");
-    if (hasRequest) {
-      log('\u001b[93m Request: \u001B[39m \u001b[95m$request\u001B[39m');
-    }
-    log(statusCode.isSuccessful() ? "\u001b[32m" : "\u001b[31m");
-    log('Response ($methodtype) $statusCode: ${formatJson(responseBody)}');
-    log("\u001B[0m");
-    log("└───────────────────────────────────────────────────────────────────────────────────────────────────────");
+    // log("┌───────────────────────────────────────────────────────────────────────────────────────────────────────");
+    // log("\u001b[93m Url: \u001B[39m $url");
+    // log("\u001b[93m endPoint:: \u001B[39m \u001B[1m$endPoint\u001B[22m");
+    // log("\u001b[93m header: \u001B[39m \u001b[96m$headers\u001B[39m");
+    // if (hasRequest) {
+    //   log('\u001b[93m Request: \u001B[39m \u001b[95m$request\u001B[39m');
+    // }
+    // log(statusCode.isSuccessful() ? "\u001b[32m" : "\u001b[31m");
+    // log('Response ($methodtype) $statusCode: ${formatJson(responseBody)}');
+    // log("\u001B[0m");
+    // log("└───────────────────────────────────────────────────────────────────────────────────────────────────────");
   }
 }
 

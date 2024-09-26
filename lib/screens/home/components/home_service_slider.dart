@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:kivicare_patient/screens/service/components/service_card.dart';
 import 'package:kivicare_patient/screens/service/event_outreach_service.dart';
 import 'package:kivicare_patient/screens/service/personalized_self_service.dart';
 import 'package:kivicare_patient/screens/service/personalized_senior_service.dart';
 import 'package:kivicare_patient/screens/service/service_screen.dart';
+import 'package:kivicare_patient/utils/view_all_label_component.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:kivicare_patient/utils/colors.dart';
 
@@ -33,69 +35,83 @@ class _HomeServiceSliderState extends State<HomeServiceSlider> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: SizedBox(
-        height: 190,
-        child: Stack(
-          clipBehavior: Clip.none,
-          children: [
-            PageView.builder(
-              controller: sliderPageController,
-              onPageChanged: (int page) {
-                setState(() {
-                  sliderCurrentPage = page;
-                });
-              },
-              itemCount: servicePages.length,
-              itemBuilder: (context, index) {
-                return ServiceCard(
-                  title: servicePages[index]['title'],
-                  desc: servicePages[index]['desc'],
-                  img: servicePages[index]['image'],
-                  onTap: () {
-                    Get.to(servicePages[index]['page']);
-                  },
-                  color: servicePages[index]['color'],
-                );
-              },
-            ),
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: List<Widget>.generate(
-                  servicePages.length,
-                  (index) {
-                    return InkWell(
-                      onTap: () {
-                        sliderPageController.animateToPage(
-                          index,
-                          duration: const Duration(milliseconds: 300),
-                          curve: Curves.easeIn,
-                        );
-                      },
-                      child: Container(
-                        height: 6,
-                        width: sliderCurrentPage == index ? 20 : 10,
-                        margin: const EdgeInsets.all(3),
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          border: Border.all(color: white),
-                          color: sliderCurrentPage == index
-                              ? appColorPrimary
-                              : appColorPrimary.withOpacity(0.5),
-                        ),
+      padding: const EdgeInsets.only(top: 30),
+      child: Column(
+        children: [
+          ViewAllLabel(
+            label: "Services",
+            onTap: () {
+              Get.to(() => const ServiceScreen());
+            },
+            trailingText: "See All",
+          ).paddingOnly(left: 16, right: 8),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: SizedBox(
+              height: 190,
+              child: Stack(
+                clipBehavior: Clip.none,
+                children: [
+                  PageView.builder(
+                    controller: sliderPageController,
+                    onPageChanged: (int page) {
+                      setState(() {
+                        sliderCurrentPage = page;
+                      });
+                    },
+                    itemCount: servicePages.length,
+                    itemBuilder: (context, index) {
+                      return ServiceCard(
+                        title: servicePages[index]['title'],
+                        desc: servicePages[index]['desc'],
+                        img: servicePages[index]['image'],
+                        onTap: () {
+                          Get.to(servicePages[index]['page']);
+                        },
+                        color: servicePages[index]['color'],
+                      );
+                    },
+                  ),
+                  Positioned(
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: List<Widget>.generate(
+                        servicePages.length,
+                        (index) {
+                          return InkWell(
+                            onTap: () {
+                              sliderPageController.animateToPage(
+                                index,
+                                duration: const Duration(milliseconds: 300),
+                                curve: Curves.easeIn,
+                              );
+                            },
+                            child: Container(
+                              height: 6,
+                              width: sliderCurrentPage == index ? 20 : 10,
+                              margin: const EdgeInsets.all(3),
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                border: Border.all(color: white),
+                                color: sliderCurrentPage == index
+                                    ? appColorPrimary
+                                    : appColorPrimary.withOpacity(0.5),
+                              ),
+                            ),
+                          );
+                        },
                       ),
-                    );
-                  },
-                ),
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }

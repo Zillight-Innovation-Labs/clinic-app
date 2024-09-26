@@ -12,11 +12,11 @@ import '../api/auth_apis.dart';
 import '../utils/common_base.dart';
 import '../utils/constants.dart';
 import 'auth/model/login_response.dart';
-
-class SplashScreenController extends GetxController {
+import 'dart:developer' as dev;
+class SplashScreenController extends GetxController { 
   @override
   void onInit() {
-    super.onInit();
+    super.onInit(); 
     //Get Package Info
     getPackageInfo().then((value) => currentPackageinfo(value));
     getAppConfigurations();
@@ -54,10 +54,13 @@ class SplashScreenController extends GetxController {
   }
 
   void navigationLogic() {
+    log("navigationLogic called===========1");
+    dev.log("navigationLogic called===========2");
     if ((getValueFromLocal(SharedPreferenceConst.FIRST_TIME) ?? false) == false) {
       Get.offAll(() => WalkthroughScreen());
     } else if (getValueFromLocal(SharedPreferenceConst.IS_LOGGED_IN) == true) {
       try {
+        dev.log("IS_LOGGED_IN::::${getValueFromLocal(SharedPreferenceConst.IS_LOGGED_IN)}");
         final userData = getValueFromLocal(SharedPreferenceConst.USER_DATA);
         isLoggedIn(true);
         loginUserData(UserData.fromJson(userData));

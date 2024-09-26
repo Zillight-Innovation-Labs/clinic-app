@@ -3,9 +3,11 @@ import 'package:get/get.dart';
 import 'package:kivicare_patient/providers/bottom_nav_provider.dart';
 import 'package:kivicare_patient/screens/auth/profile/mt_medicine_reminders.dart';
 import 'package:kivicare_patient/screens/home/components/home_service_slider.dart';
+import 'package:kivicare_patient/screens/home/home_banner.dart';
 import 'package:kivicare_patient/screens/home/home_card.dart';
 import 'package:kivicare_patient/screens/service/service_screen.dart';
 import 'package:kivicare_patient/screens/tests/take_test_page.dart';
+import 'package:kivicare_patient/utils/colors.dart';
 import 'package:kivicare_patient/utils/view_all_label_component.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:kivicare_patient/components/loader_widget.dart';
@@ -18,8 +20,6 @@ import 'components/slider_component.dart';
 import 'components/upcoming_appointment_components.dart';
 import 'home_controller.dart';
 import 'model/dashboard_res_model.dart';
-
-
 
 class HomeScreen extends StatelessWidget {
   HomeScreen({super.key});
@@ -68,22 +68,9 @@ class HomeScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     SliderComponent(),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 10),
-                      child: Column(
-                        children: [
-                          const HomeBanner(),
-                          UpcomingAppointmentComponents(),
-                        ],
-                      ),
-                    ),
-                    ViewAllLabel(
-                      label: "Services",
-                      onTap: () {
-                        Get.to(() => const ServiceScreen());
-                      },
-                      trailingText: "See All",
-                    ).paddingOnly(left: 16, right: 8),
+                    const HomeBanner(),
+                    UpcomingAppointmentComponents(),
+                 
                     HomeServiceSlider()
                   ],
                 ),
@@ -92,61 +79,6 @@ class HomeScreen extends StatelessWidget {
           ),
         ),
       ),
-    );
-  }
-}
-
-class HomeBanner extends StatelessWidget {
-  const HomeBanner({
-    super.key,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        const SizedBox(height: 40),
-        Row(
-          children: [
-            HomeCard(
-                imagePath: "assets/images/diagnostics.png",
-                title: "Tests",
-                onTap: () {
-                  Get.to(const TakeTestPage());
-                }),
-            const SizedBox(width: 12),
-            HomeCard(
-                imagePath: "assets/images/nursing.png",
-                title: "Talk to\nDoctor",
-                onTap: () {}),
-          ],
-        ),
-        const SizedBox(height: 12),
-        Row(
-          children: [
-            HomeCard(
-              imagePath:
-                  "assets/images/ambulance.png", //assets/icons/ambulance.png
-              title: "Appointment",
-              onTap: () {
-                context.read<BottomNavProvider>().setNavbarIndex(1);
-                // Get.to(BookingFormScreen());
-                //BookingFormScreen
-              },
-            ),
-            const SizedBox(width: 12),
-            HomeCard(
-                imagePath: "assets/images/pharmacyImage.png",
-                title: "Medication",
-                onTap: () {
-                  Get.to(const MedicineRemindersScreen());
-                }),
-          ],
-        ),
-        const SizedBox(
-          height: 24,
-        ),
-      ],
     );
   }
 }

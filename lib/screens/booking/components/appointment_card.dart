@@ -6,11 +6,8 @@ import 'package:kivicare_patient/generated/assets.dart';
 import '../../../../components/cached_image_widget.dart';
 import '../../../../utils/colors.dart';
 import '../../../../utils/common_base.dart';
-import '../../../main.dart';
 import '../../../utils/app_common.dart';
 import '../../../utils/constants.dart';
-import '../../../utils/price_widget.dart';
-import '../appointment_detail_screen.dart';
 import '../appointments_controller.dart';
 import '../model/appointments_res_model.dart';
 
@@ -27,15 +24,16 @@ class AppointmentCard extends StatelessWidget {
     return GestureDetector(
       onTap: () {
         hideKeyboard(context);
-        // Get.to(() => AppointmentDetail(), arguments: appointment);
       },
       child: Stack(
         children: [
           Container(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            decoration: boxDecorationDefault(color: context.cardColor, shape: BoxShape.rectangle),
+            padding:
+                const EdgeInsets.symmetric(horizontal: 24).copyWith(bottom: 20),
+            decoration: boxDecorationDefault(
+                color: context.cardColor, shape: BoxShape.rectangle),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 22.height,
                 Align(
@@ -46,164 +44,50 @@ class AppointmentCard extends StatelessWidget {
                   ),
                 ),
                 16.height,
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-                    decoration: boxDecorationDefault(color: lightSecondaryColor, borderRadius: radius(22)),
-                    child: Row(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Text(
-                          appointment.appointmentDate.dateInDMMMMyyyyFormat,
-                          style: boldTextStyle(size: 12, color: appColorSecondary),
-                        ),
-                        6.width,
-                        Text(
-                          "|",
-                          style: boldTextStyle(size: 12, color: appColorSecondary),
-                        ),
-                        6.width,
-                        Text(
-                          '3:30 PM - 4:00 PM',
-                          style: boldTextStyle(size: 12, color: appColorSecondary),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                22.height,
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        "Cardiac Consultation",
-                        style: boldTextStyle(size: 20),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ),
-                      Text(
-                        "HeartCare & OrthoCare Center",
-                        style: primaryTextStyle(size: 14, color: secondaryTextColor),
-                        maxLines: 1,
-                        overflow: TextOverflow.ellipsis,
-                      ).paddingTop(8),
-                      Text(
-                        "appointment.appointmentExtraInfo",
-                        style: secondaryTextStyle(size: 12),
-                      ).paddingTop(6).visible(appointment.appointmentExtraInfo.isNotEmpty),
-                    ],
-                  ),
-                ),
-                32.height,
-                Align(
-                  alignment: Alignment.centerLeft,
+                Container(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                  decoration: boxDecorationDefault(
+                      color: lightSecondaryColor, borderRadius: radius(22)),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    mainAxisSize: MainAxisSize.min,
                     children: [
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            getServiceType(serviceType: "Online"),
-                            style: secondaryTextStyle(size: 12, color: secondaryTextColor),
-                          ),
-                          6.height,
-                          Row(
-                            children: [
-                              Text(
-                                'Doctor:',
-                                style: primaryTextStyle(size: 12, color: secondaryTextColor),
-                              ),
-                              6.width,
-                              Text(
-                                "Doctor woo",
-                                overflow: TextOverflow.ellipsis,
-                                style: boldTextStyle(size: 12),
-                              ).expand(),
-                            ],
-                          ),
-                        ],
-                      ).expand(),
-                      // PriceWidget(
-                      //   price: appointment.totalAmount,
-                      //   color: appColorPrimary,
-                      //   size: 18,
-                      //   isBoldText: true,
-                      // ),
+                      Text(
+                        appointment.appointmentDate.dateInDMMMMyyyyFormat,
+                        style:
+                            boldTextStyle(size: 12, color: appColorSecondary),
+                      ),
+                      6.width,
+                      Text(
+                        "|",
+                        style:
+                            boldTextStyle(size: 12, color: appColorSecondary),
+                      ),
+                      6.width,
+                      Text(
+                        '3:30 PM - 4:00 PM',
+                        style:
+                            boldTextStyle(size: 12, color: appColorSecondary),
+                      ),
                     ],
                   ),
                 ),
-                34.height,
-                commonDivider,
                 22.height,
-              //   Row(
-              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              //     children: [
-              //       Row(
-              //         mainAxisAlignment: MainAxisAlignment.center,
-              //         children: [
-              //           const Icon(Icons.calendar_today_outlined, color: secondaryTextColor, size: 12),
-              //           4.width,
-              //           Text("Appointment:", style: secondaryTextStyle()),
-              //           4.width,
-              //           Text(
-              //             getBookingStatus(status: appointment.status),
-              //             style: primaryTextStyle(size: 12, color: getBookingStatusColor(status: appointment.status)),
-              //           ),
-              //         ],
-              //       ),
-              //       Row(
-              //         mainAxisAlignment: MainAxisAlignment.center,
-              //         children: [
-              //           const CachedImageWidget(url: Assets.iconsIcTotalPayout, height: 15),
-              //           4.width,
-              //           Text("Payment:", style: secondaryTextStyle()),
-              //           4.width,
-              //           Text(
-              //             getBookingPaymentStatus(status: appointment.paymentStatus),
-              //             style: primaryTextStyle(size: 12, color: getPriceStatusColor(paymentStatus: appointment.paymentStatus)),
-              //           ),
-              //         ],
-              //       ),
-              //     ],
-              //   ),
-              // //
-                if (""==""
-                  // appointment.status.contains(StatusConst.pending) 
-                  ) ...[
-
-                  28.height,
-                  AppButton(
-                    color: extraLightPrimaryColor,
-                    height: 48,
-                    width: Get.width,
-                    padding: EdgeInsets.zero,
-                    shapeBorder: RoundedRectangleBorder(borderRadius: radius(defaultAppButtonRadius / 2)),
-                    onTap: () {
-                      showConfirmDialogCustom(
-                        getContext,
-                        primaryColor: appColorPrimary,
-                        negativeText: locale.value.cancel,
-                        positiveText: locale.value.yes,
-                        onAccept: (_) {
-                          appointmentsController.updateStatus(
-                            appointmentId: appointment.id,
-                            status: BookingStatusConst.CANCELLED,
-                            onUpdateBooking: onUpdateBooking,
-                          );
-                        },
-                        dialogType: DialogType.DELETE,
-                        title: "Do you want to cancel appointment?",
-                      );
-                    },
-                    text: 'Cancel',
-                    textStyle: appButtonPrimaryColorText,
-                  ),
-                ],
-                22.height,
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      "Personal Healthcare Management",
+                      style: boldTextStyle(size: 15),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Text(
+                      "Online",
+                      style: secondaryTextStyle(size: 12),
+                    )
+                  ],
+                ),
               ],
             ),
           ),
@@ -217,9 +101,11 @@ class AppointmentCard extends StatelessWidget {
                 if (canLaunchVideoCall(status: appointment.status)) {
                   if (isOnlineService) {
                     if (appointment.googleLink.isNotEmpty) {
-                      commonLaunchUrl(appointment.googleLink, launchMode: LaunchMode.externalApplication);
+                      commonLaunchUrl(appointment.googleLink,
+                          launchMode: LaunchMode.externalApplication);
                     } else if (appointment.zoomLink.isNotEmpty) {
-                      commonLaunchUrl(appointment.zoomLink, launchMode: LaunchMode.externalApplication);
+                      commonLaunchUrl(appointment.zoomLink,
+                          launchMode: LaunchMode.externalApplication);
                     } else {
                       toast("video call link is not found!");
                     }
@@ -227,17 +113,27 @@ class AppointmentCard extends StatelessWidget {
                     toast("This is not a online service!");
                   }
                 } else {
-                  if (appointment.status.toLowerCase().contains(StatusConst.pending)) {
+                  if (appointment.status
+                      .toLowerCase()
+                      .contains(StatusConst.pending)) {
                     toast("Opps! This appointment is not confirmed yet!");
-                  } else if (appointment.status.toLowerCase().contains(StatusConst.cancel) || appointment.status.toLowerCase().contains(BookingStatusConst.CANCELLED)) {
+                  } else if (appointment.status
+                          .toLowerCase()
+                          .contains(StatusConst.cancel) ||
+                      appointment.status
+                          .toLowerCase()
+                          .contains(BookingStatusConst.CANCELLED)) {
                     toast("Opps! This appointment has been cancelled!");
-                  } else if (appointment.status.toLowerCase().contains(StatusConst.completed)) {
+                  } else if (appointment.status
+                      .toLowerCase()
+                      .contains(StatusConst.completed)) {
                     toast("Opps! This appointment has been completed!");
                   }
                 }
               },
               child: Container(
-                decoration: boxDecorationDefault(shape: BoxShape.circle, color: appColorPrimary),
+                decoration: boxDecorationDefault(
+                    shape: BoxShape.circle, color: appColorPrimary),
                 padding: const EdgeInsets.all(10),
                 child: const CachedImageWidget(
                   url: Assets.imagesVideoCamera,
@@ -254,5 +150,6 @@ class AppointmentCard extends StatelessWidget {
     );
   }
 
-  bool get isOnlineService => appointment.serviceType.toLowerCase() == ServiceTypeConst.online;
+  bool get isOnlineService =>
+      appointment.serviceType.toLowerCase() == ServiceTypeConst.online;
 }

@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-import '../../components/app_scaffold.dart';
-import '../../components/cached_image_widget.dart';
-import '../../components/loader_widget.dart';
-import '../../main.dart';
-import '../../utils/colors.dart';
-import '../../utils/empty_error_state_widget.dart';
-import 'appointments_controller.dart';
-import 'components/appointment_card.dart';
-import 'model/appointment_status_model.dart';
+import '../../../components/app_scaffold.dart';
+import '../../../components/cached_image_widget.dart';
+import '../../../components/loader_widget.dart';
+import '../../../main.dart';
+import '../../../utils/colors.dart';
+import '../../../utils/empty_error_state_widget.dart';
+import '../appointments_controller.dart';
+import '../components/appointment_card.dart';
+import '../model/appointment_status_model.dart';
 
-class AppointmentsScreen extends StatelessWidget {
-  AppointmentsScreen({super.key});
+class AppointmentsHistory extends StatelessWidget {
+  AppointmentsHistory({super.key});
 
   final AppointmentsController appointmentsCont = Get.put(AppointmentsController());
 
