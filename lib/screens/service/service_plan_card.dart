@@ -3,24 +3,20 @@ import 'package:kivicare_patient/utils/common_base.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class ServicePlanCard extends StatelessWidget {
-  const ServicePlanCard({
+   ServicePlanCard({
     super.key,
     required this.name,
     required this.price,
-    required this.textOne,
-    required this.textTwo,
-    required this.textThree,
-    this.textFour,
+    this.features,
   });
   final String name;
   final String price;
-  final String textOne;
-  final String textTwo;
-  final String textThree;
-  final String? textFour;
+
+   List? features;
 
   @override
   Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Card(
@@ -53,10 +49,13 @@ class ServicePlanCard extends StatelessWidget {
                   SizedBox(width: 30),
                 ],
               ),
-              tileText(text: textOne),
-              tileText(text: textTwo),
-              tileText(text: textThree),
-              tileText(text: textFour ?? ""),
+            if(features!.isNotEmpty)...[
+                ...List.generate(features!.length, (int index) {
+                return  tileText(text: features![index], size: size);
+                
+              }),
+            ],
+         
               const SizedBox(height: 30)
             ],
           ),

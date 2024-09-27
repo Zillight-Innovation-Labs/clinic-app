@@ -1,14 +1,13 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'dart:developer' as dev;
-
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 import 'package:kivicare_patient/screens/home/home_bottom_tabs.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '../../../main.dart';
 import '../../../utils/push_notification_service.dart';
-import '../../dashboard/dashboard_controller.dart';
 import '../../home/home_controller.dart';
 import '../model/login_response.dart';
 import '../../../api/auth_apis.dart';
@@ -26,6 +25,7 @@ class SignInController extends GetxController {
   RxBool isRememberMe = true.obs;
   RxBool isLoading = false.obs;
   RxString userName = "".obs;
+  final _secureStorage = const FlutterSecureStorage();
 
   TextEditingController emailCont = TextEditingController();
   TextEditingController passwordCont = TextEditingController();
@@ -147,9 +147,15 @@ class SignInController extends GetxController {
   void handleLoginResponse({
     required UserResponse loginResponse,
     bool isSocialLogin = false,
-  }) {
+  }) async {
     if (loginResponse.userData.userRole
         .contains(LoginTypeConst.LOGIN_TYPE_USER)) {
+      dev.log("login response:::${loginResponse.userData.apiToken}");
+
+      await _secureStorage.write(
+          key: "apiToken", value: loginResponse.userData.apiToken);
+
+   
       loginUserData(loginResponse.userData);
       loginUserData.value.isSocialLogin = isSocialLogin;
       setValueToLocal(SharedPreferenceConst.USER_DATA, loginUserData.toJson());
@@ -162,13 +168,15 @@ class SignInController extends GetxController {
       isLoading(false);
 
       PushNotificationService().registerFCMAndTopics();
-      if ("" =="") {//!isNavigateToDashboard.value
-        Get.offAll(() => const HomeBottomNavBarScreen(), binding: BindingsBuilder(() {
+      if ("" == "") {
+        //!isNavigateToDashboard.value
+        Get.offAll(() => const HomeBottomNavBarScreen(),
+            binding: BindingsBuilder(() {
           Get.put(HomeController());
         }));
       } else {
         try {
-          DashboardController dashboardController = Get.find();
+          // DashboardController dashboardController = Get.find();
           // dashboardController.reloadBottomTabs();
         } catch (e) {
           log('dashboardController Get.find E: $e');
@@ -179,17 +187,7 @@ class SignInController extends GetxController {
         } catch (e) {
           log('homeScreenController Get.find E: $e');
         }
-        /* try {
-          BookingsController bookingsController = Get.find();
-          bookingsController.getBookingList();
-        } catch (e) {
-          log('appointmentsController Get.find E: $e');
-        }
-        try {
-          myPetsScreenController.init();
-        } catch (e) {
-          log('myPetsScreenController.init E: $e');
-        } */
+
         Get.back(result: true);
       }
     } else {

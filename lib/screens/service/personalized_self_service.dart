@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:kivicare_patient/components/app_scaffold.dart';
+import 'package:kivicare_patient/models/get_services_model.dart';
 import 'package:kivicare_patient/models/payment_model.dart';
 import 'package:kivicare_patient/providers/bottom_nav_provider.dart';
 import 'package:kivicare_patient/providers/payment_provider.dart';
@@ -9,12 +9,13 @@ import 'package:kivicare_patient/screens/auth/profile/profile_controller.dart';
 import 'package:kivicare_patient/screens/home/home_bottom_tabs.dart';
 import 'package:kivicare_patient/screens/service/service_plan_card.dart';
 import 'package:kivicare_patient/utils/colors.dart';
+import 'package:kivicare_patient/utils/common_base.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
-import 'dart:developer' as dev;
 
 class PersonalizedHomeCareService extends StatefulWidget {
-  const PersonalizedHomeCareService({super.key});
+  final Service model;
+  const PersonalizedHomeCareService({super.key, required this.model});
 
   @override
   State<PersonalizedHomeCareService> createState() =>
@@ -28,12 +29,16 @@ class _PersonalizedHomeCareServiceState
   String selectedPlan = 'Basic';
   String selectedPrice = '1000';
   late TabController _tabController;
-
-  String name = 'no name';
-
+  late List<String> featuresOne;
+  late List<String> featuresTwo;
+  late List<String> featuresThree;
   @override
   void initState() {
     super.initState();
+    featuresOne = convertStringToList(widget.model.packages![0].features!);
+    featuresTwo = convertStringToList(widget.model.packages![1].features!);
+    featuresThree = convertStringToList(widget.model.packages![2].features!);
+
     _tabController = TabController(length: 3, vsync: this);
 
     // Add listener to handle tab changes
@@ -75,7 +80,7 @@ class _PersonalizedHomeCareServiceState
     final Size size = MediaQuery.of(context).size;
 
     return AppScaffoldNew(
-      appBartitleText: "Personal Healthcare Management ",
+      appBartitleText: widget.model.name,
       appBarVerticalSize: size.height * 0.12,
       body: DefaultTabController(
         length: 3,
@@ -92,28 +97,14 @@ class _PersonalizedHomeCareServiceState
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      GestureDetector(
-                        onTap: () {
-                          setState(() {
-                            name = 'Yusuf';
-                          });
-                          dev.log("helllo world");
-                          print("helllo world");
-                        },
-                        child: Text(
-                          "Personal Healthcare Management:$name",
-                          style: primaryTextStyle(),
-                        ),
+                      Text(
+                        widget.model.name!,
+                        style: primaryTextStyle(),
                       ),
                       const SizedBox(height: 10),
-                      InkWell(
-                        onTap: () {
-                          dev.log("log here");
-                        },
-                        child: Text(
-                          "Our app empowers users to take control of their health with personalized plans, appointment scheduling, and remote consultations, ensuring comprehensive care at their fingertips.",
-                          style: secondaryTextStyle(color: Colors.black),
-                        ),
+                      Text(
+                        "Our app empowers users to take control of their health with personalized plans, appointment scheduling, and remote consultations, ensuring comprehensive care at their fingertips.",
+                        style: secondaryTextStyle(color: Colors.black),
                       ),
                       const SizedBox(height: 10),
                       Text(
@@ -202,40 +193,27 @@ class _PersonalizedHomeCareServiceState
                 Expanded(
                   child: TabBarView(
                     controller: _tabController,
-                    children: const [
+                    children: [
                       // Tab 1 Content
                       ServicePlanCard(
-                        name: 'Basic',
-                        price: '1000',
-                        textOne: "Access to the app with",
-                        textTwo:
-                            "Personalized health plans, Monthly\nhealth reminders and tips",
-                        textThree: "Basic appointment scheduling\nfeatures",
-                      ),
+                          name: widget.model.packages![0].name!,
+                          price: widget.model.packages![0].amount!,
+                          features: featuresOne),
 
                       // Tab 2 Content
                       ServicePlanCard(
-                        name: 'Standard',
-                        price: '3000',
-                        textOne: "All Basic Plan benefits",
-                        textTwo:
-                            "Bi-weekly remote consultations with\nhealthcare professionals",
-                        textThree:
-                            "Bi-weekly remote consultations with\nhealthcare professionals",
-                      ),
+                          name: widget.model.packages![1].name!,
+                          price: widget.model.packages![1].amount!,
+                          features: featuresTwo),
 
                       // Tab 3 Content
                       ServicePlanCard(
-                        name: 'Premium',
-                        price: '5000',
-                        textOne: "All Standard Plan benefits",
-                        textTwo: "Weekly remote consultations",
-                        textThree: "Weekly remote consultations",
-                      ),
+                          name: widget.model.packages![2].name!,
+                          price: widget.model.packages![2].amount!,
+                          features: featuresThree),
                     ],
                   ),
                 ),
-                //
               ],
             ),
             Positioned(
@@ -251,12 +229,12 @@ class _PersonalizedHomeCareServiceState
                     final paymentVM = context.read<PaymentProvider>();
 
                     final selectedService = PaymentModel(
-                      title: "Personal Healthcare Management",
+                      title: widget.model.name!,
                       desc:
                           'Empowers users to take control of their health with personalized plans',
                       price: selectedPrice,
                       serviceType: selectedPlan,
-                      createdAt: DateTime.now() ,
+                      createdAt: DateTime.now(),
                     );
 
                     await paymentVM.addSelectedService(selectedService);

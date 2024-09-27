@@ -10,8 +10,6 @@ import '../../../main.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/common_base.dart';
 import '../../../utils/empty_error_state_widget.dart';
-import '../../booking/appointment_detail_screen.dart';
-import '../../booking/model/appointments_res_model.dart';
 import '../model/notification_model.dart';
 import 'notification_screen_controller.dart';
 

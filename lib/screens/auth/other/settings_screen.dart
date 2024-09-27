@@ -8,7 +8,6 @@ import '../../../components/app_scaffold.dart';
 import '../../../components/cached_image_widget.dart';
 import '../../../generated/assets.dart';
 import '../../../utils/app_common.dart';
-import '../model/theme_mode_data_model.dart';
 import 'settings_controller.dart';
 import '../../../locale/app_localizations.dart';
 import '../../../locale/languages.dart';

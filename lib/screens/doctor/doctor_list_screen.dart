@@ -9,7 +9,6 @@ import '../../components/loader_widget.dart';
 import '../../main.dart';
 import '../../utils/colors.dart';
 import '../../utils/empty_error_state_widget.dart';
-import '../slots/booking_form_screen.dart';
 import 'doctor_list_controller.dart';
 import 'model/doctor_list_res.dart';
 
@@ -102,7 +101,7 @@ class DoctorsListScreen extends StatelessWidget {
           backgroundColor: appColorSecondary,
           onPressed: () {
             if (!doctorsListCont.selectedDoctor.value.doctorId.isNegative) {
-              Get.to(() => BookingFormScreen());
+              // Get.to(() => BookingFormScreen());
             }
           },
           child: const Icon(Icons.arrow_forward_ios, color: Colors.white),

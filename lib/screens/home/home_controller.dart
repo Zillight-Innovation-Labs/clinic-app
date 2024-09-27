@@ -33,7 +33,7 @@ class HomeController extends GetxController {
     if (!isFromSwipeRefresh) {
       isLoading(true);
     }
-    getAppConfigurations(); //TODO manage 1 call per 1 min
+    getAppConfigurations(); 
     await getDashboardDetailFuture(
       HomeServiceApis.getDashboard(),
     ).then((value) {
@@ -42,10 +42,10 @@ class HomeController extends GetxController {
   }
 
   void handleDashboardRes(DashboardRes value) {
-    debugPrint('NEARBYCLINIC.LENGTH: ${dashboardData.value.nearByClinic.length}');
-    debugPrint('VALUE.DATA: ${value.data.nearByClinic.length}');
+    // debugPrint('NEARBYCLINIC.LENGTH: ${dashboardData.value.nearByClinic.length}');
+    // debugPrint('VALUE.DATA: ${value.data.nearByClinic.length}');
     dashboardData(value.data);
-    debugPrint('After NEARBYCLINIC.LENGTH: ${dashboardData.value.nearByClinic.length}');
+    // debugPrint('After NEARBYCLINIC.LENGTH: ${dashboardData.value.nearByClinic.length}');
     //More Logic....
   }
 }

@@ -6,7 +6,6 @@ import 'package:country_picker/country_picker.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:html/parser.dart';
@@ -1191,7 +1190,7 @@ String currency(context) {
   return format.currencySymbol;
 }
 
-tileText({String text = ""}) {
+tileText({String text = "", required size}) {
   if (text != "") {
     return Padding(
       padding: const EdgeInsets.only(bottom: 20),
@@ -1203,10 +1202,15 @@ tileText({String text = ""}) {
             size: 16,
           ),
           const SizedBox(width: 20),
-          Text(
-            text,
-            style: secondaryTextStyle(
-              weight: FontWeight.w300,
+          SizedBox(
+            width: size.width * 0.6,
+            child: Text(
+              text,
+              overflow: TextOverflow.clip,
+              maxLines: 4,
+              style: secondaryTextStyle(
+                weight: FontWeight.w300,
+              ),
             ),
           ),
         ],
@@ -1247,4 +1251,14 @@ String formatSlectedTime(String inputTime) {
   } catch (e) {
     return '';
   }
+}
+
+List<String> convertStringToList(String inputString) {
+  // Split the string using the comma as a delimiter
+  List<String> splitList = inputString.split(',');
+
+  // Remove any leading or trailing whitespace from each list item
+  List<String> trimmedList = splitList.map((item) => item.trim()).toList();
+
+  return trimmedList;
 }

@@ -32,17 +32,7 @@ class WalkthroughScreen extends StatelessWidget {
             },
           ),
 
-          /* Container(
-            decoration: const BoxDecoration(
-              gradient: LinearGradient(
-                colors: [Colors.transparent, Colors.transparent, Colors.black87],
-                stops: [0.0, 0.4, 1.0],
-                begin: Alignment.topCenter,
-                end: Alignment.bottomCenter,
-                tileMode: TileMode.mirror,
-              ),
-            ),
-          ) */ //TODO Keep this code
+      
           Positioned(
             bottom: 0,
             width: Get.width,

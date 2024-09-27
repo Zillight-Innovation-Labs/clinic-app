@@ -3,12 +3,10 @@ import 'package:get/get.dart';
 import 'package:kivicare_patient/screens/service/components/service_card.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:kivicare_patient/utils/colors.dart';
-
-import '../../../components/cached_image_widget.dart';
 import '../home_controller.dart';
 
 class SliderComponent extends StatefulWidget {
-  SliderComponent({super.key});
+  const SliderComponent({super.key});
 
   @override
   State<SliderComponent> createState() => _SliderComponentState();

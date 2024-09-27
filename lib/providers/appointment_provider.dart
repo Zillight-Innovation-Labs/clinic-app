@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:kivicare_patient/api/appointment_apis.dart';
 import 'package:kivicare_patient/models/appointment_model.dart';
 import 'package:kivicare_patient/utils/app_common.dart';
-import 'package:nb_utils/nb_utils.dart';
 
-import 'dart:developer' as dev;
 
 enum AppointmentState { loading, initial, error, success }
 
 class AppointmentProvider extends ChangeNotifier {
+    final AppointmentServiceApis _appointmentServiceApis =
+      AppointmentServiceApis();
   final List<AppointModel> _selectedUserAppointments = [];
   List<AppointModel> get selectedUserAppointments => _selectedUserAppointments;
 
@@ -18,8 +18,7 @@ class AppointmentProvider extends ChangeNotifier {
   AppointmentState _state = AppointmentState.initial;
   AppointmentState get state => _state;
 
-  final AppointmentServiceApis _appointmentServiceApis =
-      AppointmentServiceApis();
+
 
   void setState(AppointmentState state) {
     _state = state;

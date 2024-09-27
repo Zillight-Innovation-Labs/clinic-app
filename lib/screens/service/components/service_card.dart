@@ -28,7 +28,8 @@ class ServiceCard extends StatelessWidget {
       height: size.height * 0.22,
       width: size.width,
       decoration: BoxDecoration(
-        image: const DecorationImage(image: AssetImage("assets/images/polygon.png")),
+        image: const DecorationImage(
+            image: AssetImage("assets/images/polygon.png")),
         color: color,
         borderRadius: BorderRadius.circular(18),
       ),
@@ -42,11 +43,14 @@ class ServiceCard extends StatelessWidget {
                 style: primaryTextStyle(color: Colors.white),
               ),
               const SizedBox(height: 7),
-              Text(
-                desc,
-                style: secondaryTextStyle(
-                  size: 12,
-                  color: Colors.white,
+              SizedBox(
+                width: size.width * 0.65,
+                child: Text(
+                  desc,
+                  style: secondaryTextStyle(
+                    size: 12,
+                    color: Colors.white,
+                  ),
                 ),
               ),
               const SizedBox(height: 12),

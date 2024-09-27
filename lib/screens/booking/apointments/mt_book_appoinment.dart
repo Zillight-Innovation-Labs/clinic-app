@@ -1,12 +1,6 @@
-import 'dart:ui';
-
 import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_spinkit/flutter_spinkit.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:kivicare_patient/api/const/const.dart';
 import 'package:kivicare_patient/components/date_time_appoint_card.dart';
 import 'package:kivicare_patient/components/loader.dart';
@@ -14,10 +8,8 @@ import 'package:kivicare_patient/models/appointment_model.dart';
 import 'package:kivicare_patient/providers/appointment_provider.dart';
 import 'package:kivicare_patient/utils/colors.dart';
 import 'package:kivicare_patient/utils/common_base.dart';
-
 import 'package:nb_utils/nb_utils.dart';
 import 'dart:developer' as dev;
-
 import 'package:provider/provider.dart';
 
 class BookAppoinment extends StatefulWidget {

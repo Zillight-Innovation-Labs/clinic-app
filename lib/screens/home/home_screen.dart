@@ -62,7 +62,7 @@ class HomeScreen extends StatelessWidget {
                     SliderComponent(),
                     const HomeBanner(),
                     UpcomingAppointmentComponents(),
-                    HomeServiceSlider()
+                    const HomeServiceSlider()
                   ],
                 ),
               );

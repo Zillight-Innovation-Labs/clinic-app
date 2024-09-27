@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:kivicare_patient/providers/test_provider.dart';
 import 'package:kivicare_patient/utils/colors.dart';
 import 'package:kivicare_patient/utils/common_base.dart';
 import 'package:kivicare_patient/utils/progress_indicator_widget.dart';
 import 'package:nb_utils/nb_utils.dart';
-
 import 'package:provider/provider.dart';
 
 List<String> testQuestion = [

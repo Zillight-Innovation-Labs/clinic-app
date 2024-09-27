@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
+import 'package:kivicare_patient/models/get_services_model.dart';
+import 'package:kivicare_patient/providers/services_provider.dart';
 import 'package:kivicare_patient/screens/service/components/service_card.dart';
 import 'package:kivicare_patient/screens/service/event_outreach_service.dart';
 import 'package:kivicare_patient/screens/service/personalized_self_service.dart';
@@ -9,11 +10,12 @@ import 'package:kivicare_patient/screens/service/service_screen.dart';
 import 'package:kivicare_patient/utils/view_all_label_component.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:kivicare_patient/utils/colors.dart';
+import 'package:provider/provider.dart';
 
 import '../home_controller.dart';
 
 class HomeServiceSlider extends StatefulWidget {
-  HomeServiceSlider({super.key});
+  const HomeServiceSlider({super.key});
 
   @override
   State<HomeServiceSlider> createState() => _HomeServiceSliderState();
@@ -34,6 +36,7 @@ class _HomeServiceSliderState extends State<HomeServiceSlider> {
 
   @override
   Widget build(BuildContext context) {
+    final servicesVM = context.watch<ServicesProvider>();
     return Padding(
       padding: const EdgeInsets.only(top: 30),
       child: Column(
@@ -59,14 +62,33 @@ class _HomeServiceSliderState extends State<HomeServiceSlider> {
                         sliderCurrentPage = page;
                       });
                     },
-                    itemCount: servicePages.length,
+                    itemCount: servicesVM.getServicesModel?.length,
                     itemBuilder: (context, index) {
+                      final Service model = servicesVM.getServicesModel![index];
+
                       return ServiceCard(
-                        title: servicePages[index]['title'],
-                        desc: servicePages[index]['desc'],
+                        title: model.name!,
+                        desc: model.description!,
                         img: servicePages[index]['image'],
                         onTap: () {
-                          Get.to(servicePages[index]['page']);
+                          if (index == 0) {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) =>
+                                    PersonalizedHomeCareService(model: model),
+                              ),
+                            );
+                          } else if (index == 1) {
+                            Get.to(
+                              () => PersonalizedHomeCareForSeniorService(
+                                  model: model),
+                            );
+                          } else {
+                            Get.to(
+                              () => EventOutreachService(model: model),
+                            );
+                          }
                         },
                         color: servicePages[index]['color'],
                       );
@@ -124,7 +146,6 @@ final List<Map<String, dynamic>> servicePages = [
         "Get a comprehensive health plan for\nyourself and your family. Your health,\nyour future, secured.",
     'image': "assets/images/personalizeImg.png",
     "color": serviceCardOne,
-    "page": const PersonalizedHomeCareService()
   },
   {
     "title": "Personalized Home Care for Seniors",
@@ -132,7 +153,6 @@ final List<Map<String, dynamic>> servicePages = [
         "Your parents cared for you, now it's\ntime to return the favor. Secure\ntheir health with the best coverage.",
     'image': "assets/images/seniorImg.png",
     "color": serviceCardTwo,
-    "page": const PersonalizedHomeCareForSeniorService()
   },
   {
     "title": "Event and Outreach Health Services",
@@ -140,6 +160,6 @@ final List<Map<String, dynamic>> servicePages = [
         "Check your health condition regularly\nto minimize the incidence of disease\nin the future.",
     'image': "assets/images/eventImg.png",
     "color": serviceCardThree,
-    "page": const EventOutreachService()
   },
 ];
+

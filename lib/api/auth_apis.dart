@@ -1,5 +1,4 @@
 import 'dart:io';
-
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:http/http.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -166,13 +165,16 @@ class AuthServiceApis {
     if (isLoggedIn.value) {
       MultipartRequest multiPartRequest =
           await getMultiPartRequest(APIEndPoints.updateProfile);
-      if (firstName.isNotEmpty)
+      if (firstName.isNotEmpty) {
         multiPartRequest.fields[UserKeys.firstName] = firstName;
-      if (lastName.isNotEmpty)
+      }
+      if (lastName.isNotEmpty) {
         multiPartRequest.fields[UserKeys.lastName] = lastName;
+      }
       if (mobile.isNotEmpty) multiPartRequest.fields[UserKeys.mobile] = mobile;
-      if (address.isNotEmpty)
+      if (address.isNotEmpty) {
         multiPartRequest.fields[UserKeys.address] = address;
+      }
       if (gender.isNotEmpty) multiPartRequest.fields[UserKeys.gender] = gender;
 
       if (imageFile != null) {

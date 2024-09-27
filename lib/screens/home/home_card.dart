@@ -27,10 +27,7 @@ class HomeCard extends StatelessWidget {
           height: size.height * 0.155,
           decoration: BoxDecoration(
             color: color,
-            // image: DecorationImage(
-            //   image: AssetImage(imagePath),
-            //   fit: BoxFit.fill,
-            // ),
+        
             borderRadius: BorderRadius.circular(10),
           ),
           child: Padding(

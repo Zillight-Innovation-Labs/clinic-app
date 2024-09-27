@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kivicare_patient/components/app_scaffold.dart';
+import 'package:kivicare_patient/models/get_services_model.dart';
 import 'package:kivicare_patient/models/payment_model.dart';
 import 'package:kivicare_patient/providers/bottom_nav_provider.dart';
 import 'package:kivicare_patient/providers/payment_provider.dart';
@@ -8,11 +9,13 @@ import 'package:kivicare_patient/screens/auth/profile/profile_controller.dart';
 import 'package:kivicare_patient/screens/home/home_bottom_tabs.dart';
 import 'package:kivicare_patient/screens/service/service_plan_card.dart';
 import 'package:kivicare_patient/utils/colors.dart';
+import 'package:kivicare_patient/utils/common_base.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 
 class PersonalizedHomeCareForSeniorService extends StatefulWidget {
-  const PersonalizedHomeCareForSeniorService({super.key});
+    final Service model;
+  const PersonalizedHomeCareForSeniorService({super.key, required this.model});
 
   @override
   State<PersonalizedHomeCareForSeniorService> createState() =>
@@ -27,10 +30,16 @@ class _PersonalizedHomeCareForSeniorServiceState
   String selectedPlan = 'Basic';
   String selectedPrice = '1000';
   late TabController _tabController;
-
+  late List<String> featuresOne;
+  late List<String> featuresTwo;
+  late List<String> featuresThree;
   @override
   void initState() {
     super.initState();
+        featuresOne = convertStringToList(widget.model.packages![0].features!);
+    featuresTwo = convertStringToList(widget.model.packages![1].features!);
+    featuresThree = convertStringToList(widget.model.packages![2].features!);
+
     _tabController = TabController(length: 3, vsync: this);
 
     // Add listener to handle tab changes
@@ -72,7 +81,7 @@ class _PersonalizedHomeCareForSeniorServiceState
     final Size size = MediaQuery.of(context).size;
 
     return AppScaffoldNew(
-      appBartitleText: "Personalized Home Care for Seniors ",
+      appBartitleText: widget.model.name!,
       appBarVerticalSize: size.height * 0.12,
       body: DefaultTabController(
         length: 3,
@@ -90,7 +99,7 @@ class _PersonalizedHomeCareForSeniorServiceState
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Personalized Home Care for Seniors",
+                         widget.model.name!,
                         style: primaryTextStyle(),
                       ),
                       const SizedBox(height: 10),
@@ -184,33 +193,26 @@ class _PersonalizedHomeCareForSeniorServiceState
                 Expanded(
                   child: TabBarView(
                     controller: _tabController,
-                    children: const [
+                    children:  [
                       // Tab 1 Content
                       ServicePlanCard(
-                        name: 'Basic',
-                        price: '1000',
-                        textOne: "Initial home care assessment",
-                        textTwo: "Access to caregiver profiles",
-                        textThree: "Weekly check-in calls from\ncaregivers",
+                        name: widget.model.packages![0].name!,
+                        price: widget.model.packages![0].amount!,
+                        features:featuresOne
                       ),
 
                       // Tab 2 Content
                       ServicePlanCard(
-                        name: 'Standard',
-                        price: '3000',
-                        textOne: "All Basic Plan benefits",
-                        textTwo: "10 hours of in-home care services\nper month",
-                        textThree: "Access to emergency medical\nsupport",
+                      name: widget.model.packages![1].name!,
+                        price: widget.model.packages![1].amount!,
+                        features:featuresTwo
                       ),
 
                       // Tab 3 Content
                       ServicePlanCard(
-                        name: 'Premium',
-                        price: '5000',
-                        textOne: "All Standard Plan benefits",
-                        textTwo: "20 hours of in-home care services\nper month",
-                        textThree:
-                            "Customized activity plans for\ncompanionship",
+                       name: widget.model.packages![2].name!,
+                        price: widget.model.packages![2].amount!,
+                   features:featuresThree
                       ),
                     ],
                   ),
@@ -228,7 +230,7 @@ class _PersonalizedHomeCareForSeniorServiceState
                     final homeTabVM = context.read<BottomNavProvider>();
                     final paymentVM = context.read<PaymentProvider>();
                     final selectedService = PaymentModel(
-                      title: "Personalized Home Care for Seniors",
+                      title:   widget.model.name!,
                       desc: 'Home care services for the elderly',
                       price: selectedPrice,
                       serviceType: selectedPlan,

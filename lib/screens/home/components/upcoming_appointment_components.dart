@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kivicare_patient/screens/booking/model/appointment_detail_res.dart';
 import 'package:kivicare_patient/screens/booking/model/appointments_res_model.dart';
 import 'package:kivicare_patient/screens/booking/model/employee_review_data.dart';
 import 'package:nb_utils/nb_utils.dart';

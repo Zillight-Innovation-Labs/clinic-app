@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kivicare_patient/components/app_scaffold.dart';
+import 'package:kivicare_patient/models/get_services_model.dart';
 import 'package:kivicare_patient/models/payment_model.dart';
 import 'package:kivicare_patient/providers/bottom_nav_provider.dart';
 import 'package:kivicare_patient/providers/payment_provider.dart';
@@ -8,11 +9,13 @@ import 'package:kivicare_patient/screens/auth/profile/profile_controller.dart';
 import 'package:kivicare_patient/screens/home/home_bottom_tabs.dart';
 import 'package:kivicare_patient/screens/service/service_plan_card.dart';
 import 'package:kivicare_patient/utils/colors.dart';
+import 'package:kivicare_patient/utils/common_base.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 
 class EventOutreachService extends StatefulWidget {
-  const EventOutreachService({super.key});
+    final Service model;
+  const EventOutreachService({super.key, required this.model});
 
   @override
   State<EventOutreachService> createState() => _EventOutreachServiceState();
@@ -25,10 +28,17 @@ class _EventOutreachServiceState extends State<EventOutreachService>
   String selectedPlan = 'Basic';
   String selectedPrice = '1000';
   late TabController _tabController;
+  late List<String> featuresOne;
+  late List<String> featuresTwo;
+  late List<String> featuresThree;
 
   @override
   void initState() {
     super.initState();
+        featuresOne = convertStringToList(widget.model.packages![0].features!);
+    featuresTwo = convertStringToList(widget.model.packages![1].features!);
+    featuresThree = convertStringToList(widget.model.packages![2].features!);
+
     _tabController = TabController(length: 3, vsync: this);
 
     // Add listener to handle tab changes
@@ -70,7 +80,7 @@ class _EventOutreachServiceState extends State<EventOutreachService>
     final Size size = MediaQuery.of(context).size;
 
     return AppScaffoldNew(
-      appBartitleText: "Event and Outreach Health Services ",
+      appBartitleText:   widget.model.name!,
       appBarVerticalSize: size.height * 0.12,
       body: DefaultTabController(
         length: 3,
@@ -88,7 +98,7 @@ class _EventOutreachServiceState extends State<EventOutreachService>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "Event and Outreach Health Services",
+                         widget.model.name!,
                         style: primaryTextStyle(),
                       ),
                       const SizedBox(height: 10),
@@ -182,35 +192,26 @@ class _EventOutreachServiceState extends State<EventOutreachService>
                 Expanded(
                   child: TabBarView(
                     controller: _tabController,
-                    children: const [
+                    children:  [
                       // Tab 1 Content
                       ServicePlanCard(
-                        name: 'Basic',
-                        price: '1000',
-                        textOne: "Access to community health events",
-                        textTwo: "Health education materials",
-                        textThree: "Monthly newsletter with health\ntips",
+                        name: widget.model.packages![0].name!,
+                        price: widget.model.packages![0].amount!,
+                        features:featuresOne
                       ),
 
                       // Tab 2 Content
                       ServicePlanCard(
-                        name: 'Standard',
-                        price: '3000',
-                        textOne: "All Basic Plan benefits",
-                        textTwo:
-                            "Participation in two on-site health\nscreenings per month",
-                        textThree:
-                            "Discounted rates for additional event\nservices",
+                      name: widget.model.packages![1].name!,
+                        price: widget.model.packages![1].amount!,
+                        features:featuresTwo
                       ),
 
                       // Tab 3 Content
                       ServicePlanCard(
-                        name: 'Premium',
-                        price: '5000',
-                        textOne: "All Standard Plan benefits",
-                        textTwo: "Access to exclusive workshops and\nwebinars",
-                        textThree: "Free wellness kits for event participants",
-                        textFour: "Priority scheduling for events",
+                       name: widget.model.packages![2].name!,
+                        price: widget.model.packages![2].amount!,
+                   features:featuresThree
                       ),
                     ],
                   ),
@@ -228,7 +229,7 @@ class _EventOutreachServiceState extends State<EventOutreachService>
                     final homeTabVM = context.read<BottomNavProvider>();
                     final paymentVM = context.read<PaymentProvider>();
                     final selectedService = PaymentModel(
-                      title: "Event and Outreach Health Services",
+                      title:   widget.model.name!,
                       desc:
                           'On-site health services for events and community outreach programs',
                       price: selectedPrice,

@@ -625,7 +625,7 @@ class UserTestProvider extends ChangeNotifier {
     } else {
     
 
-      final testScore = response.data["test"]['data']['result'] ?? 10;
+      // final testScore = response.data["test"]['data']['result'] ?? 10;
       getAllTest();
 
       setState(TestState.success);

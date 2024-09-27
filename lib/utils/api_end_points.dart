@@ -1,4 +1,5 @@
 class APIEndPoints {
+  static const String baseUrl = 'http://pos.zealightlabs.com/api';
   static const String appConfiguration = 'app-configuration';
   static const String aboutPages = 'page-list';
   //Auth & User
@@ -36,6 +37,10 @@ class APIEndPoints {
   static const String updateStatus = 'update-status';
   static const String rescheduleBooking = 'reschedule-booking';
   static const String appointment = 'appointments2';
+
+  //app-services
+    static const String getServices = 'getservices';
+
 
   //booking detail-api
   static const String getAppointmentDetail = 'appointment-detail';

@@ -19,9 +19,7 @@ import '../../utils/empty_error_state_widget.dart';
 import '../../utils/price_widget.dart';
 import '../../utils/view_all_label_component.dart';
 import '../payment/payment_controller.dart';
-import '../payment/payment_screen_del.dart';
 import 'appointment_detail_controller.dart';
-import 'appointments_controller.dart';
 import 'encounter_detail_screen.dart';
 import 'model/appointment_detail_res.dart';
 

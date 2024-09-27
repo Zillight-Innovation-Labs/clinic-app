@@ -2,64 +2,19 @@
 
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
 // import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:http/http.dart' as http;
 import 'package:nb_utils/nb_utils.dart';
-import 'package:kivicare_patient/utils/colors.dart';
 
 import '../network/network_utils.dart';
 import '../utils/app_common.dart';
 import '../../configs.dart';
-import '../utils/constants.dart';
 
 class StripeServices {
   static Future<void> stripePaymentMethod({required num amount, required Function(bool) loaderOnOFF, required Function(Map<String, dynamic>) onComplete}) async {
     loaderOnOFF(true);
     try {
-      // Stripe.publishableKey = appConfigs.value.stripePay.stripePublickey;
-      // Stripe.merchantIdentifier = STRIPE_merchantIdentifier;
-
-      // await Stripe.instance.applySettings().catchError((e) {
-      //   toast(e.toString(), print: true);
-      //   throw e.toString();
-      // });
-      // final paysheetData = await getStripePaymentIntents(amount: amount, loderOnOFF: loaderOnOFF);
-      // String? clientSecret = paysheetData == null ? null : paysheetData["client_secret"];
-      // String? tnxId = paysheetData == null ? null : paysheetData["transaction_id"];
-      // SetupPaymentSheetParameters setupPaymentSheetParameters = SetupPaymentSheetParameters(
-      //   paymentIntentClientSecret: clientSecret,
-      //   style: isDarkMode.value ? ThemeMode.dark : ThemeMode.light,
-      //   appearance: const PaymentSheetAppearance(colors: PaymentSheetAppearanceColors(primary:appColorPrimary)),
-      //   merchantDisplayName: APP_NAME,
-      //   customerId: loginUserData.value.email,
-      //   customerEphemeralKeySecret: isAndroid ? clientSecret : null,
-      //   setupIntentClientSecret: clientSecret,
-      //   billingDetails: BillingDetails(
-      //     name: loginUserData.value.userName,
-      //     email: loginUserData.value.email,
-      //     address: Address(
-      //       city: "",
-      //       country: defaultCountry.countryCode,
-      //       line1: "",
-      //       line2: "",
-      //       postalCode: "",
-      //       state: "",
-      //     ),
-      //   ),
-      // );
-
-      // await Stripe.instance.initPaymentSheet(paymentSheetParameters: setupPaymentSheetParameters).then((value) async {
-      //   await Stripe.instance.presentPaymentSheet().then((val) async {
-      //     onComplete.call({
-      //       'transaction_id': tnxId,
-      //     });
-      //   }).catchError((e) {
-      //     log('Stripe present sheet method: $e');
-      //   });
-      // }).catchError((e) {
-      //   log('Stripe init sheet method: $e');
-      // });
+     
     } catch (e) {
       log('stripePaymentMethod catch: $e');
     }

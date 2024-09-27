@@ -53,7 +53,7 @@ class ServiceSelectionCardWidget extends StatelessWidget {
                             color: context.cardColor,
                           ),
                           6.width,
-                          Text("Video", style: boldTextStyle(size: 12, color: context.cardColor)) //TODO: string
+                          Text("Video", style: boldTextStyle(size: 12, color: context.cardColor)) 
                         ],
                       ),
                     ),
@@ -85,7 +85,7 @@ class ServiceSelectionCardWidget extends StatelessWidget {
                       if (serviceElement.discount)
                         if (serviceElement.discountType == TaxType.PERCENTAGE)
                           Text(
-                            '${serviceElement.discountValue}%  off', //TODO: string
+                            '${serviceElement.discountValue}%  off', 
                             style: boldTextStyle(color: greenColor, size: 14),
                           ).paddingLeft(8)
                         else if (serviceElement.discountType == TaxType.FIXED)
