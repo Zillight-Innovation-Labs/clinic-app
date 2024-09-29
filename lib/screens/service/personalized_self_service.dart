@@ -230,8 +230,7 @@ class _PersonalizedHomeCareServiceState
 
                     final selectedService = PaymentModel(
                       title: widget.model.name!,
-                      desc:
-                          'Empowers users to take control of their health with personalized plans',
+                      desc: '$selectedPlan plan',
                       price: selectedPrice,
                       serviceType: selectedPlan,
                       createdAt: DateTime.now(),

@@ -11,14 +11,26 @@ import '../../auth/other/notification_screen.dart';
 class GreetingsComponent extends StatelessWidget {
   const GreetingsComponent({super.key});
 
+  String getFirstStringBeforeWhitespace(String input) {
+    final firstSpaceIndex = input.indexOf(' ');
+    if (firstSpaceIndex == -1) {
+      // No whitespace found, return the entire string
+      return input;
+    } else {
+      // Extract the substring before the first whitespace
+      return input.substring(0, firstSpaceIndex);
+    }
+  }
+
   @override
-  Widget build(BuildContext context) { 
+  Widget build(BuildContext context) {
     return SizedBox(
       width: Get.width,
       child: Row(
         children: [
           const CachedImageWidget(
-            url: "https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2264922221.jpg",
+            url:
+                "https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2264922221.jpg",
             // url: loginUserData.value.profileImage,
             fit: BoxFit.cover,
             width: 48,
@@ -32,7 +44,7 @@ class GreetingsComponent extends StatelessWidget {
             children: [
               Obx(
                 () => Text(
-                  '👋 Hey, ${isLoggedIn.value ? loginUserData.value.userName.validate() : locale.value.guest.validate()}',
+                  '👋 Hey, ${getFirstStringBeforeWhitespace(isLoggedIn.value ? loginUserData.value.userName.validate() : locale.value.guest.validate())}',
                   style: primaryTextStyle(color: white, size: 20),
                 ),
               ),
@@ -48,7 +60,11 @@ class GreetingsComponent extends StatelessWidget {
                         height: 14,
                       ),
                       8.width,
-                      Text(loginUserData.value.address, maxLines: 1, overflow: TextOverflow.ellipsis, style: secondaryTextStyle(color: white, size: 14)).flexible(),
+                      Text(loginUserData.value.address,
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                              style: secondaryTextStyle(color: white, size: 14))
+                          .flexible(),
                     ],
                   ),
                 ).paddingTop(4).visible(loginUserData.value.address.isNotEmpty),
@@ -64,14 +80,14 @@ class GreetingsComponent extends StatelessWidget {
             },
             behavior: HitTestBehavior.translucent,
             child: Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(border: Border.all(color: Colors.white), shape: BoxShape.circle),
-              child: const CachedImageWidget(
-                url: Assets.navigationIcNotifyOutlined,
-                color: Colors.white,
-                height: 14,
-              ),
-            ),
+                padding: const EdgeInsets.all(11),
+                decoration: BoxDecoration(
+                    border: Border.all(color: Colors.white),
+                    shape: BoxShape.circle),
+                child: const Icon(
+                  Icons.notifications,
+                  color: white,
+                )),
           ),
         ],
       ).paddingSymmetric(horizontal: 24),

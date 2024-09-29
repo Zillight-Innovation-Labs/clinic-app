@@ -23,39 +23,40 @@ class HomeBanner extends StatelessWidget {
           Row(
             children: [
               HomeCard(
-                imagePath:
-                    "assets/icons/bookAppointmentIcon.svg",
+                imagePath: "assets/images/nursing.png",
+                // "assets/icons/bookAppointmentIcon.svg",
                 title: "Book an\nAppointment",
-                color: bookAppointCard,
                 onTap: () {
                   context.read<BottomNavProvider>().setNavbarIndex(1);
                 },
               ),
               const SizedBox(width: 12),
               HomeCard(
-                  imagePath: "assets/icons/talkToDocIcon.svg",
-                  title: "Talk to a Doctor",
-                  color: talkToDocCard,
-                  onTap: () {Get.to(()=> const TalkToDoctor());}),
+                  imagePath: "assets/images/eventService.png",
+                  // imagePath: "assets/icons/talkToDocIcon.svg",
+                  title: "Talk to a\nDoctor",
+                  onTap: () {
+                    Get.to(() => const TalkToDoctor());
+                  }),
             ],
           ),
           const SizedBox(height: 12),
           Row(
             children: [
               HomeCard(
-                  imagePath: "assets/icons/medicIcon.svg",
+                  // imagePath: "assets/icons/medicIcon.svg",
+                  imagePath: "assets/images/pharmacyImage.png",
                   title: "Medication",
-                  color: medicationCard,
                   onTap: () {
-                    Get.to(()=> const MedicineRemindersScreen());
+                    Get.to(() => const MedicineRemindersScreen());
                   }),
               const SizedBox(width: 12),
               HomeCard(
-                  imagePath: "assets/icons/testCardIcon.svg",
+                  // imagePath: "assets/icons/testCardIcon.svg",
+                  imagePath: "assets/images/diagnostics.png",
                   title: "Tests/ Diagnosis",
-                  color: testCard,
                   onTap: () {
-                    Get.to(()=> const TakeTestPage());
+                    Get.to(() => const TakeTestPage());
                   }),
             ],
           ),
@@ -67,3 +68,57 @@ class HomeBanner extends StatelessWidget {
     );
   }
 }
+
+
+/*
+ Column(
+                    children: [
+                      Row(
+                        children: [
+                          HomeCard(
+                            imagePath: "assets/images/diagnostics.png",
+                            title: "Tests",
+                            onTap: () => flushBar(
+                              context,
+                              message: "UI design-screen needed ",
+                            ),
+                          ),
+                          const SizedBox(width: 12),
+                          HomeCard(
+                            imagePath: "assets/images/nursing.png",
+                            title: "Talk to\nDoctor",
+                            onTap: () => flushBar(
+                              context,
+                              message: "UI design-screen needed ",
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 12),
+                      Row(
+                        children: [
+                          HomeCard(
+                            imagePath: "assets/images/ambulance.png",
+                            title: "Appointment",
+                            onTap: () {
+                              flushBar(context,
+                                  message: "appointment avatar needed ");
+                              Future.delayed(const Duration(seconds: 3), () {
+                                const BookAppoinment().launch(context);
+                              });
+                            },
+                          ),
+                          const SizedBox(width: 12),
+                          HomeCard(
+                            imagePath: "assets/images/pharmacy.png",
+                            title: "Medication",
+                            onTap: () => flushBar(
+                              context,
+                              message: "UI design-screen needed ",
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+*/

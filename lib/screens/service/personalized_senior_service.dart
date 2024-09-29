@@ -231,7 +231,7 @@ class _PersonalizedHomeCareForSeniorServiceState
                     final paymentVM = context.read<PaymentProvider>();
                     final selectedService = PaymentModel(
                       title:   widget.model.name!,
-                      desc: 'Home care services for the elderly',
+                      desc: '$selectedPlan plan',
                       price: selectedPrice,
                       serviceType: selectedPlan,
                       createdAt: DateTime.now(),

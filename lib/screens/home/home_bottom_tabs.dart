@@ -15,6 +15,7 @@ import 'package:kivicare_patient/screens/home/home_screen.dart';
 import 'package:kivicare_patient/screens/payment/payment_screen.dart';
 import 'package:kivicare_patient/screens/service/service_screen.dart';
 import 'package:kivicare_patient/screens/tests/take_test_page.dart';
+import 'package:kivicare_patient/utils/colors.dart';
 import 'package:provider/provider.dart';
 
 class HomeBottomNavBarScreen extends StatefulWidget {
@@ -43,7 +44,7 @@ class _HomeBottomNavBarScreenState extends State<HomeBottomNavBarScreen> {
 
   @override
   void initState() {
-   context.read<ServicesProvider>().getServices() ;
+    context.read<ServicesProvider>().getServices();
     super.initState();
   }
 
@@ -162,17 +163,17 @@ class _HomeBottomNavBarScreenState extends State<HomeBottomNavBarScreen> {
             style: TabStyle.fixedCircle,
             color: kSubTitleColor,
             backgroundColor: kLikeWhiteColor,
-            activeColor: kMainColor,
+            activeColor: appColorPrimary,
             onTap: (value) {
               homeTabVM.setNavbarIndex(value);
             },
             items: [
               TabItem(
                 icon: homeTabVM.currentIndex == 0
-                    ? Icon(
+                    ? const Icon(
                         //active
                         IconlyBold.home,
-                        color: kMainColor,
+                        color: appColorPrimary,
                       )
                     : Icon(
                         IconlyBold.home,
@@ -181,11 +182,11 @@ class _HomeBottomNavBarScreenState extends State<HomeBottomNavBarScreen> {
                 title: "Home",
               ),
               TabItem(
-                //  color: kMainColor,
+                //  color: appColorPrimary,
                 icon: homeTabVM.currentIndex == 1
                     ? SvgPicture.asset(
                         "assets/icons/appointIcon.svg",
-                        color: kMainColor,
+                        color: appColorPrimary,
                       )
                     : SvgPicture.asset(
                         "assets/icons/appointIcon.svg",
@@ -203,9 +204,9 @@ class _HomeBottomNavBarScreenState extends State<HomeBottomNavBarScreen> {
               ),
               TabItem(
                 icon: homeTabVM.currentIndex == 3
-                    ? Icon(
+                    ? const Icon(
                         IconlyBold.document,
-                        color: kMainColor,
+                        color: appColorPrimary,
                       )
                     : Icon(
                         IconlyBold.document,
@@ -214,14 +215,14 @@ class _HomeBottomNavBarScreenState extends State<HomeBottomNavBarScreen> {
                 title: "Payment",
                 // activeIcon: Icon(
                 //   IconlyBold.document,
-                //   color: kMainColor,
+                //   color: appColorPrimary,
                 // ),
               ),
               TabItem(
                 icon: homeTabVM.currentIndex == 4
-                    ? Icon(
+                    ? const Icon(
                         IconlyBold.profile,
-                        color: kMainColor,
+                        color: appColorPrimary,
                       )
                     : Icon(
                         IconlyBold.profile,
@@ -230,7 +231,7 @@ class _HomeBottomNavBarScreenState extends State<HomeBottomNavBarScreen> {
                 title: "Profile",
                 // activeIcon: Icon(
                 //   IconlyBold.profile,
-                //   color: kMainColor,
+                //   color: appColorPrimary,
                 // ),
               ),
             ],

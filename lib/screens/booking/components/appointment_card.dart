@@ -55,19 +55,19 @@ class AppointmentCard extends StatelessWidget {
                       Text(
                         appointment.appointmentDate.dateInDMMMMyyyyFormat,
                         style:
-                            boldTextStyle(size: 12, color: appColorSecondary),
+                            boldTextStyle(size: 15, color: appColorSecondary),
                       ),
                       6.width,
                       Text(
                         "|",
                         style:
-                            boldTextStyle(size: 12, color: appColorSecondary),
+                            boldTextStyle(size: 13, color: appColorSecondary),
                       ),
                       6.width,
                       Text(
                         '3:30 PM - 4:00 PM',
                         style:
-                            boldTextStyle(size: 12, color: appColorSecondary),
+                            boldTextStyle(size: 15, color: appColorSecondary),
                       ),
                     ],
                   ),

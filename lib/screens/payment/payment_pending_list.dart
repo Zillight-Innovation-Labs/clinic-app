@@ -37,62 +37,68 @@ class PaymentPending extends StatelessWidget {
                   children: List.generate(
                       paymentVM.services.length + 1,
                       (index) => Card(
-                            child: Builder(builder: (context) {
-                              if (index == paymentVM.services.length) {
-                                return const SizedBox(
-                                  height: 30,
-                                );
-                              }
-                              paymentVM.services.sort((a, b) {
-                                DateTime dateA = a.createdAt;
-                                DateTime dateB = b.createdAt;
-                                return dateB.compareTo(dateA);
-                              });
-                              final PaymentModel model =
-                                  paymentVM.services[index];
-                              return Stack(
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.only(top: 3),
-                                    child: ListTile(
-                                      title: Text(
-                                        model.title,
-                                        style: primaryTextStyle(size: 18),
-                                      ),
-                                      subtitle: Text(
-                                        model.desc,
-                                        style: secondaryTextStyle(size: 10),
-                                      ),
-                                      trailing: GestureDetector(
-                                        onTap: () {},
-                                        child: Container(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10, vertical: 5),
-                                          decoration: BoxDecoration(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                              color: appColorPrimary),
-                                          child: Text(
-                                            "Pay now",
-                                            style: secondaryTextStyle(
-                                                color: white),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 5)
+                                  .copyWith(top: 8),
+                              child: Builder(builder: (context) {
+                                if (index == paymentVM.services.length) {
+                                  return const SizedBox(
+                                    height: 30,
+                                  );
+                                }
+                                paymentVM.services.sort((a, b) {
+                                  DateTime dateA = a.createdAt;
+                                  DateTime dateB = b.createdAt;
+                                  return dateB.compareTo(dateA);
+                                });
+                                final PaymentModel model =
+                                    paymentVM.services[index];
+                                return Stack(
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.only(top: 3),
+                                      child: ListTile(
+                                        title: Text(
+                                          model.title,
+                                          style: primaryTextStyle(size: 16),
+                                        ),
+                                        subtitle: Text(
+                                          model.desc,
+                                          style: secondaryTextStyle(
+                                              size: 12,
+                                              weight: FontWeight.w500),
+                                        ),
+                                        trailing: GestureDetector(
+                                          onTap: () {},
+                                          child: Container(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 10, vertical: 5),
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                                color: appColorPrimary),
+                                            child: Text(
+                                              "Pay now",
+                                              style: secondaryTextStyle(
+                                                  color: white),
+                                            ),
                                           ),
                                         ),
                                       ),
                                     ),
-                                  ),
-                                  Positioned(
-                                    left: 15,
-                                    top: -2,
-                                    child: Text(
-                                      "${getCurrency()} ${model.price}",
-                                      style: secondaryTextStyle(
-                                          color: appColorPrimary, size: 10),
+                                    Positioned(
+                                      left: 15,
+                                      top: -2,
+                                      child: Text(
+                                        "${getCurrency()} ${model.price}",
+                                        style: secondaryTextStyle(
+                                            color: appColorPrimary, size: 10),
+                                      ),
                                     ),
-                                  ),
-                                ],
-                              );
-                            }),
+                                  ],
+                                );
+                              }),
+                            ),
                           )));
             }),
           ],

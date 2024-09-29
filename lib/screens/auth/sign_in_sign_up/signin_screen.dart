@@ -14,7 +14,7 @@ import '../../../utils/common_base.dart';
 import '../password/forget_password_screen.dart';
 import 'signup_screen.dart';
 
-class SignInScreen extends StatelessWidget {
+class SignInScreen extends StatelessWidget { 
   SignInScreen({Key? key}) : super(key: key);
   final SignInController signInController = Get.put(SignInController());
 
@@ -37,7 +37,7 @@ class SignInScreen extends StatelessWidget {
               ),
               8.height,
               Text(
-                '${locale.value.welcomeBackToThe}  $APP_NAME',
+                '${locale.value.welcomeBackToThe}  "Healthcelerate',
                 style: secondaryTextStyle(size: 14),
               ),
               SizedBox(height: Get.height * 0.05),

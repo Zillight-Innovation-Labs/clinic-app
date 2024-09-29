@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kivicare_patient/providers/bottom_nav_provider.dart';
 import 'package:kivicare_patient/screens/auth/profile/history/mt_history.dart';
 import 'package:kivicare_patient/screens/auth/profile/mt_excersize_reminder.dart';
 import 'package:kivicare_patient/screens/auth/profile/mt_medicine_reminders.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:provider/provider.dart';
 import '../../../components/app_scaffold.dart';
 import '../../../generated/assets.dart';
 import '../../../main.dart';
@@ -185,6 +187,9 @@ class ProfileScreen extends StatelessWidget {
                       positiveText: locale.value.logout,
                       onAccept: (_) {
                         profileController.handleLogout();
+                        Future.delayed(const Duration(seconds: 2),(){
+                          context.read<BottomNavProvider>().setNavbarIndex(0);
+                        });
                       },
                       dialogType: DialogType.CONFIRMATION,
                       subTitle: locale.value.doYouWantToLogout,

@@ -59,7 +59,7 @@ class HomeScreen extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    SliderComponent(),
+                    const SliderComponent(),
                     const HomeBanner(),
                     UpcomingAppointmentComponents(),
                     const HomeServiceSlider()

@@ -230,8 +230,7 @@ class _EventOutreachServiceState extends State<EventOutreachService>
                     final paymentVM = context.read<PaymentProvider>();
                     final selectedService = PaymentModel(
                       title:   widget.model.name!,
-                      desc:
-                          'On-site health services for events and community outreach programs',
+                      desc: '$selectedPlan plan',
                       price: selectedPrice,
                       serviceType: selectedPlan,
                       createdAt: DateTime.now(),
