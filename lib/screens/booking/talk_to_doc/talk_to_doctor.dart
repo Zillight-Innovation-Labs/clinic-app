@@ -3,7 +3,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:kivicare_patient/api/const/const.dart';
 import 'package:kivicare_patient/components/app_scaffold.dart';
-import 'package:kivicare_patient/components/date_time_appoint_card.dart';
+import 'package:kivicare_patient/components/bottom_selection_widget.dart';
 import 'package:kivicare_patient/components/loader.dart';
 import 'package:kivicare_patient/models/appointment_model.dart';
 import 'package:kivicare_patient/providers/appointment_provider.dart';
@@ -11,6 +11,7 @@ import 'package:kivicare_patient/utils/colors.dart';
 import 'package:kivicare_patient/utils/common_base.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
+import 'package:flutter_svg/svg.dart';
 
 class TalkToDoctor extends StatefulWidget {
   const TalkToDoctor({super.key});
@@ -85,7 +86,7 @@ class _TalkToDoctorState extends State<TalkToDoctor> {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             const Text(
-                              "Available",
+                              "The Doctor is available",
                               style: TextStyle(
                                   fontWeight: FontWeight.w700,
                                   color: Colors.black),
@@ -93,9 +94,32 @@ class _TalkToDoctorState extends State<TalkToDoctor> {
                             ElevatedButton(
                               style: ElevatedButton.styleFrom(
                                   backgroundColor: appColorPrimary),
-                              onPressed: () {},
+                              onPressed: () {
+                                serviceCommonBottomSheet(context,
+                                    child: SizedBox(
+                                      height: size.height * 0.3,
+                                      child: Padding(
+                                        padding: const EdgeInsets.all(20),
+                                        child: Column(
+                                          children: [
+                                            ListTile(
+                                              onTap: () {},
+                                              leading: const Icon(Icons.phone),
+                                              title: const Text("Audio call"),
+                                            ),
+                                            ListTile(
+                                              onTap: () {},
+                                              leading:
+                                                  const Icon(Icons.video_call),
+                                              title: const Text("Video call"),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ));
+                              },
                               child: const Text(
-                                "Call ",
+                                "Call now ",
                                 style: TextStyle(
                                   fontWeight: FontWeight.w700,
                                   color: white,
@@ -105,7 +129,12 @@ class _TalkToDoctorState extends State<TalkToDoctor> {
                           ],
                         ),
                         const SizedBox(
-                          height: 12,
+                          height: 50,
+                        ),
+                        const Text(
+                          "Schedule new call",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w700, color: Colors.black),
                         ),
                         GridView.builder(
                           physics: const NeverScrollableScrollPhysics(),
@@ -154,17 +183,17 @@ class _TalkToDoctorState extends State<TalkToDoctor> {
                             );
                           },
                         ),
-                        const SizedBox(height: 10),
+                        const SizedBox(height: 40),
                         Builder(builder: (context) {
                           final appointmentVM =
                               context.watch<AppointmentProvider>();
                           return Column(
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              if (appointmentVM
-                                  .selectedUserAppointments.isNotEmpty) ...{
+                              if (appointmentVM.selectedCallSchedule !=
+                                  null) ...{
                                 const Text(
-                                  "Booking Time:",
+                                  "Scheduled Time:",
                                   style: TextStyle(
                                     fontWeight: FontWeight.w700,
                                   ),
@@ -173,22 +202,13 @@ class _TalkToDoctorState extends State<TalkToDoctor> {
                               const SizedBox(
                                 height: 10,
                               ),
-                              SingleChildScrollView(
-                                scrollDirection: Axis.horizontal,
-                                child: Row(
-                                  children: [
-                                    ...List.generate(
-                                        appointmentVM.selectedUserBooking
-                                            .length, (index) {
-                                      final AppointModel model = appointmentVM
-                                          .selectedUserBooking[index];
-                                      return DateTimeAppointmentCard(
-                                        selectedDate: model,
-                                      );
-                                    }),
-                                  ],
-                                ),
-                              )
+                              if (appointmentVM.selectedCallSchedule !=
+                                  null) ...[
+                                DateTimeAppointmentCard(
+                                  selectedDate:
+                                      appointmentVM.selectedCallSchedule!,
+                                )
+                              ],
                             ],
                           );
                         }),
@@ -210,32 +230,35 @@ class _TalkToDoctorState extends State<TalkToDoctor> {
               alignment: Alignment.bottomCenter,
               child: Consumer<AppointmentProvider>(
                   builder: (context, viewModel, _) {
-                return AppButton(
-                  text: "Book",
-                  width: size.width * 0.9,
-                  enabled: true,
-                  textColor: kLikeWhiteColor,
-                  enableScaleAnimation: false,
-                  color: selectedTime != ""
-                      ? appColorPrimary
-                      : appColorPrimary.withOpacity(0.5),
-                  onTap: () {
-                    if (selectedTime != "") {
-                      final AppointModel model = AppointModel(
-                        time: formatTime,
-                        formatedTime: formatSlectedTime(selectedTime),
-                        
-                      );
-                      context.read<AppointmentProvider>().addBooking(model);
-                      setState(() {
-                        selectedTime = '';
-                        selectedDate = '';
-                      });
-                    }
-                
-                  },
-                  elevation: 0,
-                );
+                if (selectedTime != '') {
+                  return AppButton(
+                    text: "Proceed",
+                    width: size.width * 0.9,
+                    enabled: true,
+                    textColor: kLikeWhiteColor,
+                    enableScaleAnimation: false,
+                    color: selectedTime != ''
+                        ? appColorPrimary
+                        : appColorPrimary.withOpacity(0.5),
+                    onTap: () {
+                      if (viewModel.selectedCallSchedule == null) {
+                        if (selectedTime != "") {
+                          final AppointModel model = AppointModel(
+                            time: formatTime,
+                            formatedTime: formatSlectedTime(selectedTime),
+                          );
+                          viewModel.addBooking(model);
+                          setState(() {
+                            selectedTime = '';
+                            selectedDate = '';
+                          });
+                        }
+                      }
+                    },
+                    elevation: 0,
+                  );
+                }
+                return const SizedBox.shrink();
               }),
             ),
           ),
@@ -251,3 +274,87 @@ class _TalkToDoctorState extends State<TalkToDoctor> {
     );
   }
 }
+
+class DateTimeAppointmentCard extends StatelessWidget {
+  const DateTimeAppointmentCard({
+    super.key,
+    required this.selectedDate,
+  });
+
+  final AppointModel selectedDate;
+
+  @override
+  Widget build(BuildContext context) {
+    final Size size = MediaQuery.of(context).size;
+    return Stack(
+      children: [
+        Container(
+          margin: const EdgeInsets.only(
+            right: 10,
+          ),
+          padding: const EdgeInsets.symmetric(
+            horizontal: 10,
+            vertical: 6,
+          ).copyWith(right: 20),
+          decoration: BoxDecoration(
+            color: appColorPrimary,
+            borderRadius: BorderRadius.circular(
+              15,
+            ),
+          ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Row(
+                children: [
+                  SvgPicture.asset(
+                    'assets/icons/dateIcon.svg',
+                    height: size.height * 0.02,
+                  ),
+                  const SizedBox(width: 5),
+                  Text(
+                    selectedDate.date,
+                    style: const TextStyle(
+                      color: white,
+                      fontSize: 10,
+                    ),
+                  )
+                ],
+              ),
+              const SizedBox(height: 10),
+              Row(
+                children: [
+                  SvgPicture.asset(
+                    'assets/icons/timeIcon.svg',
+                    height: size.height * 0.02,
+                  ),
+                  const SizedBox(width: 5),
+                  Text(
+                    selectedDate.time,
+                    style: const TextStyle(
+                      color: white,
+                      fontSize: 10,
+                    ),
+                  )
+                ],
+              ),
+            ],
+          ),
+        ),
+        Positioned(
+          right: -8,
+          top: -13,
+          child: IconButton(
+              onPressed: () {
+                context.read<AppointmentProvider>().removeSchedule();
+              },
+              icon: const Icon(
+                Icons.cancel,
+                color: white,
+              )),
+        )
+      ],
+    );
+  }
+}
+//

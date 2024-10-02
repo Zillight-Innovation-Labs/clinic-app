@@ -14,10 +14,8 @@ class GreetingsComponent extends StatelessWidget {
   String getFirstStringBeforeWhitespace(String input) {
     final firstSpaceIndex = input.indexOf(' ');
     if (firstSpaceIndex == -1) {
-      // No whitespace found, return the entire string
       return input;
     } else {
-      // Extract the substring before the first whitespace
       return input.substring(0, firstSpaceIndex);
     }
   }

@@ -3,22 +3,18 @@ import 'package:kivicare_patient/api/appointment_apis.dart';
 import 'package:kivicare_patient/models/appointment_model.dart';
 import 'package:kivicare_patient/utils/app_common.dart';
 
-
 enum AppointmentState { loading, initial, error, success }
 
 class AppointmentProvider extends ChangeNotifier {
-    final AppointmentServiceApis _appointmentServiceApis =
+  final AppointmentServiceApis _appointmentServiceApis =
       AppointmentServiceApis();
   final List<AppointModel> _selectedUserAppointments = [];
   List<AppointModel> get selectedUserAppointments => _selectedUserAppointments;
 
-  final List<AppointModel> _selectedUserBooking = [];
-  List<AppointModel> get selectedUserBooking => _selectedUserBooking;
+  AppointModel? selectedCallSchedule;
 
   AppointmentState _state = AppointmentState.initial;
   AppointmentState get state => _state;
-
-
 
   void setState(AppointmentState state) {
     _state = state;
@@ -31,7 +27,12 @@ class AppointmentProvider extends ChangeNotifier {
   }
 
   Future<void> addBooking(AppointModel book) async {
-    _selectedUserBooking.add(book);
+    selectedCallSchedule = book;
+    notifyListeners();
+  }
+
+  Future<void> removeSchedule() async {
+    selectedCallSchedule = null;
     notifyListeners();
   }
 

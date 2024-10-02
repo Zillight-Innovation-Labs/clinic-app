@@ -6,8 +6,11 @@ import 'package:kivicare_patient/components/date_time_appoint_card.dart';
 import 'package:kivicare_patient/components/loader.dart';
 import 'package:kivicare_patient/models/appointment_model.dart';
 import 'package:kivicare_patient/providers/appointment_provider.dart';
+import 'package:kivicare_patient/screens/booking/components/appointment_card.dart';
+import 'package:kivicare_patient/screens/home/components/upcoming_appointment_components.dart';
 import 'package:kivicare_patient/utils/colors.dart';
 import 'package:kivicare_patient/utils/common_base.dart';
+import 'package:kivicare_patient/utils/view_all_label_component.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'dart:developer' as dev;
 import 'package:provider/provider.dart';
@@ -57,6 +60,7 @@ class _BookAppoinmentState extends State<BookAppoinment> {
     FontAwesomeIcons.cloudSun,
     FontAwesomeIcons.cloudMoon,
   ];
+  bool hasActiveAppointment = true;
 
   @override
   Widget build(BuildContext context) {
@@ -76,159 +80,198 @@ class _BookAppoinmentState extends State<BookAppoinment> {
                 child: Padding(
                   padding: const EdgeInsets.all(15.0),
                   child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            formatDate(DateTime.now(), false),
-                            style: const TextStyle(
-                                fontWeight: FontWeight.w700,
-                                color: Colors.black),
-                          ),
-                          ElevatedButton(
-                            style: ElevatedButton.styleFrom(
-                                backgroundColor:
-                                    selectedTime == "" || selectedDate == ""
-                                        ? appColorPrimary.withOpacity(0.5)
-                                        : appColorPrimary),
-                            onPressed: () {
-                              if (selectedTime != "" && selectedDate != '') {
-                                final AppointModel model = AppointModel(
-                                  time: formatTime,
-                                  date: selectedDate,
-                                  formatedTime: formatSlectedTime(selectedTime),
-                                );
-                                context
-                                    .read<AppointmentProvider>()
-                                    .addSelectedAppointment(model);
-                                setState(() {
-                                  selectedTime = '';
-                                  selectedDate = '';
-                                });
-                              }
-                            },
-                            child: Text(
-                              "Add Date ",
-                              style: TextStyle(
-                                fontWeight: FontWeight.w700,
-                                color: selectedTime == "" || selectedDate == ""
-                                    ? white.withOpacity(0.5)
-                                    : white,
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(
-                        height: 12,
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: DatePicker(
-                          DateTime.now(),
-                          height: 100,
-                          initialSelectedDate: DateTime.now(),
-                          selectionColor: appColorPrimary,
-                          selectedTextColor: Colors.white,
-                          deactivatedColor: greenColor,
-                          onDateChange: (date) {
-                            // New date selected
-                            setState(() {
-                              selectedDate = formatDate(date, true);
-                              // dev.log(":$selectedDate");
-                            });
-                          },
+                      if (hasActiveAppointment) ...[
+                        const SizedBox(height: 20),
+                        const Text(
+                          "Active appointment",
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              color: appColorPrimary,
+                              fontSize: 20),
                         ),
-                      ),
-                      GridView.builder(
-                        physics: const NeverScrollableScrollPhysics(),
-                        shrinkWrap: true,
-                        itemCount: times.length,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisCount: 4,
-                          crossAxisSpacing: 6,
-                          mainAxisSpacing: 5,
-                          childAspectRatio: 2,
+                        const SizedBox(height: 10),
+                        const Text(
+                          "You are currently on the Basic Personal Healtcare Management plan, and your appointment day would be 10:00am, every 15th of the month",
+                          style: TextStyle(fontWeight: FontWeight.w500),
                         ),
-                        itemBuilder: (_, index) {
-                          return GestureDetector(
-                            onTap: () {
-                              setState(() {
-                                formatTime = times[index]['times'];
-                                selectedTime = times[index]['time'];
-                              });
-                              dev.log("formatTime:$formatTime");
-                              dev.log(
-                                  "selectedTime:${formatSlectedTime(selectedTime)}");
-                            },
-                            child: Container(
-                              decoration: BoxDecoration(
-                                border: Border.all(
-                                  color: kSubTitleColor.withOpacity(0.10),
-                                ),
-                                borderRadius: BorderRadius.circular(6.0),
-                                color: formatTime == times[index]['times']
-                                    ? appColorPrimary
-                                    : kLikeWhiteColor,
-                              ),
-                              child: Center(
-                                child: Text(
-                                  times[index]['times'],
-                                  style: TextStyle(
-                                      color: formatTime == times[index]['times']
-                                          ? kLikeWhiteColor
-                                          : kSubTitleColor,
-                                      fontWeight: FontWeight.w600),
-                                ),
-                              ),
-                            ),
-                          );
-                        },
-                      ),
-                      const SizedBox(height: 10),
-                      Builder(builder: (context) {
-                        final appointmentVM =
-                            context.watch<AppointmentProvider>();
-                        return Column(
+                        const SizedBox(height: 10),
+                     
+                        AppointmentCard(appointment: upcomingAppointment.first),
+
+                        //active appointment
+                      ] else ...[
+                        //inactive
+                        const Text(
+                          "You currently don't have an active appointment. Book appointment below",
+                          style: TextStyle(fontWeight: FontWeight.w600),
+                        ),
+                        const SizedBox(height: 10),
+
+                        Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            if (appointmentVM
-                                .selectedUserAppointments.isNotEmpty) ...{
-                              const Text(
-                                "Selected Appointment Date:",
-                                style: TextStyle(
-                                  fontWeight: FontWeight.w700,
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Text(
+                                  formatDate(DateTime.now(), false),
+                                  style: const TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      color: Colors.black),
                                 ),
-                              ),
-                            },
-                            const SizedBox(
-                              height: 10,
+                                ElevatedButton(
+                                  style: ElevatedButton.styleFrom(
+                                      backgroundColor: selectedTime == "" ||
+                                              selectedDate == ""
+                                          ? appColorPrimary.withOpacity(0.5)
+                                          : appColorPrimary),
+                                  onPressed: () {
+                                    if (selectedTime != "" &&
+                                        selectedDate != '') {
+                                      final AppointModel model = AppointModel(
+                                        time: formatTime,
+                                        date: selectedDate,
+                                        formatedTime:
+                                            formatSlectedTime(selectedTime),
+                                      );
+                                      context
+                                          .read<AppointmentProvider>()
+                                          .addSelectedAppointment(model);
+                                      setState(() {
+                                        selectedTime = '';
+                                        selectedDate = '';
+                                      });
+                                    }
+                                  },
+                                  child: Text(
+                                    "Add Date ",
+                                    style: TextStyle(
+                                      fontWeight: FontWeight.w700,
+                                      color: selectedTime == "" ||
+                                              selectedDate == ""
+                                          ? white.withOpacity(0.5)
+                                          : white,
+                                    ),
+                                  ),
+                                ),
+                              ],
                             ),
-                            SingleChildScrollView(
-                              scrollDirection: Axis.horizontal,
-                              child: Row(
-                                children: [
-                                  ...List.generate(
-                                      appointmentVM.selectedUserAppointments
-                                          .length, (index) {
-                                    final AppointModel model = appointmentVM
-                                        .selectedUserAppointments[index];
-                                    return DateTimeAppointmentCard(
-                                      selectedDate: model,
-                                    );
-                                  }),
-                                ],
+                            const SizedBox(
+                              height: 12,
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(8.0),
+                              child: DatePicker(
+                                DateTime.now(),
+                                height: 100,
+                                initialSelectedDate: DateTime.now(),
+                                selectionColor: appColorPrimary,
+                                selectedTextColor: Colors.white,
+                                deactivatedColor: greenColor,
+                                onDateChange: (date) {
+                                  // New date selected
+                                  setState(() {
+                                    selectedDate = formatDate(date, true);
+                                    // dev.log(":$selectedDate");
+                                  });
+                                },
                               ),
-                            )
+                            ),
+                            GridView.builder(
+                              physics: const NeverScrollableScrollPhysics(),
+                              shrinkWrap: true,
+                              itemCount: times.length,
+                              gridDelegate:
+                                  const SliverGridDelegateWithFixedCrossAxisCount(
+                                crossAxisCount: 4,
+                                crossAxisSpacing: 6,
+                                mainAxisSpacing: 5,
+                                childAspectRatio: 2,
+                              ),
+                              itemBuilder: (_, index) {
+                                return GestureDetector(
+                                  onTap: () {
+                                    setState(() {
+                                      formatTime = times[index]['times'];
+                                      selectedTime = times[index]['time'];
+                                    });
+                                    // dev.log("formatTime:$formatTime");
+                                    // dev.log(
+                                    //     "selectedTime:${formatSlectedTime(selectedTime)}");
+                                  },
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      border: Border.all(
+                                        color: kSubTitleColor.withOpacity(0.10),
+                                      ),
+                                      borderRadius: BorderRadius.circular(6.0),
+                                      color: formatTime == times[index]['times']
+                                          ? appColorPrimary
+                                          : kLikeWhiteColor,
+                                    ),
+                                    child: Center(
+                                      child: Text(
+                                        times[index]['times'],
+                                        style: TextStyle(
+                                            color: formatTime ==
+                                                    times[index]['times']
+                                                ? kLikeWhiteColor
+                                                : kSubTitleColor,
+                                            fontWeight: FontWeight.w600),
+                                      ),
+                                    ),
+                                  ),
+                                );
+                              },
+                            ),
+                            const SizedBox(height: 10),
+                            Builder(builder: (context) {
+                              final appointmentVM =
+                                  context.watch<AppointmentProvider>();
+                              return Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  if (appointmentVM
+                                      .selectedUserAppointments.isNotEmpty) ...{
+                                    const Text(
+                                      "Selected Appointment Date:",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  },
+                                  const SizedBox(
+                                    height: 10,
+                                  ),
+                                  SingleChildScrollView(
+                                    scrollDirection: Axis.horizontal,
+                                    child: Row(
+                                      children: [
+                                        ...List.generate(
+                                            appointmentVM
+                                                .selectedUserAppointments
+                                                .length, (index) {
+                                          final AppointModel model =
+                                              appointmentVM
+                                                      .selectedUserAppointments[
+                                                  index];
+                                          return DateTimeAppointmentCard(
+                                            selectedDate: model,
+                                          );
+                                        }),
+                                      ],
+                                    ),
+                                  )
+                                ],
+                              );
+                            }),
+                            SizedBox(
+                              height: size.height * 0.15,
+                            ),
                           ],
-                        );
-                      }),
-                      SizedBox(
-                        height: size.height * 0.15,
-                      ),
+                        ),
+                      ]
                     ],
                   ),
                 ),

@@ -5,7 +5,6 @@ import 'package:kivicare_patient/screens/auth/profile/mt_medicine_reminders.dart
 import 'package:kivicare_patient/screens/booking/talk_to_doc/talk_to_doctor.dart';
 import 'package:kivicare_patient/screens/home/home_card.dart';
 import 'package:kivicare_patient/screens/tests/take_test_page.dart';
-import 'package:kivicare_patient/utils/colors.dart';
 import 'package:provider/provider.dart';
 
 class HomeBanner extends StatelessWidget {
@@ -70,55 +69,3 @@ class HomeBanner extends StatelessWidget {
 }
 
 
-/*
- Column(
-                    children: [
-                      Row(
-                        children: [
-                          HomeCard(
-                            imagePath: "assets/images/diagnostics.png",
-                            title: "Tests",
-                            onTap: () => flushBar(
-                              context,
-                              message: "UI design-screen needed ",
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          HomeCard(
-                            imagePath: "assets/images/nursing.png",
-                            title: "Talk to\nDoctor",
-                            onTap: () => flushBar(
-                              context,
-                              message: "UI design-screen needed ",
-                            ),
-                          ),
-                        ],
-                      ),
-                      const SizedBox(height: 12),
-                      Row(
-                        children: [
-                          HomeCard(
-                            imagePath: "assets/images/ambulance.png",
-                            title: "Appointment",
-                            onTap: () {
-                              flushBar(context,
-                                  message: "appointment avatar needed ");
-                              Future.delayed(const Duration(seconds: 3), () {
-                                const BookAppoinment().launch(context);
-                              });
-                            },
-                          ),
-                          const SizedBox(width: 12),
-                          HomeCard(
-                            imagePath: "assets/images/pharmacy.png",
-                            title: "Medication",
-                            onTap: () => flushBar(
-                              context,
-                              message: "UI design-screen needed ",
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-*/
