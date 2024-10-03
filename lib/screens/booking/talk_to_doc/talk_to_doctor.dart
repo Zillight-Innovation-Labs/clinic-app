@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:kivicare_patient/api/const/const.dart';
 import 'package:kivicare_patient/components/app_scaffold.dart';
 import 'package:kivicare_patient/components/bottom_selection_widget.dart';
@@ -193,7 +194,7 @@ class _TalkToDoctorState extends State<TalkToDoctor> {
                               if (appointmentVM.selectedCallSchedule !=
                                   null) ...{
                                 const Text(
-                                  "Scheduled Time:",
+                                  "Scheduled Call Time:",
                                   style: TextStyle(
                                     fontWeight: FontWeight.w700,
                                   ),
@@ -244,9 +245,10 @@ class _TalkToDoctorState extends State<TalkToDoctor> {
                       if (viewModel.selectedCallSchedule == null) {
                         if (selectedTime != "") {
                           final AppointModel model = AppointModel(
-                            time: formatTime,
-                            formatedTime: formatSlectedTime(selectedTime),
-                          );
+                              time: formatTime,
+                              formatedTime: formatSlectedTime(selectedTime),
+                              date: DateFormat('yyyy-MM-dd')
+                                  .format(DateTime.now()));
                           viewModel.addBooking(model);
                           setState(() {
                             selectedTime = '';
