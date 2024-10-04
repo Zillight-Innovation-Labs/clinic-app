@@ -2,31 +2,29 @@ import 'package:date_picker_timeline/date_picker_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:kivicare_patient/api/const/const.dart';
 import 'package:kivicare_patient/components/app_scaffold.dart';
+import 'package:kivicare_patient/screens/auth/profile/mt_cycling.dart';
+import 'package:kivicare_patient/screens/auth/profile/mt_indoor_runing.dart';
 import 'package:kivicare_patient/screens/auth/profile/mt_outdoor_running.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:get/get.dart';
 
-
 class ExcersizeReminderScreen extends StatefulWidget {
   const ExcersizeReminderScreen({Key? key}) : super(key: key);
 
   @override
-  State<ExcersizeReminderScreen> createState() => _ExcersizeReminderScreenState();
+  State<ExcersizeReminderScreen> createState() =>
+      _ExcersizeReminderScreenState();
 }
 
 class _ExcersizeReminderScreenState extends State<ExcersizeReminderScreen> {
-  List images = [
-    "assets/images/outdoor-run.png",
-    "assets/images/trademil.png",
-    "assets/images/cycle.png",
-    "assets/images/outdoor-run.png",
-  ];
-  List names = [
-    "Outdoor Running",
-    "Indoor Runing",
-    "Cycling",
-    "Outdoor Running",
+  List exerciseType = [
+    {
+      "image": "assets/images/outdoor-run.png",
+      'name': "Outdoor running",
+    },
+    {"image": "assets/images/trademil.png", 'name': "Indoor running"},
+    {"image": "assets/images/cycle.png", 'name': "Cycling "},
   ];
 
   @override
@@ -38,31 +36,17 @@ class _ExcersizeReminderScreenState extends State<ExcersizeReminderScreen> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: Text(
-                "12 July, 2022",
-                style: TextStyle(color: kTitleColor, fontWeight: FontWeight.bold),
-              ),
-            ),
-            const SizedBox(
-              height: 12,
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: DatePicker(
-                DateTime.now(),
-                height: 100,
-                initialSelectedDate: DateTime.now(),
-                selectionColor: kMainColor,
-                selectedTextColor: Colors.white,
-                onDateChange: (date) {
-                  // New date selected
-                  setState(() {
-                  });
-                },
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.all(10.0),
+            //   child: Text(
+            //     "12 July, 2022",
+            //     style:
+            //         TextStyle(color: kTitleColor, fontWeight: FontWeight.bold),
+            //   ),
+            // ),
+            // const SizedBox(
+            //   height: 12,
+            // ),
             const SizedBox(
               height: 20,
             ),
@@ -83,13 +67,16 @@ class _ExcersizeReminderScreenState extends State<ExcersizeReminderScreen> {
                       height: 16,
                     ),
                     Container(
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(10), color: kExcerSizeBannerColor),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: kExcerSizeBannerColor),
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Row(
                           children: [
                             const CircleAvatar(
-                              backgroundImage: AssetImage("assets/images/running.png"),
+                              backgroundImage:
+                                  AssetImage("assets/images/running.png"),
                               radius: 30,
                             ),
                             const SizedBox(
@@ -100,7 +87,10 @@ class _ExcersizeReminderScreenState extends State<ExcersizeReminderScreen> {
                               children: [
                                 Text(
                                   "Your Indoor Running Done",
-                                  style: TextStyle(color: kLikeWhiteColor, fontWeight: FontWeight.bold, fontSize: 16),
+                                  style: TextStyle(
+                                      color: kLikeWhiteColor,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 16),
                                 ),
                                 Text(
                                   "Total 30 Days (26 days Completed)",
@@ -117,7 +107,8 @@ class _ExcersizeReminderScreenState extends State<ExcersizeReminderScreen> {
                                     "50.0%",
                                     style: TextStyle(color: kLikeWhiteColor),
                                   ),
-                                  backgroundColor: kLikeWhiteColor.withOpacity(0.20),
+                                  backgroundColor:
+                                      kLikeWhiteColor.withOpacity(0.20),
                                   progressColor: kLikeWhiteColor,
                                 ),
                               ],
@@ -131,13 +122,15 @@ class _ExcersizeReminderScreenState extends State<ExcersizeReminderScreen> {
                     ),
                     ListView.builder(
                       shrinkWrap: true,
-                      itemCount: images.length,
                       physics: const NeverScrollableScrollPhysics(),
+                      itemCount: exerciseType.length,
                       itemBuilder: (_, index) {
                         return Padding(
                           padding: const EdgeInsets.only(bottom: 10.0),
                           child: Container(
-                            decoration: BoxDecoration(borderRadius: BorderRadius.circular(12), color: kLikeWhiteColor),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                color: kLikeWhiteColor),
                             child: Row(
                               children: [
                                 Container(
@@ -149,7 +142,8 @@ class _ExcersizeReminderScreenState extends State<ExcersizeReminderScreen> {
                                       bottomLeft: Radius.circular(12),
                                     ),
                                     image: DecorationImage(
-                                      image: AssetImage(images[index]),
+                                      image: AssetImage(
+                                          exerciseType[index]['image']),
                                       fit: BoxFit.fill,
                                     ),
                                   ),
@@ -158,17 +152,21 @@ class _ExcersizeReminderScreenState extends State<ExcersizeReminderScreen> {
                                   child: Padding(
                                     padding: const EdgeInsets.only(left: 10.0),
                                     child: Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Row(
-                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.spaceBetween,
                                           children: [
                                             Text(
-                                              names[index],
-                                              style: const TextStyle(fontWeight: FontWeight.w600),
+                                              exerciseType[index]['name'],
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.w600),
                                             ),
                                             Padding(
-                                              padding: const EdgeInsets.only(right: 10.0),
+                                              padding: const EdgeInsets.only(
+                                                  right: 10.0),
                                               child: Icon(
                                                 Icons.check_circle,
                                                 color: kMainColor,
@@ -178,11 +176,13 @@ class _ExcersizeReminderScreenState extends State<ExcersizeReminderScreen> {
                                         ),
                                         Text(
                                           "Your Goal 90 days",
-                                          style: TextStyle(color: kSubTitleColor),
+                                          style:
+                                              TextStyle(color: kSubTitleColor),
                                         ),
                                         Text(
                                           "You have completed 30 Days",
-                                          style: TextStyle(color: kSubTitleColor),
+                                          style:
+                                              TextStyle(color: kSubTitleColor),
                                         ),
                                       ],
                                     ),
@@ -190,7 +190,15 @@ class _ExcersizeReminderScreenState extends State<ExcersizeReminderScreen> {
                                 ),
                               ],
                             ),
-                          ).onTap(() =>  Get.to(const OutdoorRunningScreen())),
+                          ).onTap(() {
+                            if (index == 0) {
+                              Get.to(() => const OutdoorRunningScreen());
+                            } else if (index == 1) {
+                              Get.to(() => const IndoorRunningScreen());
+                            } else {
+                              Get.to(() => const CyclingRunningScreen());
+                            }
+                          }),
                         );
                       },
                     ),

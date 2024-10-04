@@ -10,9 +10,7 @@ import 'package:kivicare_patient/screens/booking/components/appointment_card.dar
 import 'package:kivicare_patient/screens/home/components/upcoming_appointment_components.dart';
 import 'package:kivicare_patient/utils/colors.dart';
 import 'package:kivicare_patient/utils/common_base.dart';
-import 'package:kivicare_patient/utils/view_all_label_component.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'dart:developer' as dev;
 import 'package:provider/provider.dart';
 
 class BookAppoinment extends StatefulWidget {
@@ -24,34 +22,11 @@ class BookAppoinment extends StatefulWidget {
 
 class _BookAppoinmentState extends State<BookAppoinment> {
   var index = 0;
-  List times = [
-    {"time": "9 00 am", "times": "9.00 am"},
-    {"time": "9 30 am", "times": "9.30 am"},
-    {"time": "10 00 am", "times": "10.00 am"},
-    {"time": "10 30 am", "times": "10.30 am"},
-    {"time": "11 00 am", "times": "11.00 am"},
-    {"time": "11 30 am", "times": "11.30 am"},
-    {"time": "12 00 pm", "times": "12.00 pm"},
-    {"time": "12 30 pm", "times": "12.30 pm"},
-    {"time": "1 00 pm", "times": "1.00 pm"},
-    {"time": "1 30 pm", "times": "1.30 pm"},
-    {"time": "2 00 pm", "times": "2.00 pm"},
-    {"time": "2 30 pm", "times": "2.30 pm"},
-    {"time": "3 00 pm", "times": "3.00 pm"},
-    {"time": "3 30 pm", "times": "3.30 pm"},
-    {"time": "4 00 pm", "times": "4.00 pm"},
-    {"time": "4 30 pm", "times": "4.30 pm"},
-    // {"time": "5 00 pm", "times": "5.00 pm"},
-    // {"time": "5 30 pm", "times": "5.30 pm"},
-    // {"time": "6 00 pm", "times": "6.00 pm"},
-    // {"time": "6 30 pm", "times": "6.30 pm"},
-  ];
 
   String formatTime = '9.00 am';
   String selectedTime = '';
   String selectedDate = '';
 
-  String isSelected = 'Morning';
   String selectedMethod = 'Online';
   String selectedConsultation = 'Physical';
 
@@ -60,7 +35,7 @@ class _BookAppoinmentState extends State<BookAppoinment> {
     FontAwesomeIcons.cloudSun,
     FontAwesomeIcons.cloudMoon,
   ];
-  bool hasActiveAppointment = true;
+  bool hasActiveAppointment = false;
 
   @override
   Widget build(BuildContext context) {
@@ -84,28 +59,72 @@ class _BookAppoinmentState extends State<BookAppoinment> {
                       if (hasActiveAppointment) ...[
                         const SizedBox(height: 20),
                         const Text(
-                          "Active appointment",
+                          "Active Appointment",
                           style: TextStyle(
                               fontWeight: FontWeight.w600,
                               color: appColorPrimary,
-                              fontSize: 20),
+                              fontSize: 18),
                         ),
                         const SizedBox(height: 10),
-                        const Text(
-                          "You are currently on the Basic Personal Healtcare Management plan, and your appointment day would be 10:00am, every 15th of the month",
-                          style: TextStyle(fontWeight: FontWeight.w500),
+                        RichText(
+                          overflow: TextOverflow.clip,
+                          text: TextSpan(
+                            text: 'You are currently on a ',
+                            style: DefaultTextStyle.of(context).style,
+                            children: const <TextSpan>[
+                              TextSpan(
+                                text: 'Basic Personal Health Management',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: appColorPrimary),
+                              ),
+                              TextSpan(
+                                text:
+                                    ' plan, and your appointment day would be ',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                              TextSpan(
+                                text: '10:00am every 15th of the month',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: appColorPrimary),
+                              ),
+                            ],
+                          ),
                         ),
+
                         const SizedBox(height: 10),
-                     
+
                         AppointmentCard(appointment: upcomingAppointment.first),
 
                         //active appointment
                       ] else ...[
                         //inactive
-                        const Text(
-                          "You currently don't have an active appointment. Book appointment below",
-                          style: TextStyle(fontWeight: FontWeight.w600),
+                        RichText(
+                          overflow: TextOverflow.clip,
+                          text: TextSpan(
+                            text: 'You are currently on a ',
+                            style: DefaultTextStyle.of(context).style,
+                            children: const <TextSpan>[
+                              TextSpan(
+                                text: 'Basic Personal Health Management',
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: appColorPrimary),
+                              ),
+                              TextSpan(
+                                text:
+                                    ' plan, Which allows you to book one appointment per month',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.w400,
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
+
                         const SizedBox(height: 10),
 
                         Column(
@@ -114,9 +133,9 @@ class _BookAppoinmentState extends State<BookAppoinment> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                Text(
-                                  formatDate(DateTime.now(), false),
-                                  style: const TextStyle(
+                                const Text(
+                                  "No Active Appointment.\nBook now!",
+                                  style: TextStyle(
                                       fontWeight: FontWeight.w700,
                                       color: Colors.black),
                                 ),
@@ -232,8 +251,8 @@ class _BookAppoinmentState extends State<BookAppoinment> {
                               return Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  if (appointmentVM
-                                      .selectedUserAppointments.isNotEmpty) ...{
+                                  if (appointmentVM.selectedUserAppointments !=
+                                      null) ...{
                                     const Text(
                                       "Selected Appointment Date:",
                                       style: TextStyle(
@@ -244,25 +263,13 @@ class _BookAppoinmentState extends State<BookAppoinment> {
                                   const SizedBox(
                                     height: 10,
                                   ),
-                                  SingleChildScrollView(
-                                    scrollDirection: Axis.horizontal,
-                                    child: Row(
-                                      children: [
-                                        ...List.generate(
-                                            appointmentVM
-                                                .selectedUserAppointments
-                                                .length, (index) {
-                                          final AppointModel model =
-                                              appointmentVM
-                                                      .selectedUserAppointments[
-                                                  index];
-                                          return DateTimeAppointmentCard(
-                                            selectedDate: model,
-                                          );
-                                        }),
-                                      ],
+                                  if (appointmentVM.selectedUserAppointments !=
+                                      null) ...[
+                                    DateTimeAppointmentCard(
+                                      selectedDate: appointmentVM
+                                          .selectedUserAppointments!,
                                     ),
-                                  )
+                                  ]
                                 ],
                               );
                             }),
@@ -287,31 +294,34 @@ class _BookAppoinmentState extends State<BookAppoinment> {
             alignment: Alignment.bottomCenter,
             child:
                 Consumer<AppointmentProvider>(builder: (context, viewModel, _) {
-              if (viewModel.selectedUserAppointments.isNotEmpty) {
-                return AppButton(
-                  text: "Proceed",
-                  width: size.width * 0.9,
-                  enabled: true,
-                  textColor: kLikeWhiteColor,
-                  enableScaleAnimation: false,
-                  color: appColorPrimary,
-                  onTap: () {
-                    if (viewModel.selectedUserAppointments.isNotEmpty) {
-                      final model = AppointModel(
-                        date: viewModel.selectedUserAppointments[0].date,
-                        time:
-                            viewModel.selectedUserAppointments[0].formatedTime,
-                      );
-                      //selectedUserAppointments
-                      viewModel.bookAppointment(
-                        appointmentTime: model.time,
-                        appointmenDate: model.date,
-                      );
-                    }
-                  },
-                  elevation: 0,
-                );
+              if (!hasActiveAppointment) {
+                if (viewModel.selectedUserAppointments != null) {
+                  return AppButton(
+                    text: "Proceed",
+                    width: size.width * 0.9,
+                    enabled: true,
+                    textColor: kLikeWhiteColor,
+                    enableScaleAnimation: false,
+                    color: appColorPrimary,
+                    onTap: () {
+                      if (viewModel.selectedUserAppointments != null) {
+                        final model = AppointModel(
+                          date: viewModel.selectedUserAppointments!.date,
+                          time:
+                              viewModel.selectedUserAppointments!.formatedTime,
+                        );
+                        //selectedUserAppointments
+                        viewModel.bookAppointment(
+                          appointmentTime: model.time,
+                          appointmenDate: model.date,
+                        );
+                      }
+                    },
+                    elevation: 0,
+                  );
+                }
               }
+
               return const SizedBox.shrink();
             }),
           ),

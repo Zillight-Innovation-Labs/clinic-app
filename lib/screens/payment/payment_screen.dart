@@ -80,22 +80,22 @@ class _PaymentScreenState extends State<PaymentScreen>
                   child: Column(
                     // crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      SizedBox(height: size.height * 0.1),
-                      Text(
-                        "Available Balance",
-                        style: primaryTextStyle(),
-                      ),
-                      const SizedBox(height: 10),
-                      Text(
-                        "${getCurrency()} 1000",
-                        style: primaryTextStyle(size: 22, color: Colors.black),
-                      ),
-                      const SizedBox(height: 10),
-                      Text(
-                        "+Add money",
-                        style: primaryTextStyle(color: appColorPrimary),
-                      ),
-                      const SizedBox(height: 10),
+                      SizedBox(height: size.height * 0.05),
+                      // Text(
+                      //   "Available Balance",
+                      //   style: primaryTextStyle(),
+                      // ),
+                      // const SizedBox(height: 10),
+                      // Text(
+                      //   "${getCurrency()} 1000",
+                      //   style: primaryTextStyle(size: 22, color: Colors.black),
+                      // ),
+                      // const SizedBox(height: 10),
+                      // Text(
+                      //   "+Add money",
+                      //   style: primaryTextStyle(color: appColorPrimary),
+                      // ),
+                      // const SizedBox(height: 10),
                       Card(
                         child: Container(
                           padding: const EdgeInsets.symmetric(

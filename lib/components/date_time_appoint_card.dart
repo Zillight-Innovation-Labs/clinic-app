@@ -20,6 +20,7 @@ class DateTimeAppointmentCard extends StatelessWidget {
     return Stack(
       children: [
         Container(
+          width: size.width * 0.4,
           margin: const EdgeInsets.only(
             right: 10,
           ),
@@ -77,9 +78,7 @@ class DateTimeAppointmentCard extends StatelessWidget {
           top: -13,
           child: IconButton(
               onPressed: () {
-                context.read<AppointmentProvider>().removedDate(
-                      selectedDate,
-                    );
+                context.read<AppointmentProvider>().removedDate();
               },
               icon: const Icon(
                 Icons.cancel,

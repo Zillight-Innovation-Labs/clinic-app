@@ -1,15 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:kivicare_patient/api/appointment_apis.dart';
+import 'package:kivicare_patient/main.dart';
 import 'package:kivicare_patient/models/appointment_model.dart';
 import 'package:kivicare_patient/utils/app_common.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 enum AppointmentState { loading, initial, error, success }
 
 class AppointmentProvider extends ChangeNotifier {
   final AppointmentServiceApis _appointmentServiceApis =
       AppointmentServiceApis();
-  final List<AppointModel> _selectedUserAppointments = [];
-  List<AppointModel> get selectedUserAppointments => _selectedUserAppointments;
+  AppointModel? selectedUserAppointments;
 
   AppointModel? selectedCallSchedule;
 
@@ -22,7 +23,7 @@ class AppointmentProvider extends ChangeNotifier {
   }
 
   Future<void> addSelectedAppointment(AppointModel apoint) async {
-    _selectedUserAppointments.add(apoint);
+    selectedUserAppointments = apoint;
     notifyListeners();
   }
 
@@ -36,10 +37,8 @@ class AppointmentProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> removedDate(AppointModel date) async {
-    if (selectedUserAppointments.contains(date)) {
-      selectedUserAppointments.remove(date);
-    }
+  Future<void> removedDate() async {
+    selectedUserAppointments = null;
     notifyListeners();
   }
 
@@ -58,22 +57,12 @@ class AppointmentProvider extends ChangeNotifier {
         setState(AppointmentState.error);
       } else {
         setState(AppointmentState.success);
+        toast("Appointment created successfully");
+        removedDate();
         notifyListeners();
-
-        // dialogHandler.showDialog(
-        //   arguments: const ErrorDialogArgs(
-        //     errorMessage: "Request sent",
-        //     color: Palette.purple,
-        //   ),
-        // );
       }
     } catch (e) {
       setState(AppointmentState.error);
-      // dialogHandler.showDialog(
-      //   arguments: const ErrorDialogArgs(
-      //     errorMessage: "Something went wrong",
-      //   ),
-      // );
     }
   }
 }

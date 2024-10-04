@@ -3,14 +3,14 @@ import 'package:kivicare_patient/api/const/const.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
-class OutdoorRunningScreen extends StatefulWidget {
-  const OutdoorRunningScreen({Key? key}) : super(key: key);
+class CyclingRunningScreen extends StatefulWidget {
+  const CyclingRunningScreen({Key? key}) : super(key: key);
 
   @override
-  State<OutdoorRunningScreen> createState() => _OutdoorRunningScreenState();
+  State<CyclingRunningScreen> createState() => _CyclingRunningScreenState();
 }
 
-class _OutdoorRunningScreenState extends State<OutdoorRunningScreen> {
+class _CyclingRunningScreenState extends State<CyclingRunningScreen> {
   TimeOfDay? selectedTime;
   String? time;
 
@@ -25,7 +25,7 @@ class _OutdoorRunningScreenState extends State<OutdoorRunningScreen> {
         time = selectedTime!.format(context).toString();
       });
     }
-    toast("OutDoor Running Reminder set to $time everday");
+    toast("Cycling Reminder set to $time everday");
   }
 
   @override
@@ -40,18 +40,18 @@ class _OutdoorRunningScreenState extends State<OutdoorRunningScreen> {
           color: kTitleColor,
         ),
         title: Text(
-          "Outdoor Running",
+          "Cycling ",
           style: ktitleTextStyle,
         ),
       ),
       bottomNavigationBar: Padding(
         padding: const EdgeInsets.all(20.0),
         child: AppButton(
-          text: "Set a reminder",
+          text: "Set a reminder ",
           textColor: kLikeWhiteColor,
           elevation: 0,
           color: kMainColor,
-          onTap: () async {
+          onTap: () {
             _selectTime(context);
           },
           //  padding: EdgeInsets.zero,
@@ -73,7 +73,7 @@ class _OutdoorRunningScreenState extends State<OutdoorRunningScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    "assets/images/run.png",
+                    "assets/images/cycle.png",
                     width: 44,
                   ),
                   const Text(

@@ -3,14 +3,14 @@ import 'package:kivicare_patient/api/const/const.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 
-class OutdoorRunningScreen extends StatefulWidget {
-  const OutdoorRunningScreen({Key? key}) : super(key: key);
+class IndoorRunningScreen extends StatefulWidget {
+  const IndoorRunningScreen({Key? key}) : super(key: key);
 
   @override
-  State<OutdoorRunningScreen> createState() => _OutdoorRunningScreenState();
+  State<IndoorRunningScreen> createState() => _IndoorRunningScreenState();
 }
 
-class _OutdoorRunningScreenState extends State<OutdoorRunningScreen> {
+class _IndoorRunningScreenState extends State<IndoorRunningScreen> {
   TimeOfDay? selectedTime;
   String? time;
 
@@ -25,7 +25,7 @@ class _OutdoorRunningScreenState extends State<OutdoorRunningScreen> {
         time = selectedTime!.format(context).toString();
       });
     }
-    toast("OutDoor Running Reminder set to $time everday");
+    toast("Indoor Running Reminder set to $time everday");
   }
 
   @override
@@ -40,7 +40,7 @@ class _OutdoorRunningScreenState extends State<OutdoorRunningScreen> {
           color: kTitleColor,
         ),
         title: Text(
-          "Outdoor Running",
+          "Indoor Running",
           style: ktitleTextStyle,
         ),
       ),
@@ -51,10 +51,9 @@ class _OutdoorRunningScreenState extends State<OutdoorRunningScreen> {
           textColor: kLikeWhiteColor,
           elevation: 0,
           color: kMainColor,
-          onTap: () async {
+          onTap: () {
             _selectTime(context);
           },
-          //  padding: EdgeInsets.zero,
           shapeBorder: OutlineInputBorder(
               borderSide: BorderSide.none,
               borderRadius: BorderRadius.circular(6)),
@@ -73,7 +72,7 @@ class _OutdoorRunningScreenState extends State<OutdoorRunningScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    "assets/images/run.png",
+                    "assets/images/trademil.png",
                     width: 44,
                   ),
                   const Text(

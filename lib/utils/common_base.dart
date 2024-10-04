@@ -1262,3 +1262,26 @@ List<String> convertStringToList(String inputString) {
 
   return trimmedList;
 }
+
+  List times = [
+    {"time": "9 00 am", "times": "9.00 am"},
+    {"time": "9 30 am", "times": "9.30 am"},
+    {"time": "10 00 am", "times": "10.00 am"},
+    {"time": "10 30 am", "times": "10.30 am"},
+    {"time": "11 00 am", "times": "11.00 am"},
+    {"time": "11 30 am", "times": "11.30 am"},
+    {"time": "12 00 pm", "times": "12.00 pm"},
+    {"time": "12 30 pm", "times": "12.30 pm"},
+    {"time": "1 00 pm", "times": "1.00 pm"},
+    {"time": "1 30 pm", "times": "1.30 pm"},
+    {"time": "2 00 pm", "times": "2.00 pm"},
+    {"time": "2 30 pm", "times": "2.30 pm"},
+    {"time": "3 00 pm", "times": "3.00 pm"},
+    {"time": "3 30 pm", "times": "3.30 pm"},
+    {"time": "4 00 pm", "times": "4.00 pm"},
+    {"time": "4 30 pm", "times": "4.30 pm"},
+    // {"time": "5 00 pm", "times": "5.00 pm"},
+    // {"time": "5 30 pm", "times": "5.30 pm"},
+    // {"time": "6 00 pm", "times": "6.00 pm"},
+    // {"time": "6 30 pm", "times": "6.30 pm"},
+  ];

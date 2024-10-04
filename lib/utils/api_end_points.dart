@@ -4,7 +4,7 @@ class APIEndPoints {
   static const String aboutPages = 'page-list';
   //Auth & User
   static const String register = 'register';
-  static const String socialLogin = 'social-login'; 
+  static const String socialLogin = 'social-login';
   static const String login = 'login';
   static const String logout = 'logout';
   static const String changePassword = 'change-password';
@@ -39,8 +39,7 @@ class APIEndPoints {
   static const String appointment = 'appointments2';
 
   //app-services
-    static const String getServices = 'getservices';
-
+  static const String getServices = 'getservices';
 
   //booking detail-api
   static const String getAppointmentDetail = 'appointment-detail';
