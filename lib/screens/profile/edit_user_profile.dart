@@ -3,16 +3,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import '../../../../components/loader_widget.dart';
-import '../../../../main.dart';
-import '../../../../utils/common_base.dart';
-import '../../../components/app_scaffold.dart';
-import '../../../generated/assets.dart';
-import '../../../utils/colors.dart';
-import '../../../utils/constants.dart';
+import '../../../components/loader_widget.dart';
+import '../../../main.dart';
+import '../../../utils/common_base.dart';
+import '../../components/app_scaffold.dart';
+import '../../generated/assets.dart';
+import '../../utils/colors.dart';
+import '../../utils/constants.dart';
 import 'common_profile_widget.dart';
 import 'edit_user_profile_controller.dart';
-import '../../../utils/app_common.dart';
+import '../../utils/app_common.dart';
 
 class EditUserProfileScreen extends StatelessWidget {
   EditUserProfileScreen({super.key});

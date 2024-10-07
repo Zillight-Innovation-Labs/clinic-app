@@ -1,22 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kivicare_patient/components/app_scaffold.dart';
+import 'package:kivicare_patient/generated/assets.dart';
+import 'package:kivicare_patient/main.dart';
+import 'package:kivicare_patient/providers/appointment_provider.dart';
 import 'package:kivicare_patient/providers/bottom_nav_provider.dart';
-import 'package:kivicare_patient/screens/auth/profile/history/mt_history.dart';
-import 'package:kivicare_patient/screens/auth/profile/mt_excersize_reminder.dart';
-import 'package:kivicare_patient/screens/auth/profile/mt_medicine_reminders.dart';
+import 'package:kivicare_patient/screens/auth/other/about_us_screen.dart';
+import 'package:kivicare_patient/screens/auth/other/settings_screen.dart';
+import 'package:kivicare_patient/screens/profile/history/mt_history.dart';
+import 'package:kivicare_patient/screens/profile/mt_excersize_reminder.dart';
+import 'package:kivicare_patient/screens/profile/mt_medicine_reminders.dart';
+import 'package:kivicare_patient/utils/app_common.dart';
+import 'package:kivicare_patient/utils/colors.dart';
+import 'package:kivicare_patient/utils/common_base.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
-import '../../../components/app_scaffold.dart';
-import '../../../generated/assets.dart';
-import '../../../main.dart';
+
 import 'common_horizontal_profile_widget.dart';
 import 'edit_user_profile_controller.dart';
 import 'profile_controller.dart';
-import '../../../utils/app_common.dart';
-import '../../../utils/colors.dart';
-import '../../../utils/common_base.dart';
-import '../other/settings_screen.dart';
-import '../other/about_us_screen.dart';
+
 import 'edit_user_profile.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -189,6 +192,7 @@ class ProfileScreen extends StatelessWidget {
                         profileController.handleLogout();
                         Future.delayed(const Duration(seconds: 2),(){
                           context.read<BottomNavProvider>().setNavbarIndex(0);
+                          context.read<AppointmentProvider>().clearData();
                         });
                       },
                       dialogType: DialogType.CONFIRMATION,

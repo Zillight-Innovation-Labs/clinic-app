@@ -50,9 +50,10 @@ class ViewAllLabel extends StatelessWidget {
               style: boldTextStyle(size: labelSize ?? Constants.labelTextSize)),
         if (isShowAll)
           TextButton(
-              onPressed: () {
-                context.read<BottomNavProvider>().setNavbarIndex(1);
-              },
+              onPressed: onTap,
+              // () {
+              //   
+              // },
               child: Text('See All',
                   style: boldTextStyle(
                       color: trailingTextColor ?? appColorSecondary, size: 14)))

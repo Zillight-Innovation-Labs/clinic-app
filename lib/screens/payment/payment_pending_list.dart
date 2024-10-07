@@ -7,11 +7,16 @@ import 'package:kivicare_patient/utils/empty_error_state_widget.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 
-class PaymentPending extends StatelessWidget {
+class PaymentPending extends StatefulWidget {
   const PaymentPending({
     super.key,
   });
 
+  @override
+  State<PaymentPending> createState() => _PaymentPendingState();
+}
+
+class _PaymentPendingState extends State<PaymentPending> {
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
@@ -34,75 +39,103 @@ class PaymentPending extends StatelessWidget {
                     .paddingBottom(size.height * 0.1);
               }
               return Column(
-                  children: List.generate(
-                      paymentVM.services.length + 1,
-                      (index) => Card(
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 5)
-                                  .copyWith(top: 8),
-                              child: Builder(builder: (context) {
-                                if (index == paymentVM.services.length) {
-                                  return const SizedBox(
-                                    height: 30,
-                                  );
-                                }
-                                paymentVM.services.sort((a, b) {
-                                  DateTime dateA = a.createdAt;
-                                  DateTime dateB = b.createdAt;
-                                  return dateB.compareTo(dateA);
-                                });
-                                final PaymentModel model =
-                                    paymentVM.services[index];
-                                return Stack(
-                                  children: [
-                                    Padding(
-                                      padding: const EdgeInsets.only(top: 3),
-                                      child: ListTile(
-                                        title: Text(
-                                          model.title,
-                                          style: primaryTextStyle(size: 16),
-                                        ),
-                                        subtitle: Text(
-                                          model.desc,
-                                          style: secondaryTextStyle(
-                                              size: 12,
-                                              weight: FontWeight.w500),
-                                        ),
-                                        trailing: GestureDetector(
-                                          onTap: () {},
-                                          child: Container(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 10, vertical: 5),
-                                            decoration: BoxDecoration(
-                                                borderRadius:
-                                                    BorderRadius.circular(10),
-                                                color: appColorPrimary),
-                                            child: Text(
-                                              "Pay now",
-                                              style: secondaryTextStyle(
-                                                  color: white),
-                                            ),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                    Positioned(
-                                      left: 15,
-                                      top: -2,
-                                      child: Text(
-                                        "${getCurrency()} ${model.price}",
-                                        style: secondaryTextStyle(
-                                            color: appColorPrimary, size: 10),
-                                      ),
-                                    ),
-                                  ],
-                                );
-                              }),
-                            ),
-                          )));
+                children: List.generate(
+                  paymentVM.services.length + 1,
+                  (index) => PaymentPendingCard(index: index),
+                ),
+              );
             }),
           ],
         ),
+      ),
+    );
+  }
+}
+
+class PaymentPendingCard extends StatefulWidget {
+  final int index;
+  const PaymentPendingCard({super.key, required this.index});
+
+  @override
+  State<PaymentPendingCard> createState() => _PaymentPendingCardState();
+}
+
+class _PaymentPendingCardState extends State<PaymentPendingCard> {
+  bool isLoading = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final paymentVM = context.watch<PaymentProvider>();
+
+    return Card(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(vertical: 5).copyWith(top: 8),
+        child: Builder(builder: (context) {
+          if (widget.index == paymentVM.services.length) {
+            return const SizedBox(
+              height: 30,
+            );
+          }
+          paymentVM.services.sort((a, b) {
+            DateTime dateA = a.createdAt;
+            DateTime dateB = b.createdAt;
+            return dateB.compareTo(dateA);
+          });
+          final PaymentModel model = paymentVM.services[widget.index];
+          return Stack(
+            children: [
+              Padding(
+                padding: const EdgeInsets.only(top: 3),
+                child: ListTile(
+                  title: Text(
+                    model.title,
+                    style: primaryTextStyle(size: 16),
+                  ),
+                  subtitle: Text(
+                    model.desc,
+                    style:
+                        secondaryTextStyle(size: 12, weight: FontWeight.w500),
+                  ),
+                  trailing: GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        isLoading = true;
+                      });
+
+                      Future.delayed(const Duration(seconds: 6), () {
+                        setState(() {
+                          isLoading = false;
+                        });
+                      });
+                      context
+                          .read<PaymentProvider>()
+                          .makePayment(context, packageId: model.packageId);
+                    },
+                    child: Container(
+                      padding: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 5),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          color: appColorPrimary),
+                      child: Text(
+                        isLoading ? "Please wait..." : "Pay now",
+                        style: secondaryTextStyle(color: white),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
+              Positioned(
+                left: 15,
+                top: -2,
+                child: Text(
+                  "${getCurrency()} ${model.price}",
+                  style: secondaryTextStyle(color: appColorPrimary, size: 10),
+                ),
+              ),
+            ],
+          );
+        }),
       ),
     );
   }

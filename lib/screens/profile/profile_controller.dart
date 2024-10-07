@@ -5,9 +5,9 @@ import 'package:kivicare_patient/providers/bottom_nav_provider.dart';
 import 'package:kivicare_patient/screens/auth/sign_in_sign_up/signin_screen.dart';
 import 'package:kivicare_patient/screens/home/home_bottom_tabs.dart';
 import 'package:nb_utils/nb_utils.dart';
-import '../../../utils/app_common.dart';
-import '../../home/home_controller.dart';
-import '../../../api/auth_apis.dart';
+import '../../utils/app_common.dart';
+import '../home/home_controller.dart';
+import '../../api/auth_apis.dart';
 
 class ProfileController extends GetxController {
   RxBool isLoading = false.obs;

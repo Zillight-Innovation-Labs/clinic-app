@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:kivicare_patient/api/const/const.dart';
-import 'package:kivicare_patient/screens/auth/profile/history/mt_video_call_time_out.dart';
+import 'package:kivicare_patient/screens/profile/history/mt_video_call_time_out.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 

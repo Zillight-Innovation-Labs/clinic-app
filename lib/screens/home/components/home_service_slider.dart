@@ -46,7 +46,7 @@ class _HomeServiceSliderState extends State<HomeServiceSlider> {
             onTap: () {
               Get.to(() => const ServiceScreen());
             },
-            trailingText: "See All",
+            trailingText: "See All now",
           ).paddingOnly(left: 16, right: 8),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -162,4 +162,3 @@ final List<Map<String, dynamic>> servicePages = [
     "color": serviceCardThree,
   },
 ];
-

@@ -14,17 +14,14 @@ class AppointmentServiceApis {
     required String appointmenDate,
     required String appointmentTime,
   }) async {
-    final url =
-        Uri.parse('${APIEndPoints.baseUrl}/${APIEndPoints.appointment}');
+    final url = Uri.parse('${APIEndPoints.baseUrl}/appointments2');
     String? token = await _secureStorage.read(key: "token");
     final header = {
       'Content-Type': 'application/json',
       "Authorization": "Bearer $token"
     };
 
-    dev.log("userId:$userId");
-    dev.log("appointmenDate:$appointmenDate");
-    dev.log("appointmentTime:$appointmentTime");
+
 
     try {
       final body = jsonEncode({
@@ -38,7 +35,41 @@ class AppointmentServiceApis {
       final response = await http.post(url, body: body, headers: header);
 
       dev.log(response.statusCode.toString());
-      dev.log("appointment res:${response.body}");
+      // dev.log("appointment res:${response.body}");
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return ApiResponse(
+          statusCode: response.statusCode,
+          isError: false,
+          data: jsonDecode(response.body),
+        );
+      } else {
+        return ApiResponse(
+          statusCode: response.statusCode,
+          isError: true,
+          data: jsonDecode(response.body),
+        );
+      }
+    } catch (e) {
+      return handleError(e);
+    }
+  }
+
+  Future<ApiResponse> getAppointment({required String userId}) async {
+    final url = Uri.parse('${APIEndPoints.baseUrl}/appointments/$userId');
+    String? token = await _secureStorage.read(key: "apiToken");
+
+    final header = {
+      'Content-Type': 'application/json',
+      "Authorization": "Bearer $token"
+    };
+
+
+    try {
+      final response = await http.get(url, headers: header);
+
+      dev.log(response.statusCode.toString());
+      // dev.log("getAppointment res:${response.body}");
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         return ApiResponse(

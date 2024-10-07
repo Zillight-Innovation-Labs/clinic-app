@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kivicare_patient/api/const/const.dart';
-import 'package:kivicare_patient/screens/auth/profile/history/mt_order_track.dart';
+import 'package:kivicare_patient/screens/profile/history/mt_order_track.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:timeline_tile/timeline_tile.dart';
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:kivicare_patient/components/cached_image_widget.dart';
+import 'package:kivicare_patient/utils/colors.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:percent_indicator/percent_indicator.dart';
-import '../../../components/cached_image_widget.dart';
-import '../../../utils/colors.dart';
 
 class ProfilePicHorizotalWidget extends StatelessWidget {
   final double picSize;

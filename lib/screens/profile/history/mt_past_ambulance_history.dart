@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kivicare_patient/api/const/const.dart';
-import 'package:kivicare_patient/screens/auth/profile/history/mt_diag_offline_appointments_details.dart';
+import 'package:kivicare_patient/screens/profile/history/mt_diag_offline_appointments_details.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import 'mt_upcoming_ambulance_history.dart';

@@ -39,7 +39,11 @@ class APIEndPoints {
   static const String appointment = 'appointments2';
 
   //app-services
-  static const String getServices = 'getservices';
+  static const String getServices = 'getservices'; 
+
+  //payment-subscription
+    static const String subscription = 'subscription/create'; 
+
 
   //booking detail-api
   static const String getAppointmentDetail = 'appointment-detail';

@@ -5,7 +5,7 @@ import 'package:kivicare_patient/models/get_services_model.dart';
 import 'package:kivicare_patient/models/payment_model.dart';
 import 'package:kivicare_patient/providers/bottom_nav_provider.dart';
 import 'package:kivicare_patient/providers/payment_provider.dart';
-import 'package:kivicare_patient/screens/auth/profile/profile_controller.dart';
+import 'package:kivicare_patient/screens/profile/profile_controller.dart';
 import 'package:kivicare_patient/screens/home/home_bottom_tabs.dart';
 import 'package:kivicare_patient/screens/service/service_plan_card.dart';
 import 'package:kivicare_patient/utils/colors.dart';
@@ -14,7 +14,7 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 
 class EventOutreachService extends StatefulWidget {
-    final Service model;
+  final Service model;
   const EventOutreachService({super.key, required this.model});
 
   @override
@@ -27,6 +27,7 @@ class _EventOutreachServiceState extends State<EventOutreachService>
 
   String selectedPlan = 'Basic';
   String selectedPrice = '1000';
+  String selectedPackageId = '4';
   late TabController _tabController;
   late List<String> featuresOne;
   late List<String> featuresTwo;
@@ -35,7 +36,7 @@ class _EventOutreachServiceState extends State<EventOutreachService>
   @override
   void initState() {
     super.initState();
-        featuresOne = convertStringToList(widget.model.packages![0].features!);
+    featuresOne = convertStringToList(widget.model.packages![0].features!);
     featuresTwo = convertStringToList(widget.model.packages![1].features!);
     featuresThree = convertStringToList(widget.model.packages![2].features!);
 
@@ -61,16 +62,19 @@ class _EventOutreachServiceState extends State<EventOutreachService>
   void _onTabChanged(int index) {
     if (index == 0) {
       tabColor = appColorPrimary;
-      selectedPlan = 'Basic';
-      selectedPrice = '1000';
+      selectedPlan = widget.model.packages![0].name!;
+      selectedPrice = widget.model.packages![0].amount!;
+      selectedPackageId = widget.model.packages![0].id.toString();
     } else if (index == 1) {
       tabColor = serviceStandard;
-      selectedPlan = 'Standard';
-      selectedPrice = '3000';
+      selectedPlan = widget.model.packages![1].name!;
+      selectedPrice = widget.model.packages![1].amount!;
+      selectedPackageId = widget.model.packages![1].id.toString();
     } else if (index == 2) {
       tabColor = servicePremium;
-      selectedPlan = 'Premium';
-      selectedPrice = '5000';
+      selectedPlan = widget.model.packages![2].name!;
+      selectedPrice = widget.model.packages![2].amount!;
+      selectedPackageId = widget.model.packages![2].id.toString();
     }
     setState(() {});
   }
@@ -80,7 +84,7 @@ class _EventOutreachServiceState extends State<EventOutreachService>
     final Size size = MediaQuery.of(context).size;
 
     return AppScaffoldNew(
-      appBartitleText:   widget.model.name!,
+      appBartitleText: widget.model.name!,
       appBarVerticalSize: size.height * 0.12,
       body: DefaultTabController(
         length: 3,
@@ -98,7 +102,7 @@ class _EventOutreachServiceState extends State<EventOutreachService>
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                         widget.model.name!,
+                        widget.model.name!,
                         style: primaryTextStyle(),
                       ),
                       const SizedBox(height: 10),
@@ -192,27 +196,24 @@ class _EventOutreachServiceState extends State<EventOutreachService>
                 Expanded(
                   child: TabBarView(
                     controller: _tabController,
-                    children:  [
+                    children: [
                       // Tab 1 Content
                       ServicePlanCard(
-                        name: widget.model.packages![0].name!,
-                        price: widget.model.packages![0].amount!,
-                        features:featuresOne
-                      ),
+                          name: widget.model.packages![0].name!,
+                          price: widget.model.packages![0].amount!,
+                          features: featuresOne),
 
                       // Tab 2 Content
                       ServicePlanCard(
-                      name: widget.model.packages![1].name!,
-                        price: widget.model.packages![1].amount!,
-                        features:featuresTwo
-                      ),
+                          name: widget.model.packages![1].name!,
+                          price: widget.model.packages![1].amount!,
+                          features: featuresTwo),
 
                       // Tab 3 Content
                       ServicePlanCard(
-                       name: widget.model.packages![2].name!,
-                        price: widget.model.packages![2].amount!,
-                   features:featuresThree
-                      ),
+                          name: widget.model.packages![2].name!,
+                          price: widget.model.packages![2].amount!,
+                          features: featuresThree),
                     ],
                   ),
                 ),
@@ -229,10 +230,11 @@ class _EventOutreachServiceState extends State<EventOutreachService>
                     final homeTabVM = context.read<BottomNavProvider>();
                     final paymentVM = context.read<PaymentProvider>();
                     final selectedService = PaymentModel(
-                      title:   widget.model.name!,
+                      title: widget.model.name!,
                       desc: '$selectedPlan plan',
                       price: selectedPrice,
                       serviceType: selectedPlan,
+                      packageId: selectedPackageId,
                       createdAt: DateTime.now(),
                     );
 

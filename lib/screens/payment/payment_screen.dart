@@ -1,14 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:kivicare_patient/components/app_scaffold.dart';
-import 'package:kivicare_patient/screens/auth/profile/profile_controller.dart';
+import 'package:kivicare_patient/screens/profile/profile_controller.dart';
 import 'package:kivicare_patient/screens/payment/payment_list.dart';
 import 'package:kivicare_patient/screens/payment/payment_pending_list.dart';
-import 'package:kivicare_patient/screens/service/service_plan_card.dart';
 import 'package:kivicare_patient/utils/colors.dart';
-import 'package:kivicare_patient/utils/common_base.dart';
-import 'package:nb_utils/nb_utils.dart';
 
 class PaymentScreen extends StatefulWidget {
   const PaymentScreen({super.key});
@@ -21,7 +17,6 @@ class _PaymentScreenState extends State<PaymentScreen>
     with TickerProviderStateMixin {
   final ProfileController profileController = Get.put(ProfileController());
 
-  String selectedPlan = 'Basic';
   late TabController _tabController;
 
   @override
@@ -31,9 +26,7 @@ class _PaymentScreenState extends State<PaymentScreen>
 
     // Add listener to handle tab changes
     _tabController.addListener(() {
-      if (_tabController.indexIsChanging) {
-        _onTabChanged(_tabController.index);
-      }
+      if (_tabController.indexIsChanging) {}
     });
   }
 
@@ -41,23 +34,6 @@ class _PaymentScreenState extends State<PaymentScreen>
   void dispose() {
     _tabController.dispose();
     super.dispose();
-  }
-
-  Color tabColor = appColorPrimary;
-
-  // Function to perform actions when a tab is selected
-  void _onTabChanged(int index) {
-    if (index == 0) {
-      tabColor = appColorPrimary;
-      selectedPlan = 'Basic';
-    } else if (index == 1) {
-      tabColor = serviceStandard;
-      selectedPlan = 'Standard';
-    } else if (index == 2) {
-      tabColor = servicePremium;
-      selectedPlan = 'Premium';
-    }
-    setState(() {});
   }
 
   @override
@@ -81,21 +57,7 @@ class _PaymentScreenState extends State<PaymentScreen>
                     // crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       SizedBox(height: size.height * 0.05),
-                      // Text(
-                      //   "Available Balance",
-                      //   style: primaryTextStyle(),
-                      // ),
-                      // const SizedBox(height: 10),
-                      // Text(
-                      //   "${getCurrency()} 1000",
-                      //   style: primaryTextStyle(size: 22, color: Colors.black),
-                      // ),
-                      // const SizedBox(height: 10),
-                      // Text(
-                      //   "+Add money",
-                      //   style: primaryTextStyle(color: appColorPrimary),
-                      // ),
-                      // const SizedBox(height: 10),
+                 
                       Card(
                         child: Container(
                           padding: const EdgeInsets.symmetric(

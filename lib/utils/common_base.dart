@@ -1285,3 +1285,21 @@ List<String> convertStringToList(String inputString) {
     // {"time": "6 00 pm", "times": "6.00 pm"},
     // {"time": "6 30 pm", "times": "6.30 pm"},
   ];
+  String formatDateToDaysToGo(String dateString) {
+    final DateFormat inputFormat = DateFormat('yyyy-MM-dd');
+    final DateTime inputDate = inputFormat.parse(dateString);
+
+    final DateTime now = DateTime.now();
+    final Duration difference = inputDate.difference(now);
+    final int daysToGo = difference.inDays;
+
+    if (daysToGo < 0) {
+      return "Passed";
+    } else if (daysToGo == 0) {
+      return "Today";
+    } else if (daysToGo == 1) {
+      return "Tomorrow";
+    } else {
+      return "$daysToGo days to go";
+    }
+  }

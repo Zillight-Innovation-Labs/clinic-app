@@ -5,7 +5,7 @@ import 'package:kivicare_patient/models/get_services_model.dart';
 import 'package:kivicare_patient/models/payment_model.dart';
 import 'package:kivicare_patient/providers/bottom_nav_provider.dart';
 import 'package:kivicare_patient/providers/payment_provider.dart';
-import 'package:kivicare_patient/screens/auth/profile/profile_controller.dart';
+import 'package:kivicare_patient/screens/profile/profile_controller.dart';
 import 'package:kivicare_patient/screens/home/home_bottom_tabs.dart';
 import 'package:kivicare_patient/screens/service/service_plan_card.dart';
 import 'package:kivicare_patient/utils/colors.dart';
@@ -18,7 +18,7 @@ class PersonalizedHomeCareService extends StatefulWidget {
   const PersonalizedHomeCareService({super.key, required this.model});
 
   @override
-  State<PersonalizedHomeCareService> createState() =>
+  State<PersonalizedHomeCareService> createState() => 
       _PersonalizedHomeCareServiceState();
 }
 
@@ -28,6 +28,7 @@ class _PersonalizedHomeCareServiceState
 
   String selectedPlan = 'Basic';
   String selectedPrice = '1000';
+  String selectedPackageId = '1';
   late TabController _tabController;
   late List<String> featuresOne;
   late List<String> featuresTwo;
@@ -61,16 +62,19 @@ class _PersonalizedHomeCareServiceState
   void _onTabChanged(int index) {
     if (index == 0) {
       tabColor = appColorPrimary;
-      selectedPlan = 'Basic';
-      selectedPrice = '1000';
+      selectedPlan = widget.model.packages![0].name!;
+      selectedPrice = widget.model.packages![0].amount!;
+      selectedPackageId =widget.model.packages![0].id.toString();
     } else if (index == 1) {
       tabColor = serviceStandard;
-      selectedPlan = 'Standard';
-      selectedPrice = '3000';
+   selectedPlan = widget.model.packages![1].name!;
+      selectedPrice = widget.model.packages![1].amount!;
+      selectedPackageId =widget.model.packages![1].id.toString();
     } else if (index == 2) {
       tabColor = servicePremium;
-      selectedPlan = 'Premium';
-      selectedPrice = '5000';
+      selectedPlan = widget.model.packages![2].name!;
+      selectedPrice = widget.model.packages![2].amount!;
+      selectedPackageId =widget.model.packages![2].id.toString();
     }
     setState(() {});
   }
@@ -233,6 +237,7 @@ class _PersonalizedHomeCareServiceState
                       desc: '$selectedPlan plan',
                       price: selectedPrice,
                       serviceType: selectedPlan,
+                      packageId: selectedPackageId,
                       createdAt: DateTime.now(),
                     );
 

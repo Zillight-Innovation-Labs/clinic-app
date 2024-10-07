@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kivicare_patient/providers/bottom_nav_provider.dart';
-import 'package:kivicare_patient/screens/auth/profile/mt_medicine_reminders.dart';
+import 'package:kivicare_patient/screens/profile/mt_medicine_reminders.dart';
 import 'package:kivicare_patient/screens/booking/talk_to_doc/talk_to_doctor.dart';
 import 'package:kivicare_patient/screens/home/home_card.dart';
 import 'package:kivicare_patient/screens/tests/take_test_page.dart';

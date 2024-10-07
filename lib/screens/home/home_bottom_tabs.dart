@@ -6,9 +6,10 @@ import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:kivicare_patient/api/const/const.dart';
+import 'package:kivicare_patient/providers/appointment_provider.dart';
 import 'package:kivicare_patient/providers/bottom_nav_provider.dart';
 import 'package:kivicare_patient/providers/services_provider.dart';
-import 'package:kivicare_patient/screens/auth/profile/profile_screen.dart';
+import 'package:kivicare_patient/screens/profile/profile_screen.dart';
 import 'package:kivicare_patient/screens/booking/apointments/appointment_tab.dart';
 import 'package:kivicare_patient/screens/booking/appointments_controller.dart';
 import 'package:kivicare_patient/screens/home/home_screen.dart';
@@ -45,6 +46,7 @@ class _HomeBottomNavBarScreenState extends State<HomeBottomNavBarScreen> {
   @override
   void initState() {
     context.read<ServicesProvider>().getServices();
+    context.read<AppointmentProvider>().getAppointment();
     super.initState();
   }
 

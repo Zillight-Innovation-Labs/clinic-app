@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kivicare_patient/components/app_scaffold.dart';
-import 'package:kivicare_patient/screens/auth/profile/profile_controller.dart';
+import 'package:kivicare_patient/screens/profile/profile_controller.dart';
 import 'package:kivicare_patient/screens/booking/apointments/mt_book_appoinment.dart';
 import 'package:kivicare_patient/screens/booking/apointments/appointments_history.dart';
 

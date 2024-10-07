@@ -9,21 +9,33 @@ import 'package:http/http.dart' as http;
 class PaymentServiceApis {
   final _secureStorage = const FlutterSecureStorage();
 
-  Future<ApiResponse> makePayment({required String serviceName, required String serviceDesc,required String packageName, required String price, }) async {
-    final url = Uri.parse('${APIEndPoints.baseUrl}/${APIEndPoints.getServices}' );
+  Future<ApiResponse> makePayment({
+    required String userId,
+    required String packageId,
+  }) async {
+    final url =
+        Uri.parse('${APIEndPoints.baseUrl}/${APIEndPoints.subscription}');
     String? token = await _secureStorage.read(key: "apiToken");
 
     final header = {
       'Content-Type': 'application/json',
       "Authorization": "Bearer $token"
     };
+    final body = jsonEncode({
+      'id': userId,
+      'pack_id': packageId,
+      'subscription_type': 'monthly',
+    });
 
     try {
-
-      final response = await http.get(url, headers: header);
+      final response = await http.post(
+        url,
+        body: body,
+        headers: header,
+      );
 
       dev.log(response.statusCode.toString());
-      dev.log("services res:${response.body}");
+      // dev.log("subscription res:${response.body}");
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         return ApiResponse(
@@ -43,8 +55,11 @@ class PaymentServiceApis {
     }
   }
 
-    Future<ApiResponse> getPaymentHistory() async {
-    final url = Uri.parse('${APIEndPoints.baseUrl}/${APIEndPoints.getServices}' );
+  Future<ApiResponse> verifyPayment({
+    required String referenceUrl,
+  }) async {
+    ///api/subscription/paystack/callback?reference=abc123
+    final url = Uri.parse(referenceUrl);
     String? token = await _secureStorage.read(key: "apiToken");
 
     final header = {
@@ -53,7 +68,43 @@ class PaymentServiceApis {
     };
 
     try {
+      final response = await http.get(
+        url,
+        headers: header,
+      );
 
+      // dev.log(response.statusCode.toString());
+      dev.log("verifyPayment res:${response.body}");
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return ApiResponse(
+          statusCode: response.statusCode,
+          isError: false,
+          data: jsonDecode(response.body),
+        );
+      } else {
+        return ApiResponse(
+          statusCode: response.statusCode,
+          isError: true,
+          data: jsonDecode(response.body),
+        );
+      }
+    } catch (e) {
+      return handleError(e);
+    }
+  }
+
+  Future<ApiResponse> getPaymentHistory() async {
+    final url =
+        Uri.parse('${APIEndPoints.baseUrl}/${APIEndPoints.getServices}');
+    String? token = await _secureStorage.read(key: "apiToken");
+
+    final header = {
+      'Content-Type': 'application/json',
+      "Authorization": "Bearer $token"
+    };
+
+    try {
       final response = await http.get(url, headers: header);
 
       dev.log(response.statusCode.toString());

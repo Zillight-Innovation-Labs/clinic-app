@@ -3,6 +3,7 @@ class PaymentModel {
   String desc;
   String serviceType;
   String price;
+  String packageId;
   DateTime createdAt;
 
   PaymentModel({
@@ -10,6 +11,7 @@ class PaymentModel {
     this.desc = '',
     this.serviceType = '',
     this.price = '',
+    this.packageId = '',
    required this.createdAt,
   });
 }

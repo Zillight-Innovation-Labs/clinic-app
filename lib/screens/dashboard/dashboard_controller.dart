@@ -10,7 +10,7 @@ import '../../utils/app_common.dart';
 import '../../utils/common_base.dart';
 import '../../utils/constants.dart';
 import '../../utils/local_storage.dart';
-import '../auth/profile/profile_controller.dart';
+import '../profile/profile_controller.dart';
 import 'components/menu.dart';
 
 class DashboardController extends GetxController {

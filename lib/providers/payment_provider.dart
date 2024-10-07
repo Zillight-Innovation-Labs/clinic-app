@@ -1,7 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:kivicare_patient/api/payment_services.dart';
+import 'package:kivicare_patient/main.dart';
 import 'package:kivicare_patient/models/payment_model.dart';
+import 'package:kivicare_patient/screens/home/home_bottom_tabs.dart';
+import 'package:kivicare_patient/screens/payment/checkout_screen.dart';
 import 'dart:developer' as dev;
+
+import 'package:kivicare_patient/utils/app_common.dart';
+import 'package:kivicare_patient/utils/colors.dart';
+import 'package:nb_utils/nb_utils.dart';
 
 enum PaymentState { loading, initial, error, success }
 
@@ -26,16 +33,25 @@ class PaymentProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> makePayment(context) async {
+  Future<void> makePayment(context, {required String packageId}) async {
+    setState(PaymentState.loading);
     try {
       final response = await _paymentServiceApis.makePayment(
-        serviceName: '',
-        serviceDesc: "",
-        packageName: "",
-        price: "",
+        userId: loginUserData.value.id.toString(),
+        packageId: packageId,
       );
 
       if (response.isError) {
+        toast(response.data['message'].toString());
+        Future.delayed(const Duration(seconds: 1), () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => const HomeBottomNavBarScreen(),
+            ),
+          );
+        });
+        dev.log("error  data: ${response.data['message']}");
         setState(PaymentState.error);
       } else {
         setState(PaymentState.success);
@@ -44,19 +60,51 @@ class PaymentProvider extends ChangeNotifier {
         var responseData = response.data as Map<String, dynamic>;
 
         // Log to inspect the extracted data
-        // dev.log("response data: $responseData");
+        dev.log("makePayment data: ${responseData['paystack_url']}");
 
-        // Navigator.push(
-        //   context,
-        //   MaterialPageRoute(
-        //     builder: (context) => const CheckoutScreen(
-        //       reference: '',
-        //       paymentUrl: '',
-        //     ),
-        //   ),
-        // );
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => CheckoutScreen(
+              paymentUrl: responseData['paystack_url']!,
+              reference: '',
+            ),
+          ),
+        );
 
-        notifyListeners();
+        // notifyListeners();
+      }
+    } catch (e) {
+      dev.log("catch error  $e");
+      setState(PaymentState.error);
+    }
+  }
+
+  Future<void> verifyPayment(context, {required String referenceUrl}) async {
+    setState(PaymentState.loading);
+    try {
+      final response = await _paymentServiceApis.verifyPayment(
+        referenceUrl: referenceUrl,
+      );
+
+      if (response.isError) {
+        setState(PaymentState.error);
+      } else {
+        setState(PaymentState.success);
+
+        // var responseData = response.data as Map<String, dynamic>;
+
+        // Log to inspect the extracted data
+        // dev.log("verify============ data: $responseData");
+
+        Navigator.push(
+          context,
+          MaterialPageRoute(
+            builder: (context) => const HomeBottomNavBarScreen(),
+          ),
+        );
+
+        // notifyListeners();
       }
     } catch (e) {
       dev.log("catch error  $e");

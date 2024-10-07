@@ -6,14 +6,14 @@ import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:kivicare_patient/utils/colors.dart';
-import '../../../main.dart';
-import '../../../api/auth_apis.dart';
-import '../model/common_model.dart';
-import '../model/login_response.dart';
-import '../../../utils/app_common.dart';
-import '../../../utils/common_base.dart';
-import '../../../utils/constants.dart';
-import '../../../utils/local_storage.dart';
+import '../../main.dart';
+import '../../api/auth_apis.dart';
+import '../auth/model/common_model.dart';
+import '../auth/model/login_response.dart';
+import '../../utils/app_common.dart';
+import '../../utils/common_base.dart';
+import '../../utils/constants.dart';
+import '../../utils/local_storage.dart';
 
 class EditUserProfileController extends GetxController {
   //Constructor region

@@ -4,7 +4,7 @@ import 'package:get/get_core/src/get_main.dart';
 import 'package:kivicare_patient/api/const/const.dart';
 import 'package:kivicare_patient/components/app_scaffold.dart';
 import 'package:kivicare_patient/screens/auth/model/mt_doctor_model.dart';
-import 'package:kivicare_patient/screens/auth/profile/history/mt_diag_offline_appointments_details.dart';
+import 'package:kivicare_patient/screens/profile/history/mt_diag_offline_appointments_details.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 

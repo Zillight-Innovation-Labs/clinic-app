@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:kivicare_patient/providers/bottom_nav_provider.dart';
 import 'package:kivicare_patient/screens/booking/model/appointments_res_model.dart';
 import 'package:kivicare_patient/screens/booking/model/employee_review_data.dart';
 import 'package:nb_utils/nb_utils.dart';
+import 'package:provider/provider.dart';
 
 import '../../../utils/view_all_label_component.dart';
 import '../../booking/components/appointment_card.dart';
@@ -74,7 +76,13 @@ class UpcomingAppointmentComponents extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         16.height,
-        const ViewAllLabel(label: "Upcoming Appointments", isShowAll: true),
+        ViewAllLabel(
+          label: "Upcoming Appointments",
+          isShowAll: true,
+          onTap: () {
+            context.read<BottomNavProvider>().setNavbarIndex(1);
+          },
+        ),
         AppointmentCard(appointment: upcomingAppointment.first),
       ],
     ).paddingSymmetric(horizontal: 16);

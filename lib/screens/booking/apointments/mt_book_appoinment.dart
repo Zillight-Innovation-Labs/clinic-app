@@ -35,11 +35,19 @@ class _BookAppoinmentState extends State<BookAppoinment> {
     FontAwesomeIcons.cloudSun,
     FontAwesomeIcons.cloudMoon,
   ];
-  bool hasActiveAppointment = false;
+  // bool hasActiveAppointment = false;
+
+  @override
+  void initState() {
+    context.read<AppointmentProvider>().getAppointment();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;
+    final appointVm = context.watch<AppointmentProvider>();
+
     return Stack(
       children: [
         SingleChildScrollView(
@@ -56,7 +64,8 @@ class _BookAppoinmentState extends State<BookAppoinment> {
                   padding: const EdgeInsets.all(15.0),
                   child: Column(
                     children: [
-                      if (hasActiveAppointment) ...[
+                      if (appointVm.getAppointmentModel!.isNotEmpty) ...[
+                        //if there is active subscription
                         const SizedBox(height: 20),
                         const Text(
                           "Active Appointment",
@@ -125,7 +134,7 @@ class _BookAppoinmentState extends State<BookAppoinment> {
                           ),
                         ),
 
-                        const SizedBox(height: 10),
+                        const SizedBox(height: 20),
 
                         Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
@@ -133,11 +142,22 @@ class _BookAppoinmentState extends State<BookAppoinment> {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
-                                const Text(
-                                  "No Active Appointment.\nBook now!",
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.w700,
-                                      color: Colors.black),
+                                const Column(
+                                  children: [
+                                    Text(
+                                      "No Active Appointment",
+                                      style: TextStyle(
+                                          fontSize: 19,
+                                          fontWeight: FontWeight.w700,
+                                          color: Colors.black),
+                                    ),
+                                    Text(
+                                      "Book now!",
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w700,
+                                          color: Colors.black),
+                                    ),
+                                  ],
                                 ),
                                 ElevatedButton(
                                   style: ElevatedButton.styleFrom(
@@ -294,7 +314,7 @@ class _BookAppoinmentState extends State<BookAppoinment> {
             alignment: Alignment.bottomCenter,
             child:
                 Consumer<AppointmentProvider>(builder: (context, viewModel, _) {
-              if (!hasActiveAppointment) {
+              if (!appointVm.getAppointmentModel!.isNotEmpty) {
                 if (viewModel.selectedUserAppointments != null) {
                   return AppButton(
                     text: "Proceed",

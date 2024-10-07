@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
+import 'package:kivicare_patient/components/cached_image_widget.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:kivicare_patient/utils/colors.dart';
-import '../../../components/cached_image_widget.dart';
 
 class ProfilePicWidget extends StatelessWidget {
   final double picSize;

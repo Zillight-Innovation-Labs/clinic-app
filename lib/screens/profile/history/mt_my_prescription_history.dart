@@ -3,8 +3,8 @@ import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:kivicare_patient/api/const/const.dart';
 import 'package:kivicare_patient/components/app_scaffold.dart';
-import 'package:kivicare_patient/screens/auth/profile/history/mt_order_details.dart';
-import 'package:kivicare_patient/screens/auth/profile/history/mt_past_prescription_history.dart';
+import 'package:kivicare_patient/screens/profile/history/mt_order_details.dart';
+import 'package:kivicare_patient/screens/profile/history/mt_past_prescription_history.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 

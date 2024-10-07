@@ -3,7 +3,7 @@ import 'package:get/get.dart';
 import 'package:kivicare_patient/components/app_scaffold.dart';
 import 'package:kivicare_patient/models/get_services_model.dart';
 import 'package:kivicare_patient/providers/services_provider.dart';
-import 'package:kivicare_patient/screens/auth/profile/profile_controller.dart';
+import 'package:kivicare_patient/screens/profile/profile_controller.dart';
 import 'package:kivicare_patient/screens/home/components/home_service_slider.dart';
 import 'package:kivicare_patient/screens/service/components/service_card.dart';
 import 'package:kivicare_patient/screens/service/event_outreach_service.dart';

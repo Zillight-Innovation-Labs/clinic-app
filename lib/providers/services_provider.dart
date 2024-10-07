@@ -15,7 +15,6 @@ class ServicesProvider extends ChangeNotifier {
 
   List<Service> _getServicesModel = [];
   List<Service>? get getServicesModel => _getServicesModel;
-
   ServicesState _state = ServicesState.initial;
   ServicesState get state => _state;
 
