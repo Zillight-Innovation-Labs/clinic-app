@@ -24,6 +24,7 @@ import 'app_common.dart';
 import 'colors.dart';
 import 'constants.dart';
 import 'local_storage.dart';
+import 'dart:developer' as dev;
 
 Widget get commonDivider => Column(
       children: [
@@ -1263,43 +1264,76 @@ List<String> convertStringToList(String inputString) {
   return trimmedList;
 }
 
-  List times = [
-    {"time": "9 00 am", "times": "9.00 am"},
-    {"time": "9 30 am", "times": "9.30 am"},
-    {"time": "10 00 am", "times": "10.00 am"},
-    {"time": "10 30 am", "times": "10.30 am"},
-    {"time": "11 00 am", "times": "11.00 am"},
-    {"time": "11 30 am", "times": "11.30 am"},
-    {"time": "12 00 pm", "times": "12.00 pm"},
-    {"time": "12 30 pm", "times": "12.30 pm"},
-    {"time": "1 00 pm", "times": "1.00 pm"},
-    {"time": "1 30 pm", "times": "1.30 pm"},
-    {"time": "2 00 pm", "times": "2.00 pm"},
-    {"time": "2 30 pm", "times": "2.30 pm"},
-    {"time": "3 00 pm", "times": "3.00 pm"},
-    {"time": "3 30 pm", "times": "3.30 pm"},
-    {"time": "4 00 pm", "times": "4.00 pm"},
-    {"time": "4 30 pm", "times": "4.30 pm"},
-    // {"time": "5 00 pm", "times": "5.00 pm"},
-    // {"time": "5 30 pm", "times": "5.30 pm"},
-    // {"time": "6 00 pm", "times": "6.00 pm"},
-    // {"time": "6 30 pm", "times": "6.30 pm"},
-  ];
-  String formatDateToDaysToGo(String dateString) {
-    final DateFormat inputFormat = DateFormat('yyyy-MM-dd');
-    final DateTime inputDate = inputFormat.parse(dateString);
+List times = [
+  {"time": "9 00 am", "times": "9.00 am"},
+  {"time": "9 30 am", "times": "9.30 am"},
+  {"time": "10 00 am", "times": "10.00 am"},
+  {"time": "10 30 am", "times": "10.30 am"},
+  {"time": "11 00 am", "times": "11.00 am"},
+  {"time": "11 30 am", "times": "11.30 am"},
+  {"time": "12 00 pm", "times": "12.00 pm"},
+  {"time": "12 30 pm", "times": "12.30 pm"},
+  {"time": "1 00 pm", "times": "1.00 pm"},
+  {"time": "1 30 pm", "times": "1.30 pm"},
+  {"time": "2 00 pm", "times": "2.00 pm"},
+  {"time": "2 30 pm", "times": "2.30 pm"},
+  {"time": "3 00 pm", "times": "3.00 pm"},
+  {"time": "3 30 pm", "times": "3.30 pm"},
+  {"time": "4 00 pm", "times": "4.00 pm"},
+  {"time": "4 30 pm", "times": "4.30 pm"},
+  // {"time": "5 00 pm", "times": "5.00 pm"},
+  // {"time": "5 30 pm", "times": "5.30 pm"},
+  // {"time": "6 00 pm", "times": "6.00 pm"},
+  // {"time": "6 30 pm", "times": "6.30 pm"},
+];
+String formatDateToDaysToGo(String dateString) {
+  final DateFormat inputFormat = DateFormat('yyyy-MM-dd');
+  final DateTime inputDate = inputFormat.parse(dateString);
 
-    final DateTime now = DateTime.now();
-    final Duration difference = inputDate.difference(now);
-    final int daysToGo = difference.inDays;
+  final DateTime now = DateTime.now();
+  final Duration difference = inputDate.difference(now);
+  final int daysToGo = difference.inDays;
 
-    if (daysToGo < 0) {
-      return "Passed";
-    } else if (daysToGo == 0) {
-      return "Today";
-    } else if (daysToGo == 1) {
-      return "Tomorrow";
-    } else {
-      return "$daysToGo days to go";
-    }
+  if (daysToGo < 0) {
+    return "Passed";
+  } else if (daysToGo == 0) {
+    return "Today";
+  } else if (daysToGo == 1) {
+    return "Tomorrow";
+  } else {
+    return "$daysToGo days to go";
   }
+}
+
+//given date 20 october 2024
+//current day 07 october 2024
+int getDayNumber(String date) {
+  DateTime days = DateTime.parse(date);
+  int day = days.day;
+  return day;
+}
+
+int getDaysToGo(String dattte) {
+  int currentD = getDayNumber(dattte);
+  int currentDate = DateTime.now().day;
+
+  int dayToGo = currentDate - currentD;
+  dev.log("${dayToGo}- Days to go");
+
+  return dayToGo;
+}
+
+String calculateDateDifference(String givenDateString) {
+  DateTime givenDate = DateTime.parse(givenDateString);
+  DateTime currentDate = DateTime.now();
+  int difference = givenDate.difference(currentDate).inDays;
+
+  String finaDate = '';
+
+  if (difference < 0) {
+    return "$difference to go";
+  } else {
+    finaDate = givenDateString;
+  }
+  return finaDate;
+}

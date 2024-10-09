@@ -13,7 +13,7 @@ const medicationCard = Color(0xFFFEF3F2);
 const serviceStandard = Color(0xFFEF6820);
 const servicePremium = Color(0xFF16B364);
 
-const appColorPrimary = Color(0xFF5670CC);
+const appColorPrimary = Color(0xFF008800);
 const appColorSecondary = Color(0xFFF67E7D);
 const lightPrimaryColor = Color(0xFFEBEDFF);
 const extraLightPrimaryColor = Color(0xFFF5F6FA);

@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:intl/intl.dart';
 import 'package:kivicare_patient/providers/appointment_provider.dart';
 import 'package:kivicare_patient/screens/booking/model/appointment_model.dart';
 import 'package:kivicare_patient/utils/common_base.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
-import '../../../components/cached_image_widget.dart';
-import '../../../components/loader_widget.dart';
-import '../../../main.dart';
 import '../../../utils/colors.dart';
 import '../../../utils/empty_error_state_widget.dart';
 import '../appointments_controller.dart';
-import '../components/appointment_card.dart';
-import '../model/appointment_status_model.dart';
 
 class AppointmentsHistory extends StatefulWidget {
   AppointmentsHistory({super.key});

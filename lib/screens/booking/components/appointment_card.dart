@@ -36,13 +36,28 @@ class AppointmentCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 22.height,
-                Align(
-                  alignment: Alignment.centerLeft,
-                  child: Text(
-                    'Appointment #${appointment.id.toString()}',
-                    style: boldTextStyle(size: 14, color: appColorPrimary),
-                  ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Appointment #${appointment.id.toString()}',
+                      style: boldTextStyle(size: 14, color: appColorPrimary),
+                    ),
+                    Text(
+                      formatDateToDaysToGo(appointment.appointmentDate),
+                      style: boldTextStyle(size: 14, color: appColorPrimary),
+                    ),
+                    Text(calculateDateDifference(appointment.appointmentDate)
+                        .toString())
+                  ],
                 ),
+                // Align(
+                //   alignment: Alignment.centerLeft,
+                //   child: Text(
+                //     'Appointment #${appointment.id.toString()}',
+                //     style: boldTextStyle(size: 14, color: appColorPrimary),
+                //   ),
+                // ),
                 16.height,
                 Container(
                   padding:
