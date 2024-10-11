@@ -37,27 +37,15 @@ class AppointmentCard extends StatelessWidget {
               children: [
                 22.height,
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     Text(
-                      'Appointment #${appointment.id.toString()}',
+                      getDaysToGo("2024-10-27"),
+                      // getDaysToGo(appointment.appointmentDate),
                       style: boldTextStyle(size: 14, color: appColorPrimary),
                     ),
-                    Text(
-                      formatDateToDaysToGo(appointment.appointmentDate),
-                      style: boldTextStyle(size: 14, color: appColorPrimary),
-                    ),
-                    Text(calculateDateDifference(appointment.appointmentDate)
-                        .toString())
                   ],
                 ),
-                // Align(
-                //   alignment: Alignment.centerLeft,
-                //   child: Text(
-                //     'Appointment #${appointment.id.toString()}',
-                //     style: boldTextStyle(size: 14, color: appColorPrimary),
-                //   ),
-                // ),
                 16.height,
                 Container(
                   padding:
@@ -68,7 +56,7 @@ class AppointmentCard extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     children: [
                       Text(
-                        appointment.appointmentDate.dateInDMMMMyyyyFormat,
+                        formatDateString(appointment.appointmentDate),
                         style:
                             boldTextStyle(size: 15, color: appColorSecondary),
                       ),

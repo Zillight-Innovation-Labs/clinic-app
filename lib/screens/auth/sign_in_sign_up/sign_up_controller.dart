@@ -29,11 +29,19 @@ class SignUpController extends GetxController {
     if (isAcceptedTc.value) {
       isLoading(true);
       hideKeyBoardWithoutContext();
+      /*
+         "first_name": "John",
+    "last_name": "Doe",
+    "email": "test1@gmail.com",
+    "password": "password123",
+    "password_confirmation": "password123"
+      */
       Map<String, dynamic> req = {
         "email": emailCont.text.trim(),
         "first_name": fisrtNameCont.text.trim(),
         "last_name": lastNameCont.text.trim(),
         "password": passwordCont.text.trim(),
+        "password_confirmation": passwordCont.text.trim(),
         UserKeys.userType: LoginTypeConst.LOGIN_TYPE_USER,
       };
 

@@ -69,7 +69,7 @@ class AppointmentServiceApis {
       final response = await http.get(url, headers: header);
 
       dev.log(response.statusCode.toString());
-      // dev.log("getAppointment res:${response.body}");
+      dev.log("getAppointment res:${response.body}");
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         return ApiResponse(

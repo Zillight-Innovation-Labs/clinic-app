@@ -8,18 +8,18 @@ import 'dart:developer' as dev;
 import 'package:kivicare_patient/utils/app_common.dart';
 import 'package:nb_utils/nb_utils.dart';
 
-enum PaymentState { loading, initial, error, success }
+enum TalkToDoctorState { loading, initial, error, success }
 
-class PaymentProvider extends ChangeNotifier {
+class TalkToDoctorProvider extends ChangeNotifier {
   final PaymentServiceApis _paymentServiceApis = PaymentServiceApis();
 
   final List<PaymentModel> _services = [];
   List<PaymentModel> get services => _services;
 
-  PaymentState _state = PaymentState.initial;
-  PaymentState get state => _state;
+  TalkToDoctorState _state = TalkToDoctorState.initial;
+  TalkToDoctorState get state => _state;
 
-  void setState(PaymentState state) {
+  void setState(TalkToDoctorState state) {
     _state = state;
     notifyListeners();
   }
@@ -32,7 +32,7 @@ class PaymentProvider extends ChangeNotifier {
   }
 
   Future<void> makePayment(context, {required String packageId}) async {
-    setState(PaymentState.loading);
+    setState(TalkToDoctorState.loading);
     try {
       final response = await _paymentServiceApis.makePayment(
         userId: loginUserData.value.id.toString(),
@@ -50,9 +50,9 @@ class PaymentProvider extends ChangeNotifier {
           );
         });
         dev.log("error  data: ${response.data['message']}");
-        setState(PaymentState.error);
+        setState(TalkToDoctorState.error);
       } else {
-        setState(PaymentState.success);
+        setState(TalkToDoctorState.success);
 
         // Extract the 'data' field from the response
         var responseData = response.data as Map<String, dynamic>;
@@ -74,21 +74,21 @@ class PaymentProvider extends ChangeNotifier {
       }
     } catch (e) {
       dev.log("catch error  $e");
-      setState(PaymentState.error);
+      setState(TalkToDoctorState.error);
     }
   }
 
   Future<void> verifyPayment(context, {required String referenceUrl}) async {
-    setState(PaymentState.loading);
+    setState(TalkToDoctorState.loading);
     try {
       final response = await _paymentServiceApis.verifyPayment(
         referenceUrl: referenceUrl,
       );
 
       if (response.isError) {
-        setState(PaymentState.error);
+        setState(TalkToDoctorState.error);
       } else {
-        setState(PaymentState.success);
+        setState(TalkToDoctorState.success);
 
         // var responseData = response.data as Map<String, dynamic>;
 
@@ -106,7 +106,7 @@ class PaymentProvider extends ChangeNotifier {
       }
     } catch (e) {
       dev.log("catch error  $e");
-      setState(PaymentState.error);
+      setState(TalkToDoctorState.error);
     }
   }
 
@@ -115,9 +115,9 @@ class PaymentProvider extends ChangeNotifier {
       final response = await _paymentServiceApis.getPaymentHistory();
 
       if (response.isError) {
-        setState(PaymentState.error);
+        setState(TalkToDoctorState.error);
       } else {
-        setState(PaymentState.success);
+        setState(TalkToDoctorState.success);
 
         var responseData = response.data as Map<String, dynamic>;
 
@@ -131,7 +131,7 @@ class PaymentProvider extends ChangeNotifier {
       }
     } catch (e) {
       dev.log("catch error  $e");
-      setState(PaymentState.error);
+      setState(TalkToDoctorState.error);
     }
   }
 }

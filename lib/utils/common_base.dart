@@ -230,6 +230,9 @@ extension DateData on String {
     }
   }
 
+
+
+
   String get dateInDDMMYYYYFormat {
     try {
       return DateFormat(DateFormatConst.DD_MM_YYYY)
@@ -1289,13 +1292,14 @@ List times = [
 String formatDateToDaysToGo(String dateString) {
   final DateFormat inputFormat = DateFormat('yyyy-MM-dd');
   final DateTime inputDate = inputFormat.parse(dateString);
+//  final String formattedDate = DateFormat('d MMMM, yyyy').format(dateString);
 
   final DateTime now = DateTime.now();
   final Duration difference = inputDate.difference(now);
   final int daysToGo = difference.inDays;
 
   if (daysToGo < 0) {
-    return "Passed";
+    return dateString.dateInDMMMMyyyyFormat;
   } else if (daysToGo == 0) {
     return "Today";
   } else if (daysToGo == 1) {
@@ -1313,14 +1317,19 @@ int getDayNumber(String date) {
   return day;
 }
 
-int getDaysToGo(String dattte) {
-  int currentD = getDayNumber(dattte);
+String getDaysToGo(String dattte) {
+  int nextAppointment = getDayNumber(dattte);
   int currentDate = DateTime.now().day;
+  String result = '';
 
-  int dayToGo = currentDate - currentD;
-  dev.log("${dayToGo}- Days to go");
+  int dayDiff = nextAppointment - currentDate;
+  if (dayDiff < 0) {
+    result = "Passed";
+  } else {
+    result = dayDiff.toString();
+  }
 
-  return dayToGo;
+  return '$result days to go';
 }
 
 String calculateDateDifference(String givenDateString) {
@@ -1328,12 +1337,19 @@ String calculateDateDifference(String givenDateString) {
   DateTime currentDate = DateTime.now();
   int difference = givenDate.difference(currentDate).inDays;
 
-  String finaDate = '';
+  String finalDate = '';
 
   if (difference < 0) {
     return "$difference to go";
   } else {
-    finaDate = givenDateString;
+    finalDate = givenDateString;
   }
-  return finaDate;
+  return finalDate;
+}
+
+
+String formatDateString(String dateTime) {
+  DateTime date =DateTime.parse(dateTime);
+  DateFormat formatter = DateFormat('d MMM., yyyy');
+  return formatter.format(date);
 }
