@@ -6,7 +6,7 @@ import 'package:kivicare_patient/screens/service/test_services.dart';
 import 'package:kivicare_patient/utils/api_end_points.dart';
 import 'package:http/http.dart' as http;
 
-class AppointmentServiceApis {
+class ProfileServiceApis {
   final _secureStorage = const FlutterSecureStorage();
 
   Future<ApiResponse> bookAppoinment({
@@ -20,6 +20,8 @@ class AppointmentServiceApis {
       'Content-Type': 'application/json',
       "Authorization": "Bearer $token"
     };
+
+
 
     try {
       final body = jsonEncode({
@@ -53,8 +55,8 @@ class AppointmentServiceApis {
     }
   }
 
-  Future<ApiResponse> getAppointment({required String userId}) async {
-    final url = Uri.parse('${APIEndPoints.baseUrl}/appointments/$userId');
+  Future<ApiResponse> getExercise() async {
+    final url = Uri.parse('${APIEndPoints.baseUrl}/exercises');
     String? token = await _secureStorage.read(key: "apiToken");
 
     final header = {
@@ -62,11 +64,12 @@ class AppointmentServiceApis {
       "Authorization": "Bearer $token"
     };
 
+
     try {
       final response = await http.get(url, headers: header);
 
       dev.log(response.statusCode.toString());
-      // dev.log("getAppointment res:${response.body}");
+      dev.log("exercises res:${response.body}");
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         return ApiResponse(
@@ -86,22 +89,21 @@ class AppointmentServiceApis {
     }
   }
 
-//subscriptions/user/{user_id}
   Future<ApiResponse> getSubscription({required String userId}) async {
-    final url = Uri.parse('${APIEndPoints.baseUrl}/subscriptions/user/$userId');
+    final url = Uri.parse('${APIEndPoints.baseUrl}/appointments/$userId');
     String? token = await _secureStorage.read(key: "apiToken");
-    dev.log("getSubscription called");
 
     final header = {
       'Content-Type': 'application/json',
       "Authorization": "Bearer $token"
     };
 
+
     try {
       final response = await http.get(url, headers: header);
 
       dev.log(response.statusCode.toString());
-      // dev.log("getSubscription res:${response.body}");
+      dev.log("getSubscription res:${response.body}");
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         return ApiResponse(

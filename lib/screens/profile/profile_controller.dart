@@ -25,18 +25,23 @@ class ProfileController extends GetxController {
     if (isLoading.value) return;
     isLoading(true);
     log('HANDLELOGOUT: called');
-    await AuthServiceApis.logoutApi().then((value) {
-      isLoading(false);
-    }).catchError((e) {
-      toast(e.toString());
-    }).whenComplete(() {
-      AuthServiceApis.clearData();
-      Get.offAll(() => SignInScreen(), binding: BindingsBuilder(() {
-        // Get.offAll(() => const HomeBottomNavBarScreen(), binding: BindingsBuilder(() {
-        Get.put(HomeController());
-      }));
-      
-    });
+    AuthServiceApis.clearData();
+    Get.offAll(() => SignInScreen(), binding: BindingsBuilder(() {
+      // Get.offAll(() => const HomeBottomNavBarScreen(), binding: BindingsBuilder(() {
+      Get.put(HomeController());
+    }));
+    // await AuthServiceApis.logoutApi().then((value) {
+    //   isLoading(false);
+    // }).catchError((e) {
+    //   toast(e.toString());
+    // }).whenComplete(() {
+    //   AuthServiceApis.clearData();
+    //   Get.offAll(() => SignInScreen(), binding: BindingsBuilder(() {
+    //     // Get.offAll(() => const HomeBottomNavBarScreen(), binding: BindingsBuilder(() {
+    //     Get.put(HomeController());
+    //   }));
+
+    // });
   }
 
   ///Get About Pages

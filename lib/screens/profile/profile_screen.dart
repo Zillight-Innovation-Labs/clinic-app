@@ -5,6 +5,7 @@ import 'package:kivicare_patient/generated/assets.dart';
 import 'package:kivicare_patient/main.dart';
 import 'package:kivicare_patient/providers/appointment_provider.dart';
 import 'package:kivicare_patient/providers/bottom_nav_provider.dart';
+import 'package:kivicare_patient/providers/profile_provider.dart';
 import 'package:kivicare_patient/screens/auth/other/about_us_screen.dart';
 import 'package:kivicare_patient/screens/auth/other/settings_screen.dart';
 import 'package:kivicare_patient/screens/profile/history/mt_history.dart';
@@ -22,12 +23,25 @@ import 'profile_controller.dart';
 
 import 'edit_user_profile.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   ProfileScreen({Key? key}) : super(key: key);
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
   final ProfileController profileController = Get.put(ProfileController());
+
+  @override
+  void initState() {
+    // context.read<ProfileProvider>().getExercise();
+    super.initState();
+  }
 
   final String image =
       'https://www.shutterstock.com/image-vector/vector-flat-illustration-grayscale-avatar-600nw-2264922221.jpg';
+
   @override
   Widget build(BuildContext context) {
     return Obx(

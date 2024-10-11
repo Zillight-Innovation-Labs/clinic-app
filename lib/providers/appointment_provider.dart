@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:kivicare_patient/api/appointment_apis.dart';
 import 'package:kivicare_patient/models/appointment_model.dart';
 import 'package:kivicare_patient/screens/booking/model/appointment_model.dart';
+import 'package:kivicare_patient/screens/booking/model/subscription_model.dart';
 import 'package:kivicare_patient/utils/app_common.dart';
+import 'package:kivicare_patient/utils/common_base.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'dart:developer' as dev;
 
@@ -14,12 +16,29 @@ class AppointmentProvider extends ChangeNotifier {
 
   List<Appointment> _getAppointmentModel = [];
   List<Appointment>? get getAppointmentModel => _getAppointmentModel;
-//
+  List<SubscriptionModel> _getSubscriptionModel = [];
+  List<SubscriptionModel>? get getSubscriptionModel => _getSubscriptionModel;
+
+  SubscriptionModel? _firstSubscription;
+  SubscriptionModel? get firstSubscription => _firstSubscription;
+
+  Appointment? _nextAppointment;
+  Appointment? get nextAppointment => _nextAppointment;
+
+  int? _firstSubscriptionDay;
+  int? get firstSubscriptionDay => _firstSubscriptionDay;
+
+  int? _nextAppointmentDay;
+  int? get nextAppointmentDay => _nextAppointmentDay;
+
   AppointModel? selectedUserAppointments;
   AppointModel? selectedCallSchedule;
 
   AppointmentState _state = AppointmentState.initial;
   AppointmentState get state => _state;
+
+  bool _hasActiveSubscription = false;
+  bool get hasActiveSubscription => _hasActiveSubscription;
 
   void setState(AppointmentState state) {
     _state = state;
@@ -88,7 +107,10 @@ class AppointmentProvider extends ChangeNotifier {
                 .map((connects) => Appointment.fromJson(connects)),
           );
 
-          // dev.log("_getAppointmentModel data: ${_getAppointmentModel}");
+          _getAppointmentModel
+              .sort((a, b) => b.createdAt!.compareTo(a.createdAt!));
+
+          _storeNextAppointment();
         } else {
           throw Exception("Unexpected data format");
         }
@@ -101,8 +123,69 @@ class AppointmentProvider extends ChangeNotifier {
     }
   }
 
+  Future<void> getSubscription() async {
+    try {
+      final response = await _appointmentServiceApis.getSubscription(
+        userId: loginUserData.value.id.toString(),
+      );
+
+      if (response.isError) {
+        setState(AppointmentState.error);
+      } else {
+        setState(AppointmentState.success);
+
+        // Convert the response data to List<SubscriptionModel>
+        _getSubscriptionModel = (response.data as List)
+            .map((item) => SubscriptionModel.fromJson(item))
+            .toList();
+
+        dev.log("_getSubscriptionModel data: ${_getSubscriptionModel.length}");
+
+        // Sort by createdAt in descending order
+        _getSubscriptionModel
+            .sort((a, b) => b.createdAt!.compareTo(a.createdAt!));
+
+        // Store the first subscription model
+        _storeFirstSubscription();
+
+        notifyListeners();
+      }
+    } catch (e) {
+      dev.log("catch error  $e");
+      setState(AppointmentState.error);
+    }
+  }
+
+  void _storeFirstSubscription() {
+    if (_getSubscriptionModel.isNotEmpty) {
+      _firstSubscription = _getSubscriptionModel.first;
+
+      _firstSubscriptionDay =
+          getDayNumberDateTime(_firstSubscription!.createdAt!);
+
+      dev.log("First subscription: ${_firstSubscriptionDay}");
+    } else {
+      _firstSubscription = null;
+    }
+  }
+
+  void _storeNextAppointment() {
+    if (_getAppointmentModel.isNotEmpty) {
+      _nextAppointment = _getAppointmentModel.first;
+
+      _nextAppointmentDay = getDayNumber(_nextAppointment!.appointmentDate!);
+
+      dev.log(" _nextAppointment: ${_nextAppointment!.appointmentTime}");
+    } else {
+      _firstSubscription = null;
+    }
+  }
+
+//
   void clearData() {
     _getAppointmentModel = [];
+    _getSubscriptionModel = [];
+    _firstSubscription = null;
     notifyListeners();
   }
 }

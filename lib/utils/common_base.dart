@@ -1316,6 +1316,11 @@ int getDayNumber(String date) {
   int day = days.day;
   return day;
 }
+int getDayNumberDateTime(DateTime date) {
+  // DateTime days = DateTime.parse(date);
+  int day = date.day;
+  return day;
+}
 
 String getDaysToGo(String dattte) {
   int nextAppointment = getDayNumber(dattte);
@@ -1352,4 +1357,14 @@ String formatDateString(String dateTime) {
   DateTime date =DateTime.parse(dateTime);
   DateFormat formatter = DateFormat('d MMM., yyyy');
   return formatter.format(date);
+}
+
+String formatTimenow(DateTime dateTime) {
+  // Use the intl package's DateFormat to format the DateTime
+  return DateFormat('hh:mm a').format(dateTime);
+}
+String formatTimenowString(String dateTime) {
+  final day  = DateTime.parse(dateTime);
+  // Use the intl package's DateFormat to format the DateTime
+  return DateFormat('hh:mm a').format(day);
 }

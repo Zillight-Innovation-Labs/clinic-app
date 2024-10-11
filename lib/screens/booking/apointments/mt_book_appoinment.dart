@@ -43,10 +43,11 @@ class _BookAppoinmentState extends State<BookAppoinment> {
   @override
   void initState() {
     context.read<AppointmentProvider>().getAppointment();
+    context.read<AppointmentProvider>().getSubscription();
     super.initState();
   }
 
-  bool hasActiveSubscription = false;
+  // bool hasActiveSubscription = false;
 
   @override
   Widget build(BuildContext context) {
@@ -71,12 +72,13 @@ class _BookAppoinmentState extends State<BookAppoinment> {
                     padding: const EdgeInsets.all(15.0),
                     child: Column(
                       children: [
-                        if (hasActiveSubscription) ...{
+                        if (appointVm.getSubscriptionModel!.isNotEmpty) ...{
+                          //if there is active subscription
                           Column(
                             children: [
                               if (appointVm
                                   .getAppointmentModel!.isNotEmpty) ...[
-                                //if there is active subscription
+                                //if there is active appointment
                                 const SizedBox(height: 20),
                                 const Text(
                                   "Active Appointment",
@@ -91,15 +93,15 @@ class _BookAppoinmentState extends State<BookAppoinment> {
                                   text: TextSpan(
                                     text: 'You are currently on a ',
                                     style: DefaultTextStyle.of(context).style,
-                                    children: const <TextSpan>[
+                                    children: <TextSpan>[
                                       TextSpan(
                                         text:
-                                            'Basic Personal Health Management',
-                                        style: TextStyle(
+                                            '${appointVm.firstSubscription?.package.name}',
+                                        style: const TextStyle(
                                             fontWeight: FontWeight.bold,
                                             color: appColorPrimary),
                                       ),
-                                      TextSpan(
+                                      const TextSpan(
                                         text:
                                             ' plan, and your appointment day would be ',
                                         style: TextStyle(
@@ -107,8 +109,10 @@ class _BookAppoinmentState extends State<BookAppoinment> {
                                         ),
                                       ),
                                       TextSpan(
-                                        text: '10:00am every 15th of the month',
-                                        style: TextStyle(
+                                        text:
+                                            '${(appointVm.nextAppointment!.appointmentTime!)} every ${appointVm.nextAppointmentDay} of the month',
+                                        // '${formatTimenowString(appointVm.nextAppointment!.appointmentTime!)} every ${appointVm.nextAppointmentDay} of the month',
+                                        style: const TextStyle(
                                             fontWeight: FontWeight.bold,
                                             color: appColorPrimary),
                                       ),
@@ -120,8 +124,6 @@ class _BookAppoinmentState extends State<BookAppoinment> {
 
                                 AppointmentCard(
                                     appointment: upcomingAppointment.first),
-
-                                //active appointment
                               ] else ...[
                                 //inactive
                                 RichText(
