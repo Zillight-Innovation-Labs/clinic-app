@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kivicare_patient/components/cached_image_widget.dart';
 import 'package:kivicare_patient/utils/colors.dart';
+import 'package:kivicare_patient/utils/common_base.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 
@@ -80,16 +81,21 @@ class ProfilePicHorizotalWidget extends StatelessWidget {
                           margin: const EdgeInsets.symmetric(horizontal: 16),
                           alignment: Alignment.center,
                           padding: const EdgeInsets.all(3),
-                          decoration: boxDecorationDefault(borderRadius: radius(100), color: context.cardColor),
+                          decoration: boxDecorationDefault(
+                              borderRadius: radius(100),
+                              color: context.cardColor),
                           child: AppButton(
                             height: 20,
                             width: 88,
-                            padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 2),
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 4, vertical: 2),
                             elevation: 0,
-                            shapeBorder: RoundedRectangleBorder(borderRadius: radius(100)),
+                            shapeBorder: RoundedRectangleBorder(
+                                borderRadius: radius(100)),
                             color: appColorSecondary,
                             onTap: onCameraTap,
-                            child: Text("EDIT", style: boldTextStyle(size: 12, color: white)),
+                            child: Text("EDIT",
+                                style: boldTextStyle(size: 12, color: white)),
                           ),
                         ),
                       )
@@ -102,9 +108,12 @@ class ProfilePicHorizotalWidget extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(userName, style: boldTextStyle(size: 20)),
+                    Text(getFirstStringBeforeWhitespace(userName),
+                        style: boldTextStyle(size: 20)),
                     4.height,
-                    Text(subInfo, style: primaryTextStyle(size: 14, color: secondaryTextColor)),
+                    Text(subInfo,
+                        style: primaryTextStyle(
+                            size: 14, color: secondaryTextColor)),
                   ],
                 ).expand(),
                 /* IconButton(

@@ -2,8 +2,8 @@ import 'dart:developer' as dev;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kivicare_patient/components/app_scaffold.dart';
+import 'package:kivicare_patient/providers/appointment_provider.dart';
 import 'package:kivicare_patient/providers/payment_provider.dart';
-import 'package:kivicare_patient/utils/api_end_points.dart';
 import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
@@ -41,7 +41,13 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               //api/subscription/paystack/callback
               dev.log('===========X================: ${request.url}');
 
-              await context.read<PaymentProvider>().verifyPayment(context, referenceUrl: request.url);
+              await context
+                  .read<PaymentProvider>()
+                  .verifyPayment(context, referenceUrl: request.url);
+              await context.read<PaymentProvider>().clearService();
+              context.read<AppointmentProvider>().getAppointment();
+              context.read<AppointmentProvider>().getSubscription();
+
               // await context.read<HomeProvider>().getTransaction();
               // context.read<AuthProvider>().getUserProfile();
 
@@ -50,9 +56,9 @@ class _CheckoutScreenState extends State<CheckoutScreen> {
               // Future.delayed(const Duration(seconds: 1), () {
               //   Navigator.of(context).pop();
               // });
-            }
-            // return NavigationDecision.navigate;
-            return NavigationDecision.prevent;
+              return NavigationDecision.prevent;
+            } else {}
+            return NavigationDecision.navigate;
           },
         ),
       )

@@ -95,8 +95,8 @@ class _BookAppoinmentState extends State<BookAppoinment> {
                                     style: DefaultTextStyle.of(context).style,
                                     children: <TextSpan>[
                                       TextSpan(
-                                        text:
-                                            '${appointVm.firstSubscription?.package.name}',
+                                        text: appointVm.firstSubscription!
+                                            .package.service.name,
                                         style: const TextStyle(
                                             fontWeight: FontWeight.bold,
                                             color: appColorPrimary),
@@ -109,21 +109,36 @@ class _BookAppoinmentState extends State<BookAppoinment> {
                                         ),
                                       ),
                                       TextSpan(
-                                        text:
-                                            '${(appointVm.nextAppointment!.appointmentTime!)} every ${appointVm.nextAppointmentDay} of the month',
-                                        // '${formatTimenowString(appointVm.nextAppointment!.appointmentTime!)} every ${appointVm.nextAppointmentDay} of the month',
+                                        text: (appointVm
+                                            .nextAppointment!.appointmentTime!),
                                         style: const TextStyle(
                                             fontWeight: FontWeight.bold,
                                             color: appColorPrimary),
+                                      ),
+                                      const TextSpan(
+                                        text: ' every ',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text:
+                                            ' ${getDayWithSuffix(appointVm.nextAppointmentDay!)} ',
+                                        style: const TextStyle(
+                                            fontWeight: FontWeight.bold,
+                                            color: appColorPrimary),
+                                      ),
+                                      const TextSpan(
+                                        text: ' of the month ',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                        ),
                                       ),
                                     ],
                                   ),
                                 ),
 
                                 const SizedBox(height: 10),
-
-                                AppointmentCard(
-                                    appointment: upcomingAppointment.first),
                               ] else ...[
                                 //inactive
                                 RichText(
@@ -131,17 +146,34 @@ class _BookAppoinmentState extends State<BookAppoinment> {
                                   text: TextSpan(
                                     text: 'You are currently on a ',
                                     style: DefaultTextStyle.of(context).style,
-                                    children: const <TextSpan>[
+                                    children: <TextSpan>[
                                       TextSpan(
-                                        text:
-                                            'Basic Personal Health Management',
-                                        style: TextStyle(
+                                        text: appointVm.firstSubscription
+                                                ?.package.service.name ??
+                                            "",
+                                        style: const TextStyle(
                                             fontWeight: FontWeight.bold,
                                             color: appColorPrimary),
                                       ),
-                                      TextSpan(
+                                      const TextSpan(
                                         text:
-                                            ' plan, Which allows you to book one appointment per month',
+                                            ' plan, Which allows you to book ',
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                      TextSpan(
+                                        text: appointVm.firstSubscription
+                                                    ?.package.name !=
+                                                "Basic"
+                                            ? "Two appointments "
+                                            : "one appointment",
+                                        style: const TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                        ),
+                                      ),
+                                      const TextSpan(
+                                        text: ' per month',
                                         style: TextStyle(
                                           fontWeight: FontWeight.w400,
                                         ),
@@ -260,9 +292,6 @@ class _BookAppoinmentState extends State<BookAppoinment> {
                                               selectedTime =
                                                   times[index]['time'];
                                             });
-                                            // dev.log("formatTime:$formatTime");
-                                            // dev.log(
-                                            //     "selectedTime:${formatSlectedTime(selectedTime)}");
                                           },
                                           child: Container(
                                             decoration: BoxDecoration(
@@ -347,11 +376,12 @@ class _BookAppoinmentState extends State<BookAppoinment> {
                                       fontSize: 18),
                                 ),
                                 const Text(
-                                  "Click below to select your favourite service",
+                                  "Click below to explore our services and select your favorite.",
+                                  textAlign: TextAlign.center,
                                   style: TextStyle(
                                       fontWeight: FontWeight.w500,
                                       color: appColorPrimary,
-                                      fontSize: 16),
+                                      fontSize: 14),
                                 ),
                                 SizedBox(height: size.height * 0.05),
                                 ElevatedButton(

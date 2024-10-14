@@ -13,7 +13,7 @@ enum PaymentState { loading, initial, error, success }
 class PaymentProvider extends ChangeNotifier {
   final PaymentServiceApis _paymentServiceApis = PaymentServiceApis();
 
-  final List<PaymentModel> _services = [];
+  List<PaymentModel> _services = [];
   List<PaymentModel> get services => _services;
 
   PaymentState _state = PaymentState.initial;
@@ -133,5 +133,10 @@ class PaymentProvider extends ChangeNotifier {
       dev.log("catch error  $e");
       setState(PaymentState.error);
     }
+  }
+
+  clearService() {
+    _services = [];
+    notifyListeners();
   }
 }

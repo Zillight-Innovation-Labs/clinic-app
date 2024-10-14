@@ -11,14 +11,7 @@ import '../../auth/other/notification_screen.dart';
 class GreetingsComponent extends StatelessWidget {
   const GreetingsComponent({super.key});
 
-  String getFirstStringBeforeWhitespace(String input) {
-    final firstSpaceIndex = input.indexOf(' ');
-    if (firstSpaceIndex == -1) {
-      return input;
-    } else {
-      return input.substring(0, firstSpaceIndex);
-    }
-  }
+ 
 
   @override
   Widget build(BuildContext context) {

@@ -23,7 +23,7 @@ class AppointmentProvider extends ChangeNotifier {
   SubscriptionModel? get firstSubscription => _firstSubscription;
 
   Appointment? _nextAppointment;
-  Appointment? get nextAppointment => _nextAppointment;
+  Appointment? get nextAppointment => _nextAppointment; 
 
   int? _firstSubscriptionDay;
   int? get firstSubscriptionDay => _firstSubscriptionDay;

@@ -5,7 +5,6 @@ import 'package:kivicare_patient/generated/assets.dart';
 import 'package:kivicare_patient/main.dart';
 import 'package:kivicare_patient/providers/appointment_provider.dart';
 import 'package:kivicare_patient/providers/bottom_nav_provider.dart';
-import 'package:kivicare_patient/providers/profile_provider.dart';
 import 'package:kivicare_patient/screens/auth/other/about_us_screen.dart';
 import 'package:kivicare_patient/screens/auth/other/settings_screen.dart';
 import 'package:kivicare_patient/screens/profile/history/mt_history.dart';

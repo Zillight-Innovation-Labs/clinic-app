@@ -43,23 +43,6 @@ class SubscriptionModel {
       package: Package.fromJson(json['package']),
     );
   }
-
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'member_id': memberId,
-      'pack_id': packId,
-      'subscription_type': subscriptionType,
-      'amount': amount,
-      'paystack_reference': paystackReference,
-      'paystack_subscription_code': paystackSubscriptionCode,
-      'paystack_subscription_url': paystackSubscriptionUrl,
-      'status': status,
-      'created_at': createdAt.toIso8601String(),
-      'updated_at': updatedAt.toIso8601String(),
-      'package': package.toJson(),
-    };
-  }
 }
 
 class Package {
@@ -68,6 +51,7 @@ class Package {
   final String name;
   final String amount;
   final String features;
+  final Service service;
 
   Package({
     required this.id,
@@ -75,6 +59,7 @@ class Package {
     required this.name,
     required this.amount,
     required this.features,
+    required this.service,
   });
 
   factory Package.fromJson(Map<String, dynamic> json) {
@@ -84,16 +69,33 @@ class Package {
       name: json['name'],
       amount: json['amount'],
       features: json['features'],
+      service: Service.fromJson(json['service']),
     );
   }
+}
 
-  Map<String, dynamic> toJson() {
-    return {
-      'id': id,
-      'service_id': serviceId,
-      'name': name,
-      'amount': amount,
-      'features': features,
-    };
+class Service {
+  final int id;
+  final String name;
+  final String description;
+  final DateTime createdAt;
+  final DateTime updatedAt;
+
+  Service({
+    required this.id,
+    required this.name,
+    required this.description,
+    required this.createdAt,
+    required this.updatedAt,
+  });
+
+  factory Service.fromJson(Map<String, dynamic> json) {
+    return Service(
+      id: json['id'],
+      name: json['name'],
+      description: json['description'],
+      createdAt: DateTime.parse(json['created_at']),
+      updatedAt: DateTime.parse(json['updated_at']),
+    );
   }
 }

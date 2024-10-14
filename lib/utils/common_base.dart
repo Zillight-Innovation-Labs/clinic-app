@@ -230,9 +230,6 @@ extension DateData on String {
     }
   }
 
-
-
-
   String get dateInDDMMYYYYFormat {
     try {
       return DateFormat(DateFormatConst.DD_MM_YYYY)
@@ -1297,9 +1294,10 @@ String formatDateToDaysToGo(String dateString) {
   final DateTime now = DateTime.now();
   final Duration difference = inputDate.difference(now);
   final int daysToGo = difference.inDays;
+  // final int days = inputDate.day;
 
   if (daysToGo < 0) {
-    return dateString.dateInDMMMMyyyyFormat;
+    return "";
   } else if (daysToGo == 0) {
     return "Today";
   } else if (daysToGo == 1) {
@@ -1316,6 +1314,7 @@ int getDayNumber(String date) {
   int day = days.day;
   return day;
 }
+
 int getDayNumberDateTime(DateTime date) {
   // DateTime days = DateTime.parse(date);
   int day = date.day;
@@ -1352,9 +1351,8 @@ String calculateDateDifference(String givenDateString) {
   return finalDate;
 }
 
-
 String formatDateString(String dateTime) {
-  DateTime date =DateTime.parse(dateTime);
+  DateTime date = DateTime.parse(dateTime);
   DateFormat formatter = DateFormat('d MMM., yyyy');
   return formatter.format(date);
 }
@@ -1363,8 +1361,36 @@ String formatTimenow(DateTime dateTime) {
   // Use the intl package's DateFormat to format the DateTime
   return DateFormat('hh:mm a').format(dateTime);
 }
+
 String formatTimenowString(String dateTime) {
-  final day  = DateTime.parse(dateTime);
+  final day = DateTime.parse(dateTime);
   // Use the intl package's DateFormat to format the DateTime
   return DateFormat('hh:mm a').format(day);
 }
+
+String getDayWithSuffix(int day) {
+  if (day >= 11 && day <= 13) {
+    // Special case for 11th, 12th, and 13th
+    return '$day' 'th';
+  }
+
+  switch (day % 10) {
+    case 1:
+      return '$day' 'st';
+    case 2:
+      return '$day' 'nd';
+    case 3:
+      return '$day' 'rd';
+    default:
+      return '$day' 'th';
+  }
+}
+
+ String getFirstStringBeforeWhitespace(String input) {
+    final firstSpaceIndex = input.indexOf(' ');
+    if (firstSpaceIndex == -1) {
+      return input;
+    } else {
+      return input.substring(0, firstSpaceIndex);
+    }
+  }
