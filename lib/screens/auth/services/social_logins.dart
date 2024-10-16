@@ -85,7 +85,7 @@ class GoogleSignInAuthService {
 
           String firstName = '';
           String lastName = '';
-          log('result.credential ==> ${result.credential != null ? result.credential?.toMap() : null}');
+          log('result.credential ==> ${result.credential?.toMap()}');
           log('result.credential!.fullName ==> ${result.credential!.fullName!.toMap()}');
 
           if (result.credential != null && result.credential!.fullName != null) {

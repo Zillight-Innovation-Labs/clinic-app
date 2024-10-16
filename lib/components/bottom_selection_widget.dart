@@ -81,10 +81,11 @@ class BottomSelectionSheet extends StatelessWidget {
     return GetBuilder(
       init: BSScontroller(searchApiCall: searchApiCall),
       builder: (getxBSSCont) {
-        return WillPopScope(
-          onWillPop: () {
+        return PopScope(
+          canPop: true,
+          onPopInvokedWithResult: (a, b) {
             handleCloseClick(context, getxBSSCont);
-            return Future(() => true);
+       
           },
           child: GestureDetector(
             onTap: () => hideKeyboard(context),

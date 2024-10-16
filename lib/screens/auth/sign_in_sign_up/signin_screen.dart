@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:kivicare_patient/utils/app_common.dart';
 import '../../../components/app_logo_widget.dart';
 import '../../../components/app_scaffold.dart';
-import '../../../configs.dart';
 import '../../../generated/assets.dart';
 import '../../../main.dart';
 import '../../../utils/constants.dart';

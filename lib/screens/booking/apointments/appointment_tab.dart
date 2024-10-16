@@ -21,9 +21,9 @@ class AppointmentTabs extends StatelessWidget {
         isLoading: profileController.isLoading,
         appBarVerticalSize: Get.height * 0.12,
    
-        body: Column(
+        body: const Column(
           children: [
-            const TabBar(
+            TabBar(
             tabs: [
               Tab(text: 'Book Appointment'),
               Tab(text: 'Appointment History'),
@@ -32,7 +32,7 @@ class AppointmentTabs extends StatelessWidget {
             Expanded(
               child: TabBarView(
                 children: [
-                  const BookAppoinment(),
+                  BookAppoinment(),
                   AppointmentsHistory(),
                 ],
               ),

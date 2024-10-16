@@ -119,11 +119,11 @@ class TalkToDoctorProvider extends ChangeNotifier {
       } else {
         setState(TalkToDoctorState.success);
 
-        var responseData = response.data as Map<String, dynamic>;
+        // var responseData = response.data as Map<String, dynamic>;
 
         // dev.log("response data: $responseData");
 
-        var paymentList = responseData['data'] as List<dynamic>;
+        // var paymentList = responseData['data'] as List<dynamic>;
 
         // _getServicesModel = paymentList.map((service) => Service.fromJson(service)).toList();
 

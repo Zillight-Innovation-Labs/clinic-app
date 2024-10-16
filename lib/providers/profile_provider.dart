@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kivicare_patient/api/appointment_apis.dart';
 import 'package:kivicare_patient/api/profile_apis.dart';
 import 'package:kivicare_patient/models/appointment_model.dart';
 import 'package:kivicare_patient/screens/booking/model/appointment_model.dart';
@@ -21,9 +20,6 @@ class ProfileProvider extends ChangeNotifier {
 
   ProfileState _state = ProfileState.initial;
   ProfileState get state => _state;
-
-  bool _hasActiveSubscription = false;
-  bool get hasActiveSubscription => _hasActiveSubscription;
 
   void setState(ProfileState state) {
     _state = state;

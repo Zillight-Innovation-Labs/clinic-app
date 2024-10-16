@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get/get_core/src/get_main.dart';
 import 'package:kivicare_patient/components/app_scaffold.dart';
 import 'package:kivicare_patient/screens/booking/talk_to_doc/meeting_controls.dart';
 import 'package:kivicare_patient/screens/booking/talk_to_doc/meeting_tile.dart';
-import 'package:provider/provider.dart';
 import 'package:videosdk/videosdk.dart';
 
 class AudioCallPage extends StatefulWidget {

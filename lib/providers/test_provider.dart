@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kivicare_patient/models/get_all_test_detail_model.dart';
 import 'package:kivicare_patient/screens/service/test_services.dart';
-import 'package:kivicare_patient/screens/tests/insomnia/insomnia_test_result.dart';
 
 enum TestState { loading, initial, error, success }
 
@@ -281,7 +280,6 @@ class UserTestProvider extends ChangeNotifier {
   setAllTest(GetAllTestModel? test) {
     getTestModel = test!;
 
-
     notifyListeners();
   }
 
@@ -546,10 +544,10 @@ class UserTestProvider extends ChangeNotifier {
   setSelectedTestName(String testId, testScore) {
     dynamic route;
 
-    if (testId == insomniaTestId) {
-      route = InsomniaTestResult(testScore: testScore);
-    } 
-    
+    // if (testId == insomniaTestId) {
+    //   route = InsomniaTestResult(testScore: testScore);
+    // }
+
     // else if (testId == hostilityTestId)
     //  {
     //   route = HostilityTestResult(testScore: testScore);
@@ -610,9 +608,7 @@ class UserTestProvider extends ChangeNotifier {
   Future<void> addTest(testId, context) async {
     setState(TestState.loading);
 
-
     final response = await _testService.addTest(testId, testInputData);
-
 
     if (response.isError) {
       var errorStr = response.data['data'];
@@ -623,8 +619,6 @@ class UserTestProvider extends ChangeNotifier {
       setMessage(errorStr ?? "server error");
       // showSnackBar(context, message.toString());
     } else {
-    
-
       // final testScore = response.data["test"]['data']['result'] ?? 10;
       getAllTest();
 
@@ -644,9 +638,7 @@ class UserTestProvider extends ChangeNotifier {
   Future<void> getAllTest() async {
     final response = await _testService.getAllTest();
 
-
     if (response!.isError) {
-
     } else {
       setAllTest(response.data);
 

@@ -1161,14 +1161,14 @@ Widget typeOfTestCard({
             ),
             const SizedBox(height: 8),
             Padding(
-              padding: const EdgeInsets.only(left: 12.0),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Text(
                 testType,
+                textAlign: TextAlign.center,
                 style:
-                    const TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                    const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
               ),
             ),
-            const SizedBox(height: 20),
           ],
         ),
       ),
@@ -1386,11 +1386,20 @@ String getDayWithSuffix(int day) {
   }
 }
 
- String getFirstStringBeforeWhitespace(String input) {
-    final firstSpaceIndex = input.indexOf(' ');
-    if (firstSpaceIndex == -1) {
-      return input;
-    } else {
-      return input.substring(0, firstSpaceIndex);
-    }
+String getFirstStringBeforeWhitespace(String input) {
+  final firstSpaceIndex = input.indexOf(' ');
+  if (firstSpaceIndex == -1) {
+    return input;
+  } else {
+    return input.substring(0, firstSpaceIndex);
   }
+}
+
+String? validateFullName<T>(String? value) {
+  if (value == null) return 'Field cannot be empty';
+
+  if (value.isEmpty) return 'Field cannot be empty';
+
+  // if (value.split(' ').length < 2) return 'Enter a valid Full Name';
+  return null;
+}

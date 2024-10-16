@@ -16,10 +16,10 @@ class ZoomImageScreen extends StatefulWidget {
   const ZoomImageScreen({super.key, required this.index, this.galleryImages});
 
   @override
-  _ZoomImageScreenState createState() => _ZoomImageScreenState();
+  ZoomImageScreenState createState() => ZoomImageScreenState();
 }
 
-class _ZoomImageScreenState extends State<ZoomImageScreen> {
+class ZoomImageScreenState extends State<ZoomImageScreen> {
   bool showAppBar = false;
 
   @override
@@ -36,7 +36,7 @@ class _ZoomImageScreenState extends State<ZoomImageScreen> {
   Widget build(BuildContext context) {
     return PopScope(
       canPop: true,
-      onPopInvoked: (canPop) {
+      onPopInvokedWithResult: (canPop, b) {
         exitFullScreen();
       },
       child: AppScaffoldNew(

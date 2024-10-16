@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:kivicare_patient/providers/app_provider.dart';
 import 'package:kivicare_patient/providers/appointment_provider.dart';
 import 'package:kivicare_patient/screens/booking/model/subscription_model.dart';
 import 'package:kivicare_patient/utils/colors.dart';

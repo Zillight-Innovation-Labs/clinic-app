@@ -1,11 +1,15 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 import 'package:kivicare_patient/components/app_scaffold.dart';
 import 'package:kivicare_patient/providers/test_provider.dart';
-import 'package:kivicare_patient/screens/tests/addiction/addiction_questionnaire.dart';
-import 'package:kivicare_patient/screens/tests/insomnia/insomnia_questionnaire.dart';
+import 'package:kivicare_patient/screens/tests/bmi/bmi_test.dart';
+import 'package:kivicare_patient/screens/tests/bmr/bmr_test.dart';
+import 'package:kivicare_patient/screens/tests/body_fat/body_fat_test.dart';
+import 'package:kivicare_patient/screens/tests/hydration/hydration_test.dart';
+import 'package:kivicare_patient/screens/tests/resting_heart_rate/resting_heart_rate_test.dart';
+import 'package:kivicare_patient/screens/tests/sleep/sleep_test.dart';
+import 'package:kivicare_patient/screens/tests/whr/whr_test.dart';
 import 'package:kivicare_patient/utils/colors.dart';
 import 'package:kivicare_patient/utils/common_base.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -21,22 +25,67 @@ class TakeTestPage extends StatefulWidget {
 class _TakeTestPageState extends State<TakeTestPage> {
   List takeTestData = [
     {
-      "testName": "Insomnia",
+      "testName": "BMI",
       "textDesc": "",
       "testDesc":
-          "Insomnia is a common sleep disorder characterized by difficulty falling asleep, staying asleep, or experiencing poor quality sleep. It can significantly impact your overall well-being and daily functioning. If you suspect you may be experiencing insomnia, it’s essential to understand its symptoms and potential causes.",
+          "Body mass index (BMI) is a medical screening tool that measures the ratio of your height to your weight to estimate the amount of body fat you have.",
       "testImg": "assets/images/insomnia.png",
-      "route": const InsomniaTestQuestionnaire(),
-      "modalHeight": 0.75,
+      "route": const BMITestPage(),
+      "modalHeight": 0.45,
     },
     {
-      "testName": "Addiction",
+      "testName": "WHR",
       "textDesc": "",
       "testDesc":
-          "Whether it is food, television, internet, gaming, social media, cola drink, alcohol, substance abuse, sex or overspending; do you wonder if your behavior is crossing the line into addiction?\nAddiction is a persistent desire or unsuccessful efforts to stop, reduce or control those behavior.",
-      "testImg": "assets/images/addiction.png",
-      "route": const AddictionTestQuestionnaire(),
-      "modalHeight": 0.75,
+          "The waist–hip ratio or waist-to-hip ratio (WHR) is the dimensionless ratio of the circumference of the waist to that of the hips.",
+      "testImg": "assets/icons/depression.png",
+      "route": const WHRTestPage(),
+      "modalHeight": 0.45,
+    },
+    {
+      "testName": "BMR",
+      "textDesc": "",
+      "testDesc":
+          "Basal Metabolic Rate (BMR) is the number of calories you burn as your body performs basic (basal) life-sustaining function. Commonly also termed as Resting Metabolic Rate (RMR), which is the calories burned if you stayed in bed all day.  In either case, many utilize the basal metabolic rate formula to calculate their body’s metabolism rate.",
+      "testImg": "assets/images/depression.png",
+      "route": const BMRTestPage(),
+      "modalHeight": 0.55,
+    },
+    {
+      "testName": "Body fat",
+      "textDesc": "",
+      "testDesc":
+          "Body fat percentage is defined as the percentage of your body that consists of fat. Everyone has a different body fat distribution, and according to the World Health Organization, measuring body fat is key to assessing whether a person is overweight, obese or at a healthy weight",
+      "testImg": "assets/images/psychosis.png",
+      "route": const BodyFatTestPage(),
+      "modalHeight": 0.55,
+    },
+    {
+      "testName": "Resting Heart Rate",
+      "textDesc": "",
+      "testDesc":
+          "Resting heart rate or pulse, is the number of times your heart beats per minute when you are at rest — such as when you are relaxed, sitting or lying down. Resting heart rate varies from person to person. Knowing yours can give you an important sign of your heart health.",
+      "testImg": "assets/images/hostility.png",
+      "route": const RestingHeartRateTestPage(),
+      "modalHeight": 0.55,
+    },
+    {
+      "testName": "Sleep Quality",
+      "textDesc": "",
+      "testDesc":
+          "The evaluation of an individual's sleep patterns, duration, and characteristics to determine the quality and effectiveness of their sleep",
+      "testImg": "assets/images/sensitivity.png",
+      "route": const SleepTestPage(),
+      "modalHeight": 0.40,
+    },
+    {
+      "testName": "Hydration Levels",
+      "textDesc": "",
+      "testDesc":
+          "The amount of water and electrolytes present in the body, essential for maintaining proper bodily functions",
+      "testImg": "assets/images/somatization.png",
+      "route": const HydrationTestPage(),
+      "modalHeight": 0.40,
     },
   ];
 
@@ -54,7 +103,7 @@ class _TakeTestPageState extends State<TakeTestPage> {
               children: [
                 const SizedBox(height: 20),
                 const Text(
-                  "Test your mental health today to take control of your health.",
+                  "",
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w500,
@@ -195,7 +244,7 @@ class TakeTestCard extends StatelessWidget {
                     AppButton(
                       width: Get.width,
                       text: "Take Test",
-                      color: appColorSecondary,
+                      color: appColorPrimary,
                       textStyle: appButtonTextStyleWhite,
                       shapeBorder: RoundedRectangleBorder(
                         borderRadius: radius(
@@ -204,7 +253,8 @@ class TakeTestCard extends StatelessWidget {
                       ),
                       onTap: () {
                         Navigator.pop(context);
-                        Get.to(route);
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) => route));
                         testProvider.clearTestData();
                       },
                     ),

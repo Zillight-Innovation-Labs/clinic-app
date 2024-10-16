@@ -27,7 +27,6 @@ class CommonPdfPlaceHolder extends StatelessWidget {
             size: 32,
           ),
           12.height,
-          //TODO: string
           Marquee(child: Text(text == 'File' ? 'File' : text, style: primaryTextStyle(), maxLines: 1, textAlign: TextAlign.center)),
         ],
       ).center(),

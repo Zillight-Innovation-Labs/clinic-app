@@ -10,7 +10,6 @@ import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 
 import '../../../utils/view_all_label_component.dart';
-import '../../booking/components/appointment_card.dart';
 import '../home_controller.dart';
 
 List<AppointmentData> upcomingAppointment = [

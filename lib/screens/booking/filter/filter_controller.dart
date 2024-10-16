@@ -106,7 +106,7 @@ class FilterController extends GetxController {
     selectedServiceType("");
     isPriceMin("");
     isPriceMax("");
-    rangeValues(RangeValues(1, 5000));
+    rangeValues(const RangeValues(1, 5000));
     ServiceListController serviceCont = Get.find();
     Get.back();
     serviceCont.clinicId(selectedClinicData.value.id);

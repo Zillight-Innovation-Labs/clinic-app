@@ -37,8 +37,7 @@ class AppointmentProvider extends ChangeNotifier {
   AppointmentState _state = AppointmentState.initial;
   AppointmentState get state => _state;
 
-  bool _hasActiveSubscription = false;
-  bool get hasActiveSubscription => _hasActiveSubscription;
+
 
   void setState(AppointmentState state) {
     _state = state;
@@ -139,11 +138,11 @@ class AppointmentProvider extends ChangeNotifier {
             .map((item) => SubscriptionModel.fromJson(item))
             .toList();
 
-        dev.log("_getSubscriptionModel data: ${_getSubscriptionModel.length}");
+        // dev.log("_getSubscriptionModel data: ${_getSubscriptionModel.length}");
 
         // Sort by createdAt in descending order
         _getSubscriptionModel
-            .sort((a, b) => b.createdAt!.compareTo(a.createdAt!));
+            .sort((a, b) => b.createdAt.compareTo(a.createdAt));
 
         // Store the first subscription model
         _storeFirstSubscription();
@@ -161,9 +160,9 @@ class AppointmentProvider extends ChangeNotifier {
       _firstSubscription = _getSubscriptionModel.first;
 
       _firstSubscriptionDay =
-          getDayNumberDateTime(_firstSubscription!.createdAt!);
+          getDayNumberDateTime(_firstSubscription!.createdAt);
 
-      dev.log("First subscription: ${_firstSubscriptionDay}");
+      // dev.log("First subscription: ${_firstSubscriptionDay}");
     } else {
       _firstSubscription = null;
     }

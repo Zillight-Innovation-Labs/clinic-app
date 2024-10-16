@@ -1,3 +1,5 @@
+// ignore_for_file: prefer_null_aware_operators
+
 class Appointment {
   final String? id;
   final String? doctorId;

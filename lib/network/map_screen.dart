@@ -136,8 +136,8 @@ class MapScreenState extends State<MapScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
+    return PopScope(
+      onPopInvokedWithResult: (a, b) async {
         handleBack();
         return Future(() => true);
       },
