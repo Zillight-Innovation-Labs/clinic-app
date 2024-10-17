@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:kivicare_patient/api/const/const.dart';
+import 'package:kivicare_patient/models/exercise_model.dart';
+import 'package:kivicare_patient/providers/profile_provider.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:provider/provider.dart';
 
 class CyclingRunningScreen extends StatefulWidget {
-  const CyclingRunningScreen({Key? key}) : super(key: key);
+  final Exercise exercise;
+  const CyclingRunningScreen({Key? key, required this.exercise})
+      : super(key: key);
 
   @override
   State<CyclingRunningScreen> createState() => _CyclingRunningScreenState();
@@ -25,7 +30,13 @@ class _CyclingRunningScreenState extends State<CyclingRunningScreen> {
         time = selectedTime!.format(context).toString();
       });
     }
-    toast("Cycling Reminder set to $time everday");
+    if (time != null) {
+      toast("Cycling Reminder set to $time everday");
+      context.read<ProfileProvider>().postExercise(
+            exerciseId: widget.exercise.id.toString(),
+            exerciseTime: time!,
+          );
+    }
   }
 
   @override

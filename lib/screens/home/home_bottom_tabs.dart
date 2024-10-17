@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:kivicare_patient/api/const/const.dart';
 import 'package:kivicare_patient/providers/appointment_provider.dart';
 import 'package:kivicare_patient/providers/bottom_nav_provider.dart';
+import 'package:kivicare_patient/providers/profile_provider.dart';
 import 'package:kivicare_patient/providers/services_provider.dart';
 import 'package:kivicare_patient/screens/profile/profile_screen.dart';
 import 'package:kivicare_patient/screens/booking/apointments/appointment_tab.dart';
@@ -48,6 +49,7 @@ class _HomeBottomNavBarScreenState extends State<HomeBottomNavBarScreen> {
     context.read<ServicesProvider>().getServices();
     context.read<AppointmentProvider>().getAppointment();
     context.read<AppointmentProvider>().getSubscription();
+    context.read<ProfileProvider>().getExercise();
     super.initState();
   }
 

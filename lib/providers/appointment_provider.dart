@@ -138,9 +138,6 @@ class AppointmentProvider extends ChangeNotifier {
             .map((item) => SubscriptionModel.fromJson(item))
             .toList();
 
-        // dev.log("_getSubscriptionModel data: ${_getSubscriptionModel.length}");
-
-        // Sort by createdAt in descending order
         _getSubscriptionModel
             .sort((a, b) => b.createdAt.compareTo(a.createdAt));
 

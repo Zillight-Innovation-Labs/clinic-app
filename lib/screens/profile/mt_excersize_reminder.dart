@@ -1,12 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:kivicare_patient/api/const/const.dart';
 import 'package:kivicare_patient/components/app_scaffold.dart';
+import 'package:kivicare_patient/models/exercise_model.dart';
+import 'package:kivicare_patient/providers/profile_provider.dart';
 import 'package:kivicare_patient/screens/profile/mt_cycling.dart';
 import 'package:kivicare_patient/screens/profile/mt_indoor_runing.dart';
 import 'package:kivicare_patient/screens/profile/mt_outdoor_running.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 class ExcersizeReminderScreen extends StatefulWidget {
   const ExcersizeReminderScreen({Key? key}) : super(key: key);
@@ -119,88 +122,98 @@ class _ExcersizeReminderScreenState extends State<ExcersizeReminderScreen> {
                     const SizedBox(
                       height: 16,
                     ),
-                    ListView.builder(
-                      shrinkWrap: true,
-                      physics: const NeverScrollableScrollPhysics(),
-                      itemCount: exerciseType.length,
-                      itemBuilder: (_, index) {
-                        return Padding(
-                          padding: const EdgeInsets.only(bottom: 10.0),
-                          child: Container(
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(12),
-                                color: kLikeWhiteColor),
-                            child: Row(
-                              children: [
-                                Container(
-                                  width: 80,
-                                  height: 80,
-                                  decoration: BoxDecoration(
-                                    borderRadius: const BorderRadius.only(
-                                      topLeft: Radius.circular(12),
-                                      bottomLeft: Radius.circular(12),
-                                    ),
-                                    image: DecorationImage(
-                                      image: AssetImage(
-                                          exerciseType[index]['image']),
-                                      fit: BoxFit.fill,
+                    Consumer<ProfileProvider>(builder: (context, profileVM, _) {
+                      return ListView.builder(
+                        shrinkWrap: true,
+                        physics: const NeverScrollableScrollPhysics(),
+                        itemCount: profileVM.getExerciseModel?.length,
+                        itemBuilder: (_, index) {
+                          final Exercise exercise =
+                              profileVM.getExerciseModel![index];
+
+                          return Padding(
+                            padding: const EdgeInsets.only(bottom: 10.0),
+                            child: Container(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12),
+                                  color: kLikeWhiteColor),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    width: 80,
+                                    height: 80,
+                                    decoration: BoxDecoration(
+                                      borderRadius: const BorderRadius.only(
+                                        topLeft: Radius.circular(12),
+                                        bottomLeft: Radius.circular(12),
+                                      ),
+                                      image: DecorationImage(
+                                        image: AssetImage(
+                                            exerciseType[index]['image']),
+                                        fit: BoxFit.fill,
+                                      ),
                                     ),
                                   ),
-                                ),
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.only(left: 10.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              exerciseType[index]['name'],
-                                              style: const TextStyle(
-                                                  fontWeight: FontWeight.w600),
-                                            ),
-                                            Padding(
-                                              padding: const EdgeInsets.only(
-                                                  right: 10.0),
-                                              child: Icon(
-                                                Icons.check_circle,
-                                                color: kMainColor,
+                                  Expanded(
+                                    child: Padding(
+                                      padding:
+                                          const EdgeInsets.only(left: 10.0),
+                                      child: Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.spaceBetween,
+                                            children: [
+                                              Text(
+                                                exercise.name!,
+                                                style: const TextStyle(
+                                                    fontWeight:
+                                                        FontWeight.w600),
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                        Text(
-                                          "Your Goal 90 days",
-                                          style:
-                                              TextStyle(color: kSubTitleColor),
-                                        ),
-                                        Text(
-                                          "You have completed 30 Days",
-                                          style:
-                                              TextStyle(color: kSubTitleColor),
-                                        ),
-                                      ],
+                                              Padding(
+                                                padding: const EdgeInsets.only(
+                                                    right: 10.0),
+                                                child: Icon(
+                                                  Icons.check_circle,
+                                                  color: kMainColor,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                          Text(
+                                            "Your Goal ${exercise.duration} days",
+                                            style: TextStyle(
+                                                color: kSubTitleColor),
+                                          ),
+                                          // Text(
+                                          //   "You have completed 30 Days",
+                                          //   style:
+                                          //       TextStyle(color: kSubTitleColor),
+                                          // ),
+                                        ],
+                                      ),
                                     ),
                                   ),
-                                ),
-                              ],
-                            ),
-                          ).onTap(() {
-                            if (index == 0) {
-                              Get.to(() => const OutdoorRunningScreen());
-                            } else if (index == 1) {
-                              Get.to(() => const IndoorRunningScreen());
-                            } else {
-                              Get.to(() => const CyclingRunningScreen());
-                            }
-                          }),
-                        );
-                      },
-                    ),
+                                ],
+                              ),
+                            ).onTap(() {
+                              if (index == 0) {
+                                Get.to(() =>
+                                    OutdoorRunningScreen(exercise: exercise));
+                              } else if (index == 1) {
+                                Get.to(() =>
+                                    IndoorRunningScreen(exercise: exercise));
+                              } else {
+                                Get.to(() =>
+                                    CyclingRunningScreen(exercise: exercise));
+                              }
+                            }),
+                          );
+                        },
+                      );
+                    }),
                   ],
                 ),
               ),

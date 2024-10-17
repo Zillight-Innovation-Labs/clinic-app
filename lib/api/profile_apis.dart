@@ -20,9 +20,6 @@ class ProfileServiceApis {
       'Content-Type': 'application/json',
       "Authorization": "Bearer $token"
     };
-
-
-
     try {
       final body = jsonEncode({
         'user_id': userId,
@@ -36,6 +33,47 @@ class ProfileServiceApis {
 
       dev.log(response.statusCode.toString());
       // dev.log("appointment res:${response.body}");
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return ApiResponse(
+          statusCode: response.statusCode,
+          isError: false,
+          data: jsonDecode(response.body),
+        );
+      } else {
+        return ApiResponse(
+          statusCode: response.statusCode,
+          isError: true,
+          data: jsonDecode(response.body),
+        );
+      }
+    } catch (e) {
+      return handleError(e);
+    }
+  }
+  Future<ApiResponse> postExercise({
+    required String userId,
+    required String time,
+    required String exericseId,
+  }) async {
+    final url = Uri.parse('${APIEndPoints.baseUrl}/user-exercises');
+    String? token = await _secureStorage.read(key: "token");
+    final header = {
+      'Content-Type': 'application/json',
+      "Authorization": "Bearer $token"
+    };
+    try {
+      final body = jsonEncode({
+        'userId': userId,
+        'exerciseId': exericseId,
+        'exerciseTime': time,
+   
+      });
+
+      final response = await http.post(url, body: body, headers: header);
+
+      dev.log(response.statusCode.toString());
+      dev.log("exercise res:${response.body}");
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         return ApiResponse(
@@ -69,7 +107,7 @@ class ProfileServiceApis {
       final response = await http.get(url, headers: header);
 
       dev.log(response.statusCode.toString());
-      dev.log("exercises res:${response.body}");
+      // dev.log("exercises res:${response.body}");
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         return ApiResponse(

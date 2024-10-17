@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:kivicare_patient/api/const/const.dart';
+import 'package:kivicare_patient/models/exercise_model.dart';
+import 'package:kivicare_patient/providers/profile_provider.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
+import 'package:provider/provider.dart';
 
 class IndoorRunningScreen extends StatefulWidget {
-  const IndoorRunningScreen({Key? key}) : super(key: key);
+  final Exercise exercise;
+  const IndoorRunningScreen({Key? key, required this.exercise})
+      : super(key: key);
 
   @override
   State<IndoorRunningScreen> createState() => _IndoorRunningScreenState();
@@ -25,7 +30,13 @@ class _IndoorRunningScreenState extends State<IndoorRunningScreen> {
         time = selectedTime!.format(context).toString();
       });
     }
-    toast("Indoor Running Reminder set to $time everday");
+    if (time != null) {
+      toast("Indoor Running Reminder set to $time everday");
+        context.read<ProfileProvider>().postExercise(
+            exerciseId: widget.exercise.id.toString(),
+            exerciseTime: time!,
+          );
+    }
   }
 
   @override

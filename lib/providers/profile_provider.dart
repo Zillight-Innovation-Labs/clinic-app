@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:kivicare_patient/api/profile_apis.dart';
 import 'package:kivicare_patient/models/appointment_model.dart';
+import 'package:kivicare_patient/models/exercise_model.dart';
 import 'package:kivicare_patient/screens/booking/model/appointment_model.dart';
 import 'package:kivicare_patient/utils/app_common.dart';
 import 'package:nb_utils/nb_utils.dart';
@@ -9,12 +10,14 @@ import 'dart:developer' as dev;
 enum ProfileState { loading, initial, error, success }
 
 class ProfileProvider extends ChangeNotifier {
-  final ProfileServiceApis _profileServiceApis =
-      ProfileServiceApis();
+  final ProfileServiceApis _profileServiceApis = ProfileServiceApis();
 
   List<Appointment> _getAppointmentModel = [];
   List<Appointment>? get getAppointmentModel => _getAppointmentModel;
-//
+
+  List<Exercise> _getExerciseModel = [];
+  List<Exercise>? get getExerciseModel => _getExerciseModel;
+
   AppointModel? selectedUserAppointments;
   AppointModel? selectedCallSchedule;
 
@@ -72,27 +75,25 @@ class ProfileProvider extends ChangeNotifier {
 
   Future<void> getExercise() async {
     try {
-      final response = await _profileServiceApis.getExercise(
-      );
+      final response = await _profileServiceApis.getExercise();
 
       if (response.isError) {
         setState(ProfileState.error);
       } else {
         setState(ProfileState.success);
 
-        dev.log("ProfileProvider:${response.data}");
+        // dev.log("ProfileProvider:${response.data}");
 
-        // Access the 'exercise' field from the response data
-        // if (response.data['appointments'] is List) {
-        //   _getAppointmentModel = List<Appointment>.from(
-        //     response.data['appointments']
-        //         .map((connects) => Appointment.fromJson(connects)),
-        //   );
+        if (response.data['exercises'] is List) {
+          _getExerciseModel = List<Exercise>.from(
+            response.data['exercises']
+                .map((connects) => Exercise.fromJson(connects)),
+          );
 
-        //   // dev.log("_getAppointmentModel data: ${_getAppointmentModel}");
-        // } else {
-        //   throw Exception("Unexpected data format");
-        // }
+          // dev.log("_getExerciseModel data: ${_getExerciseModel}");
+        } else {
+          throw Exception("Unexpected data format");
+        }
 
         notifyListeners();
       }
@@ -102,38 +103,32 @@ class ProfileProvider extends ChangeNotifier {
     }
   }
 
-//   Future<void> getSubscription() async {
-//     try {
-//       final response = await _profileServiceApis.getAppointment(
-//         userId: loginUserData.value.id.toString(),
-//       );
+  Future<void> postExercise({
+    required String exerciseId,
+    required String exerciseTime,
+  }) async {
+    try {
+      dev.log("exerciseId:$exerciseId");
+      dev.log("exerciseTime:$exerciseTime");
+      final response = await _profileServiceApis.postExercise(
+        exericseId: "",
+        userId: loginUserData.value.id.toString(),
+        time: '',
+      );
 
-//       if (response.isError) {
-//         setState(ProfileState.error);
-//       } else {
-//         setState(ProfileState.success);
-//         //_hasActiveSubscription
+      if (response.isError) {
+        setState(ProfileState.error);
+      } else {
+        setState(ProfileState.success);
 
-//         // Access the 'appointments' field from the response data
-//         // if (response.data['appointments'] is List) {
-//         //   _getAppointmentModel = List<Appointment>.from(
-//         //     response.data['appointments']
-//         //         .map((connects) => Appointment.fromJson(connects)),
-//         //   );
+        notifyListeners();
+      }
+    } catch (e) {
+      dev.log("catch error  $e");
+      setState(ProfileState.error);
+    }
+  }
 
-//         //   // dev.log("_getAppointmentModel data: ${_getAppointmentModel}");
-//         // } else {
-//         //   throw Exception("Unexpected data format");
-//         // }
-
-//         notifyListeners();
-//       }
-//     } catch (e) {
-//       dev.log("catch error  $e");
-//       setState(ProfileState.error);
-//     }
-//   }
-// //
   void clearData() {
     _getAppointmentModel = [];
     notifyListeners();
