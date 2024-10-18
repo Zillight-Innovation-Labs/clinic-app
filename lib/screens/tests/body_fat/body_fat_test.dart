@@ -182,15 +182,21 @@ class BodyFatTestPageState extends State<BodyFatTestPage> {
                         borderRadius: radius(defaultAppButtonRadius / 2)),
                     onTap: () {
                       if (_formkey.currentState!.validate()) {
+                        double hip = 0;
                         if (gender == '') {
                           toast("Gender is required");
                           return;
                         }
+                        if (gender == 'Female') {
+                          hip = double.parse(hipController.text);
+                        } else {
+                          hip = 0;
+                        }
                         final double result = calculateBodyFat(
                             waist: double.parse(waistController.text),
                             height: double.parse(heightController.text),
-                            hip: double.parse(hipController.text),
-                            neck: double.parse(heightController.text),
+                            hip: hip,
+                            neck: double.parse(neckController.text),
                             gender: gender);
 
                         Navigator.push(
