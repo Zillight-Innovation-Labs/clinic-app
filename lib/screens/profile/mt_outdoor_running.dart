@@ -31,10 +31,10 @@ class _OutdoorRunningScreenState extends State<OutdoorRunningScreen> {
       });
     }
     if (time != null) {
-      toast("OutDoor Running Reminder set to $time everday");
+      toast("${widget.exercise.name} Reminder set to $time daily");
       context.read<ProfileProvider>().postExercise(
             exerciseId: widget.exercise.id.toString(),
-            exerciseTime: time!,
+            reminderTime: time!,
           );
     }
   }
@@ -51,7 +51,7 @@ class _OutdoorRunningScreenState extends State<OutdoorRunningScreen> {
           color: kTitleColor,
         ),
         title: Text(
-          "Outdoor Running",
+          " ${widget.exercise.name}",
           style: ktitleTextStyle,
         ),
       ),

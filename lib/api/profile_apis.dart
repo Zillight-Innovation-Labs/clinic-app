@@ -51,29 +51,32 @@ class ProfileServiceApis {
       return handleError(e);
     }
   }
+
   Future<ApiResponse> postExercise({
-    required String userId,
+    required int userId,
     required String time,
-    required String exericseId,
+    required int exericseId,
   }) async {
     final url = Uri.parse('${APIEndPoints.baseUrl}/user-exercises');
+    // final url = Uri.parse('http://pos.zealightlabs.com/api/user-exercises');
     String? token = await _secureStorage.read(key: "token");
     final header = {
       'Content-Type': 'application/json',
       "Authorization": "Bearer $token"
     };
+
     try {
       final body = jsonEncode({
-        'userId': userId,
-        'exerciseId': exericseId,
-        'exerciseTime': time,
-   
+        "user_id": userId,
+        "exercise_id": exericseId,
+        "reminder_time": time,
+        "reminder_frequency": "daily"
       });
 
       final response = await http.post(url, body: body, headers: header);
 
       dev.log(response.statusCode.toString());
-      dev.log("exercise res:${response.body}");
+      dev.log("post-exercise res:${response.body}");
 
       if (response.statusCode == 200 || response.statusCode == 201) {
         return ApiResponse(
@@ -102,6 +105,40 @@ class ProfileServiceApis {
       "Authorization": "Bearer $token"
     };
 
+    try {
+      final response = await http.get(url, headers: header);
+
+      dev.log(response.statusCode.toString());
+      // dev.log("exercises res:${response.body}");
+
+      if (response.statusCode == 200 || response.statusCode == 201) {
+        return ApiResponse(
+          statusCode: response.statusCode,
+          isError: false,
+          data: jsonDecode(response.body),
+        );
+      } else {
+        return ApiResponse(
+          statusCode: response.statusCode,
+          isError: true,
+          data: jsonDecode(response.body),
+        );
+      }
+    } catch (e) {
+      return handleError(e);
+    }
+  }
+
+  Future<ApiResponse> getUserExercise({required String userId}) async {
+    final url = Uri.parse('${APIEndPoints.baseUrl}/user-exercises/$userId');
+
+    ///user-exercises/1
+    String? token = await _secureStorage.read(key: "apiToken");
+
+    final header = {
+      'Content-Type': 'application/json',
+      "Authorization": "Bearer $token"
+    };
 
     try {
       final response = await http.get(url, headers: header);
@@ -136,7 +173,6 @@ class ProfileServiceApis {
       "Authorization": "Bearer $token"
     };
 
-
     try {
       final response = await http.get(url, headers: header);
 
@@ -160,5 +196,4 @@ class ProfileServiceApis {
       return handleError(e);
     }
   }
-//
 }

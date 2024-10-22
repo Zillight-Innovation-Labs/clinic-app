@@ -1,9 +1,13 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:kivicare_patient/api/profile_apis.dart';
 import 'package:kivicare_patient/models/appointment_model.dart';
-import 'package:kivicare_patient/models/exercise_model.dart';
+import 'package:kivicare_patient/models/exercise_model.dart' as exercise;
+import 'package:kivicare_patient/models/user_exercises_model.dart';
 import 'package:kivicare_patient/screens/booking/model/appointment_model.dart';
+import 'package:kivicare_patient/service/notification_services.dart';
 import 'package:kivicare_patient/utils/app_common.dart';
+import 'package:kivicare_patient/utils/common_base.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'dart:developer' as dev;
 
@@ -15,8 +19,11 @@ class ProfileProvider extends ChangeNotifier {
   List<Appointment> _getAppointmentModel = [];
   List<Appointment>? get getAppointmentModel => _getAppointmentModel;
 
-  List<Exercise> _getExerciseModel = [];
-  List<Exercise>? get getExerciseModel => _getExerciseModel;
+  List<exercise.Exercise> _getExerciseModel = [];
+  List<exercise.Exercise>? get getExerciseModel => _getExerciseModel;
+
+  List<UserExercise> _getUserExerciseModel = [];
+  List<UserExercise>? get getUserExerciseModel => _getUserExerciseModel;
 
   AppointModel? selectedUserAppointments;
   AppointModel? selectedCallSchedule;
@@ -82,15 +89,11 @@ class ProfileProvider extends ChangeNotifier {
       } else {
         setState(ProfileState.success);
 
-        // dev.log("ProfileProvider:${response.data}");
-
         if (response.data['exercises'] is List) {
-          _getExerciseModel = List<Exercise>.from(
+          _getExerciseModel = List<exercise.Exercise>.from(
             response.data['exercises']
-                .map((connects) => Exercise.fromJson(connects)),
+                .map((connects) => exercise.Exercise.fromJson(connects)),
           );
-
-          // dev.log("_getExerciseModel data: ${_getExerciseModel}");
         } else {
           throw Exception("Unexpected data format");
         }
@@ -105,15 +108,31 @@ class ProfileProvider extends ChangeNotifier {
 
   Future<void> postExercise({
     required String exerciseId,
-    required String exerciseTime,
+    required String reminderTime,
   }) async {
     try {
-      dev.log("exerciseId:$exerciseId");
-      dev.log("exerciseTime:$exerciseTime");
       final response = await _profileServiceApis.postExercise(
-        exericseId: "",
+        exericseId: int.parse(exerciseId),
+        userId: loginUserData.value.id,
+        time: formatExerciseTime(reminderTime),
+      );
+
+      if (response.isError) {
+        setState(ProfileState.error);
+      } else {
+        setState(ProfileState.success);
+        getUserExercise();
+      }
+    } catch (e) {
+      dev.log("catch error  $e");
+      setState(ProfileState.error);
+    }
+  }
+
+  Future<void> getUserExercise() async {
+    try {
+      final response = await _profileServiceApis.getUserExercise(
         userId: loginUserData.value.id.toString(),
-        time: '',
       );
 
       if (response.isError) {
@@ -121,12 +140,46 @@ class ProfileProvider extends ChangeNotifier {
       } else {
         setState(ProfileState.success);
 
+        if (response.data['userExercises'] is List) {
+          _getUserExerciseModel = List<UserExercise>.from(
+            response.data['userExercises']
+                .map((exe) => UserExercise.fromJson(exe)),
+          );
+        } else {
+          throw Exception("Unexpected data format");
+        }
+
+        _getUserExerciseModel
+            .sort((a, b) => b.createdAt.compareTo(a.createdAt));
+
+        notifyExercises(getTimeDifference(_getUserExerciseModel.first.reminderTime));
+
         notifyListeners();
       }
     } catch (e) {
       dev.log("catch error  $e");
       setState(ProfileState.error);
     }
+  }
+
+  void notifyExercises(int timeInterval) async {
+    await NotificationService.showNotification(
+        title: "Exercise reminder",
+        body: "Its time for your daily exercise",
+        payload: {
+          "navigate": "true",
+          "exerciseName": "",
+        },
+        scheduled: true,
+        interval: timeInterval,
+        actionButtons: [
+          NotificationActionButton(
+            key: 'check',
+            label: 'Preview',
+            actionType: ActionType.Default,
+            color: Colors.green,
+          )
+        ]);
   }
 
   void clearData() {

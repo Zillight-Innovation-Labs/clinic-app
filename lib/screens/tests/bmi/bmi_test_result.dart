@@ -16,58 +16,80 @@ class BMITestResult extends StatelessWidget {
       appBarVerticalSize: Get.height * 0.12,
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30.0),
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(
                 height: 30,
               ),
-              const Text(
-                'Interpretation:',
-                style: TextStyle(
-                    fontSize: 16,
-                    color: Color(0xff5F5F5F),
-                    fontWeight: FontWeight.w700),
-              ),
-              Text(
-                testScore <= 18.8
-                    ? "Underweight"
-                    : testScore <= (24.9)
-                        ? "Normal weight"
-                        : testScore <= (24.9)
-                            ? "Overweight"
-                            : "Obesity",
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: Colors.black,
-                  height: 1.5,
+              Card(
+                child: Container(
+                  padding: const EdgeInsets.symmetric(vertical: 20),
+                  width: Get.width,
+                  decoration: const BoxDecoration(),
+                  child: Column(
+                    children: [
+                      const Text(
+                        'Interpretation:',
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Color(0xff5F5F5F),
+                            fontWeight: FontWeight.w700),
+                      ),
+                      Text(
+                        testScore <= 18.8
+                            ? "Underweight"
+                            : testScore <= (24.9)
+                                ? "Normal weight"
+                                : testScore <= (24.9)
+                                    ? "Overweight"
+                                    : "Obesity",
+                        style: const TextStyle(
+                          fontSize: 18,
+                          color: Colors.black,
+                          height: 1.5,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(
                 height: 40,
               ),
-              const Text(
-                'Recomendation:',
-                style: TextStyle(
-                    fontSize: 16,
-                    color: Color(0xff5F5F5F),
-                    fontWeight: FontWeight.w700),
-              ),
-              Text(
-                testScore <= 18.8
-                    ? "Your BMI indicates that you are underweight. Consider consulting a healthcare provider for advice on achieving a healthier weight."
-                    : testScore <= (24.9)
-                        ? "Great! Your BMI is within the normal range. Keep maintaining a healthy lifestyle."
-                        : testScore <= (24.9)
-                            ? "Your BMI indicates that you are overweight. It’s important to adopt a balanced diet and regular exercise. Consider seeking advice from a healthcare provider."
-                            : "Your BMI indicates obesity. It's important to consult a healthcare provider for personalized advice on managing your weight.",
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: Colors.black,
-                  height: 1.5,
+              Card(
+                child: Container(
+                  width: Get.width,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                  child: Column(
+                    children: [
+                      const Text(
+                        'Recomendation:',
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Color(0xff5F5F5F),
+                            fontWeight: FontWeight.w700),
+                      ),
+                      Text(
+                        testScore <= 18.8
+                            ? "Your BMI indicates that you are underweight. Consider consulting a healthcare provider for advice on achieving a healthier weight."
+                            : testScore <= (24.9)
+                                ? "Great! Your BMI is within the normal range. Keep maintaining a healthy lifestyle."
+                                : testScore <= (24.9)
+                                    ? "Your BMI indicates that you are overweight. It’s important to adopt a balanced diet and regular exercise. Consider seeking advice from a healthcare provider."
+                                    : "Your BMI indicates obesity. It's important to consult a healthcare provider for personalized advice on managing your weight.",
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.black,
+                          height: 1.5,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
-              ),
+              )
             ],
           ),
         ),

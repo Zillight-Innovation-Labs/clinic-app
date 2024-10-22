@@ -16,52 +16,74 @@ class RestingHeartrateTestResult extends StatelessWidget {
       appBarVerticalSize: Get.height * 0.12,
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30.0),
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(
                 height: 30,
               ),
-              const Text(
-                'Interpretation:',
-                style: TextStyle(
-                    fontSize: 16,
-                    color: Color(0xff5F5F5F),
-                    fontWeight: FontWeight.w700),
-              ),
-              Text(
-                testScore <= 60
-                    ? "Low Range (Bradycardia)"
-                    : testScore <= (100)
-                        ? "Normal Range"
-                        : "High Range (Tachycardia)",
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: Colors.black,
-                  height: 1.5,
+              Card(
+                child: Container(
+                  width: Get.width,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                  child: Column(
+                    children: [
+                      const Text(
+                        'Interpretation:',
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Color(0xff5F5F5F),
+                            fontWeight: FontWeight.w700),
+                      ),
+                      Text(
+                        testScore <= 60
+                            ? "Low Range (Bradycardia)"
+                            : testScore <= (100)
+                                ? "Normal Range"
+                                : "High Range (Tachycardia)",
+                        style: const TextStyle(
+                          fontSize: 18,
+                          color: Colors.black,
+                          height: 1.5,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(
                 height: 40,
               ),
-              const Text(
-                'Recomendation:',
-                style: TextStyle(
-                    fontSize: 16,
-                    color: Color(0xff5F5F5F),
-                    fontWeight: FontWeight.w700),
-              ),
-              Text(
-                testScore <= 60
-                    ? "Your Resting Heart Rate is lower than the normal range. This could indicate bradycardia. Please consult a healthcare provider if you experience dizziness or fatigue"
-                    : testScore <= (100)
-                        ? "Your Resting Heart Rate is within the normal range. Great job maintaining a healthy heart!"
-                        : "Your Resting Heart Rate is higher than the normal range. This could indicate tachycardia. Please consult a healthcare provider",
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: Colors.black,
-                  height: 1.5,
+              Card(
+                child: Container(
+                  width: Get.width,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                  child: Column(
+                    children: [
+                      const Text(
+                        'Recomendation:',
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Color(0xff5F5F5F),
+                            fontWeight: FontWeight.w700),
+                      ),
+                      Text(
+                        testScore <= 60
+                            ? "Your Resting Heart Rate is lower than the normal range. This could indicate bradycardia. Please consult a healthcare provider if you experience dizziness or fatigue"
+                            : testScore <= (100)
+                                ? "Your Resting Heart Rate is within the normal range. Great job maintaining a healthy heart!"
+                                : "Your Resting Heart Rate is higher than the normal range. This could indicate tachycardia. Please consult a healthcare provider",
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.black,
+                          height: 1.5,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

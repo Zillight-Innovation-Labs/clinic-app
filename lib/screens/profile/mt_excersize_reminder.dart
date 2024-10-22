@@ -22,11 +22,11 @@ class ExcersizeReminderScreen extends StatefulWidget {
 class _ExcersizeReminderScreenState extends State<ExcersizeReminderScreen> {
   List exerciseType = [
     {
-      "image": "assets/images/outdoor-run.png",
+      "image": "assets/images/cycle.png",
       'name': "Outdoor running",
     },
-    {"image": "assets/images/trademil.png", 'name': "Indoor running"},
-    {"image": "assets/images/cycle.png", 'name': "Cycling "},
+    {"image": "assets/images/outdoor-run.png", 'name': "Indoor running"},
+    {"image": "assets/images/trademil.png", 'name': "Cycling "},
   ];
 
   @override

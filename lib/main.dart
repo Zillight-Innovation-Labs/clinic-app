@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:kivicare_patient/providers/app_provider.dart';
+import 'package:kivicare_patient/service/notification_services.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:kivicare_patient/locale/language_en.dart';
 import 'app_theme.dart';
@@ -36,6 +37,7 @@ Rx<BaseLanguage> locale = LanguageEn().obs;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+   await NotificationService.initializeNotification();
   FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform).then((value) {
     PushNotificationService().setupFirebaseMessaging();
@@ -83,10 +85,14 @@ void main() async {
   runApp(MultiProvider(
      providers: AppProvider.providers,
     child: const MyApp()));
+
+
 }
 
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  static GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   @override
   Widget build(BuildContext context) {

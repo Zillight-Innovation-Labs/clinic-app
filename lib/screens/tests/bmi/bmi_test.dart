@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:kivicare_patient/components/app_scaffold.dart';
-import 'package:kivicare_patient/providers/test_provider.dart';
 import 'package:kivicare_patient/screens/tests/bmi/bmi_test_result.dart';
 import 'package:kivicare_patient/utils/colors.dart';
 import 'package:kivicare_patient/utils/common_base.dart';
@@ -24,15 +23,25 @@ class BMITestPageState extends State<BMITestPage> {
   FocusNode weightFocus = FocusNode();
   FocusNode heightFocus = FocusNode();
 
-  double calculateBMI(double weight, double height) {
-    if (height <= 0) {
-      throw ArgumentError("Height must be greater than zero.");
-    }
-    final double result = weight / (height * height);
+  // double calculateBMIs(double weight, double height) {
+  //   if (height <= 0) {
+  //     throw ArgumentError("Height must be greater than zero.");
+  //   }
+  //   final double result = weight / (height * height);
 
-    dev.log("result:$result");
-    return result;
+  //   dev.log("result:$result");
+  //   return result;
+  // }
+
+  double calculateBMI(double weight, double heightInCentimeters) {
+    if (heightInCentimeters <= 0) {
+      throw Exception("Height must be greater than zero.");
+    }
+    double heightInMeters = heightInCentimeters / 100; // Convert cm to m
+    return weight / (heightInMeters * heightInMeters);
   }
+
+ 
 
   @override
   void dispose() {
@@ -77,7 +86,7 @@ class BMITestPageState extends State<BMITestPage> {
                 ),
                 const SizedBox(height: 20),
                 AppTextField(
-                  title: "Height(meters)",
+                  title: "Height(Centimeters)",
                   textStyle: primaryTextStyle(size: 12),
                   controller: heightController,
                   focus: heightFocus,

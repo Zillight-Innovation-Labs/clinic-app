@@ -60,44 +60,66 @@ class _SleepTestResultState extends State<SleepTestResult> {
       appBarVerticalSize: Get.height * 0.12,
       body: SingleChildScrollView(
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30.0),
+          padding: const EdgeInsets.symmetric(horizontal: 10.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               const SizedBox(
                 height: 30,
               ),
-              const Text(
-                'Interpretation:',
-                style: TextStyle(
-                    fontSize: 16,
-                    color: Color(0xff5F5F5F),
-                    fontWeight: FontWeight.w700),
-              ),
-              Text(
-                sleepOutput,
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: Colors.black,
-                  height: 1.5,
+              Card(
+                child: Container(
+                  width: Get.width,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                  child: Column(
+                    children: [
+                      const Text(
+                        'Interpretation:',
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Color(0xff5F5F5F),
+                            fontWeight: FontWeight.w700),
+                      ),
+                      Text(
+                        sleepOutput,
+                        style: const TextStyle(
+                          fontSize: 18,
+                          color: Colors.black,
+                          height: 1.5,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               const SizedBox(
                 height: 40,
               ),
-              const Text(
-                'Recomendation:',
-                style: TextStyle(
-                    fontSize: 16,
-                    color: Color(0xff5F5F5F),
-                    fontWeight: FontWeight.w700),
-              ),
-              Text(
-                sleepOutputDesc,
-                style: const TextStyle(
-                  fontSize: 14,
-                  color: Colors.black,
-                  height: 1.5,
+              Card(
+                child: Container(
+                  width: Get.width,
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+                  child: Column(
+                    children: [
+                      const Text(
+                        'Recomendation:',
+                        style: TextStyle(
+                            fontSize: 20,
+                            color: Color(0xff5F5F5F),
+                            fontWeight: FontWeight.w700),
+                      ),
+                      Text(
+                        sleepOutputDesc,
+                        style: const TextStyle(
+                          fontSize: 14,
+                          color: Colors.black,
+                          height: 1.5,
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ],

@@ -31,10 +31,10 @@ class _CyclingRunningScreenState extends State<CyclingRunningScreen> {
       });
     }
     if (time != null) {
-      toast("Cycling Reminder set to $time everday");
+      toast("${widget.exercise.name} Reminder set to $time daily");
       context.read<ProfileProvider>().postExercise(
             exerciseId: widget.exercise.id.toString(),
-            exerciseTime: time!,
+            reminderTime: time!,
           );
     }
   }
@@ -51,7 +51,7 @@ class _CyclingRunningScreenState extends State<CyclingRunningScreen> {
           color: kTitleColor,
         ),
         title: Text(
-          "Cycling ",
+          " ${widget.exercise.name}",
           style: ktitleTextStyle,
         ),
       ),

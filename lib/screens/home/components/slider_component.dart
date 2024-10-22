@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:kivicare_patient/screens/service/components/service_card.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:kivicare_patient/utils/colors.dart';
-import '../home_controller.dart';
 
 class SliderComponent extends StatefulWidget {
   const SliderComponent({super.key});
@@ -13,7 +11,7 @@ class SliderComponent extends StatefulWidget {
 }
 
 class _SliderComponentState extends State<SliderComponent> {
-  final HomeController homeScreenController = Get.find();
+  // final HomeController homeScreenController = Get.find();
 
   int sliderCurrentPage = 0;
 
@@ -26,10 +24,6 @@ class _SliderComponentState extends State<SliderComponent> {
 
   @override
   Widget build(BuildContext context) {
-    if (homeScreenController.dashboardData.value.slider.isEmpty) {
-      return const Offstage();
-    }
-
     return SizedBox(
       height: 190,
       child: Stack(

@@ -90,7 +90,7 @@ class AppointmentServiceApis {
   Future<ApiResponse> getSubscription({required String userId}) async {
     final url = Uri.parse('${APIEndPoints.baseUrl}/subscriptions/user/$userId');
     String? token = await _secureStorage.read(key: "apiToken");
-    dev.log("getSubscription called");
+    // dev.log("getSubscription called");
 
     final header = {
       'Content-Type': 'application/json',

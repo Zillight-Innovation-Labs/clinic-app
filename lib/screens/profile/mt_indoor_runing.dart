@@ -31,10 +31,10 @@ class _IndoorRunningScreenState extends State<IndoorRunningScreen> {
       });
     }
     if (time != null) {
-      toast("Indoor Running Reminder set to $time everday");
-        context.read<ProfileProvider>().postExercise(
+      toast("${widget.exercise.name} Reminder set to $time daily");
+      context.read<ProfileProvider>().postExercise(
             exerciseId: widget.exercise.id.toString(),
-            exerciseTime: time!,
+            reminderTime: time!,
           );
     }
   }
@@ -51,7 +51,7 @@ class _IndoorRunningScreenState extends State<IndoorRunningScreen> {
           color: kTitleColor,
         ),
         title: Text(
-          "Indoor Running",
+          " ${widget.exercise.name}",
           style: ktitleTextStyle,
         ),
       ),

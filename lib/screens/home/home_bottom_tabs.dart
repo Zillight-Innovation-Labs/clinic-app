@@ -50,6 +50,7 @@ class _HomeBottomNavBarScreenState extends State<HomeBottomNavBarScreen> {
     context.read<AppointmentProvider>().getAppointment();
     context.read<AppointmentProvider>().getSubscription();
     context.read<ProfileProvider>().getExercise();
+    context.read<ProfileProvider>().getUserExercise();
     super.initState();
   }
 

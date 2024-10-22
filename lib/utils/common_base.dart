@@ -1403,3 +1403,46 @@ String? validateFullName<T>(String? value) {
   // if (value.split(' ').length < 2) return 'Enter a valid Full Name';
   return null;
 }
+  String formatExerciseTime(String time) {
+    // Remove AM/PM
+    String cleanTime = time.replaceAll(RegExp(r'AM|PM'), '').trim();
+
+    // Split into hours and minutes
+    List<String> timeParts = cleanTime.split(':');
+    String hour = timeParts[0];
+    String minute = timeParts[1];
+
+    // Add leading zero to the hour if it's a single digit
+    if (hour.length == 1) {
+      hour = '0$hour';
+    }
+
+    return '$hour:$minute';
+  }
+
+  int getTimeDifference(String targetTime) {
+  DateFormat formatWithSeconds = DateFormat("HH:mm:ss");
+  DateFormat formatWithoutSeconds = DateFormat("HH:mm");
+  
+  DateTime targetDateTime;
+
+  try {
+    targetDateTime = formatWithSeconds.parseStrict(targetTime);
+  } catch (e) {
+    targetDateTime = formatWithoutSeconds.parseStrict(targetTime);
+  }
+
+  DateTime now = DateTime.now();
+
+  targetDateTime = DateTime(now.year, now.month, now.day, targetDateTime.hour, targetDateTime.minute, targetDateTime.second);
+
+  Duration difference = targetDateTime.difference(now);
+
+  if (difference.isNegative) {
+    targetDateTime = targetDateTime.add(const Duration(days: 1)); // Move to the next day
+    difference = targetDateTime.difference(now); 
+    return difference.inSeconds;
+  } else  {
+    return difference.inSeconds;
+  } 
+}
