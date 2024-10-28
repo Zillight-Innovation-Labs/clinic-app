@@ -73,7 +73,7 @@ class PaymentProvider extends ChangeNotifier {
         // notifyListeners();
       }
     } catch (e) {
-      dev.log("catch error  $e");
+      dev.log("catch error pay1 $e");
       setState(PaymentState.error);
     }
   }
@@ -105,7 +105,7 @@ class PaymentProvider extends ChangeNotifier {
         // notifyListeners();
       }
     } catch (e) {
-      dev.log("catch error  $e");
+      dev.log("catch error pay2 $e");
       setState(PaymentState.error);
     }
   }
@@ -130,7 +130,7 @@ class PaymentProvider extends ChangeNotifier {
         notifyListeners();
       }
     } catch (e) {
-      dev.log("catch error  $e");
+      dev.log("catch error pay3 $e");
       setState(PaymentState.error);
     }
   }

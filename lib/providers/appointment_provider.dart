@@ -117,7 +117,7 @@ class AppointmentProvider extends ChangeNotifier {
         notifyListeners();
       }
     } catch (e) {
-      dev.log("catch error  $e");
+      dev.log("catch error appoint 1  $e");
       setState(AppointmentState.error);
     }
   }
@@ -147,7 +147,7 @@ class AppointmentProvider extends ChangeNotifier {
         notifyListeners();
       }
     } catch (e) {
-      dev.log("catch error  $e");
+      dev.log("catch error appoint 2 $e");
       setState(AppointmentState.error);
     }
   }

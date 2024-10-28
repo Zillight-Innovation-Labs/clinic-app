@@ -28,7 +28,7 @@ class ProfileController extends GetxController {
     AuthServiceApis.clearData();
     Get.offAll(() => SignInScreen(), binding: BindingsBuilder(() {
       // Get.offAll(() => const HomeBottomNavBarScreen(), binding: BindingsBuilder(() {
-      Get.put(HomeController());
+      // Get.put(HomeController());
     }));
     // await AuthServiceApis.logoutApi().then((value) {
     //   isLoading(false);

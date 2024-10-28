@@ -203,10 +203,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       positiveText: locale.value.logout,
                       onAccept: (_) {
                         profileController.handleLogout();
-                        Future.delayed(const Duration(seconds: 2),(){
-                          context.read<BottomNavProvider>().setNavbarIndex(0);
-                          context.read<AppointmentProvider>().clearData();
-                        });
+                        context.read<AppointmentProvider>().clearData();
+                    
                       },
                       dialogType: DialogType.CONFIRMATION,
                       subTitle: locale.value.doYouWantToLogout,

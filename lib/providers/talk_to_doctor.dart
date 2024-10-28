@@ -73,7 +73,7 @@ class TalkToDoctorProvider extends ChangeNotifier {
         // notifyListeners();
       }
     } catch (e) {
-      dev.log("catch error  $e");
+      dev.log("catch error talk1 $e");
       setState(TalkToDoctorState.error);
     }
   }
@@ -105,7 +105,7 @@ class TalkToDoctorProvider extends ChangeNotifier {
         // notifyListeners();
       }
     } catch (e) {
-      dev.log("catch error  $e");
+      dev.log("catch error takl2  $e");
       setState(TalkToDoctorState.error);
     }
   }
@@ -130,7 +130,7 @@ class TalkToDoctorProvider extends ChangeNotifier {
         notifyListeners();
       }
     } catch (e) {
-      dev.log("catch error  $e");
+      dev.log("catch error talk 3  $e");
       setState(TalkToDoctorState.error);
     }
   }

@@ -53,7 +53,7 @@ class _MyPrescriptionHistoryScreenState extends State<MyPrescriptionHistoryScree
                       elevation: 0,
                       enableScaleAnimation: false,
                       onTap: () {
-                        const PastPrescriptionHistoryScreen().launch(context);
+                        // const PastPrescriptionHistoryScreen().launch(context);
                       },
                       shapeBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: kMainColor)),
                       text: "Past",
@@ -159,9 +159,10 @@ class _MyPrescriptionHistoryScreenState extends State<MyPrescriptionHistoryScree
                               ),
                             ),
                           ),
-                        ).onTap(
-                          () => const OrderDetailsScreen().launch(context),
                         );
+                        // .onTap(
+                        //   () => const OrderDetailsScreen().launch(context),
+                        // );
                       },
                     ),
                     const SizedBox(
@@ -241,7 +242,8 @@ class _MyPrescriptionHistoryScreenState extends State<MyPrescriptionHistoryScree
                                       ),
                                     ),
                                   ])),
-                            )).onTap(() => const OrderDetailsScreen().launch(context));
+                            )
+                            );
                       },
                     ),
                   ],

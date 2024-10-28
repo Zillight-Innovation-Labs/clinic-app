@@ -34,7 +34,7 @@ class SignUpController extends GetxController {
     "last_name": "Doe",
     "email": "test1@gmail.com",
     "password": "password123",
-    "password_confirmation": "password123"
+    "password_confirmation": "password123" 
       */
       Map<String, dynamic> req = {
         "email": emailCont.text.trim(),

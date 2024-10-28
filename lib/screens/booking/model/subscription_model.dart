@@ -1,7 +1,7 @@
 class SubscriptionModel {
-  final int id;
-  final String memberId;
-  final String packId;
+  final dynamic id;
+  final dynamic  memberId;
+  final dynamic  packId;
   final String subscriptionType;
   final String amount;
   final String? paystackReference;
@@ -46,8 +46,8 @@ class SubscriptionModel {
 }
 
 class Package {
-  final int id;
-  final String serviceId;
+  final dynamic id;
+  final dynamic serviceId;
   final String name;
   final String amount;
   final String features;
@@ -75,7 +75,7 @@ class Package {
 }
 
 class Service {
-  final int id;
+  final dynamic id;
   final String name;
   final String description;
   final DateTime createdAt;

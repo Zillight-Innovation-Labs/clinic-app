@@ -16,10 +16,10 @@ class ExerciseModel {
 }
 
 class Exercise {
-  final int? id;
+  final dynamic id;
   final String? name;
   final String? description;
-  final String? duration;
+  final dynamic duration;
   final String? createdAt;
   final String? updatedAt;
 

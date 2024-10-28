@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:kivicare_patient/providers/bottom_nav_provider.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:get/get.dart';
 import 'package:kivicare_patient/utils/app_common.dart';
+import 'package:provider/provider.dart';
 import '../../../components/app_logo_widget.dart';
 import '../../../components/app_scaffold.dart';
 import '../../../generated/assets.dart';
@@ -13,7 +15,7 @@ import '../../../utils/common_base.dart';
 import '../password/forget_password_screen.dart';
 import 'signup_screen.dart';
 
-class SignInScreen extends StatelessWidget { 
+class SignInScreen extends StatelessWidget {
   SignInScreen({Key? key}) : super(key: key);
   final SignInController signInController = Get.put(SignInController());
 
@@ -140,7 +142,7 @@ class SignInScreen extends StatelessWidget {
                               color: appColorSecondary,
                               textStyle: appButtonTextStyleWhite,
                               onTap: () {
-                             
+                                context.read<BottomNavProvider>().setNavbarIndex(0);
                                 if (signInController.signInformKey.currentState!
                                     .validate()) {
                                   signInController.signInformKey.currentState!
@@ -152,43 +154,43 @@ class SignInScreen extends StatelessWidget {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                GestureDetector(
-                                  onTap: () {
-                                    signInController.googleSignIn();
-                                  },
-                                  child: Container(
-                                    height: 54,
-                                    width: 54,
-                                    padding: const EdgeInsets.all(18),
-                                    decoration: boxDecorationWithRoundedCorners(
-                                      backgroundColor:
-                                          bodyWhite.withOpacity(0.1),
-                                      boxShape: BoxShape.circle,
-                                    ),
-                                    child: GoogleLogoWidget(size: 24),
-                                  ),
-                                ),
-                                GestureDetector(
-                                  onTap: () {
-                                    signInController.appleSignIn();
-                                  },
-                                  child: Container(
-                                    height: 54,
-                                    width: 54,
-                                    padding: const EdgeInsets.all(16),
-                                    decoration: boxDecorationWithRoundedCorners(
-                                      backgroundColor:
-                                          bodyWhite.withOpacity(0.1),
-                                      boxShape: BoxShape.circle,
-                                    ),
-                                    child: Image.asset(
-                                      Assets.imagesAppleLogo,
-                                      color: isDarkMode.value ? null : black,
-                                    ).center(),
-                                  ).paddingLeft(16).visible(isApple),
-                                ),
+                                // GestureDetector(
+                                //   onTap: () {
+                                //     signInController.googleSignIn();
+                                //   },
+                                //   child: Container(
+                                //     height: 54,
+                                //     width: 54,
+                                //     padding: const EdgeInsets.all(18),
+                                //     decoration: boxDecorationWithRoundedCorners(
+                                //       backgroundColor:
+                                //           bodyWhite.withOpacity(0.1),
+                                //       boxShape: BoxShape.circle,
+                                //     ),
+                                //     child: GoogleLogoWidget(size: 24),
+                                //   ),
+                                // ),
+                                // GestureDetector(
+                                //   onTap: () {
+                                //     signInController.appleSignIn();
+                                //   },
+                                //   child: Container(
+                                //     height: 54,
+                                //     width: 54,
+                                //     padding: const EdgeInsets.all(16),
+                                //     decoration: boxDecorationWithRoundedCorners(
+                                //       backgroundColor:
+                                //           bodyWhite.withOpacity(0.1),
+                                //       boxShape: BoxShape.circle,
+                                //     ),
+                                //     child: Image.asset(
+                                //       Assets.imagesAppleLogo,
+                                //       color: isDarkMode.value ? null : black,
+                                //     ).center(),
+                                //   ).paddingLeft(16).visible(isApple),
+                                // ),
                               ],
-                            ).paddingLeft(16)
+                            )
                           ],
                         ),
                         8.height,

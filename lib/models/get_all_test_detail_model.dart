@@ -73,7 +73,7 @@ class Data {
 }
 
 class Test {
-    String id;
+    dynamic id;
     String testName;
     AdminId adminId;
     List<QuestionType> questionTypes;
@@ -170,7 +170,7 @@ class ExtraDetails {
 
 class QuestionType {
     String questions;
-    String id;
+    dynamic id;
 
     QuestionType({
         required this.questions,

@@ -15,9 +15,9 @@ class UserExerciseModel {
 }
 
 class UserExercise {
-  final int id;
-  final String userId;
-  final String exerciseId;
+  final dynamic id;
+  final dynamic userId;
+  final dynamic exerciseId;
   final String createdAt;
   final String updatedAt;
   final String reminderTime;
@@ -50,7 +50,7 @@ class UserExercise {
 }
 
 class Exercis {
-  final int id;
+  final dynamic id;
   final String name;
   final String description;
   final String duration;

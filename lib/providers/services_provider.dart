@@ -38,6 +38,8 @@ Future<void> getServices() async {
       // dev.log("response data: $responseData");
       
       var servicesList = responseData['data'] as List<dynamic>;
+
+      // dev.log(" responseData['data'] :${ responseData['data'] }");
       
       // Map the list of dynamic objects to a list of Service objects
       _getServicesModel = servicesList.map((service) => Service.fromJson(service)).toList();
@@ -45,7 +47,7 @@ Future<void> getServices() async {
       notifyListeners();
     }
   } catch (e) {
-    dev.log("catch error  $e");
+    dev.log("catch error -service error: $e");
     setState(ServicesState.error);
   }
 }

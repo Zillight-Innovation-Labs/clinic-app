@@ -12,7 +12,7 @@ import '../api/auth_apis.dart';
 import '../utils/common_base.dart';
 import '../utils/constants.dart';
 import 'auth/model/login_response.dart';
-import 'dart:developer' as dev;
+// import 'dart:developer' as dev;
 class SplashScreenController extends GetxController { 
   @override
   void onInit() {

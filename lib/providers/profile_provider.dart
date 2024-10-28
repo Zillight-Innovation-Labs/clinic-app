@@ -101,7 +101,7 @@ class ProfileProvider extends ChangeNotifier {
         notifyListeners();
       }
     } catch (e) {
-      dev.log("catch error  $e");
+      dev.log("catch error profile1 $e");
       setState(ProfileState.error);
     }
   }
@@ -124,7 +124,7 @@ class ProfileProvider extends ChangeNotifier {
         getUserExercise();
       }
     } catch (e) {
-      dev.log("catch error  $e");
+      dev.log("catch error profile 3  $e");
       setState(ProfileState.error);
     }
   }
@@ -157,7 +157,7 @@ class ProfileProvider extends ChangeNotifier {
         notifyListeners();
       }
     } catch (e) {
-      dev.log("catch error  $e");
+      dev.log("catch error profile 4  $e");
       setState(ProfileState.error);
     }
   }

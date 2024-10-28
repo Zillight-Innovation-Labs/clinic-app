@@ -1,12 +1,12 @@
 // ignore_for_file: prefer_null_aware_operators
 
 class Appointment {
-  final String? id;
-  final String? doctorId;
-  final String? userId;
+  final dynamic id;
+  final dynamic doctorId;
+  final dynamic userId;
   final String? appointmentDate;
   final String? appointmentTime;
-  final String? duration;
+  final dynamic duration;
   final String? location;
   final String? status;
   final String? createdAt;
