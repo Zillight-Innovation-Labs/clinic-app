@@ -2,7 +2,7 @@
 // import 'package:get/get.dart';
 // import 'package:nb_utils/nb_utils.dart';
 // import 'package:url_launcher/url_launcher.dart';
-// import 'package:kivicare_patient/generated/assets.dart';
+// import 'package:healthcelerate/generated/assets.dart';
 // import '../../../../components/cached_image_widget.dart';
 // import '../../../../utils/colors.dart';
 // import '../../../../utils/common_base.dart';

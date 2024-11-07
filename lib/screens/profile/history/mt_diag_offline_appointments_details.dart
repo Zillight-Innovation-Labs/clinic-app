@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:kivicare_patient/api/const/const.dart';
-import 'package:kivicare_patient/screens/profile/history/mt_write_review.dart';
+import 'package:healthcelerate/api/const/const.dart';
+import 'package:healthcelerate/screens/profile/history/mt_write_review.dart';
 import 'package:nb_utils/nb_utils.dart';
-
 
 class DiagnosticsOfflineAppoinmentScreen extends StatefulWidget {
   const DiagnosticsOfflineAppoinmentScreen({Key? key}) : super(key: key);
 
   @override
-  State<DiagnosticsOfflineAppoinmentScreen> createState() => _DiagnosticsOfflineAppoinmentScreenState();
+  State<DiagnosticsOfflineAppoinmentScreen> createState() =>
+      _DiagnosticsOfflineAppoinmentScreenState();
 }
 
-class _DiagnosticsOfflineAppoinmentScreenState extends State<DiagnosticsOfflineAppoinmentScreen> {
+class _DiagnosticsOfflineAppoinmentScreenState
+    extends State<DiagnosticsOfflineAppoinmentScreen> {
   var index = 0;
 
   @override
@@ -78,68 +79,74 @@ class _DiagnosticsOfflineAppoinmentScreenState extends State<DiagnosticsOfflineA
                   borderRadius: BorderRadius.circular(10),
                   side: BorderSide.none),
               child: Padding(
-                  padding: const EdgeInsets.all(12.0),
-                  child: Row(
+                padding: const EdgeInsets.all(12.0),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(46),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          image: const DecorationImage(
+                              image: AssetImage(
+                                "assets/images/diagnostics_lab.png",
+                              ),
+                              fit: BoxFit.fill)),
+                    ),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Container(
-                          padding: const EdgeInsets.all(46),
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(8),
-                              image: const DecorationImage(
-                                  image: AssetImage(
-                                    "assets/images/diagnostics_lab.png",
-                                  ),
-                                  fit: BoxFit.fill)),
+                        const Text(
+                          "Tested Labs",
+                          style: TextStyle(fontWeight: FontWeight.w600),
                         ),
                         const SizedBox(
-                          width: 10,
+                          height: 4,
                         ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const Text(
-                              "Tested Labs",
-                              style: TextStyle(fontWeight: FontWeight.w600),
-                            ),
-                            const SizedBox(
-                              height: 4,
-                            ),
-                            RichText(
-                                text: TextSpan(
-                                    text: "Doctor: ",
-                                    style: ksubTitleTextStyle,
-                                    children: [
-                                  TextSpan(
-                                    text: "Dr. Josiah Toor",
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        color: kSubTitleColor),
-                                  ),
-                                ],),),
-                            const SizedBox(
-                              height: 4,
-                            ),
-                            Text(
-                              "25 May 22 - 10:00 AM",
-                              style: ksubTitleTextStyle,
-                            ),
-                            const SizedBox(
-                              height: 3,
-                            ),
-                            RichText(
-                                text: TextSpan(
-                                    text: "Hospital- ",
-                                    style: ksubTitleTextStyle,
-                                    children: [
-                                  TextSpan(
-                                    text: "Accepted",
-                                    style: TextStyle(color: kWatchColor),
-                                  ),
-                                ],),),
-                          ],
+                        RichText(
+                          text: TextSpan(
+                            text: "Doctor: ",
+                            style: ksubTitleTextStyle,
+                            children: [
+                              TextSpan(
+                                text: "Dr. Josiah Toor",
+                                style: TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    color: kSubTitleColor),
+                              ),
+                            ],
+                          ),
                         ),
-                      ],),),
+                        const SizedBox(
+                          height: 4,
+                        ),
+                        Text(
+                          "25 May 22 - 10:00 AM",
+                          style: ksubTitleTextStyle,
+                        ),
+                        const SizedBox(
+                          height: 3,
+                        ),
+                        RichText(
+                          text: TextSpan(
+                            text: "Hospital- ",
+                            style: ksubTitleTextStyle,
+                            children: [
+                              TextSpan(
+                                text: "Accepted",
+                                style: TextStyle(color: kWatchColor),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
             ),
             const SizedBox(
               height: 12,
@@ -169,13 +176,14 @@ class _DiagnosticsOfflineAppoinmentScreenState extends State<DiagnosticsOfflineA
                             decoration: BoxDecoration(
                                 color: kLikeWhiteColor, shape: BoxShape.circle),
                             child: Padding(
-                                padding: const EdgeInsets.all(10.0),
-                                child: ImageIcon(
-                                  const AssetImage(
-                                    "assets/images/covid_diag.png",
-                                  ),
-                                  color: kWatchColor,
-                                ),),
+                              padding: const EdgeInsets.all(10.0),
+                              child: ImageIcon(
+                                const AssetImage(
+                                  "assets/images/covid_diag.png",
+                                ),
+                                color: kWatchColor,
+                              ),
+                            ),
                           ),
                           const SizedBox(
                             width: 12,
@@ -195,7 +203,8 @@ class _DiagnosticsOfflineAppoinmentScreenState extends State<DiagnosticsOfflineA
                     Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        ImageIcon(const AssetImage("assets/images/ic_hospital.png"),
+                        ImageIcon(
+                            const AssetImage("assets/images/ic_hospital.png"),
                             color: kSubTitleColor),
                         const SizedBox(
                           width: 12,
@@ -414,7 +423,6 @@ class _DiagnosticsOfflineAppoinmentScreenState extends State<DiagnosticsOfflineA
                     const SizedBox(
                       height: 24,
                     ),
-
                   ],
                 ),
               ),

@@ -1,9 +1,9 @@
 import 'dart:developer' as dev;
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kivicare_patient/components/app_scaffold.dart';
-import 'package:kivicare_patient/providers/appointment_provider.dart';
-import 'package:kivicare_patient/providers/payment_provider.dart';
+import 'package:healthcelerate/components/app_scaffold.dart';
+import 'package:healthcelerate/providers/appointment_provider.dart';
+import 'package:healthcelerate/providers/payment_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 

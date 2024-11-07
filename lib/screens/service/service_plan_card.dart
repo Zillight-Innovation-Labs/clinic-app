@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:kivicare_patient/utils/common_base.dart';
+import 'package:healthcelerate/utils/common_base.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class ServicePlanCard extends StatelessWidget {
-   ServicePlanCard({
+  ServicePlanCard({
     super.key,
     required this.name,
     required this.price,
@@ -12,7 +12,7 @@ class ServicePlanCard extends StatelessWidget {
   final String name;
   final String price;
 
-   List? features;
+  List? features;
 
   @override
   Widget build(BuildContext context) {
@@ -49,13 +49,11 @@ class ServicePlanCard extends StatelessWidget {
                   SizedBox(width: 30),
                 ],
               ),
-            if(features!.isNotEmpty)...[
+              if (features!.isNotEmpty) ...[
                 ...List.generate(features!.length, (int index) {
-                return  tileText(text: features![index], size: size);
-                
-              }),
-            ],
-         
+                  return tileText(text: features![index], size: size);
+                }),
+              ],
               const SizedBox(height: 30)
             ],
           ),

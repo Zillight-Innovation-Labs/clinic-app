@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:kivicare_patient/utils/colors.dart';
+import 'package:healthcelerate/utils/colors.dart';
 import '../../../components/app_shader_widget.dart';
 import 'menu.dart';
 
@@ -52,7 +52,11 @@ class BtmNavItem extends StatelessWidget {
                   ),
                 ),
                 5.width,
-                Marquee(child: Text(navBar.title, overflow: TextOverflow.ellipsis, style: primaryTextStyle(color: white, size: 14))).flexible(),
+                Marquee(
+                        child: Text(navBar.title,
+                            overflow: TextOverflow.ellipsis,
+                            style: primaryTextStyle(color: white, size: 14)))
+                    .flexible(),
               ],
             ).paddingSymmetric(horizontal: 6)
           : IconButton(

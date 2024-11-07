@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kivicare_patient/components/app_scaffold.dart';
-import 'package:kivicare_patient/providers/test_provider.dart';
-import 'package:kivicare_patient/screens/tests/bmi/bmi_test_result.dart';
-import 'package:kivicare_patient/screens/tests/sleep/sleep_test_result.dart';
-import 'package:kivicare_patient/utils/colors.dart';
-import 'package:kivicare_patient/utils/common_base.dart';
+import 'package:healthcelerate/components/app_scaffold.dart';
+import 'package:healthcelerate/providers/test_provider.dart';
+import 'package:healthcelerate/screens/tests/bmi/bmi_test_result.dart';
+import 'package:healthcelerate/screens/tests/sleep/sleep_test_result.dart';
+import 'package:healthcelerate/utils/colors.dart';
+import 'package:healthcelerate/utils/common_base.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'dart:developer' as dev;
 

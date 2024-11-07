@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:kivicare_patient/components/app_scaffold.dart';
+import 'package:healthcelerate/components/app_scaffold.dart';
 
 import '../../../components/cached_image_widget.dart';
 import '../../../generated/assets.dart';
@@ -34,7 +34,8 @@ class AboutDoctorComponent extends StatelessWidget {
                 child: ReadMoreText(
                   parseHtmlString(doctorData.aboutSelf),
                   trimLines: 4,
-                  style: secondaryTextStyle(size: 14, color: secondaryTextColor),
+                  style:
+                      secondaryTextStyle(size: 14, color: secondaryTextColor),
                   colorClickableText: appColorPrimary,
                   trimMode: TrimMode.Line,
                   textAlign: TextAlign.justify,
@@ -64,9 +65,15 @@ class AboutDoctorComponent extends StatelessWidget {
                         behavior: HitTestBehavior.translucent,
                         child: Row(
                           children: [
-                            const CachedImageWidget(url: Assets.iconsIcMail, color: primaryTextColor, width: 14, height: 14),
+                            const CachedImageWidget(
+                                url: Assets.iconsIcMail,
+                                color: primaryTextColor,
+                                width: 14,
+                                height: 14),
                             12.width,
-                            Text(doctorData.email, style: primaryTextStyle(color: secondaryTextColor)),
+                            Text(doctorData.email,
+                                style: primaryTextStyle(
+                                    color: secondaryTextColor)),
                           ],
                         ),
                       ).paddingBottom(16),
@@ -78,9 +85,15 @@ class AboutDoctorComponent extends StatelessWidget {
                         behavior: HitTestBehavior.translucent,
                         child: Row(
                           children: [
-                            const CachedImageWidget(url: Assets.iconsIcCall, color: primaryTextColor, width: 14, height: 14),
+                            const CachedImageWidget(
+                                url: Assets.iconsIcCall,
+                                color: primaryTextColor,
+                                width: 14,
+                                height: 14),
                             12.width,
-                            Text(doctorData.mobile, style: primaryTextStyle(color: secondaryTextColor)),
+                            Text(doctorData.mobile,
+                                style: primaryTextStyle(
+                                    color: secondaryTextColor)),
                           ],
                         ),
                       ),
@@ -88,7 +101,8 @@ class AboutDoctorComponent extends StatelessWidget {
                 ),
               ),
             ],
-          ).paddingBottom(30).visible(doctorData.email.isNotEmpty || doctorData.mobile.isNotEmpty),
+          ).paddingBottom(30).visible(
+              doctorData.email.isNotEmpty || doctorData.mobile.isNotEmpty),
           Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -99,9 +113,14 @@ class AboutDoctorComponent extends StatelessWidget {
                 decoration: boxDecorationDefault(color: context.cardColor),
                 child: Row(
                   children: [
-                    const CachedImageWidget(url: Assets.iconsIcSpecialization, color: primaryTextColor, width: 14, height: 14),
+                    const CachedImageWidget(
+                        url: Assets.iconsIcSpecialization,
+                        color: primaryTextColor,
+                        width: 14,
+                        height: 14),
                     12.width,
-                    Text(doctorData.expert, style: primaryTextStyle(color: secondaryTextColor)),
+                    Text(doctorData.expert,
+                        style: primaryTextStyle(color: secondaryTextColor)),
                   ],
                 ),
               ),
@@ -117,9 +136,14 @@ class AboutDoctorComponent extends StatelessWidget {
                 decoration: boxDecorationDefault(color: context.cardColor),
                 child: Row(
                   children: [
-                    const CachedImageWidget(url: Assets.iconsIcExperience, color: primaryTextColor, width: 14, height: 14),
+                    const CachedImageWidget(
+                        url: Assets.iconsIcExperience,
+                        color: primaryTextColor,
+                        width: 14,
+                        height: 14),
                     12.width,
-                    Text(doctorData.experience, style: primaryTextStyle(color: secondaryTextColor)),
+                    Text(doctorData.experience,
+                        style: primaryTextStyle(color: secondaryTextColor)),
                   ],
                 ),
               ),

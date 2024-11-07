@@ -1,16 +1,17 @@
 import 'dart:convert';
 import 'dart:developer' as dev;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:kivicare_patient/api/const/api.dart';
-import 'package:kivicare_patient/screens/service/test_services.dart';
-import 'package:kivicare_patient/utils/api_end_points.dart';
+import 'package:healthcelerate/api/const/api.dart';
+import 'package:healthcelerate/screens/service/test_services.dart';
+import 'package:healthcelerate/utils/api_end_points.dart';
 import 'package:http/http.dart' as http;
 
 class AppServiceApis {
   final _secureStorage = const FlutterSecureStorage();
 
   Future<ApiResponse> getServices() async {
-    final url = Uri.parse('${APIEndPoints.baseUrl}/${APIEndPoints.getServices}' );
+    final url =
+        Uri.parse('${APIEndPoints.baseUrl}/${APIEndPoints.getServices}');
     String? token = await _secureStorage.read(key: "apiToken");
 
     final header = {
@@ -19,7 +20,6 @@ class AppServiceApis {
     };
 
     try {
-
       final response = await http.get(url, headers: header);
 
       dev.log(response.statusCode.toString());

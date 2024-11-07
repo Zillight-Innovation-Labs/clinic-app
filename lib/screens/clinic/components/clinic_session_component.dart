@@ -1,77 +1,83 @@
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:nb_utils/nb_utils.dart';
-import 'package:kivicare_patient/components/app_scaffold.dart';
-import 'package:kivicare_patient/screens/clinic/components/week_time_comnponents.dart';
+// import 'package:flutter/material.dart';
+// import 'package:get/get.dart';
+// import 'package:nb_utils/nb_utils.dart';
+// import 'package:healthcelerate/components/app_scaffold.dart';
+// import 'package:healthcelerate/screens/clinic/components/week_time_comnponents.dart';
 
-import '../../../utils/colors.dart';
-import '../clinic_detail_controller.dart';
-import '../model/clinic_detail_model.dart';
+// import '../../../utils/colors.dart';
+// import '../clinic_detail_controller.dart';
+// import '../model/clinic_detail_model.dart';
 
-class ClinicSessionComponent extends StatelessWidget {
-  final ClinicDetailController clinicDetailCont;
+// class ClinicSessionComponent extends StatelessWidget {
+//   final ClinicDetailController clinicDetailCont;
 
-  const ClinicSessionComponent({super.key, required this.clinicDetailCont});
+//   const ClinicSessionComponent({super.key, required this.clinicDetailCont});
 
-  @override
-  Widget build(BuildContext context) {
-    return AppScaffoldNew(
-      appBartitleText: "Session",
-      scaffoldBackgroundColor: context.scaffoldBackgroundColor,
-      appBarVerticalSize: Get.height * 0.12,
-      body: RefreshIndicator(
-        onRefresh: () {
-          return clinicDetailCont.init(showLoader: false);
-        },
-        child: Obx(
-          () => AnimatedListView(
-            listAnimationType: ListAnimationType.FadeIn,
-            padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
-            shrinkWrap: true,
-            itemCount: clinicDetailCont.clinicData.value.allClinicSession.length,
-            itemBuilder: (ctx, index) {
-              AllClinicSession allClinicSessionData = clinicDetailCont.clinicData.value.allClinicSession[index];
+//   @override
+//   Widget build(BuildContext context) {
+//     return AppScaffoldNew(
+//       appBartitleText: "Session",
+//       scaffoldBackgroundColor: context.scaffoldBackgroundColor,
+//       appBarVerticalSize: Get.height * 0.12,
+//       body: RefreshIndicator(
+//         onRefresh: () {
+//           return clinicDetailCont.init(showLoader: false);
+//         },
+//         child: Obx(
+//           () => AnimatedListView(
+//             listAnimationType: ListAnimationType.FadeIn,
+//             padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
+//             shrinkWrap: true,
+//             itemCount:
+//                 clinicDetailCont.clinicData.value.allClinicSession.length,
+//             itemBuilder: (ctx, index) {
+//               AllClinicSession allClinicSessionData =
+//                   clinicDetailCont.clinicData.value.allClinicSession[index];
 
-              return Container(
-                padding: const EdgeInsets.all(16),
-                margin: const EdgeInsets.only(bottom: 16),
-                decoration: boxDecorationDefault(borderRadius: BorderRadius.circular(6)),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      children: [
-                        Text(
-                          allClinicSessionData.day.capitalize.toString(),
-                          style: primaryTextStyle(
-                            size: 12,
-                            weight: FontWeight.w500,
-                            color: allClinicSessionData.isHoliday ? dividerColor : blackTextColor,
-                          ),
-                        ).expand(),
-                        if (allClinicSessionData.isHoliday)
-                          Text(
-                            "Unavailable",
-                            style: primaryTextStyle(
-                              size: 12,
-                              weight: FontWeight.w500,
-                              color: dividerColor,
-                            ),
-                          ),
-                      ],
-                    ),
-                    if (!allClinicSessionData.isHoliday) WeekTimeComponent(weekData: allClinicSessionData),
-                  ],
-                ),
-              );
-            },
-          ),
-        ),
-      ),
-    );
-  }
-}
+//               return Container(
+//                 padding: const EdgeInsets.all(16),
+//                 margin: const EdgeInsets.only(bottom: 16),
+//                 decoration: boxDecorationDefault(
+//                     borderRadius: BorderRadius.circular(6)),
+//                 child: Column(
+//                   crossAxisAlignment: CrossAxisAlignment.start,
+//                   mainAxisAlignment: MainAxisAlignment.start,
+//                   mainAxisSize: MainAxisSize.min,
+//                   children: [
+//                     Row(
+//                       mainAxisAlignment: MainAxisAlignment.start,
+//                       crossAxisAlignment: CrossAxisAlignment.center,
+//                       children: [
+//                         Text(
+//                           allClinicSessionData.day.capitalize.toString(),
+//                           style: primaryTextStyle(
+//                             size: 12,
+//                             weight: FontWeight.w500,
+//                             color: allClinicSessionData.isHoliday
+//                                 ? dividerColor
+//                                 : blackTextColor,
+//                           ),
+//                         ).expand(),
+//                         if (allClinicSessionData.isHoliday)
+//                           Text(
+//                             "Unavailable",
+//                             style: primaryTextStyle(
+//                               size: 12,
+//                               weight: FontWeight.w500,
+//                               color: dividerColor,
+//                             ),
+//                           ),
+//                       ],
+//                     ),
+//                     if (!allClinicSessionData.isHoliday)
+//                       WeekTimeComponent(weekData: allClinicSessionData),
+//                   ],
+//                 ),
+//               );
+//             },
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }

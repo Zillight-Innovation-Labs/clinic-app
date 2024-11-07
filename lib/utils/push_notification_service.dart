@@ -1,219 +1,214 @@
-import 'dart:convert';
-import 'dart:io';
+// import 'dart:convert';
+// import 'dart:io';
+// import 'package:firebase_messaging/firebase_messaging.dart';
+// import 'package:flutter_local_notifications/flutter_local_notifications.dart';
+// import 'package:nb_utils/nb_utils.dart';
+// import '../main.dart';
+// import '../models/notificationdata_model.dart';
+// import 'app_common.dart';
+// import 'constants.dart';
 
-import 'package:firebase_messaging/firebase_messaging.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:get/get.dart';
-import 'package:nb_utils/nb_utils.dart';
-import 'package:kivicare_patient/screens/booking/appointment_detail_screen.dart';
+// class PushNotificationService {
+// // It is assumed that all messages contain a data field with the key 'type'
+//   Future<void> setupFirebaseMessaging() async {
+//     await initFirebaseMessaging();
 
-import '../main.dart';
-import '../models/notificationdata_model.dart';
-import '../screens/booking/model/appointments_res_model.dart';
-import 'app_common.dart';
-import 'constants.dart';
+//     await enableIOSNotifications();
+//   }
 
-class PushNotificationService {
-// It is assumed that all messages contain a data field with the key 'type'
-  Future<void> setupFirebaseMessaging() async {
-    await initFirebaseMessaging();
+//   Future<void> initFirebaseMessaging() async {
+//     // ignore: body_might_complete_normally_catch_error
+//     NotificationSettings settings = await FirebaseMessaging.instance.requestPermission(alert: true, badge: true, sound: true, provisional: true).catchError((e) {
+//       log('------Request Notification Permission ERROR-----------');
+//     });
 
-    await enableIOSNotifications();
-  }
+//     if (settings.authorizationStatus == AuthorizationStatus.authorized) {
+//       log('------Request Notification Permission COMPLETED-----------');
+//       await registerNotificationListeners().then((value) {
+//         log('------Notification Listener REGISTRATION COMPLETED-----------');
+//       }).catchError((e) {
+//         log('------Notification Listener REGISTRATION ERROR-----------');
+//       });
 
-  Future<void> initFirebaseMessaging() async {
-    // ignore: body_might_complete_normally_catch_error
-    NotificationSettings settings = await FirebaseMessaging.instance.requestPermission(alert: true, badge: true, sound: true, provisional: true).catchError((e) {
-      log('------Request Notification Permission ERROR-----------');
-    });
+//       FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 
-    if (settings.authorizationStatus == AuthorizationStatus.authorized) {
-      log('------Request Notification Permission COMPLETED-----------');
-      await registerNotificationListeners().then((value) {
-        log('------Notification Listener REGISTRATION COMPLETED-----------');
-      }).catchError((e) {
-        log('------Notification Listener REGISTRATION ERROR-----------');
-      });
+//       await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(alert: true, badge: true, sound: true).then((value) {
+//         log('------setForegroundNotificationPresentationOptions COMPLETED-----------');
+//       }).catchError((e) {
+//         log('------setForegroundNotificationPresentationOptions ERROR-----------');
+//       });
+//     }
+//   }
 
-      FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+//   Future<void> registerFCMAndTopics() async {
+//     if (isLoggedIn.value) {
+//       if (Platform.isIOS) {
+//         String? apnsToken = await FirebaseMessaging.instance.getAPNSToken();
+//         if (apnsToken != null) {
+//           subScribeToTopic();
+//         } else {
+//           Future.delayed(const Duration(seconds: 3), () async {
+//             apnsToken = await FirebaseMessaging.instance.getAPNSToken();
+//             if (apnsToken != null) {
+//               subScribeToTopic();
+//             }
+//           });
+//         }
+//         log("===============${FirebaseTopicConst.apnsNotificationTokenKey}===============\n$apnsToken");
+//       }
+//       FirebaseMessaging.instance.getToken().then((token) {
+//         log("===============${FirebaseTopicConst.fcmNotificationTokenKey}===============\n$token");
+//       });
+//       subScribeToTopic();
+//     }
+//   }
 
-      await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(alert: true, badge: true, sound: true).then((value) {
-        log('------setForegroundNotificationPresentationOptions COMPLETED-----------');
-      }).catchError((e) {
-        log('------setForegroundNotificationPresentationOptions ERROR-----------');
-      });
-    }
-  }
+//   Future<void> subScribeToTopic() async {
+//     await FirebaseMessaging.instance.subscribeToTopic('healthAndWellness').whenComplete(() {
+//       log("${FirebaseTopicConst.topicSubscribed}healthAndWellness");
+//     });
+//     await FirebaseMessaging.instance.subscribeToTopic("${FirebaseTopicConst.userWithUnderscoreKey}${loginUserData.value.id}").then((value) {
+//       log("${FirebaseTopicConst.topicSubscribed}${FirebaseTopicConst.userWithUnderscoreKey}${loginUserData.value.id}");
+//     });
+//   }
 
-  Future<void> registerFCMAndTopics() async {
-    if (isLoggedIn.value) {
-      if (Platform.isIOS) {
-        String? apnsToken = await FirebaseMessaging.instance.getAPNSToken();
-        if (apnsToken != null) {
-          subScribeToTopic();
-        } else {
-          Future.delayed(const Duration(seconds: 3), () async {
-            apnsToken = await FirebaseMessaging.instance.getAPNSToken();
-            if (apnsToken != null) {
-              subScribeToTopic();
-            }
-          });
-        }
-        log("===============${FirebaseTopicConst.apnsNotificationTokenKey}===============\n$apnsToken");
-      }
-      FirebaseMessaging.instance.getToken().then((token) {
-        log("===============${FirebaseTopicConst.fcmNotificationTokenKey}===============\n$token");
-      });
-      subScribeToTopic();
-    }
-  }
+//   Future<void> unsubscribeFirebaseTopic() async {
+//     await FirebaseMessaging.instance.unsubscribeFromTopic('healthAndWellness').then((value) {
+//       log("${FirebaseTopicConst.topicUnSubscribed}healthAndWellness");
+//     });
+//     await FirebaseMessaging.instance.unsubscribeFromTopic('${FirebaseTopicConst.userWithUnderscoreKey}${loginUserData.value.id}').then((value) {
+//       log("${FirebaseTopicConst.topicUnSubscribed}${FirebaseTopicConst.userWithUnderscoreKey}${loginUserData.value.id}");
+//     });
+//   }
 
-  Future<void> subScribeToTopic() async {
-    await FirebaseMessaging.instance.subscribeToTopic('healthAndWellness').whenComplete(() {
-      log("${FirebaseTopicConst.topicSubscribed}healthAndWellness");
-    });
-    await FirebaseMessaging.instance.subscribeToTopic("${FirebaseTopicConst.userWithUnderscoreKey}${loginUserData.value.id}").then((value) {
-      log("${FirebaseTopicConst.topicSubscribed}${FirebaseTopicConst.userWithUnderscoreKey}${loginUserData.value.id}");
-    });
-  }
+//   void handleNotificationClick(RemoteMessage message, {bool isForeGround = false}) {
+//     printLogsNotificationData(message);
+//     NotificationData notificationData = NotificationData.fromJson(message.data);
+//     log("===============${FirebaseTopicConst.notificationDataKey}===============\n${notificationData.toJson()}");
+//     if (isForeGround) {
+//       showNotification(currentTimeStamp(), message.notification!.title.validate(), message.notification!.body.validate(), message);
+//     } else {
+//       log('======== ELSE PART ===============');
+//       try {
+//         Map<String, dynamic> additionalData = jsonDecode(message.data[FirebaseTopicConst.additionalDataKey]) ?? {};
+//         if (additionalData.isNotEmpty) {
+//           int? notId = additionalData[FirebaseTopicConst.idKey];
+//           log("notId=== $notId");
+//           if (notId != null) {
+//             log("additionalData[FirebaseTopicConst.notificationGroupKey]=== ${additionalData[FirebaseTopicConst.notificationGroupKey]}");
+//             log("============ IN APPOINTMENT ================");
+//             // Get.to(
+//             //   () => AppointmentDetail(),
+//             //   arguments: AppointmentData(id: notId),
+//             // );
+//           }
+//         }
+//       } catch (e) {
+//         log('${FirebaseTopicConst.notificationErrorKey}: $e');
+//       }
+//     }
+//   }
 
-  Future<void> unsubscribeFirebaseTopic() async {
-    await FirebaseMessaging.instance.unsubscribeFromTopic('healthAndWellness').then((value) {
-      log("${FirebaseTopicConst.topicUnSubscribed}healthAndWellness");
-    });
-    await FirebaseMessaging.instance.unsubscribeFromTopic('${FirebaseTopicConst.userWithUnderscoreKey}${loginUserData.value.id}').then((value) {
-      log("${FirebaseTopicConst.topicUnSubscribed}${FirebaseTopicConst.userWithUnderscoreKey}${loginUserData.value.id}");
-    });
-  }
+//   Future<void> registerNotificationListeners() async {
+//     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+//       handleNotificationClick(message, isForeGround: true);
+//     }, onError: (e) {
+//       log("${FirebaseTopicConst.onMessageListen} $e");
+//     });
 
-  void handleNotificationClick(RemoteMessage message, {bool isForeGround = false}) {
-    printLogsNotificationData(message);
-    NotificationData notificationData = NotificationData.fromJson(message.data);
-    log("===============${FirebaseTopicConst.notificationDataKey}===============\n${notificationData.toJson()}");
-    if (isForeGround) {
-      showNotification(currentTimeStamp(), message.notification!.title.validate(), message.notification!.body.validate(), message);
-    } else {
-      log('======== ELSE PART ===============');
-      try {
-        Map<String, dynamic> additionalData = jsonDecode(message.data[FirebaseTopicConst.additionalDataKey]) ?? {};
-        if (additionalData.isNotEmpty) {
-          int? notId = additionalData[FirebaseTopicConst.idKey];
-          log("notId=== $notId");
-          if (notId != null) {
-            log("additionalData[FirebaseTopicConst.notificationGroupKey]=== ${additionalData[FirebaseTopicConst.notificationGroupKey]}");
-            log("============ IN APPOINTMENT ================");
-            Get.to(
-              () => AppointmentDetail(),
-              arguments: AppointmentData(id: notId),
-            );
-          }
-        }
-      } catch (e) {
-        log('${FirebaseTopicConst.notificationErrorKey}: $e');
-      }
-    }
-  }
+//     // replacement for onResume: When the app is in the background and opened directly from the push notification.
+//     FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
+//       handleNotificationClick(message);
+//     }, onError: (e) {
+//       log("${FirebaseTopicConst.onMessageOpened} $e");
+//     });
 
-  Future<void> registerNotificationListeners() async {
-    FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      handleNotificationClick(message, isForeGround: true);
-    }, onError: (e) {
-      log("${FirebaseTopicConst.onMessageListen} $e");
-    });
+//     // workaround for onLaunch: When the app is completely closed (not in the background) and opened directly from the push notification
+//     FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage? message) {
+//       if (message != null) {
+//         handleNotificationClick(message);
+//       }
+//     }, onError: (e) {
+//       log("${FirebaseTopicConst.onGetInitialMessage} $e");
+//     });
+//   }
 
-    // replacement for onResume: When the app is in the background and opened directly from the push notification.
-    FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-      handleNotificationClick(message);
-    }, onError: (e) {
-      log("${FirebaseTopicConst.onMessageOpened} $e");
-    });
+//   void showNotification(int id, String title, String message, RemoteMessage remoteMessage) async {
+//     FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
-    // workaround for onLaunch: When the app is completely closed (not in the background) and opened directly from the push notification
-    FirebaseMessaging.instance.getInitialMessage().then((RemoteMessage? message) {
-      if (message != null) {
-        handleNotificationClick(message);
-      }
-    }, onError: (e) {
-      log("${FirebaseTopicConst.onGetInitialMessage} $e");
-    });
-  }
+//     //code for background notification channel
+//     AndroidNotificationChannel channel = const AndroidNotificationChannel(
+//       FirebaseTopicConst.notificationChannelIdKey,
+//       FirebaseTopicConst.notificationChannelNameKey,
+//       importance: Importance.high,
+//       enableLights: true,
+//       playSound: true,
+//       showBadge: true,
+//     );
 
-  void showNotification(int id, String title, String message, RemoteMessage remoteMessage) async {
-    FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
+//     await flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.createNotificationChannel(channel);
 
-    //code for background notification channel
-    AndroidNotificationChannel channel = const AndroidNotificationChannel(
-      FirebaseTopicConst.notificationChannelIdKey,
-      FirebaseTopicConst.notificationChannelNameKey,
-      importance: Importance.high,
-      enableLights: true,
-      playSound: true,
-      showBadge: true,
-    );
+//     const AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('@drawable/ic_stat_notification');
 
-    await flutterLocalNotificationsPlugin.resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()?.createNotificationChannel(channel);
+//     var iOS = DarwinInitializationSettings(
+//       requestSoundPermission: false,
+//       requestBadgePermission: false,
+//       requestAlertPermission: false,
+//       onDidReceiveLocalNotification: (id, title, body, payload) {
+//         handleNotificationClick(remoteMessage, isForeGround: true);
+//       },
+//     );
 
-    const AndroidInitializationSettings initializationSettingsAndroid = AndroidInitializationSettings('@drawable/ic_stat_notification');
+//     var macOS = iOS;
 
-    var iOS = DarwinInitializationSettings(
-      requestSoundPermission: false,
-      requestBadgePermission: false,
-      requestAlertPermission: false,
-      onDidReceiveLocalNotification: (id, title, body, payload) {
-        handleNotificationClick(remoteMessage, isForeGround: true);
-      },
-    );
+//     final InitializationSettings initializationSettings = InitializationSettings(android: initializationSettingsAndroid, iOS: iOS, macOS: macOS);
+//     await flutterLocalNotificationsPlugin.initialize(initializationSettings, onDidReceiveNotificationResponse: (details) {
+//       handleNotificationClick(remoteMessage);
+//     });
 
-    var macOS = iOS;
+//     var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
+//       FirebaseTopicConst.notificationChannelIdKey,
+//       FirebaseTopicConst.notificationChannelNameKey,
+//       importance: Importance.high,
+//       visibility: NotificationVisibility.public,
+//       autoCancel: true,
+//       playSound: true,
+//       priority: Priority.high,
+//       icon: '@drawable/ic_stat_notification',
+//       channelShowBadge: true,
+//       colorized: true,
+//     );
 
-    final InitializationSettings initializationSettings = InitializationSettings(android: initializationSettingsAndroid, iOS: iOS, macOS: macOS);
-    await flutterLocalNotificationsPlugin.initialize(initializationSettings, onDidReceiveNotificationResponse: (details) {
-      handleNotificationClick(remoteMessage);
-    });
+//     var darwinPlatformChannelSpecifics = const DarwinNotificationDetails(
+//       presentSound: true,
+//       presentBanner: true,
+//       presentBadge: true,
+//     );
 
-    var androidPlatformChannelSpecifics = const AndroidNotificationDetails(
-      FirebaseTopicConst.notificationChannelIdKey,
-      FirebaseTopicConst.notificationChannelNameKey,
-      importance: Importance.high,
-      visibility: NotificationVisibility.public,
-      autoCancel: true,
-      playSound: true,
-      priority: Priority.high,
-      icon: '@drawable/ic_stat_notification',
-      channelShowBadge: true,
-      colorized: true,
-    );
+//     var platformChannelSpecifics = NotificationDetails(
+//       android: androidPlatformChannelSpecifics,
+//       iOS: darwinPlatformChannelSpecifics,
+//       macOS: darwinPlatformChannelSpecifics,
+//     );
 
-    var darwinPlatformChannelSpecifics = const DarwinNotificationDetails(
-      presentSound: true,
-      presentBanner: true,
-      presentBadge: true,
-    );
+//     flutterLocalNotificationsPlugin.show(id, title, message, platformChannelSpecifics);
+//   }
 
-    var platformChannelSpecifics = NotificationDetails(
-      android: androidPlatformChannelSpecifics,
-      iOS: darwinPlatformChannelSpecifics,
-      macOS: darwinPlatformChannelSpecifics,
-    );
+//   Future<void> enableIOSNotifications() async {
+//     await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
+//       alert: true, // Required to display a heads up notification
+//       badge: true,
+//       sound: true,
+//     );
+//   }
 
-    flutterLocalNotificationsPlugin.show(id, title, message, platformChannelSpecifics);
-  }
-
-  Future<void> enableIOSNotifications() async {
-    await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
-      alert: true, // Required to display a heads up notification
-      badge: true,
-      sound: true,
-    );
-  }
-
-  void printLogsNotificationData(RemoteMessage message) {
-    log("====================");
-    log('${FirebaseTopicConst.notificationDataKey} : ${message.data}');
-    log('${FirebaseTopicConst.notificationTitleKey} : ${message.notification?.title}');
-    log('${FirebaseTopicConst.notificationBodyKey} : ${message.notification?.body}');
-    log('${FirebaseTopicConst.messageDataCollapseKey} : ${message.collapseKey}');
-    log('${FirebaseTopicConst.messageDataMessageIdKey} : ${message.messageId}');
-    log('${FirebaseTopicConst.messageDataMessageTypeKey} : ${message.messageType}');
-  }
-}
+//   void printLogsNotificationData(RemoteMessage message) {
+//     log("====================");
+//     log('${FirebaseTopicConst.notificationDataKey} : ${message.data}');
+//     log('${FirebaseTopicConst.notificationTitleKey} : ${message.notification?.title}');
+//     log('${FirebaseTopicConst.notificationBodyKey} : ${message.notification?.body}');
+//     log('${FirebaseTopicConst.messageDataCollapseKey} : ${message.collapseKey}');
+//     log('${FirebaseTopicConst.messageDataMessageIdKey} : ${message.messageId}');
+//     log('${FirebaseTopicConst.messageDataMessageTypeKey} : ${message.messageType}');
+//   }
+// }

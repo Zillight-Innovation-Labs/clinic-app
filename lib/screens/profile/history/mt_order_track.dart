@@ -1,7 +1,7 @@
 // import 'package:flutter/material.dart';
 // import 'package:flutter_iconly/flutter_iconly.dart';
 // import 'package:google_maps_flutter/google_maps_flutter.dart';
-// import 'package:kivicare_patient/api/const/const.dart';
+// import 'package:healthcelerate/api/const/const.dart';
 // import 'package:nb_utils/nb_utils.dart';
 
 

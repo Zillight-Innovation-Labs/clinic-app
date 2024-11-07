@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kivicare_patient/providers/bottom_nav_provider.dart';
-import 'package:kivicare_patient/screens/profile/mt_medicine_reminders.dart';
-import 'package:kivicare_patient/screens/booking/talk_to_doc/talk_to_doctor.dart';
-import 'package:kivicare_patient/screens/home/home_card.dart';
-import 'package:kivicare_patient/screens/tests/take_test_page.dart';
+import 'package:healthcelerate/providers/bottom_nav_provider.dart';
+import 'package:healthcelerate/screens/profile/mt_medicine_reminders.dart';
+import 'package:healthcelerate/screens/booking/talk_to_doc/talk_to_doctor.dart';
+import 'package:healthcelerate/screens/home/home_card.dart';
+import 'package:healthcelerate/screens/tests/take_test_page.dart';
 import 'package:provider/provider.dart';
 
 class HomeBanner extends StatelessWidget {
@@ -31,7 +31,7 @@ class HomeBanner extends StatelessWidget {
               ),
               const SizedBox(width: 12),
               HomeCard(
-                  imagePath: "assets/images/eventService.png",
+                  imagePath: "assets/images/talk.png",
                   // imagePath: "assets/icons/talkToDocIcon.svg",
                   title: "Talk to a\nDoctor",
                   onTap: () {
@@ -67,5 +67,3 @@ class HomeBanner extends StatelessWidget {
     );
   }
 }
-
-

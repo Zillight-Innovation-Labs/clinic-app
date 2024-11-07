@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kivicare_patient/models/get_services_model.dart';
-import 'package:kivicare_patient/providers/services_provider.dart';
-import 'package:kivicare_patient/screens/service/components/service_card.dart';
-import 'package:kivicare_patient/screens/service/event_outreach_service.dart';
-import 'package:kivicare_patient/screens/service/personalized_self_service.dart';
-import 'package:kivicare_patient/screens/service/personalized_senior_service.dart';
-import 'package:kivicare_patient/screens/service/service_screen.dart';
-import 'package:kivicare_patient/utils/view_all_label_component.dart';
+import 'package:healthcelerate/models/get_services_model.dart';
+import 'package:healthcelerate/providers/services_provider.dart';
+import 'package:healthcelerate/screens/service/components/service_card.dart';
+import 'package:healthcelerate/screens/service/event_outreach_service.dart';
+import 'package:healthcelerate/screens/service/personalized_self_service.dart';
+import 'package:healthcelerate/screens/service/personalized_senior_service.dart';
+import 'package:healthcelerate/screens/service/service_screen.dart';
+import 'package:healthcelerate/utils/view_all_label_component.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:kivicare_patient/utils/colors.dart';
+import 'package:healthcelerate/utils/colors.dart';
 import 'package:provider/provider.dart';
 
 import '../home_controller.dart';

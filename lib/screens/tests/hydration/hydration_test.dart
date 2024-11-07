@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kivicare_patient/components/app_scaffold.dart';
-import 'package:kivicare_patient/components/toggle_yes_no.dart';
-import 'package:kivicare_patient/screens/tests/hydration/hydration_test_result.dart';
-import 'package:kivicare_patient/utils/colors.dart';
-import 'package:kivicare_patient/utils/common_base.dart';
+import 'package:healthcelerate/components/app_scaffold.dart';
+import 'package:healthcelerate/components/toggle_yes_no.dart';
+import 'package:healthcelerate/screens/tests/hydration/hydration_test_result.dart';
+import 'package:healthcelerate/utils/colors.dart';
+import 'package:healthcelerate/utils/common_base.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'dart:developer' as dev;
 

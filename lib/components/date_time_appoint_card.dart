@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
-import 'package:kivicare_patient/models/appointment_model.dart';
-import 'package:kivicare_patient/providers/appointment_provider.dart';
-import 'package:kivicare_patient/utils/colors.dart';
+import 'package:healthcelerate/models/appointment_model.dart';
+import 'package:healthcelerate/providers/appointment_provider.dart';
+import 'package:healthcelerate/utils/colors.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 

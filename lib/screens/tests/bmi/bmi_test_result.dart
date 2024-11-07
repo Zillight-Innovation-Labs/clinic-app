@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kivicare_patient/components/app_scaffold.dart';
+import 'package:healthcelerate/components/app_scaffold.dart';
 
 class BMITestResult extends StatelessWidget {
   final double testScore;

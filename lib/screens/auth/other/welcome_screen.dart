@@ -1,8 +1,9 @@
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-import 'package:kivicare_patient/screens/home/home_bottom_tabs.dart';
+import 'package:healthcelerate/screens/auth/sign_in_sign_up/signup_screen.dart';
+import 'package:healthcelerate/screens/home/home_bottom_tabs.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:kivicare_patient/utils/colors.dart';
+import 'package:healthcelerate/utils/colors.dart';
 import '../../../components/app_scaffold.dart';
 import '../../../generated/assets.dart';
 import '../../home/home_controller.dart';
@@ -95,13 +96,14 @@ class WelcomeScreen extends StatelessWidget {
                             elevation: 0,
                             color: appColorSecondary,
                             onTap: () {
-                              Get.offAll(() => const HomeBottomNavBarScreen(),
-                                  binding: BindingsBuilder(() {
-                                Get.put(HomeController());
-                              }));
+                              Get.to(
+                                () => SignUpScreen(),
+                                arguments: true,
+                                binding: BindingsBuilder(() {}),
+                              );
                             },
                             child: Text(
-                              'Explore',
+                              'Sign-Up',
                               style: boldTextStyle(
                                 size: 12,
                                 color: whiteTextColor,

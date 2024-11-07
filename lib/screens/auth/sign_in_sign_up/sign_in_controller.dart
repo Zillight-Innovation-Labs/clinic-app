@@ -4,7 +4,7 @@ import 'dart:developer' as dev;
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
-import 'package:kivicare_patient/screens/home/home_bottom_tabs.dart';
+import 'package:healthcelerate/screens/home/home_bottom_tabs.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '../../../main.dart';
 import '../../../utils/push_notification_service.dart';
@@ -155,7 +155,6 @@ class SignInController extends GetxController {
       await _secureStorage.write(
           key: "apiToken", value: loginResponse.userData.apiToken);
 
-   
       loginUserData(loginResponse.userData);
       loginUserData.value.isSocialLogin = isSocialLogin;
       setValueToLocal(SharedPreferenceConst.USER_DATA, loginUserData.toJson());
@@ -167,7 +166,7 @@ class SignInController extends GetxController {
 
       isLoading(false);
 
-      PushNotificationService().registerFCMAndTopics();
+      // PushNotificationService().registerFCMAndTopics();
       if ("" == "") {
         //!isNavigateToDashboard.value
         Get.offAll(() => const HomeBottomNavBarScreen(),

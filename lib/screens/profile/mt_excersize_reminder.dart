@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:kivicare_patient/api/const/const.dart';
-import 'package:kivicare_patient/components/app_scaffold.dart';
-import 'package:kivicare_patient/models/exercise_model.dart';
-import 'package:kivicare_patient/providers/profile_provider.dart';
-import 'package:kivicare_patient/screens/profile/mt_cycling.dart';
-import 'package:kivicare_patient/screens/profile/mt_indoor_runing.dart';
-import 'package:kivicare_patient/screens/profile/mt_outdoor_running.dart';
+import 'package:healthcelerate/api/const/const.dart';
+import 'package:healthcelerate/components/app_scaffold.dart';
+import 'package:healthcelerate/models/exercise_model.dart';
+import 'package:healthcelerate/providers/profile_provider.dart';
+import 'package:healthcelerate/screens/profile/mt_cycling.dart';
+import 'package:healthcelerate/screens/profile/mt_indoor_runing.dart';
+import 'package:healthcelerate/screens/profile/mt_outdoor_running.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:percent_indicator/linear_percent_indicator.dart';
 import 'package:get/get.dart';
@@ -88,14 +88,14 @@ class _ExcersizeReminderScreenState extends State<ExcersizeReminderScreen> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  "Your Indoor Running Done",
+                                  "Your daily exercise ",
                                   style: TextStyle(
                                       color: kLikeWhiteColor,
                                       fontWeight: FontWeight.bold,
                                       fontSize: 16),
                                 ),
                                 Text(
-                                  "Total 30 Days (26 days Completed)",
+                                  "", //Total 30 Days (26 days Completed)
                                   style: TextStyle(
                                     color: kLikeWhiteColor,
                                   ),
@@ -104,9 +104,9 @@ class _ExcersizeReminderScreenState extends State<ExcersizeReminderScreen> {
                                   width: 200,
                                   padding: EdgeInsets.zero,
                                   lineHeight: 4.0,
-                                  percent: 0.5,
+                                  percent: 1,
                                   trailing: Text(
-                                    "50.0%",
+                                    "",
                                     style: TextStyle(color: kLikeWhiteColor),
                                   ),
                                   backgroundColor:
@@ -183,7 +183,7 @@ class _ExcersizeReminderScreenState extends State<ExcersizeReminderScreen> {
                                             ],
                                           ),
                                           Text(
-                                            "Your Goal ${exercise.duration} days",
+                                            "Set ${exercise.name} reminder",
                                             style: TextStyle(
                                                 color: kSubTitleColor),
                                           ),
@@ -200,14 +200,17 @@ class _ExcersizeReminderScreenState extends State<ExcersizeReminderScreen> {
                               ),
                             ).onTap(() {
                               if (index == 0) {
-                                Get.to(() =>
-                                    OutdoorRunningScreen(exercise: exercise));
+                                Get.to(() => OutdoorRunningScreen(
+                                    exercise: exercise,
+                                    img: exerciseType[index]['image']));
                               } else if (index == 1) {
-                                Get.to(() =>
-                                    IndoorRunningScreen(exercise: exercise));
+                                Get.to(() => IndoorRunningScreen(
+                                    exercise: exercise,
+                                    img: exerciseType[index]['image']));
                               } else {
-                                Get.to(() =>
-                                    CyclingRunningScreen(exercise: exercise));
+                                Get.to(() => CyclingRunningScreen(
+                                    exercise: exercise,
+                                    img: exerciseType[index]['image']));
                               }
                             }),
                           );

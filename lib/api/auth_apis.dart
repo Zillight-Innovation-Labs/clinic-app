@@ -13,7 +13,6 @@ import '../screens/auth/model/app_configuration_res.dart';
 import '../screens/auth/model/change_password_res.dart';
 import '../screens/auth/model/login_response.dart';
 import '../screens/auth/model/notification_model.dart';
-import '../utils/push_notification_service.dart';
 
 class AuthServiceApis {
   static Future<UserResponse> createUser({required Map request}) async {
@@ -93,7 +92,7 @@ class AuthServiceApis {
 
   static Future<void> clearData({bool isFromDeleteAcc = false}) async {
     GoogleSignIn().signOut();
-    PushNotificationService().unsubscribeFirebaseTopic();
+    // PushNotificationService().unsubscribeFirebaseTopic();
 
     if (isFromDeleteAcc) {
       localStorage.erase();

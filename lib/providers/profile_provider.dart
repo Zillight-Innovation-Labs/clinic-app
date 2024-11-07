@@ -1,13 +1,13 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
-import 'package:kivicare_patient/api/profile_apis.dart';
-import 'package:kivicare_patient/models/appointment_model.dart';
-import 'package:kivicare_patient/models/exercise_model.dart' as exercise;
-import 'package:kivicare_patient/models/user_exercises_model.dart';
-import 'package:kivicare_patient/screens/booking/model/appointment_model.dart';
-import 'package:kivicare_patient/service/notification_services.dart';
-import 'package:kivicare_patient/utils/app_common.dart';
-import 'package:kivicare_patient/utils/common_base.dart';
+import 'package:healthcelerate/api/profile_apis.dart';
+import 'package:healthcelerate/models/appointment_model.dart';
+import 'package:healthcelerate/models/exercise_model.dart' as exercise;
+import 'package:healthcelerate/models/user_exercises_model.dart';
+import 'package:healthcelerate/screens/booking/model/appointment_model.dart';
+import 'package:healthcelerate/service/notification_services.dart';
+import 'package:healthcelerate/utils/app_common.dart';
+import 'package:healthcelerate/utils/common_base.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'dart:developer' as dev;
 
@@ -152,7 +152,8 @@ class ProfileProvider extends ChangeNotifier {
         _getUserExerciseModel
             .sort((a, b) => b.createdAt.compareTo(a.createdAt));
 
-        notifyExercises(getTimeDifference(_getUserExerciseModel.first.reminderTime));
+        notifyExercises(
+            getTimeDifference(_getUserExerciseModel.first.reminderTime));
 
         notifyListeners();
       }

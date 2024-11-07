@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kivicare_patient/screens/home/components/home_service_slider.dart';
-import 'package:kivicare_patient/screens/home/home_banner.dart';
+import 'package:healthcelerate/screens/home/components/home_service_slider.dart';
+import 'package:healthcelerate/screens/home/home_banner.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:kivicare_patient/components/loader_widget.dart';
+import 'package:healthcelerate/components/loader_widget.dart';
 import '../../components/app_scaffold.dart';
 import '../../main.dart';
 import '../../utils/empty_error_state_widget.dart';

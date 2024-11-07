@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_feather_icons/flutter_feather_icons.dart';
-import 'package:kivicare_patient/api/const/const.dart';
+import 'package:healthcelerate/api/const/const.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 import 'mt_upcoming_nursing_care_history.dart';
@@ -15,7 +15,6 @@ class PastNursingCareHistoryScreen extends StatefulWidget {
 
 class _PastNursingCareHistoryScreenState
     extends State<PastNursingCareHistoryScreen> {
-
   List conditions = ["In Progress", 'Accepted', "Cancel"];
   List colors = [kWatchColor, kStarColor, kBadgeColor];
   List packsColor = [kHeartBgColor, kLungsBgColor, kDaigLungsBGColor];
@@ -25,11 +24,7 @@ class _PastNursingCareHistoryScreenState
     "Name: Ibne Riead",
     "Name:Tarik Bin Aziz"
   ];
-  List dayPacks = [
-    "Day: 1 Day Pack",
-    "Day: 3 Day Pack",
-    "Day: 4 Day Pack"
-  ];
+  List dayPacks = ["Day: 1 Day Pack", "Day: 3 Day Pack", "Day: 4 Day Pack"];
 
   @override
   Widget build(BuildContext context) {
@@ -46,7 +41,7 @@ class _PastNursingCareHistoryScreenState
           style: ktitleTextStyle,
         ),
       ),
-      body:  SingleChildScrollView(
+      body: SingleChildScrollView(
         child: Column(
           children: [
             Padding(
@@ -58,7 +53,8 @@ class _PastNursingCareHistoryScreenState
                       elevation: 0,
                       enableScaleAnimation: false,
                       onTap: () {
-                        const UpcomingNursingCareHistoryScreen().launch(context);
+                        const UpcomingNursingCareHistoryScreen()
+                            .launch(context);
                       },
                       shapeBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(6),
@@ -66,8 +62,7 @@ class _PastNursingCareHistoryScreenState
                       color: kLikeWhiteColor,
                       text: "Upcoming",
                       textStyle: TextStyle(
-                          color: kMainColor,
-                          fontWeight: FontWeight.w700),
+                          color: kMainColor, fontWeight: FontWeight.w700),
                     ),
                   ),
                   const SizedBox(
@@ -78,8 +73,7 @@ class _PastNursingCareHistoryScreenState
                       elevation: 0,
                       color: kMainColor,
                       enableScaleAnimation: false,
-                      onTap: () {
-                      },
+                      onTap: () {},
                       shapeBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(6),
                           borderSide: BorderSide(color: kMainColor)),
@@ -127,68 +121,62 @@ class _PastNursingCareHistoryScreenState
                               shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(10),
                                   side: BorderSide(
-                                      color: kSubTitleColor
-                                          .withOpacity(0.10))),
+                                      color: kSubTitleColor.withOpacity(0.10))),
                               child: Padding(
                                   padding: const EdgeInsets.all(12.0),
                                   child: Row(
                                       crossAxisAlignment:
-                                      CrossAxisAlignment.start,
+                                          CrossAxisAlignment.start,
                                       mainAxisAlignment:
-                                      MainAxisAlignment.center,
+                                          MainAxisAlignment.center,
                                       children: [
                                         Stack(
-                                            alignment:
-                                            AlignmentDirectional.center,
-                                            children: [
-                                              Container(
-                                                width: 64,
-                                                height: 64,
-                                                decoration: BoxDecoration(
-                                                    color:
-                                                    packsColor[index]),
-                                                child: Align(
-                                                    alignment:
-                                                    Alignment.topLeft,
-                                                    child: Padding(
-                                                      padding:
-                                                      const EdgeInsets
-                                                          .only(
-                                                          bottom: 10.0),
-                                                      child: Image.asset(
-                                                        "assets/images/Ellipse 792.png",
-                                                      ),
-                                                    )),
+                                          alignment:
+                                              AlignmentDirectional.center,
+                                          children: [
+                                            Container(
+                                              width: 64,
+                                              height: 64,
+                                              decoration: BoxDecoration(
+                                                  color: packsColor[index]),
+                                              child: Align(
+                                                  alignment: Alignment.topLeft,
+                                                  child: Padding(
+                                                    padding:
+                                                        const EdgeInsets.only(
+                                                            bottom: 10.0),
+                                                    child: Image.asset(
+                                                      "assets/images/Ellipse 792.png",
+                                                    ),
+                                                  )),
+                                            ),
+                                            SizedBox(
+                                              width: 40,
+                                              child: Text(
+                                                texts[index],
+                                                textAlign: TextAlign.center,
+                                                style: TextStyle(
+                                                    fontWeight: FontWeight.w900,
+                                                    color: kLikeWhiteColor),
                                               ),
-                                              SizedBox(
-                                                width: 40,
-                                                child: Text(
-                                                  texts[index],
-                                                  textAlign:
-                                                  TextAlign.center,
-                                                  style: TextStyle(
-                                                      fontWeight:
-                                                      FontWeight.w900,
-                                                      color:
-                                                      kLikeWhiteColor),
-                                                ),
-                                              ),
-                                            ],),
+                                            ),
+                                          ],
+                                        ),
                                         const SizedBox(
                                           width: 10,
                                         ),
                                         Expanded(
                                           child: Column(
                                             crossAxisAlignment:
-                                            CrossAxisAlignment.start,
+                                                CrossAxisAlignment.start,
                                             mainAxisAlignment:
-                                            MainAxisAlignment.center,
+                                                MainAxisAlignment.center,
                                             children: [
                                               Text(
                                                 names[index],
                                                 style: const TextStyle(
                                                     fontWeight:
-                                                    FontWeight.bold),
+                                                        FontWeight.bold),
                                               ),
                                               const SizedBox(
                                                 height: 4,
@@ -203,8 +191,12 @@ class _PastNursingCareHistoryScreenState
                                                   Flexible(
                                                     child: Text(
                                                         "2715 Ash Dr. San Jose, South Dakoterjrkel",
-                                                        style:TextStyle(overflow: TextOverflow.ellipsis,color: kSubTitleColor )
-                                                    ),
+                                                        style: TextStyle(
+                                                            overflow:
+                                                                TextOverflow
+                                                                    .ellipsis,
+                                                            color:
+                                                                kSubTitleColor)),
                                                   ),
                                                 ],
                                               ),
@@ -213,25 +205,24 @@ class _PastNursingCareHistoryScreenState
                                               ),
                                               Text(
                                                 "Date: 26 Jun 2022 - 29 Jun 2022",
-                                                style:
-                                                ksubTitleTextStyle,
-                                              ), const SizedBox(
+                                                style: ksubTitleTextStyle,
+                                              ),
+                                              const SizedBox(
                                                 height: 4,
                                               ),
                                               Row(
                                                 mainAxisAlignment:
-                                                MainAxisAlignment
-                                                    .spaceBetween,
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
                                                 children: [
                                                   Text(
                                                     dayPacks[index],
-                                                    style:
-                                                    ksubTitleTextStyle,
+                                                    style: ksubTitleTextStyle,
                                                   ),
                                                   Text(
                                                     "Reschedule",
                                                     style: TextStyle(
-                                                        color:kMainColor),
+                                                        color: kMainColor),
                                                   ),
                                                 ],
                                               ),
@@ -240,11 +231,8 @@ class _PastNursingCareHistoryScreenState
                                         ),
                                       ])),
                             ));
-
                       },
                     ),
-
-
                   ],
                 ),
               ),

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:kivicare_patient/utils/colors.dart';
+import 'package:healthcelerate/utils/colors.dart';
 import '../../main.dart';
 import '../../api/auth_apis.dart';
 import '../auth/model/common_model.dart';
@@ -53,7 +53,8 @@ class EditUserProfileController extends GetxController {
     lNameCont.text = loginUserData.value.lastName;
     try {
       mobileCont.text = loginUserData.value.mobile.extractPhoneCodeAndNumber.$2;
-      pickedPhoneCode(CountryParser.parsePhoneCode(loginUserData.value.mobile.extractPhoneCodeAndNumber.$1));
+      pickedPhoneCode(CountryParser.parsePhoneCode(
+          loginUserData.value.mobile.extractPhoneCodeAndNumber.$1));
     } catch (e) {
       pickedPhoneCode(Country.from(json: defaultCountry.toJson()));
       mobileCont.text = loginUserData.value.mobile.trim();
@@ -61,7 +62,10 @@ class EditUserProfileController extends GetxController {
     }
     emailCont.text = loginUserData.value.email;
     addressCont.text = loginUserData.value.address;
-    selectedGender(genders.firstWhere((element) => element.slug.toString() == loginUserData.value.gender.toLowerCase(), orElse: () => CMNModel()));
+    selectedGender(genders.firstWhere(
+        (element) =>
+            element.slug.toString() == loginUserData.value.gender.toLowerCase(),
+        orElse: () => CMNModel()));
   }
 
   Future<void> updateUserProfile() async {
@@ -70,24 +74,35 @@ class EditUserProfileController extends GetxController {
     }
     isLoading(true);
 
-    AuthServiceApis.updateProfile( 
-      firstName: isProfilePhoto ? loginUserData.value.firstName : fNameCont.text.trim(),
-      lastName: isProfilePhoto ? loginUserData.value.lastName : lNameCont.text.trim(),
-      mobile: isProfilePhoto ? loginUserData.value.mobile : "+${mobileCont.text.trim().formatPhoneNumber(pickedPhoneCode.value.phoneCode)}",
-      address: isProfilePhoto ? loginUserData.value.address : addressCont.text.trim(),
-      gender: isProfilePhoto ? loginUserData.value.gender : selectedGender.value.slug,
+    AuthServiceApis.updateProfile(
+      firstName: isProfilePhoto
+          ? loginUserData.value.firstName
+          : fNameCont.text.trim(),
+      lastName:
+          isProfilePhoto ? loginUserData.value.lastName : lNameCont.text.trim(),
+      mobile: isProfilePhoto
+          ? loginUserData.value.mobile
+          : "+${mobileCont.text.trim().formatPhoneNumber(pickedPhoneCode.value.phoneCode)}",
+      address: isProfilePhoto
+          ? loginUserData.value.address
+          : addressCont.text.trim(),
+      gender: isProfilePhoto
+          ? loginUserData.value.gender
+          : selectedGender.value.slug,
       imageFile: imageFile.value.path.isNotEmpty ? imageFile.value : null,
       onSuccess: (data) {
         isLoading(false);
         if (data != null) {
           if ((data as String).isJson()) {
             log("Response: ${jsonDecode(data)}");
-            UserResponse loginResponseModel = UserResponse.fromJson(jsonDecode(data));
+            UserResponse loginResponseModel =
+                UserResponse.fromJson(jsonDecode(data));
             loginUserData(UserData(
               id: loginUserData.value.id,
               firstName: loginResponseModel.userData.firstName,
               lastName: loginResponseModel.userData.lastName,
-              userName: "${loginResponseModel.userData.firstName} ${loginResponseModel.userData.lastName}",
+              userName:
+                  "${loginResponseModel.userData.firstName} ${loginResponseModel.userData.lastName}",
               mobile: loginResponseModel.userData.mobile,
               email: loginUserData.value.email,
               userRole: loginUserData.value.userRole,
@@ -96,7 +111,8 @@ class EditUserProfileController extends GetxController {
               profileImage: loginResponseModel.userData.profileImage,
               loginType: loginUserData.value.loginType,
             ));
-            setValueToLocal(SharedPreferenceConst.USER_DATA, loginUserData.toJson());
+            setValueToLocal(
+                SharedPreferenceConst.USER_DATA, loginUserData.toJson());
             Get.back();
           }
         }
@@ -110,7 +126,8 @@ class EditUserProfileController extends GetxController {
   }
 
   void _getFromGallery() async {
-    pickedFile = await ImagePicker().pickImage(source: ImageSource.gallery, maxWidth: 1800, maxHeight: 1800);
+    pickedFile = await ImagePicker().pickImage(
+        source: ImageSource.gallery, maxWidth: 1800, maxHeight: 1800);
     if (pickedFile != null) {
       imageFile(File(pickedFile!.path));
       if (isProfilePhoto) {
@@ -121,7 +138,8 @@ class EditUserProfileController extends GetxController {
   }
 
   _getFromCamera() async {
-    pickedFile = await ImagePicker().pickImage(source: ImageSource.camera, maxWidth: 1800, maxHeight: 1800);
+    pickedFile = await ImagePicker()
+        .pickImage(source: ImageSource.camera, maxWidth: 1800, maxHeight: 1800);
     if (pickedFile != null) {
       imageFile(File(pickedFile!.path));
       if (isProfilePhoto) {
@@ -192,10 +210,13 @@ class EditUserProfileController extends GetxController {
               alignment: Alignment.center,
               width: 100,
               height: 100,
-              decoration: boxDecorationDefault(shape: BoxShape.circle, color: appColorPrimary.withOpacity(0.4)),
+              decoration: boxDecorationDefault(
+                  shape: BoxShape.circle,
+                  color: appColorPrimary.withOpacity(0.4)),
               child: Text(
                 "${loginUserData.value.firstName.firstLetter.toUpperCase()}${loginUserData.value.lastName.firstLetter.toUpperCase()}",
-                style: const TextStyle(fontSize: 100 * 0.3, color: Colors.white),
+                style:
+                    const TextStyle(fontSize: 100 * 0.3, color: Colors.white),
               ),
             ),
           ).cornerRadiusWithClipRRect(45),

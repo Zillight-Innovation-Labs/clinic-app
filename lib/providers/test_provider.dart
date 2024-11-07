@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kivicare_patient/models/get_all_test_detail_model.dart';
-import 'package:kivicare_patient/screens/service/test_services.dart';
+import 'package:healthcelerate/models/get_all_test_detail_model.dart';
+import 'package:healthcelerate/screens/service/test_services.dart';
 
 enum TestState { loading, initial, error, success }
 

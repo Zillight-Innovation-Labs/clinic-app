@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kivicare_patient/api/const/const.dart';
-import 'package:kivicare_patient/screens/home/home_bottom_tabs.dart';
+import 'package:healthcelerate/api/const/const.dart';
+import 'package:healthcelerate/screens/home/home_bottom_tabs.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 class WriteReviewScreen extends StatelessWidget {
@@ -29,7 +29,7 @@ class WriteReviewScreen extends StatelessWidget {
           textColor: kLikeWhiteColor,
           elevation: 0,
           color: kMainColor,
-          onTap: ()=>const HomeBottomNavBarScreen().launch(context),
+          onTap: () => const HomeBottomNavBarScreen().launch(context),
           //  padding: EdgeInsets.zero,
           shapeBorder: OutlineInputBorder(
               borderSide: BorderSide.none,

@@ -5,19 +5,19 @@ import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-import 'package:kivicare_patient/api/const/const.dart';
-import 'package:kivicare_patient/providers/appointment_provider.dart';
-import 'package:kivicare_patient/providers/bottom_nav_provider.dart';
-import 'package:kivicare_patient/providers/profile_provider.dart';
-import 'package:kivicare_patient/providers/services_provider.dart';
-import 'package:kivicare_patient/screens/profile/profile_screen.dart';
-import 'package:kivicare_patient/screens/booking/apointments/appointment_tab.dart';
-import 'package:kivicare_patient/screens/booking/appointments_controller.dart';
-import 'package:kivicare_patient/screens/home/home_screen.dart';
-import 'package:kivicare_patient/screens/payment/payment_screen.dart';
-import 'package:kivicare_patient/screens/service/service_screen.dart';
-import 'package:kivicare_patient/screens/tests/take_test_page.dart';
-import 'package:kivicare_patient/utils/colors.dart';
+import 'package:healthcelerate/api/const/const.dart';
+import 'package:healthcelerate/providers/appointment_provider.dart';
+import 'package:healthcelerate/providers/bottom_nav_provider.dart';
+import 'package:healthcelerate/providers/profile_provider.dart';
+import 'package:healthcelerate/providers/services_provider.dart';
+import 'package:healthcelerate/screens/profile/profile_screen.dart';
+import 'package:healthcelerate/screens/booking/apointments/appointment_tab.dart';
+import 'package:healthcelerate/screens/booking/appointments_controller.dart';
+import 'package:healthcelerate/screens/home/home_screen.dart';
+import 'package:healthcelerate/screens/payment/payment_screen.dart';
+import 'package:healthcelerate/screens/service/service_screen.dart';
+import 'package:healthcelerate/screens/tests/take_test_page.dart';
+import 'package:healthcelerate/utils/colors.dart';
 import 'package:provider/provider.dart';
 
 class HomeBottomNavBarScreen extends StatefulWidget {
@@ -28,8 +28,8 @@ class HomeBottomNavBarScreen extends StatefulWidget {
 }
 
 class _HomeBottomNavBarScreenState extends State<HomeBottomNavBarScreen> {
-  final AppointmentsController appointmentsCont =
-      Get.put(AppointmentsController());
+  // final AppointmentsController appointmentsCont =
+  //     Get.put(AppointmentsController());
   //"Get.put(AppointmentsController())" or "Get.lazyPut(()=>AppointmentsController())"
 
   var currentIndex = 0;

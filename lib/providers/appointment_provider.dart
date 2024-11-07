@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:kivicare_patient/api/appointment_apis.dart';
-import 'package:kivicare_patient/models/appointment_model.dart';
-import 'package:kivicare_patient/screens/booking/model/appointment_model.dart';
-import 'package:kivicare_patient/screens/booking/model/subscription_model.dart';
-import 'package:kivicare_patient/utils/app_common.dart';
-import 'package:kivicare_patient/utils/common_base.dart';
+import 'package:healthcelerate/api/appointment_apis.dart';
+import 'package:healthcelerate/models/appointment_model.dart';
+import 'package:healthcelerate/screens/booking/model/appointment_model.dart';
+import 'package:healthcelerate/screens/booking/model/subscription_model.dart';
+import 'package:healthcelerate/utils/app_common.dart';
+import 'package:healthcelerate/utils/common_base.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'dart:developer' as dev;
 
@@ -23,7 +23,7 @@ class AppointmentProvider extends ChangeNotifier {
   SubscriptionModel? get firstSubscription => _firstSubscription;
 
   Appointment? _nextAppointment;
-  Appointment? get nextAppointment => _nextAppointment; 
+  Appointment? get nextAppointment => _nextAppointment;
 
   int? _firstSubscriptionDay;
   int? get firstSubscriptionDay => _firstSubscriptionDay;
@@ -36,8 +36,6 @@ class AppointmentProvider extends ChangeNotifier {
 
   AppointmentState _state = AppointmentState.initial;
   AppointmentState get state => _state;
-
-
 
   void setState(AppointmentState state) {
     _state = state;

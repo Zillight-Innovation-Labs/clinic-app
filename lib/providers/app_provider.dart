@@ -1,10 +1,10 @@
-import 'package:kivicare_patient/providers/appointment_provider.dart';
-import 'package:kivicare_patient/providers/bottom_nav_provider.dart';
-import 'package:kivicare_patient/providers/payment_provider.dart';
-import 'package:kivicare_patient/providers/profile_provider.dart';
-import 'package:kivicare_patient/providers/services_provider.dart';
-import 'package:kivicare_patient/providers/talk_to_doctor.dart';
-import 'package:kivicare_patient/providers/test_provider.dart';
+import 'package:healthcelerate/providers/appointment_provider.dart';
+import 'package:healthcelerate/providers/bottom_nav_provider.dart';
+import 'package:healthcelerate/providers/payment_provider.dart';
+import 'package:healthcelerate/providers/profile_provider.dart';
+import 'package:healthcelerate/providers/services_provider.dart';
+import 'package:healthcelerate/providers/talk_to_doctor.dart';
+import 'package:healthcelerate/providers/test_provider.dart';
 import 'package:provider/provider.dart';
 import 'package:provider/single_child_widget.dart';
 
@@ -20,6 +20,5 @@ class AppProvider {
     ChangeNotifierProvider(create: (_) => TalkToDoctorProvider()),
     ChangeNotifierProvider(create: (_) => ProfileProvider()),
     // ChangeNotifierProvider(create: (_) => AuthTokenProvider()),
-
   ];
 }

@@ -1,18 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kivicare_patient/components/app_scaffold.dart';
-import 'package:kivicare_patient/generated/assets.dart';
-import 'package:kivicare_patient/main.dart';
-import 'package:kivicare_patient/providers/appointment_provider.dart';
-import 'package:kivicare_patient/providers/bottom_nav_provider.dart';
-import 'package:kivicare_patient/screens/auth/other/about_us_screen.dart';
-import 'package:kivicare_patient/screens/auth/other/settings_screen.dart';
-import 'package:kivicare_patient/screens/profile/history/mt_history.dart';
-import 'package:kivicare_patient/screens/profile/mt_excersize_reminder.dart';
-import 'package:kivicare_patient/screens/profile/mt_medicine_reminders.dart';
-import 'package:kivicare_patient/utils/app_common.dart';
-import 'package:kivicare_patient/utils/colors.dart';
-import 'package:kivicare_patient/utils/common_base.dart';
+import 'package:healthcelerate/components/app_scaffold.dart';
+import 'package:healthcelerate/generated/assets.dart';
+import 'package:healthcelerate/main.dart';
+import 'package:healthcelerate/providers/appointment_provider.dart';
+import 'package:healthcelerate/screens/auth/other/about_us_screen.dart';
+import 'package:healthcelerate/screens/auth/other/settings_screen.dart';
+import 'package:healthcelerate/screens/profile/history/mt_history.dart';
+import 'package:healthcelerate/screens/profile/mt_excersize_reminder.dart';
+import 'package:healthcelerate/screens/profile/mt_medicine_reminders.dart';
+import 'package:healthcelerate/utils/app_common.dart';
+import 'package:healthcelerate/utils/colors.dart';
+import 'package:healthcelerate/utils/common_base.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 
@@ -123,21 +122,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   padding:
                       const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
                 ).paddingTop(16),
-                SettingItemWidget(
-                  title: "History",
-                  decoration: boxDecorationDefault(),
-                  subTitle: "See Your Medical History",
-                  splashColor: transparentColor,
-                  onTap: () {
-                    Get.to(() => const MyHistoryScreen());
-                  },
-                  titleTextStyle: boldTextStyle(size: 14),
-                  leading: commonLeadingWid(imgPath: Assets.iconsIcHistory)
-                      .circularLightPrimaryBg(),
-                  trailing: trailing,
-                  padding:
-                      const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
-                ).paddingTop(16),
+                // SettingItemWidget(
+                //   title: "History",
+                //   decoration: boxDecorationDefault(),
+                //   subTitle: "See Your Medical History",
+                //   splashColor: transparentColor,
+                //   onTap: () {
+                //     Get.to(() => const MyHistoryScreen());
+                //   },
+                //   titleTextStyle: boldTextStyle(size: 14),
+                //   leading: commonLeadingWid(imgPath: Assets.iconsIcHistory)
+                //       .circularLightPrimaryBg(),
+                //   trailing: trailing,
+                //   padding:
+                //       const EdgeInsets.symmetric(vertical: 15, horizontal: 16),
+                // ).paddingTop(16),
                 SettingItemWidget(
                   title: locale.value.settings,
                   decoration: boxDecorationDefault(),
@@ -204,7 +203,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       onAccept: (_) {
                         profileController.handleLogout();
                         context.read<AppointmentProvider>().clearData();
-                    
                       },
                       dialogType: DialogType.CONFIRMATION,
                       subTitle: locale.value.doYouWantToLogout,

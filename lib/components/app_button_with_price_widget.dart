@@ -1,8 +1,7 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:kivicare_patient/utils/colors.dart';
+import 'package:healthcelerate/utils/colors.dart';
 
 import '../utils/price_widget.dart';
 import '../utils/app_common.dart';
@@ -63,7 +62,9 @@ class AppButtonWithPricing extends StatelessWidget {
                     Row(
                       children: [
                         PriceWidget(
-                          price: price.toStringAsFixed(Constants.DECIMAL_POINT).toDouble(),
+                          price: price
+                              .toStringAsFixed(Constants.DECIMAL_POINT)
+                              .toDouble(),
                           color: appColorPrimary,
                           size: 14,
                           isBoldText: true,
@@ -76,7 +77,8 @@ class AppButtonWithPricing extends StatelessWidget {
                                 style: primaryTextStyle(),
                               ),
                               TextSpan(
-                                text: '(+$tax${appCurrency.value.currencySymbol} Tax Included)',
+                                text:
+                                    '(+$tax${appCurrency.value.currencySymbol} Tax Included)',
                                 style: secondaryTextStyle(),
                               ),
                             ],
@@ -95,7 +97,8 @@ class AppButtonWithPricing extends StatelessWidget {
                 ),
                 if (serviceImg.validate().isNotEmpty)
                   Container(
-                    decoration: boxDecorationDefault(color: Colors.white, shape: BoxShape.circle),
+                    decoration: boxDecorationDefault(
+                        color: Colors.white, shape: BoxShape.circle),
                     padding: const EdgeInsets.all(10),
                     child: CachedImageWidget(
                       url: serviceImg.validate(),

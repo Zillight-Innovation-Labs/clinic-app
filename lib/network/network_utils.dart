@@ -193,7 +193,7 @@ Future handleResponse(
   } else if (response.statusCode == 429) {
     throw locale.value.tooManyRequests;
   } else if (response.statusCode == 500) {
-    throw locale.value.internalServerError;
+    throw jsonDecode(response.body);
   } else if (response.statusCode == 502) {
     throw locale.value.badGateway;
   } else if (response.statusCode == 503) {

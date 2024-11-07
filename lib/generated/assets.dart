@@ -100,7 +100,7 @@ class Assets {
   static const String navigationIcCalenderOutlined = 'assets/icons/navigation/ic_calender_outlined.png';
   static const String navigationIcHomeFilled = 'assets/icons/navigation/ic_home_filled.png';
   static const String navigationIcHomeOutlined = 'assets/icons/navigation/ic_home_outlined.png';
-  static const String navigationIcNotifyFilled = 'assets/icons/navigation/ic_notify_filled.png';
+  // static const String navigationIcNotifyFilled = 'assets/icons/navigation/ic_notify_filled.png';
   static const String navigationIcNotifyOutlined = 'assets/icons/navigation/ic_notify_outlined.png';
   static const String navigationIcUserFilled = 'assets/icons/navigation/ic_user_filled.png';
   static const String navigationIcUserOutlined = 'assets/icons/navigation/ic_user_outlined.png';

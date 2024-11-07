@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kivicare_patient/components/app_scaffold.dart';
-import 'package:kivicare_patient/models/get_services_model.dart';
-import 'package:kivicare_patient/models/payment_model.dart';
-import 'package:kivicare_patient/providers/bottom_nav_provider.dart';
-import 'package:kivicare_patient/providers/payment_provider.dart';
-import 'package:kivicare_patient/screens/profile/profile_controller.dart';
-import 'package:kivicare_patient/screens/home/home_bottom_tabs.dart';
-import 'package:kivicare_patient/screens/service/service_plan_card.dart';
-import 'package:kivicare_patient/utils/colors.dart';
-import 'package:kivicare_patient/utils/common_base.dart';
+import 'package:healthcelerate/components/app_scaffold.dart';
+import 'package:healthcelerate/models/get_services_model.dart';
+import 'package:healthcelerate/models/payment_model.dart';
+import 'package:healthcelerate/providers/bottom_nav_provider.dart';
+import 'package:healthcelerate/providers/payment_provider.dart';
+import 'package:healthcelerate/screens/profile/profile_controller.dart';
+import 'package:healthcelerate/screens/home/home_bottom_tabs.dart';
+import 'package:healthcelerate/screens/service/service_plan_card.dart';
+import 'package:healthcelerate/utils/colors.dart';
+import 'package:healthcelerate/utils/common_base.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 
@@ -18,7 +18,7 @@ class PersonalizedHomeCareService extends StatefulWidget {
   const PersonalizedHomeCareService({super.key, required this.model});
 
   @override
-  State<PersonalizedHomeCareService> createState() => 
+  State<PersonalizedHomeCareService> createState() =>
       _PersonalizedHomeCareServiceState();
 }
 
@@ -64,17 +64,17 @@ class _PersonalizedHomeCareServiceState
       tabColor = appColorPrimary;
       selectedPlan = widget.model.packages![0].name!;
       selectedPrice = widget.model.packages![0].amount!;
-      selectedPackageId =widget.model.packages![0].id.toString();
+      selectedPackageId = widget.model.packages![0].id.toString();
     } else if (index == 1) {
       tabColor = serviceStandard;
-   selectedPlan = widget.model.packages![1].name!;
+      selectedPlan = widget.model.packages![1].name!;
       selectedPrice = widget.model.packages![1].amount!;
-      selectedPackageId =widget.model.packages![1].id.toString();
+      selectedPackageId = widget.model.packages![1].id.toString();
     } else if (index == 2) {
       tabColor = servicePremium;
       selectedPlan = widget.model.packages![2].name!;
       selectedPrice = widget.model.packages![2].amount!;
-      selectedPackageId =widget.model.packages![2].id.toString();
+      selectedPackageId = widget.model.packages![2].id.toString();
     }
     setState(() {});
   }

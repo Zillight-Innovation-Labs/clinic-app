@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:kivicare_patient/api/const/const.dart';
+import 'package:healthcelerate/api/const/const.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'mt_write_review.dart';
 
@@ -47,7 +47,10 @@ class VideoCallTimeOutScreen extends StatelessWidget {
                       ),
                       Text(
                         "Dr. Josiah Toor",
-                        style: TextStyle(fontSize: 24, color: kTitleColor, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 24,
+                            color: kTitleColor,
+                            fontWeight: FontWeight.bold),
                       ),
                       const SizedBox(
                         height: 10,
@@ -76,7 +79,9 @@ class VideoCallTimeOutScreen extends StatelessWidget {
                         color: kMainColor,
                         onTap: () => const WriteReviewScreen().launch(context),
                         //  padding: EdgeInsets.zero,
-                        shapeBorder: OutlineInputBorder(borderSide: BorderSide.none, borderRadius: BorderRadius.circular(6)),
+                        shapeBorder: OutlineInputBorder(
+                            borderSide: BorderSide.none,
+                            borderRadius: BorderRadius.circular(6)),
                       ),
                       const SizedBox(
                         height: 12,
@@ -90,7 +95,9 @@ class VideoCallTimeOutScreen extends StatelessWidget {
                         color: kLikeWhiteColor,
                         onTap: () {},
                         //  padding: EdgeInsets.zero,
-                        shapeBorder: OutlineInputBorder(borderSide: BorderSide(color: kMainColor), borderRadius: BorderRadius.circular(6)),
+                        shapeBorder: OutlineInputBorder(
+                            borderSide: BorderSide(color: kMainColor),
+                            borderRadius: BorderRadius.circular(6)),
                       ),
 
                       //  SizedBox(height: 40,)

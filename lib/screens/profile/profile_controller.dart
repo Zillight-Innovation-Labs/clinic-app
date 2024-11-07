@@ -1,9 +1,9 @@
 // ignore_for_file: depend_on_referenced_packages
 
 import 'package:get/get.dart';
-import 'package:kivicare_patient/providers/bottom_nav_provider.dart';
-import 'package:kivicare_patient/screens/auth/sign_in_sign_up/signin_screen.dart';
-import 'package:kivicare_patient/screens/home/home_bottom_tabs.dart';
+import 'package:healthcelerate/providers/bottom_nav_provider.dart';
+import 'package:healthcelerate/screens/auth/sign_in_sign_up/signin_screen.dart';
+import 'package:healthcelerate/screens/home/home_bottom_tabs.dart';
 import 'package:nb_utils/nb_utils.dart';
 import '../../utils/app_common.dart';
 import '../home/home_controller.dart';

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:kivicare_patient/components/cached_image_widget.dart';
-import 'package:kivicare_patient/utils/colors.dart';
-import 'package:kivicare_patient/utils/common_base.dart';
+import 'package:healthcelerate/components/cached_image_widget.dart';
+import 'package:healthcelerate/utils/colors.dart';
+import 'package:healthcelerate/utils/common_base.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:percent_indicator/percent_indicator.dart';
 

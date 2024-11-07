@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:kivicare_patient/providers/bottom_nav_provider.dart';
+import 'package:healthcelerate/providers/bottom_nav_provider.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:kivicare_patient/utils/colors.dart';
-import 'package:kivicare_patient/utils/constants.dart';
+import 'package:healthcelerate/utils/colors.dart';
+import 'package:healthcelerate/utils/constants.dart';
 import 'package:provider/provider.dart';
 
 import '../main.dart';
@@ -52,7 +52,7 @@ class ViewAllLabel extends StatelessWidget {
           TextButton(
               onPressed: onTap,
               // () {
-              //   
+              //
               // },
               child: Text('See All',
                   style: boldTextStyle(

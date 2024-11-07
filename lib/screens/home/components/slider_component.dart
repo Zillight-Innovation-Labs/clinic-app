@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:kivicare_patient/screens/service/components/service_card.dart';
+import 'package:healthcelerate/screens/service/components/service_card.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:kivicare_patient/utils/colors.dart';
+import 'package:healthcelerate/utils/colors.dart';
 
 class SliderComponent extends StatefulWidget {
   const SliderComponent({super.key});

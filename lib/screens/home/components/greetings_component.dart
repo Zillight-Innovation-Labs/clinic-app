@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:kivicare_patient/utils/common_base.dart';
+import 'package:healthcelerate/utils/common_base.dart';
 import '../../../../main.dart';
 import '../../../../utils/app_common.dart';
 import '../../../components/cached_image_widget.dart';
@@ -10,8 +10,6 @@ import '../../auth/other/notification_screen.dart';
 
 class GreetingsComponent extends StatelessWidget {
   const GreetingsComponent({super.key});
-
- 
 
   @override
   Widget build(BuildContext context) {

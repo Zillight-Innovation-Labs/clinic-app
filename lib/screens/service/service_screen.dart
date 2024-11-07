@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kivicare_patient/components/app_scaffold.dart';
-import 'package:kivicare_patient/models/get_services_model.dart';
-import 'package:kivicare_patient/providers/services_provider.dart';
-import 'package:kivicare_patient/screens/profile/profile_controller.dart';
-import 'package:kivicare_patient/screens/home/components/home_service_slider.dart';
-import 'package:kivicare_patient/screens/service/components/service_card.dart';
-import 'package:kivicare_patient/screens/service/event_outreach_service.dart';
-import 'package:kivicare_patient/screens/service/personalized_self_service.dart';
-import 'package:kivicare_patient/screens/service/personalized_senior_service.dart';
+import 'package:healthcelerate/components/app_scaffold.dart';
+import 'package:healthcelerate/models/get_services_model.dart';
+import 'package:healthcelerate/providers/services_provider.dart';
+import 'package:healthcelerate/screens/profile/profile_controller.dart';
+import 'package:healthcelerate/screens/home/components/home_service_slider.dart';
+import 'package:healthcelerate/screens/service/components/service_card.dart';
+import 'package:healthcelerate/screens/service/event_outreach_service.dart';
+import 'package:healthcelerate/screens/service/personalized_self_service.dart';
+import 'package:healthcelerate/screens/service/personalized_senior_service.dart';
 import 'package:provider/provider.dart';
 
 class ServiceScreen extends StatefulWidget {

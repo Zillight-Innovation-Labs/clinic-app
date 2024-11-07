@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:kivicare_patient/providers/bottom_nav_provider.dart';
+import 'package:healthcelerate/providers/bottom_nav_provider.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:get/get.dart';
-import 'package:kivicare_patient/utils/app_common.dart';
 import 'package:provider/provider.dart';
 import '../../../components/app_logo_widget.dart';
 import '../../../components/app_scaffold.dart';
@@ -38,7 +37,7 @@ class SignInScreen extends StatelessWidget {
               ),
               8.height,
               Text(
-                '${locale.value.welcomeBackToThe}  "Healthcelerate',
+                '${locale.value.welcomeBackToThe}  Healthcelerate',
                 style: secondaryTextStyle(size: 14),
               ),
               SizedBox(height: Get.height * 0.05),
@@ -142,7 +141,9 @@ class SignInScreen extends StatelessWidget {
                               color: appColorSecondary,
                               textStyle: appButtonTextStyleWhite,
                               onTap: () {
-                                context.read<BottomNavProvider>().setNavbarIndex(0);
+                                context
+                                    .read<BottomNavProvider>()
+                                    .setNavbarIndex(0);
                                 if (signInController.signInformKey.currentState!
                                     .validate()) {
                                   signInController.signInformKey.currentState!
@@ -151,7 +152,7 @@ class SignInScreen extends StatelessWidget {
                                 }
                               },
                             ).expand(),
-                            Row(
+                            const Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 // GestureDetector(

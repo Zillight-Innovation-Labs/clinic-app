@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kivicare_patient/components/app_scaffold.dart';
-import 'package:kivicare_patient/screens/booking/talk_to_doc/meeting_controls.dart';
-import 'package:kivicare_patient/screens/booking/talk_to_doc/meeting_tile.dart';
+import 'package:healthcelerate/components/app_scaffold.dart';
+import 'package:healthcelerate/screens/booking/talk_to_doc/meeting_controls.dart';
+import 'package:healthcelerate/screens/booking/talk_to_doc/meeting_tile.dart';
 import 'package:videosdk/videosdk.dart';
 
 class VideocallPage extends StatefulWidget {
@@ -77,8 +77,6 @@ class _VideocallPageState extends State<VideocallPage> {
     });
   }
 
-
-
   @override
   void dispose() {
     // RTCVideoRenderer.dispose;
@@ -91,14 +89,11 @@ class _VideocallPageState extends State<VideocallPage> {
   Widget build(BuildContext context) {
     // final provider = context.watch<SessionProvider>();
 
- 
     return PopScope(
-      canPop:false ,
+      canPop: false,
       child: AppScaffoldNew(
-      appBartitleText: "Ongoing Video Call",
-      appBarVerticalSize: Get.height * 0.12,
-      
-     
+        appBartitleText: "Ongoing Video Call",
+        appBarVerticalSize: Get.height * 0.12,
         body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(8.0),

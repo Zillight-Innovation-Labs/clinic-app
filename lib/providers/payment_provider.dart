@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:kivicare_patient/api/payment_services.dart';
-import 'package:kivicare_patient/models/payment_model.dart';
-import 'package:kivicare_patient/screens/home/home_bottom_tabs.dart';
-import 'package:kivicare_patient/screens/payment/checkout_screen.dart';
+import 'package:healthcelerate/api/payment_services.dart';
+import 'package:healthcelerate/models/payment_model.dart';
+import 'package:healthcelerate/screens/home/home_bottom_tabs.dart';
+import 'package:healthcelerate/screens/payment/checkout_screen.dart';
 import 'dart:developer' as dev;
 
-import 'package:kivicare_patient/utils/app_common.dart';
+import 'package:healthcelerate/utils/app_common.dart';
 import 'package:nb_utils/nb_utils.dart';
 
 enum PaymentState { loading, initial, error, success }

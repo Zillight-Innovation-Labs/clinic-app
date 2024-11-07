@@ -1,10 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:healthcelerate/screens/auth/sign_in_sign_up/sign_in_controller.dart';
+import 'package:healthcelerate/screens/auth/sign_in_sign_up/signin_screen.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'package:kivicare_patient/components/app_logo_widget.dart';
-import 'package:kivicare_patient/utils/constants.dart';
+import 'package:healthcelerate/components/app_logo_widget.dart';
+import 'package:healthcelerate/utils/constants.dart';
 
 import '../../../components/app_scaffold.dart';
 import '../../../configs.dart';
@@ -17,6 +19,7 @@ import 'sign_up_controller.dart';
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({Key? key}) : super(key: key);
   final SignUpController signUpController = Get.put(SignUpController());
+  final SignInController signInController = Get.put(SignInController());
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +91,7 @@ class SignUpScreen extends StatelessWidget {
                     ),
                     16.height,
                     AppTextField(
-                      title: locale.value.email, 
+                      title: locale.value.email,
                       textStyle: primaryTextStyle(size: 12),
                       controller: signUpController.emailCont,
                       focus: signUpController.emailFocus,
@@ -163,9 +166,9 @@ class SignUpScreen extends StatelessWidget {
                                         decorationColor: appColorPrimary),
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
-                                        commonLaunchUrl(TERMS_CONDITION_URL,
-                                            launchMode:
-                                                LaunchMode.externalApplication);
+                                        // commonLaunchUrl(TERMS_CONDITION_URL,
+                                        //     launchMode:
+                                        //         LaunchMode.externalApplication);
                                       },
                                   ),
                                   TextSpan(
@@ -180,9 +183,9 @@ class SignUpScreen extends StatelessWidget {
                                         decorationColor: appColorPrimary),
                                     recognizer: TapGestureRecognizer()
                                       ..onTap = () {
-                                        commonLaunchUrl(PRIVACY_POLICY_URL,
-                                            launchMode:
-                                                LaunchMode.externalApplication);
+                                        // commonLaunchUrl(PRIVACY_POLICY_URL,
+                                        //     launchMode:
+                                        //         LaunchMode.externalApplication);
                                       },
                                   ),
                                 ],
@@ -222,7 +225,11 @@ class SignUpScreen extends StatelessWidget {
                       padding: EdgeInsets.zero,
                     ),
                     onPressed: () {
-                      Get.back();
+                      Get.to(
+                        () => SignInScreen(),
+                        arguments: true,
+                        binding: BindingsBuilder(() {}),
+                      );
                     },
                     child: Text(
                       locale.value.signIn,

@@ -1,7 +1,7 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
-import 'package:kivicare_patient/main.dart';
-import 'package:kivicare_patient/screens/profile/mt_excersize_reminder.dart';
+import 'package:healthcelerate/main.dart';
+import 'package:healthcelerate/screens/profile/mt_excersize_reminder.dart';
 
 class NotificationService {
   static Future<void> initializeNotification() async {
@@ -74,7 +74,7 @@ class NotificationService {
       MyApp.navigatorKey.currentState?.push(
         MaterialPageRoute(builder: (_) => const ExcersizeReminderScreen()),
       );
-    } 
+    }
   }
 
   static Future<void> showNotification({

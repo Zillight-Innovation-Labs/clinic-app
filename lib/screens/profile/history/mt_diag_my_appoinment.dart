@@ -1,22 +1,31 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kivicare_patient/api/const/const.dart';
-import 'package:kivicare_patient/components/app_scaffold.dart';
-import 'package:kivicare_patient/screens/auth/model/mt_doctor_model.dart';
-import 'package:kivicare_patient/screens/profile/history/mt_diag_offline_appointments_details.dart';
+import 'package:healthcelerate/api/const/const.dart';
+import 'package:healthcelerate/components/app_scaffold.dart';
+import 'package:healthcelerate/screens/auth/model/mt_doctor_model.dart';
+import 'package:healthcelerate/screens/profile/history/mt_diag_offline_appointments_details.dart';
 import 'package:nb_utils/nb_utils.dart';
-
 
 class DiagnosticsMyAppoinmentScreen extends StatefulWidget {
   const DiagnosticsMyAppoinmentScreen({Key? key}) : super(key: key);
 
   @override
-  State<DiagnosticsMyAppoinmentScreen> createState() => _DiagnosticsMyAppoinmentScreenState();
+  State<DiagnosticsMyAppoinmentScreen> createState() =>
+      _DiagnosticsMyAppoinmentScreenState();
 }
 
-class _DiagnosticsMyAppoinmentScreenState extends State<DiagnosticsMyAppoinmentScreen> {
-  List icons = ["assets/images/video2.png", "assets/images/phone.png", "assets/images/massege.png"];
-  List<String> labProfile = ["assets/images/diagnostics_lab.png", "assets/images/female_lab.png", "assets/images/standlab.png"];
+class _DiagnosticsMyAppoinmentScreenState
+    extends State<DiagnosticsMyAppoinmentScreen> {
+  List icons = [
+    "assets/images/video2.png",
+    "assets/images/phone.png",
+    "assets/images/massege.png"
+  ];
+  List<String> labProfile = [
+    "assets/images/diagnostics_lab.png",
+    "assets/images/female_lab.png",
+    "assets/images/standlab.png"
+  ];
   List<String> labName = ["Tested Labs", "Safety Labs", "Diagnostics Wise"];
   List calls = [
     "Hospital-",
@@ -58,14 +67,23 @@ class _DiagnosticsMyAppoinmentScreenState extends State<DiagnosticsMyAppoinmentS
                         child: Container(
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(6.0),
-                            border: Border.all(color: isSelected == titleList[i] ? Colors.transparent : kMainColor),
-                            color: isSelected == titleList[i] ? kMainColor : Colors.white,
+                            border: Border.all(
+                                color: isSelected == titleList[i]
+                                    ? Colors.transparent
+                                    : kMainColor),
+                            color: isSelected == titleList[i]
+                                ? kMainColor
+                                : Colors.white,
                           ),
                           padding: const EdgeInsets.all(10.0),
                           width: 150,
                           child: Text(
                             titleList[i],
-                            style: TextStyle(color: isSelected == titleList[i] ? Colors.white : kMainColor, fontWeight: FontWeight.w700),
+                            style: TextStyle(
+                                color: isSelected == titleList[i]
+                                    ? Colors.white
+                                    : kMainColor,
+                                fontWeight: FontWeight.w700),
                             textAlign: TextAlign.center,
                           ),
                         ),
@@ -98,7 +116,9 @@ class _DiagnosticsMyAppoinmentScreenState extends State<DiagnosticsMyAppoinmentS
                       children: [
                         Text(
                           "Today - 12 July 2022",
-                          style: TextStyle(fontWeight: FontWeight.w600, color: kSubTitleColor),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              color: kSubTitleColor),
                         ),
                         const SizedBox(
                           height: 12,
@@ -113,26 +133,38 @@ class _DiagnosticsMyAppoinmentScreenState extends State<DiagnosticsMyAppoinmentS
                               child: Card(
                                 elevation: 0,
                                 margin: EdgeInsets.zero,
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10), side: BorderSide(color: kSubTitleColor.withOpacity(0.10))),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    side: BorderSide(
+                                        color:
+                                            kSubTitleColor.withOpacity(0.10))),
                                 child: Padding(
                                   padding: const EdgeInsets.all(12.0),
                                   child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Container(
                                         padding: const EdgeInsets.all(46),
                                         decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(8), image: const DecorationImage(image: AssetImage('assets/images/diagnostics_lab.png'), fit: BoxFit.fill)),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            image: const DecorationImage(
+                                                image: AssetImage(
+                                                    'assets/images/diagnostics_lab.png'),
+                                                fit: BoxFit.fill)),
                                       ),
                                       const SizedBox(
                                         width: 10,
                                       ),
                                       Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           const Text(
                                             'Safety Labs',
-                                            style: TextStyle(fontWeight: FontWeight.w600),
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w600),
                                           ),
                                           const SizedBox(
                                             height: 4,
@@ -154,7 +186,9 @@ class _DiagnosticsMyAppoinmentScreenState extends State<DiagnosticsMyAppoinmentS
                                           ),
                                           Text(
                                             allDoctors[index].speciality ?? '',
-                                            style: TextStyle(fontWeight: FontWeight.w400, color: kMainColor),
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w400,
+                                                color: kMainColor),
                                           ),
                                           const SizedBox(
                                             height: 4,
@@ -171,7 +205,8 @@ class _DiagnosticsMyAppoinmentScreenState extends State<DiagnosticsMyAppoinmentS
                                               RichText(
                                                 text: TextSpan(
                                                   text: calls[index],
-                                                  style: TextStyle(color: kTitleColor),
+                                                  style: TextStyle(
+                                                      color: kTitleColor),
                                                   children: [
                                                     const WidgetSpan(
                                                         child: SizedBox(
@@ -179,7 +214,8 @@ class _DiagnosticsMyAppoinmentScreenState extends State<DiagnosticsMyAppoinmentS
                                                     )),
                                                     TextSpan(
                                                       text: conditions[index],
-                                                      style: TextStyle(color: colors[index]),
+                                                      style: TextStyle(
+                                                          color: colors[index]),
                                                     )
                                                   ],
                                                 ),
@@ -191,7 +227,9 @@ class _DiagnosticsMyAppoinmentScreenState extends State<DiagnosticsMyAppoinmentS
                                     ],
                                   ),
                                 ),
-                              ).onTap(() => const DiagnosticsOfflineAppoinmentScreen().launch(context)),
+                              ).onTap(() =>
+                                  const DiagnosticsOfflineAppoinmentScreen()
+                                      .launch(context)),
                             );
                           },
                         ),
@@ -200,7 +238,9 @@ class _DiagnosticsMyAppoinmentScreenState extends State<DiagnosticsMyAppoinmentS
                         ),
                         Text(
                           "Yesterday - 11 July 2022",
-                          style: TextStyle(fontWeight: FontWeight.w600, color: kSubTitleColor),
+                          style: TextStyle(
+                              fontWeight: FontWeight.w600,
+                              color: kSubTitleColor),
                         ),
                         const SizedBox(
                           height: 12,
@@ -215,26 +255,38 @@ class _DiagnosticsMyAppoinmentScreenState extends State<DiagnosticsMyAppoinmentS
                               child: Card(
                                 elevation: 0,
                                 margin: EdgeInsets.zero,
-                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10), side: BorderSide(color: kSubTitleColor.withOpacity(0.10))),
+                                shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10),
+                                    side: BorderSide(
+                                        color:
+                                            kSubTitleColor.withOpacity(0.10))),
                                 child: Padding(
                                   padding: const EdgeInsets.all(12.0),
                                   child: Row(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: [
                                       Container(
                                         padding: const EdgeInsets.all(46),
                                         decoration: BoxDecoration(
-                                            borderRadius: BorderRadius.circular(8), image: const DecorationImage(image: AssetImage('assets/images/diagnostics_lab.png'), fit: BoxFit.fill)),
+                                            borderRadius:
+                                                BorderRadius.circular(8),
+                                            image: const DecorationImage(
+                                                image: AssetImage(
+                                                    'assets/images/diagnostics_lab.png'),
+                                                fit: BoxFit.fill)),
                                       ),
                                       const SizedBox(
                                         width: 10,
                                       ),
                                       Column(
-                                        crossAxisAlignment: CrossAxisAlignment.start,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
                                         children: [
                                           const Text(
                                             'Safety Labs',
-                                            style: TextStyle(fontWeight: FontWeight.w600),
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w600),
                                           ),
                                           const SizedBox(
                                             height: 4,
@@ -256,7 +308,9 @@ class _DiagnosticsMyAppoinmentScreenState extends State<DiagnosticsMyAppoinmentS
                                           ),
                                           Text(
                                             allDoctors[index].speciality ?? '',
-                                            style: TextStyle(fontWeight: FontWeight.w400, color: kMainColor),
+                                            style: TextStyle(
+                                                fontWeight: FontWeight.w400,
+                                                color: kMainColor),
                                           ),
                                           const SizedBox(
                                             height: 4,
@@ -273,15 +327,17 @@ class _DiagnosticsMyAppoinmentScreenState extends State<DiagnosticsMyAppoinmentS
                                               RichText(
                                                 text: TextSpan(
                                                   text: calls[index],
-                                                  style: TextStyle(color: kTitleColor),
+                                                  style: TextStyle(
+                                                      color: kTitleColor),
                                                   children: [
                                                     const WidgetSpan(
                                                         child: SizedBox(
-                                                          width: 6,
-                                                        )),
+                                                      width: 6,
+                                                    )),
                                                     TextSpan(
                                                       text: conditions[index],
-                                                      style: TextStyle(color: colors[index]),
+                                                      style: TextStyle(
+                                                          color: colors[index]),
                                                     )
                                                   ],
                                                 ),
@@ -293,7 +349,9 @@ class _DiagnosticsMyAppoinmentScreenState extends State<DiagnosticsMyAppoinmentS
                                     ],
                                   ),
                                 ),
-                              ).onTap(() => const DiagnosticsOfflineAppoinmentScreen().launch(context)),
+                              ).onTap(() =>
+                                  const DiagnosticsOfflineAppoinmentScreen()
+                                      .launch(context)),
                             );
                           },
                         ),

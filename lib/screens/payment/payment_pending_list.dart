@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:kivicare_patient/models/payment_model.dart';
-import 'package:kivicare_patient/providers/payment_provider.dart';
-import 'package:kivicare_patient/utils/colors.dart';
-import 'package:kivicare_patient/utils/common_base.dart';
-import 'package:kivicare_patient/utils/empty_error_state_widget.dart';
+import 'package:healthcelerate/models/payment_model.dart';
+import 'package:healthcelerate/providers/payment_provider.dart';
+import 'package:healthcelerate/utils/colors.dart';
+import 'package:healthcelerate/utils/common_base.dart';
+import 'package:healthcelerate/utils/empty_error_state_widget.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 

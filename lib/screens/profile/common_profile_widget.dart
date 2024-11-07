@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:kivicare_patient/components/cached_image_widget.dart';
+import 'package:healthcelerate/components/cached_image_widget.dart';
 import 'package:nb_utils/nb_utils.dart';
-import 'package:kivicare_patient/utils/colors.dart';
+import 'package:healthcelerate/utils/colors.dart';
 
 class ProfilePicWidget extends StatelessWidget {
   final double picSize;
@@ -46,7 +46,8 @@ class ProfilePicWidget extends StatelessWidget {
                       children: [
                         Container(
                           padding: const EdgeInsets.all(4),
-                          decoration: boxDecorationDefault(shape: BoxShape.circle, color: context.cardColor),
+                          decoration: boxDecorationDefault(
+                              shape: BoxShape.circle, color: context.cardColor),
                           child: Hero(
                             tag: heroTag,
                             child: CachedImageWidget(
@@ -67,10 +68,13 @@ class ProfilePicWidget extends StatelessWidget {
                             onTap: onCameraTap,
                             child: Container(
                               padding: const EdgeInsets.all(3),
-                              decoration: boxDecorationDefault(shape: BoxShape.circle, color: Colors.white),
+                              decoration: boxDecorationDefault(
+                                  shape: BoxShape.circle, color: Colors.white),
                               child: Container(
                                 padding: const EdgeInsets.all(5),
-                                decoration: boxDecorationDefault(shape: BoxShape.circle, color: appColorPrimary),
+                                decoration: boxDecorationDefault(
+                                    shape: BoxShape.circle,
+                                    color: appColorPrimary),
                                 child: const Icon(
                                   Icons.camera_alt_outlined,
                                   size: 16,

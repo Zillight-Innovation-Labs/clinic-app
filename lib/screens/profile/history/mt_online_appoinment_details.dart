@@ -1,17 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:kivicare_patient/api/const/const.dart';
-import 'package:kivicare_patient/screens/auth/model/mt_doctor_model.dart';
-import 'package:kivicare_patient/screens/profile/history/mt_video_call.dart';
-import 'package:kivicare_patient/screens/profile/history/mt_write_review.dart';
+import 'package:healthcelerate/api/const/const.dart';
+import 'package:healthcelerate/screens/auth/model/mt_doctor_model.dart';
+import 'package:healthcelerate/screens/profile/history/mt_video_call.dart';
+import 'package:healthcelerate/screens/profile/history/mt_write_review.dart';
 import 'package:nb_utils/nb_utils.dart';
-
 
 class OnlineAppoinmentDetails extends StatefulWidget {
   const OnlineAppoinmentDetails({Key? key}) : super(key: key);
 
   @override
-  State<OnlineAppoinmentDetails> createState() => _OnlineAppoinmentDetailsState();
+  State<OnlineAppoinmentDetails> createState() =>
+      _OnlineAppoinmentDetailsState();
 }
 
 class _OnlineAppoinmentDetailsState extends State<OnlineAppoinmentDetails> {
@@ -41,9 +41,12 @@ class _OnlineAppoinmentDetailsState extends State<OnlineAppoinmentDetails> {
                 elevation: 0,
                 enableScaleAnimation: false,
                 onTap: () {},
-                shapeBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide(color: kBadgeColor)),
+                shapeBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6),
+                    borderSide: BorderSide(color: kBadgeColor)),
                 text: "Cancel",
-                textStyle: TextStyle(color: kBadgeColor, fontWeight: FontWeight.w700),
+                textStyle:
+                    TextStyle(color: kBadgeColor, fontWeight: FontWeight.w700),
               ),
             ),
             const SizedBox(
@@ -56,10 +59,14 @@ class _OnlineAppoinmentDetailsState extends State<OnlineAppoinmentDetails> {
                 onTap: () {
                   const WriteReviewScreen().launch(context);
                 },
-                shapeBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide.none),
+                shapeBorder: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(6),
+                    borderSide: BorderSide.none),
                 color: kMainColor,
                 text: "Write a Review",
-                textStyle: TextStyle(color: kElevatedButtonTextColor, fontWeight: FontWeight.w700),
+                textStyle: TextStyle(
+                    color: kElevatedButtonTextColor,
+                    fontWeight: FontWeight.w700),
               ),
             ),
           ],
@@ -75,7 +82,11 @@ class _OnlineAppoinmentDetailsState extends State<OnlineAppoinmentDetails> {
                 children: [
                   Container(
                     padding: const EdgeInsets.all(40),
-                    decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), image: DecorationImage(image: AssetImage(allDoctors[index].image ?? ''), fit: BoxFit.fill)),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        image: DecorationImage(
+                            image: AssetImage(allDoctors[index].image ?? ''),
+                            fit: BoxFit.fill)),
                   ),
                   const SizedBox(
                     width: 10,
@@ -85,7 +96,8 @@ class _OnlineAppoinmentDetailsState extends State<OnlineAppoinmentDetails> {
                     children: [
                       Text(
                         allDoctors[index].doctorName ?? '',
-                        style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 24),
+                        style: const TextStyle(
+                            fontWeight: FontWeight.bold, fontSize: 24),
                       ),
                       const SizedBox(
                         height: 4,
@@ -107,7 +119,11 @@ class _OnlineAppoinmentDetailsState extends State<OnlineAppoinmentDetails> {
               height: 12,
             ),
             Container(
-              decoration: BoxDecoration(color: kbigContainerColor, borderRadius: const BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20))),
+              decoration: BoxDecoration(
+                  color: kbigContainerColor,
+                  borderRadius: const BorderRadius.only(
+                      topLeft: Radius.circular(20),
+                      topRight: Radius.circular(20))),
               child: Padding(
                 padding: const EdgeInsets.all(10.0),
                 child: Column(
@@ -117,11 +133,14 @@ class _OnlineAppoinmentDetailsState extends State<OnlineAppoinmentDetails> {
                     ),
                     Container(
                       padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(borderRadius: BorderRadius.circular(8), color: kWatchColor),
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: kWatchColor),
                       child: Row(
                         children: [
                           Container(
-                            decoration: BoxDecoration(color: kLikeWhiteColor, shape: BoxShape.circle),
+                            decoration: BoxDecoration(
+                                color: kLikeWhiteColor, shape: BoxShape.circle),
                             child: Padding(
                               padding: const EdgeInsets.all(10.0),
                               child: Image.asset(
@@ -159,7 +178,10 @@ class _OnlineAppoinmentDetailsState extends State<OnlineAppoinmentDetails> {
                           children: [
                             Text(
                               "Visit time",
-                              style: TextStyle(color: kTitleColor, fontWeight: FontWeight.bold, fontSize: 16),
+                              style: TextStyle(
+                                  color: kTitleColor,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16),
                             ),
                             const SizedBox(
                               height: 6,
@@ -210,7 +232,10 @@ class _OnlineAppoinmentDetailsState extends State<OnlineAppoinmentDetails> {
                           children: [
                             Text(
                               "Patient information",
-                              style: TextStyle(color: kTitleColor, fontWeight: FontWeight.bold, fontSize: 16),
+                              style: TextStyle(
+                                  color: kTitleColor,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16),
                             ),
                             const SizedBox(
                               height: 6,
@@ -334,7 +359,10 @@ class _OnlineAppoinmentDetailsState extends State<OnlineAppoinmentDetails> {
                           children: [
                             Text(
                               "Consultation Fees",
-                              style: TextStyle(color: kTitleColor, fontWeight: FontWeight.bold, fontSize: 16),
+                              style: TextStyle(
+                                  color: kTitleColor,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 16),
                             ),
                             const SizedBox(
                               height: 6,

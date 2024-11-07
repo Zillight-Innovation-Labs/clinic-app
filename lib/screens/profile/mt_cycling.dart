@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
-import 'package:kivicare_patient/api/const/const.dart';
-import 'package:kivicare_patient/models/exercise_model.dart';
-import 'package:kivicare_patient/providers/profile_provider.dart';
+import 'package:healthcelerate/api/const/const.dart';
+import 'package:healthcelerate/models/exercise_model.dart';
+import 'package:healthcelerate/providers/profile_provider.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:provider/provider.dart';
 
 class CyclingRunningScreen extends StatefulWidget {
   final Exercise exercise;
-  const CyclingRunningScreen({Key? key, required this.exercise})
+  final String img;
+
+  const CyclingRunningScreen(
+      {Key? key, required this.exercise, required this.img})
       : super(key: key);
 
   @override
@@ -84,7 +87,7 @@ class _CyclingRunningScreenState extends State<CyclingRunningScreen> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Image.asset(
-                    "assets/images/cycle.png",
+                    widget.img,
                     width: 44,
                   ),
                   const Text(

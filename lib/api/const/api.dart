@@ -1,7 +1,7 @@
 import 'dart:async';
 import 'dart:io';
 
-import 'package:kivicare_patient/screens/service/test_services.dart';
+import 'package:healthcelerate/screens/service/test_services.dart';
 
 ApiResponse handleError(Object e) {
   if (e is SocketException) {

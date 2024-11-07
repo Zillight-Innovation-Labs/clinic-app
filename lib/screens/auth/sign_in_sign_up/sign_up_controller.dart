@@ -8,6 +8,7 @@ import '../../../utils/common_base.dart';
 import '../../../utils/constants.dart';
 import '../../../api/auth_apis.dart';
 import 'sign_in_controller.dart';
+import 'dart:developer' as dev;
 
 class SignUpController extends GetxController {
   RxBool isLoading = false.obs;
@@ -46,6 +47,7 @@ class SignUpController extends GetxController {
       };
 
       await AuthServiceApis.createUser(request: req).then((value) async {
+        dev.log("value.message 1:${value.message}");
         toast(value.message.toString(), print: true);
         try {
           final SignInController sCont = Get.find();
@@ -55,11 +57,19 @@ class SignUpController extends GetxController {
           sCont.saveForm().whenComplete(() => isLoading(false));
         } catch (e) {
           log('E: $e');
+          dev.log("value.message 2:${value.message}");
           toast(e.toString(), print: true);
         }
       }).catchError((e) {
         isLoading(false);
+        if (e is Map) {
+          dev.log("---value.message 3:${e['error']}");
+          toast(e['error']);
+          return;
+        }
+        // if(e.contains(""))
         toast(e.toString(), print: true);
+        // dev.log("value.message 3:${e.runtimeType}");
       }).whenComplete(() => isLoading(false));
     } else {
       toast(locale.value.pleaseAcceptTermsAnd);

@@ -1,9 +1,9 @@
 //GetServicesModel
 
 import 'package:flutter/material.dart';
-import 'package:kivicare_patient/api/app_services_api.dart';
-import 'package:kivicare_patient/models/get_services_model.dart';
-import 'package:kivicare_patient/models/payment_model.dart';
+import 'package:healthcelerate/api/app_services_api.dart';
+import 'package:healthcelerate/models/get_services_model.dart';
+import 'package:healthcelerate/models/payment_model.dart';
 import 'dart:developer' as dev;
 
 enum ServicesState { loading, initial, error, success }
@@ -23,34 +23,33 @@ class ServicesProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-Future<void> getServices() async {
-  try {
-    final response = await _appServiceApis.getServices();
-    
-    if (response.isError) {
+  Future<void> getServices() async {
+    try {
+      final response = await _appServiceApis.getServices();
+
+      if (response.isError) {
+        setState(ServicesState.error);
+      } else {
+        setState(ServicesState.success);
+
+        var responseData = response.data as Map<String, dynamic>;
+
+        // Log to inspect the extracted data
+        // dev.log("response data: $responseData");
+
+        var servicesList = responseData['data'] as List<dynamic>;
+
+        // dev.log(" responseData['data'] :${ responseData['data'] }");
+
+        // Map the list of dynamic objects to a list of Service objects
+        _getServicesModel =
+            servicesList.map((service) => Service.fromJson(service)).toList();
+
+        notifyListeners();
+      }
+    } catch (e) {
+      dev.log("catch error -service error: $e");
       setState(ServicesState.error);
-    } else {
-      setState(ServicesState.success);
-      
-      var responseData = response.data as Map<String, dynamic>;
-      
-      // Log to inspect the extracted data
-      // dev.log("response data: $responseData");
-      
-      var servicesList = responseData['data'] as List<dynamic>;
-
-      // dev.log(" responseData['data'] :${ responseData['data'] }");
-      
-      // Map the list of dynamic objects to a list of Service objects
-      _getServicesModel = servicesList.map((service) => Service.fromJson(service)).toList();
-      
-      notifyListeners();
     }
-  } catch (e) {
-    dev.log("catch error -service error: $e");
-    setState(ServicesState.error);
   }
-}
-
-
 }

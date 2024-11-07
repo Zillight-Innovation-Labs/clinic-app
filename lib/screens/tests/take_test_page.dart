@@ -1,17 +1,17 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kivicare_patient/components/app_scaffold.dart';
-import 'package:kivicare_patient/providers/test_provider.dart';
-import 'package:kivicare_patient/screens/tests/bmi/bmi_test.dart';
-import 'package:kivicare_patient/screens/tests/bmr/bmr_test.dart';
-import 'package:kivicare_patient/screens/tests/body_fat/body_fat_test.dart';
-import 'package:kivicare_patient/screens/tests/hydration/hydration_test.dart';
-import 'package:kivicare_patient/screens/tests/resting_heart_rate/resting_heart_rate_test.dart';
-import 'package:kivicare_patient/screens/tests/sleep/sleep_test.dart';
-import 'package:kivicare_patient/screens/tests/whr/whr_test.dart';
-import 'package:kivicare_patient/utils/colors.dart';
-import 'package:kivicare_patient/utils/common_base.dart';
+import 'package:healthcelerate/components/app_scaffold.dart';
+import 'package:healthcelerate/providers/test_provider.dart';
+import 'package:healthcelerate/screens/tests/bmi/bmi_test.dart';
+import 'package:healthcelerate/screens/tests/bmr/bmr_test.dart';
+import 'package:healthcelerate/screens/tests/body_fat/body_fat_test.dart';
+import 'package:healthcelerate/screens/tests/hydration/hydration_test.dart';
+import 'package:healthcelerate/screens/tests/resting_heart_rate/resting_heart_rate_test.dart';
+import 'package:healthcelerate/screens/tests/sleep/sleep_test.dart';
+import 'package:healthcelerate/screens/tests/whr/whr_test.dart';
+import 'package:healthcelerate/utils/colors.dart';
+import 'package:healthcelerate/utils/common_base.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kivicare_patient/providers/appointment_provider.dart';
-import 'package:kivicare_patient/providers/bottom_nav_provider.dart';
-import 'package:kivicare_patient/screens/booking/apointments/appointments_history.dart';
-import 'package:kivicare_patient/screens/booking/model/appointment_model.dart';
-import 'package:kivicare_patient/screens/booking/model/appointments_res_model.dart';
-import 'package:kivicare_patient/screens/booking/model/employee_review_data.dart';
+import 'package:healthcelerate/providers/appointment_provider.dart';
+import 'package:healthcelerate/providers/bottom_nav_provider.dart';
+import 'package:healthcelerate/screens/booking/apointments/appointments_history.dart';
+import 'package:healthcelerate/screens/booking/model/appointment_model.dart';
+import 'package:healthcelerate/screens/booking/model/appointments_res_model.dart';
+import 'package:healthcelerate/screens/booking/model/employee_review_data.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 

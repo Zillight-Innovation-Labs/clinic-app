@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kivicare_patient/components/app_scaffold.dart';
-import 'package:kivicare_patient/utils/colors.dart';
+import 'package:healthcelerate/components/app_scaffold.dart';
+import 'package:healthcelerate/utils/colors.dart';
 
 class BMRTestResult extends StatelessWidget {
   final int testScore;

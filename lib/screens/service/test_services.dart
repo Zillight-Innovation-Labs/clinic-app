@@ -1,19 +1,14 @@
 // import 'package:how_bodi_mobile/v2/src/components/api_services/auth_services.dart';
 
-import 'package:kivicare_patient/models/get_all_test_detail_model.dart';
+import 'package:healthcelerate/models/get_all_test_detail_model.dart';
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 
 abstract class TestService {
-
-  Future<ApiResponse> addTest(String testId,  response);
+  Future<ApiResponse> addTest(String testId, response);
   Future<ApiResponse<GetAllTestModel>>? getAllTest();
-
 }
-
-
-
 
 class TestServiceImpl implements TestService {
   final storage = const FlutterSecureStorage();
@@ -50,7 +45,6 @@ class TestServiceImpl implements TestService {
     }
   }
 
-
   @override
   Future<ApiResponse<GetAllTestModel>>? getAllTest() async {
     final url = Uri.parse("UrlEndpoints.getAllTest");
@@ -63,7 +57,6 @@ class TestServiceImpl implements TestService {
 
     try {
       final response = await http.get(url, headers: headers);
-  
 
       GetAllTestModel getTestModel = getAllTestModelFromJson(response.body);
 
@@ -88,11 +81,7 @@ class TestServiceImpl implements TestService {
       );
     }
   }
-
-
 }
-
-
 
 class ApiResponse<T> {
   final int? statusCode;
@@ -105,4 +94,3 @@ class ApiResponse<T> {
     this.data,
   });
 }
-

@@ -22,7 +22,7 @@ class WalkthroughScreen extends StatelessWidget {
             onPageChanged: (int index) {
               walkthroughController.currentPage(index);
             },
-            itemBuilder: (context, index) {
+            itemBuilder: (context, index) { 
               return CachedImageWidget(
                 url: walkthroughController.walkthroughDetails[index].image.validate(),
                 fit: BoxFit.cover,

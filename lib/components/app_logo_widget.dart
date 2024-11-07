@@ -26,14 +26,17 @@ class AppLogoWidget extends StatelessWidget {
           ),
         ],
       ),
-      child: Image.asset(
-        Assets.assetsAppLogo,
-        fit: BoxFit.cover,
-        errorBuilder: (context, error, stackTrace) => Text(
-          APP_NAME.toUpperCase(),
-          style: boldTextStyle(
-            color: appColorPrimary,
-            letterSpacing: 10,
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(100),
+        child: Image.asset(
+          Assets.assetsAppLogo,
+          fit: BoxFit.cover,
+          errorBuilder: (context, error, stackTrace) => Text(
+            APP_NAME.toUpperCase(),
+            style: boldTextStyle(
+              color: appColorPrimary,
+              letterSpacing: 10,
+            ),
           ),
         ),
       ),

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:kivicare_patient/api/const/const.dart';
-import 'package:kivicare_patient/screens/auth/model/mt_doctor_model.dart';
-import 'package:kivicare_patient/screens/booking/apointments/mt_book_appoinment.dart';
+import 'package:healthcelerate/api/const/const.dart';
+import 'package:healthcelerate/screens/auth/model/mt_doctor_model.dart';
+import 'package:healthcelerate/screens/booking/apointments/mt_book_appoinment.dart';
 import 'package:nb_utils/nb_utils.dart';
-
 
 class DoctorDetailsScreen extends StatefulWidget {
   const DoctorDetailsScreen({Key? key}) : super(key: key);
@@ -68,7 +67,9 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
               children: [
                 Container(
                   padding: const EdgeInsets.all(12),
-                  decoration: BoxDecoration(borderRadius: BorderRadius.circular(6.0), color: kMainColor.withOpacity(0.10)),
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(6.0),
+                      color: kMainColor.withOpacity(0.10)),
                   child: Icon(
                     IconlyBold.heart,
                     color: kMainColor,
@@ -81,10 +82,14 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
                   child: AppButton(
                     enableScaleAnimation: false,
                     onTap: () => const BookAppoinment().launch(context),
-                    shapeBorder: OutlineInputBorder(borderRadius: BorderRadius.circular(6), borderSide: BorderSide.none),
+                    shapeBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(6),
+                        borderSide: BorderSide.none),
                     color: kMainColor,
                     text: "Book Appointment",
-                    textStyle: TextStyle(color: kElevatedButtonTextColor, fontWeight: FontWeight.w700),
+                    textStyle: TextStyle(
+                        color: kElevatedButtonTextColor,
+                        fontWeight: FontWeight.w700),
                   ),
                 )
               ],
@@ -106,7 +111,10 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
                           height: 82,
                           decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(8),
-                              image: DecorationImage(image: AssetImage(allDoctors[index].image ?? ''), fit: BoxFit.fill)),
+                              image: DecorationImage(
+                                  image:
+                                      AssetImage(allDoctors[index].image ?? ''),
+                                  fit: BoxFit.fill)),
                         ),
                         const SizedBox(
                           width: 10,
@@ -116,7 +124,8 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
                           children: [
                             Text(
                               allDoctors[index].doctorName ?? '',
-                              style: const TextStyle(fontWeight: FontWeight.w600),
+                              style:
+                                  const TextStyle(fontWeight: FontWeight.w600),
                             ),
                             SizedBox(
                               width: context.width() / 1.5,
@@ -139,7 +148,9 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
                         Container(
                           width: context.width() / 2.2,
                           height: context.height() / 7.7,
-                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(6.0), color: kDrContainerColor),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(6.0),
+                              color: kDrContainerColor),
                           child: Row(
                             mainAxisAlignment: MainAxisAlignment.start,
                             crossAxisAlignment: CrossAxisAlignment.center,
@@ -150,7 +161,8 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
                               Container(
                                 width: 60,
                                 height: 60,
-                                decoration: BoxDecoration(shape: BoxShape.circle, color: kWatchColor),
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle, color: kWatchColor),
                                 child: Padding(
                                   padding: const EdgeInsets.all(15.0),
                                   child: Image.asset("assets/images/drexp.png"),
@@ -179,7 +191,9 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
                         Container(
                           width: context.width() / 2.2,
                           height: context.height() / 7.7,
-                          decoration: BoxDecoration(borderRadius: BorderRadius.circular(6.0), color: kPatientContainerColor),
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(6.0),
+                              color: kPatientContainerColor),
                           child: Row(
                             crossAxisAlignment: CrossAxisAlignment.center,
                             mainAxisAlignment: MainAxisAlignment.start,
@@ -190,7 +204,8 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
                               Container(
                                 width: 60,
                                 height: 60,
-                                decoration: BoxDecoration(shape: BoxShape.circle, color: kStarColor),
+                                decoration: BoxDecoration(
+                                    shape: BoxShape.circle, color: kStarColor),
                                 child: Padding(
                                   padding: const EdgeInsets.all(15.0),
                                   child: Image.asset(
@@ -207,11 +222,15 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
                                 children: [
                                   Text(
                                     "5,000+",
-                                    style: TextStyle(fontWeight: FontWeight.w600, color: kTitleColor),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w600,
+                                        color: kTitleColor),
                                   ),
                                   Text(
                                     "Patient",
-                                    style: TextStyle(fontWeight: FontWeight.w400, color: kSubTitleColor),
+                                    style: TextStyle(
+                                        fontWeight: FontWeight.w400,
+                                        color: kSubTitleColor),
                                   )
                                 ],
                               )
@@ -324,9 +343,13 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
                             width: context.width(),
                             child: Card(
                               elevation: 0,
-                              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10), side: BorderSide(color: kSubTitleColor.withOpacity(0.10))),
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10),
+                                  side: BorderSide(
+                                      color: kSubTitleColor.withOpacity(0.10))),
                               child: Padding(
-                                padding: const EdgeInsets.only(left: 8.0, right: 8.0, bottom: 16.0),
+                                padding: const EdgeInsets.only(
+                                    left: 8.0, right: 8.0, bottom: 16.0),
                                 child: Column(
                                   children: [
                                     ListTile(
@@ -334,11 +357,14 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
                                       minVerticalPadding: 0.0,
                                       leading: CircleAvatar(
                                         radius: 20,
-                                        backgroundImage: AssetImage(reviewImages[index]),
+                                        backgroundImage:
+                                            AssetImage(reviewImages[index]),
                                       ),
                                       title: Text(
                                         "Jerome Bell",
-                                        style: TextStyle(fontWeight: FontWeight.w500, color: kTitleColor),
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w500,
+                                            color: kTitleColor),
                                       ),
                                       subtitle: RatingBarWidget(
                                         size: 14,
@@ -355,7 +381,9 @@ class _DoctorDetailsScreenState extends State<DoctorDetailsScreen> {
                                     ),
                                     Text(
                                       reviewWomen,
-                                      style: TextStyle(fontWeight: FontWeight.w400, color: kSubTitleColor),
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w400,
+                                          color: kSubTitleColor),
                                     )
                                   ],
                                 ),

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_iconly/flutter_iconly.dart';
-import 'package:kivicare_patient/api/const/const.dart';
-import 'package:kivicare_patient/screens/profile/history/mt_video_call_time_out.dart';
+import 'package:healthcelerate/api/const/const.dart';
+import 'package:healthcelerate/screens/profile/history/mt_video_call_time_out.dart';
 import 'package:nb_utils/nb_utils.dart';
-
 
 class VideoCallScreen extends StatelessWidget {
   const VideoCallScreen({Key? key}) : super(key: key);
@@ -44,11 +43,12 @@ class VideoCallScreen extends StatelessWidget {
                         height: 108,
                         width: 86,
                         decoration: BoxDecoration(
-                          border: Border.all(color: kMainColor),
+                            border: Border.all(color: kMainColor),
                             borderRadius: BorderRadius.circular(20),
                             image: const DecorationImage(
-                                image: AssetImage(
-                                    "assets/images/video_face.png"),fit: BoxFit.fill)),
+                                image:
+                                    AssetImage("assets/images/video_face.png"),
+                                fit: BoxFit.fill)),
                       ),
                       Text(
                         "Dr. Josiah Toor",
@@ -103,7 +103,8 @@ class VideoCallScreen extends StatelessWidget {
                                 color: kLikeWhiteColor,
                               ),
                             ),
-                          ).onTap(()=>const VideoCallTimeOutScreen().launch(context)),
+                          ).onTap(() =>
+                              const VideoCallTimeOutScreen().launch(context)),
                           const SizedBox(
                             width: 28,
                           ),

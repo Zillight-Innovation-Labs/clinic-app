@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:kivicare_patient/providers/appointment_provider.dart';
-import 'package:kivicare_patient/screens/booking/model/appointment_model.dart';
-import 'package:kivicare_patient/utils/common_base.dart';
+import 'package:healthcelerate/providers/appointment_provider.dart';
+import 'package:healthcelerate/screens/booking/model/appointment_model.dart';
+import 'package:healthcelerate/utils/common_base.dart';
 import 'package:nb_utils/nb_utils.dart';
 import 'package:provider/provider.dart';
 import '../../../utils/colors.dart';
@@ -17,8 +17,8 @@ class AppointmentsHistory extends StatefulWidget {
 }
 
 class _AppointmentsHistoryState extends State<AppointmentsHistory> {
-  final AppointmentsController appointmentsCont =
-      Get.put(AppointmentsController());
+  // final AppointmentsController appointmentsCont =
+  //     Get.put(AppointmentsController());
 
   @override
   void initState() {
