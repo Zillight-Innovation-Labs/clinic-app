@@ -91,7 +91,11 @@ class AuthServiceApis {
   }
 
   static Future<void> clearData({bool isFromDeleteAcc = false}) async {
-    GoogleSignIn().signOut();
+    try {
+      await GoogleSignIn.instance.signOut();
+    } catch (e) {
+      // Ignore if not initialized or already signed out
+    }
     // PushNotificationService().unsubscribeFirebaseTopic();
 
     if (isFromDeleteAcc) {

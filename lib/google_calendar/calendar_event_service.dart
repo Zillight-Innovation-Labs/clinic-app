@@ -9,17 +9,23 @@ import 'package:url_launcher/url_launcher.dart';
 
 GoogleSignInAccount? _currentUser;
 
-final GoogleSignIn _googleSignIn = GoogleSignIn(
-  scopes: <String>[
-    cal.CalendarApi.calendarScope,
-    cal.CalendarApi.calendarEventsScope,
-  ],
-);
+final GoogleSignIn _googleSignIn = GoogleSignIn.instance;
 
 Future<void> handleSignIn() async {
   try {
-    _currentUser = await _googleSignIn.signInSilently();
-    _currentUser ??= await _googleSignIn.signIn();
+    // Initialize if not already initialized
+    await _googleSignIn.initialize();
+
+    // Attempt lightweight authentication first
+    _currentUser = await _googleSignIn.attemptLightweightAuthentication();
+
+    // If that fails, do full authentication with scopes
+    _currentUser ??= await _googleSignIn.authenticate(
+      scopeHint: <String>[
+        cal.CalendarApi.calendarScope,
+        cal.CalendarApi.calendarEventsScope,
+      ],
+    );
   } catch (error) {
     log('handleSignIn ERROR: $error');
   }
@@ -37,44 +43,55 @@ Future<bool> addToGoogleCalendar({
 }) async {
   bool isSuccess = false;
   await handleSignIn().then((value) async {
-    // Retrieve an [auth.AuthClient] from the current [GoogleSignIn] instance.
-    final auth.AuthClient? client = await _googleSignIn.authenticatedClient();
-    if (client == null) {
+    if (_currentUser == null) {
       toast("Something went wrong! Please try again!");
-    } else {
-      cal.CalendarApi calsd = cal.CalendarApi(client);
-      CalendarClient calendarClient = CalendarClient();
-      CalendarClient.calendar = calsd;
-      try {
-        await calendarClient
-            .insert(
-          title: title,
-          description: description,
-          location: location,
-          attendeeEmailList: attendeeEmailList,
-          shouldNotifyAttendees: shouldNotifyAttendees,
-          hasConferenceSupport: hasConferenceSupport,
-          startTime: startTime.toUtc(),
-          endTime: endTime.toUtc(),
-        )
-            .then((value) {
-          log('------> calendarClient.insert VALUE: $value');
-          if (hasConferenceSupport) {
-            if (value.isNotEmpty) {
-              log('Event added to Google Calendar');
-              return value["link"];
-            } else {
-              log("Unable to add event to Google Calendar +-+-+-+-+-+-+-");
-            }
+      return;
+    }
+
+    // Get authorization for calendar scopes
+    final scopes = <String>[
+      cal.CalendarApi.calendarScope,
+      cal.CalendarApi.calendarEventsScope,
+    ];
+
+    final authz =
+        await _currentUser!.authorizationClient.authorizeScopes(scopes);
+
+    // Retrieve an [auth.AuthClient] using the extension
+    final auth.AuthClient client = authz.authClient(scopes: scopes);
+
+    cal.CalendarApi calsd = cal.CalendarApi(client);
+    CalendarClient calendarClient = CalendarClient();
+    CalendarClient.calendar = calsd;
+    try {
+      await calendarClient
+          .insert(
+        title: title,
+        description: description,
+        location: location,
+        attendeeEmailList: attendeeEmailList,
+        shouldNotifyAttendees: shouldNotifyAttendees,
+        hasConferenceSupport: hasConferenceSupport,
+        startTime: startTime.toUtc(),
+        endTime: endTime.toUtc(),
+      )
+          .then((value) {
+        log('------> calendarClient.insert VALUE: $value');
+        if (hasConferenceSupport) {
+          if (value.isNotEmpty) {
+            log('Event added to Google Calendar');
+            return value["link"];
           } else {
-            log('VALUE["STATUS"]: ${value["status"]}');
-            isSuccess = value["status"] == "confirmed";
+            log("Unable to add event to Google Calendar +-+-+-+-+-+-+-");
           }
-        });
-      } catch (e) {
-        toast(e.toString());
-        log('Error creating event $e');
-      }
+        } else {
+          log('VALUE["STATUS"]: ${value["status"]}');
+          isSuccess = value["status"] == "confirmed";
+        }
+      });
+    } catch (e) {
+      toast(e.toString());
+      log('Error creating event $e');
     }
   }).catchError((e) {
     toast(e.toString());

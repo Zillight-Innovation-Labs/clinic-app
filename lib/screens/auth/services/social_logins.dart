@@ -11,49 +11,61 @@ final FirebaseAuth auth = FirebaseAuth.instance;
 //endregion
 
 class GoogleSignInAuthService {
-  static final GoogleSignIn googleSignIn = GoogleSignIn();
+  static final GoogleSignIn googleSignIn = GoogleSignIn.instance;
 
   static Future<UserData> signInWithGoogle() async {
-    GoogleSignInAccount? googleSignInAccount = await googleSignIn.signIn();
-
-    if (googleSignInAccount != null) {
-      final GoogleSignInAuthentication googleSignInAuthentication = await googleSignInAccount.authentication;
-
-      final AuthCredential credential = GoogleAuthProvider.credential(
-        accessToken: googleSignInAuthentication.accessToken,
-        idToken: googleSignInAuthentication.idToken,
-      );
-
-      final UserCredential authResult = await auth.signInWithCredential(credential);
-      final User user = authResult.user!;
-      assert(!user.isAnonymous);
-
-      final User currentUser = auth.currentUser!;
-      assert(user.uid == currentUser.uid);
-
-      log('CURRENTUSER: $currentUser');
-
-      await googleSignIn.signOut();
-
-      String firstName = '';
-      String lastName = '';
-      if (currentUser.displayName.validate().split(' ').isNotEmpty) firstName = currentUser.displayName.splitBefore(' ');
-      if (currentUser.displayName.validate().split(' ').length >= 2) lastName = currentUser.displayName.splitAfter(' ');
-
-      /// Create a temporary request to send
-      UserData tempUserData = UserData()
-        ..mobile = currentUser.phoneNumber.validate()
-        ..email = currentUser.email.validate()
-        ..firstName = firstName.validate()
-        ..lastName = lastName.validate()
-        ..profileImage = currentUser.photoURL.validate()
-        ..loginType = LoginTypeConst.LOGIN_TYPE_GOOGLE
-        ..userName = currentUser.displayName.validate();
-
-      return tempUserData;
-    } else {
-      throw "User not created";
+    // Initialize if not already initialized
+    try {
+      await googleSignIn.initialize();
+    } catch (e) {
+      // Already initialized, ignore
     }
+
+    GoogleSignInAccount googleSignInAccount = await googleSignIn.authenticate();
+
+    final GoogleSignInAuthentication googleSignInAuthentication = googleSignInAccount.authentication;
+
+    // Get access token via authorization client
+    String? accessToken;
+    try {
+      final authz = await googleSignInAccount.authorizationClient.authorizationForScopes(['openid', 'email', 'profile']);
+      accessToken = authz?.accessToken;
+    } catch (e) {
+      log('Error getting access token: $e');
+    }
+
+    final AuthCredential credential = GoogleAuthProvider.credential(
+      accessToken: accessToken,
+      idToken: googleSignInAuthentication.idToken,
+    );
+
+    final UserCredential authResult = await auth.signInWithCredential(credential);
+    final User user = authResult.user!;
+    assert(!user.isAnonymous);
+
+    final User currentUser = auth.currentUser!;
+    assert(user.uid == currentUser.uid);
+
+    log('CURRENTUSER: $currentUser');
+
+    await googleSignIn.signOut();
+
+    String firstName = '';
+    String lastName = '';
+    if (currentUser.displayName.validate().split(' ').isNotEmpty) firstName = currentUser.displayName.splitBefore(' ');
+    if (currentUser.displayName.validate().split(' ').length >= 2) lastName = currentUser.displayName.splitAfter(' ');
+
+    /// Create a temporary request to send
+    UserData tempUserData = UserData()
+      ..mobile = currentUser.phoneNumber.validate()
+      ..email = currentUser.email.validate()
+      ..firstName = firstName.validate()
+      ..lastName = lastName.validate()
+      ..profileImage = currentUser.photoURL.validate()
+      ..loginType = LoginTypeConst.LOGIN_TYPE_GOOGLE
+      ..userName = currentUser.displayName.validate();
+
+    return tempUserData;
   }
 
   // region Apple Sign

@@ -13,7 +13,7 @@ subprojects {
 //     project.evaluationDependsOn(':app')
 // }
 
-subprojects { afterEvaluate { android { compileSdkVersion 34 } } }
+subprojects { afterEvaluate { android { compileSdkVersion 36 } } }
 
 
 tasks.register("clean", Delete) {
